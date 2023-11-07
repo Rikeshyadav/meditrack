@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/register_bg_color1"
+    tools:context=".register">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/register_text_color1"
+        android:text="Register"
+        android:textSize="20sp"
+        android:id="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="1dp"
+        android:padding="10dp"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/margin_small"
+        android:layout_height="match_parent"
+        >
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/name"
+        android:inputType="text"
+        android:textColorHint="@color/hint"
+        android:textColor="@color/register_text_color1"
+        android:layout_alignParentTop="true"
+        android:hint="Name"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="text"
+        android:textColorHint="@color/hint"
+        android:textColor="@color/register_text_color1"
+        android:id="@+id/email"
+        android:layout_below="@+id/name"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone No."
+        android:textColor="@color/register_text_color1"
+        android:id="@+id/phone"
+        android:inputType="number"
+        android:maxLength="10"
+        android:textColorHint="@color/hint"
+        android:layout_below="@+id/email"
+        />
+
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="DOB"
+        android:textColorHint="@color/hint"
+        android:textColor="@color/register_text_color1"
+        android:id="@+id/Age"
+        android:layout_below="@id/phone"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/hint"
+        android:hint="Gender"
+        android:inputType="text"
+        android:textColor="@color/register_text_color1"
+        android:id="@+id/gender"
+        android:layout_below="@id/Age"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:inputType="text"
+        android:textColorHint="@color/hint"
+        android:textColor="@color/register_text_color1"
+        android:id="@+id/address"
+        android:layout_below="@id/gender"
+        />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/docpat"
+        android:padding="10dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
+        android:layout_below="@+id/address"
+        />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Speciality"
+            android:visibility="gone"
+            android:textColorHint="@color/hint"
+            android:textColor="@color/register_text_color1"
+            android:id="@+id/speciality"
+
+            android:layout_below="@id/docpat"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Year of experience"
+            android:textColorHint="@color/hint"
+            android:id="@+id/year_of_experience"
+            android:visibility="gone"
+            android:layout_below="@id/speciality"
+            android:textColor="@color/register_text_color1"
+            android:inputType="number"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/hint"
+            android:layout_below="@id/year_of_experience"
+            android:inputType="textMultiLine"
+            android:minHeight="200dp"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:hint="Summary about you"
+            android:id="@+id/aboutdoctor"
+            />
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Highest Qualification"
+    android:textColorHint="@color/hint"
+    android:textColor="@color/black"
+    android:inputType="text"
+    android:layout_below="@id/aboutdoctor"
+    android:visibility="gone"
+    android:id="@+id/qualification"
+    />
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Sign Up"
+    android:textColor="@color/black"
+    android:id="@+id/signup"
+    android:layout_below="@+id/qualification"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="30dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginEnd="0dp"
+    android:layout_marginStart="0dp"
+    android:padding="16dp"
+    />
+</RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
