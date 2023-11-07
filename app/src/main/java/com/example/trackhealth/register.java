@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class register extends AppCompatActivity {
 Spinner dopcat;
-EditText speciality,yoe,aboutDoc,qualification;
+EditText speciality,yoe,aboutDoc,qualification,organisation;
 Button signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ Button signup;
         yoe=findViewById(R.id.year_of_experience);
         aboutDoc=findViewById(R.id.aboutdoctor);
         qualification=findViewById(R.id.qualification);
-
+        organisation=findViewById(R.id.organisation);
         // id of button
                signup=findViewById(R.id.signup);
 
@@ -58,11 +58,13 @@ Button signup;
                    speciality.setVisibility(View.VISIBLE);
                    qualification.setVisibility(View.VISIBLE);
                    aboutDoc.setVisibility(View.VISIBLE);
+                   organisation.setVisibility(View.VISIBLE);
                    yoe.setVisibility(View.VISIBLE);
                }
                 if(selectedOption.equals("You are a patient")) {
                     speciality.setVisibility(View.GONE);
                     aboutDoc.setVisibility(View.GONE);
+                    organisation.setVisibility(View.GONE);
                     qualification.setVisibility(View.GONE);
                     yoe.setVisibility(View.GONE);
                 }
