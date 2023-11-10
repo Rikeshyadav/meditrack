@@ -1,12 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTintMode="@drawable/rt"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:background="@drawable/img"
+    tools:ignore="ExtraText">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/appname"
+        android:layout_width="210dp"
+        android:layout_height="71dp"
+        android:layout_centerHorizontal="false"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="380dp"
+        android:gravity="center"
+        android:text="TrackHealth"
+        android:textColor="#751717"
+        android:textSize="35sp"
+        android:textStyle="bold" />
 
+    <EditText
+        android:id="@+id/emaenter"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:hint="id here"
+        android:textColorHint="#C1CCCA"
+        android:textSize="23dp"
+        android:textStyle="italic" />
 
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="308dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emaenter"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:hint="password"
+        android:textColorHint="#C1CCCA"
+        android:textSize="23dp"
+        android:textStyle="italic" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/login"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="login" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:text="register"
+        android:id="@+id/regclick"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+</RelativeLayout>
+</ScrollView>
 </RelativeLayout>
