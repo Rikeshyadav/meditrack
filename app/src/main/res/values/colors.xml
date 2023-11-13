@@ -3,6 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="purple">#24077C</color>
+    <color name="blue">#1565C0</color>
+    <color name="red">#ff0000</color>
     <color name="hint">#8C8989</color>
     <color name="register_text_color1">#1E1E1E</color>
     <color name="register_bg_color1">#FCFBFD</color>

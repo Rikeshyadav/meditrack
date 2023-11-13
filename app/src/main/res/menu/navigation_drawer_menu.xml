@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+           <!-- it act as a radio bottom mean at a one time one bottom is clickable-->
+       <item
+            android:id="@+id/nav_editprofile"
+           android:title="edit profile"/>
+        <item
+            android:id="@+id/nav_notification"
+            android:title="notification"
+            android:icon="@drawable/baseline_notifications_24"/>
+        <item android:id="@+id/nav_privacy"
+            android:title="privacy"
+            android:icon="@drawable/baseline_privacy_tip_24"
+            />
+        <item
+            android:id="@+id/nav_trash"
+            android:title="trash"
+            android:icon="@drawable/baseline_restore_from_trash_24"/>
+        <item
+            android:id="@+id/nav_setting"
+            android:title="setting"
+            android:icon="@drawable/baseline_settings_24"/>
+        <item android:id="@+id/nav_logout"
+            android:title="Logout"
+            android:icon="@drawable/baseline_logout_24"
+            />
+        <item android:id="@+id/nav_aboutus"
+            android:title="About Us"
+           />
+
+
+    </group>
+</menu>

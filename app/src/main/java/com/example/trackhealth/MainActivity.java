@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     TextView t1,t2;
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         t1=findViewById(R.id.appname);
         t2=findViewById(R.id.regclick);
-        e1=findViewById(R.id.emaenter);
+        e1=findViewById(R.id.emailenter);
         e2=findViewById(R.id.pass);
         b1=findViewById(R.id.login);
         t2.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent b1 =new Intent(MainActivity.this,Mainhomepage2.class);
+                startActivity(b1);
             }
         });
 
