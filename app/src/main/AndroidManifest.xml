@@ -13,12 +13,17 @@
         android:theme="@style/Theme.Trackhealth"
         tools:targetApi="31">
         <activity
+            android:name=".MainplusActivity3"
+            android:exported="false" />
+        <activity
+            android:name=".Mainhomepage2"
+            android:exported="false" />
+        <activity
             android:name=".firstpage"
             android:exported="false" />
         <activity
             android:name=".register"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true">
