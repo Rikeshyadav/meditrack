@@ -1,74 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/img"
-    android:fillViewport="true"
+    android:background="@color/white"
     tools:ignore="ExtraText">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scroll">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/appname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/appname"
-        android:layout_width="209dp"
-        android:layout_height="59dp"
-        android:layout_centerHorizontal="false"
-        android:layout_marginStart="122dp"
-        android:layout_marginTop="380dp"
-        android:gravity="center"
-        android:text="TrackHealth"
-        android:textColor="#751717"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+                android:layout_marginTop="290dp"
+                android:layout_marginBottom="60dp"
 
-    <EditText
-        android:id="@+id/emailenter"
-        android:layout_width="302dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/appname"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:hint="id here"
-        android:textColorHint="#C1CCCA"
-        android:textSize="23sp"
-        android:textStyle="italic" />
+                android:layout_centerHorizontal="true"
+                android:text="TrackHealth"
+                android:textColor="#751717"
+                android:textSize="35sp"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/pass"
-        android:layout_width="308dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/emailenter"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:hint="password"
-        android:textColorHint="#C1CCCA"
-        android:textSize="23sp"
-        android:textStyle="italic" />
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/appname"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="0dp"
+                android:hint="username"
+                android:textColor="@color/black"
+                android:textColorHint="#C1CCCA"
+                android:textSize="20sp"
+                />
 
-    <Button
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="1dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="25dp"
+                android:hint="password"
+                android:textColorHint="#C1CCCA"
+                android:textSize="20sp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:id="@+id/login"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:padding="8dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pass"
+                android:background="@drawable/button_login"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="60dp"
+                android:text="login" />
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:id="@+id/login"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pass"
+        android:id="@+id/register_layout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:text="login" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="9dp"
-        android:text="register"
-        android:id="@+id/regclick"
-        android:textColor="@color/black"
-        android:textSize="25sp" />
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have account?"
+            android:id="@+id/regclick2"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="register"
+            android:id="@+id/regclick"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="20dp"
 
+            android:textColor="#2A46DF"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
-</ScrollView>

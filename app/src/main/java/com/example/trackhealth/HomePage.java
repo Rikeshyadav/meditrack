@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,9 +22,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
-public class Mainhomepage2 extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
+public class HomePage extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
    DrawerLayout drawerLayout;
+   String username;
    BottomNavigationView bottomNavigationView;
+   NavigationView nav;
    FragmentManager fragmentManager;
    Toolbar toolbar;
    FloatingActionButton fab;
@@ -32,7 +35,24 @@ public class Mainhomepage2 extends AppCompatActivity  implements NavigationView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepage);
+        setContentView(R.layout.activity_homepage);
+
+        //intent data
+
+        username = getIntent().getStringExtra("username");
+
+
+        nav = findViewById(R.id.navigation_drawer);
+
+        // Find the header view
+        View headerView = nav.getHeaderView(0);
+
+        // Find the TextView inside the header view
+        TextView headerText = headerView.findViewById(R.id.user1);
+
+        // Set the text of the TextView
+        headerText.setText(username);
+
         //initialise all use item to prevent from null pointer error
         fab=findViewById(R.id.fab);
         toolbar=findViewById(R.id.toolbar);
@@ -74,13 +94,14 @@ public class Mainhomepage2 extends AppCompatActivity  implements NavigationView.
                 return false;
             }
         });
+
     fragmentManager =getSupportFragmentManager();
     openFragment(new HomeFragment());
     fab.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-           Toast.makeText(Mainhomepage2.this,"add person",Toast.LENGTH_SHORT).show();
-            Intent fab=new Intent(Mainhomepage2.this,MainplusActivity3.class);
+           Toast.makeText(HomePage.this,"add person",Toast.LENGTH_SHORT).show();
+            Intent fab=new Intent(HomePage.this, AddPatientPage.class);
             startActivity(fab);
         }
     });

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#244165"
-    tools:context=".MainplusActivity3">
+    tools:context=".AddPatientPage">
 
     <TextView
         android:layout_width="wrap_content"
