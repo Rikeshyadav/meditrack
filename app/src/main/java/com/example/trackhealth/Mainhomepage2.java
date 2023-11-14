@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,17 +61,17 @@ public class Mainhomepage2 extends AppCompatActivity  implements NavigationView.
                 else if (itemId==R.id.bottom_schedule){
                     openFragment(new ScheduledFragment());
                 }
-                else if(itemId==R.id.bottom_search){
+               else if(itemId==R.id.bottom_search){
                 openFragment(new SearchFragment());
                 }
                   else if(itemId==R.id.bottom_call){
                     openFragment(new CallFragment());
                 }
-                else if(itemId==R.id.bottom_setting){
+              /*  else if(itemId==R.id.bottom_setting){
                     openFragment(new SettingFragment());
 
                 }
-
+*/
                 return false;
             }
         });
@@ -80,6 +81,8 @@ public class Mainhomepage2 extends AppCompatActivity  implements NavigationView.
         @Override
         public void onClick(View v) {
            Toast.makeText(Mainhomepage2.this,"add person",Toast.LENGTH_SHORT).show();
+            Intent fab=new Intent(Mainhomepage2.this,MainplusActivity3.class);
+            startActivity(fab);
         }
     });
 

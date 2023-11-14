@@ -15,7 +15,7 @@
     <item android:id="@+id/bottom_call"
         android:title="call"
         android:icon="@drawable/baseline_call_24"/>
-    <item android:id="@+id/bottom_setting"
+   <!-- <item android:id="@+id/bottom_setting"
         android:title="setting"
-        android:icon="@drawable/baseline_settings_24"/>
+        android:icon="@drawable/baseline_settings_24"/>-->
 </menu>
