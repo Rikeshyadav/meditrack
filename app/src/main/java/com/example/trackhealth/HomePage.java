@@ -1,7 +1,6 @@
 package com.example.trackhealth;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -33,7 +32,7 @@ public class Mainhomepage2 extends AppCompatActivity  implements NavigationView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mainhomepage2);
+        setContentView(R.layout.homepage);
         //initialise all use item to prevent from null pointer error
         fab=findViewById(R.id.fab);
         toolbar=findViewById(R.id.toolbar);
