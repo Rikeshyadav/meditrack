@@ -2,5 +2,8 @@
 <resources>
 <!-- margin for register page-->
     <dimen name="margin_small">5dp</dimen>
-
+    <dimen name="padding_register">11dp</dimen>
+    <dimen name="register_header_text_size">22sp</dimen>
+    <dimen name="register_font_size">15sp</dimen>
+    <dimen name="register_edit_text_size">15sp</dimen>
 </resources>

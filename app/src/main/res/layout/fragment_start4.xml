@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".StartFragment2">
+    tools:context=".StartFragment3">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,19 +15,19 @@
 
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            app:lottie_rawRes="@raw/hospital_location"
-            android:id="@+id/s3"
+            app:lottie_rawRes="@raw/appointment"
+            android:id="@+id/s4"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"/>
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Search nearest Hospitals"
-    android:layout_centerHorizontal="true"
-    android:textColor="@color/black"
-    android:layout_below="@id/s3"
-    android:textSize="16sp"
-    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="get online appointments"
+            android:textColor="@color/black"
+            android:layout_below="@id/s4"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"/>
+
     </RelativeLayout>
 
 </FrameLayout>
