@@ -3,31 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".StartFragment3">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+    tools:context=".StartFragment4">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
 
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            app:lottie_rawRes="@raw/appointment"
-            android:id="@+id/s4"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="get online appointments"
-            android:textColor="@color/black"
-            android:layout_below="@id/s4"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:lottie_rawRes="@raw/patient1"
+        android:id="@+id/s2"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
 
-    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="keep your data secure"
+        android:textColor="@color/black"
+        android:layout_below="@id/s2"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/but1"
+        android:text="Get Started"
+        android:elevation="5dp"
+        android:textColor="@color/white"
+        android:background="@drawable/orange_button"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="30dp"
+
+        />
+
+
+</RelativeLayout>
 </FrameLayout>
