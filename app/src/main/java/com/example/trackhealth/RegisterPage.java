@@ -1,6 +1,7 @@
 package com.example.trackhealth;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ public class RegisterPage extends AppCompatActivity {
     EditText speciality, yoe, aboutDoc, qualification, organisation, clinic_type, clinic_address, clinic_phone, dob;
 
     View line1;
-    Button signup;
+    AppCompatButton signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

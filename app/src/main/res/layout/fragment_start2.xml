@@ -3,10 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".StartFragment2">
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@drawable/fun2"
+        android:layout_marginStart="0.03dp"
+        android:layout_marginEnd="0.03dp"
         android:layout_height="match_parent"
         >
         <com.airbnb.lottie.LottieAnimationView
@@ -22,9 +26,9 @@
 <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Search nearest Hospitals"
+    android:text="Search for nearest Hospitals"
     android:layout_centerHorizontal="true"
-    android:textColor="@color/black"
+    android:textColor="@color/start_fragment_text_color"
     android:layout_below="@id/s3"
     android:textSize="16sp"
     />

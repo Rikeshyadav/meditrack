@@ -4,12 +4,15 @@
    <item>
       <shape android:shape="rectangle"/>
    </item>
-   <item android:bottom="90dp"
-      android:left="-10dp"
-      android:right="-1000dp"
+   <item android:bottom="135dp"
+      android:left="-300dp"
+      android:right="-700dp"
       android:top="-100dp">
       <shape android:shape="oval">
          <solid android:color="#64BDB2"/>
       </shape>
+
+      <transition android:opacity="transparent"
+         android:autoMirrored="true"/>
 </item>
 </layer-list>

@@ -11,7 +11,34 @@
 
     </style>
 
-    <style name="Theme.Trackhealth" parent="Base.Theme.Trackhealth" />
+    <style name="Theme.Trackhealth" parent="Base.Theme.Trackhealth" >
+        <item name="colorPrimary">@color/white</item>
+    </style>
+
+    <style name="Theme.SplashScreen" parent="Base.Theme.Trackhealth" >
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.StartFragment" parent="Base.Theme.Trackhealth" >
+        <item name="colorPrimary">#C3CAF3</item>
+    </style>
+
+
+    <style name="Theme.Loginpage" parent="Base.Theme.Trackhealth" >
+        <item name="colorPrimary">#58ACA1</item>
+    </style>
+
+    <style name="Theme.HomePage" parent="Base.Theme.Trackhealth" >
+        <item name="colorPrimary">#A62D2D</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Theme.RegisterPage" parent="Base.Theme.Trackhealth" >
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
     <style name="ThemeOverlay.AppCompat.navTheme">
         <item name="colorPrimary">@color/white</item>
     </style>
