@@ -57,7 +57,7 @@
                 android:id="@+id/fab"
                 app:layout_anchor="@id/bottomAppbar"
                 app:maxImageSize="40dp"
-                android:tint="@color/black"/>
+                android:tint="#0E0D0D"/>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </RelativeLayout>

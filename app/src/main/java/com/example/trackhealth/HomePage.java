@@ -91,12 +91,13 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
 
                 }
 */
-                return false;
+                return true;
             }
         });
 
-    fragmentManager =getSupportFragmentManager();
-    openFragment(new HomeFragment());
+    //fragmentManager =getSupportFragmentManager();
+    //openFragment(new HomeFragment());
+    bottomNavigationView.setSelectedItemId(R.id.bottom_home);
     fab.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
