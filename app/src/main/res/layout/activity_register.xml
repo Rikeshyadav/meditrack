@@ -3,174 +3,814 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/register_bg_color1"
+    android:background="@color/white"
     tools:context=".register">
+
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/register_text_color1"
-        android:text="Register"
-        android:textSize="20sp"
-        android:id="@+id/title"
         android:layout_centerHorizontal="true"
-        android:layout_margin="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
         android:padding="10dp"
-        />
+        android:text="Register"
+        android:textColor="@color/register_text_color1"
+        android:textSize="20sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/title"
+        android:id="@+id/scroll"
         >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_margin="@dimen/margin_small"
-        android:layout_height="match_parent"
-        >
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/name"
-        android:inputType="text"
-        android:textColorHint="@color/hint"
-        android:textColor="@color/register_text_color1"
-        android:layout_alignParentTop="true"
-        android:hint="Name"
-        />
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="text"
-        android:textColorHint="@color/hint"
-        android:textColor="@color/register_text_color1"
-        android:id="@+id/email"
-        android:layout_below="@+id/name"
-        />
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone No."
-        android:textColor="@color/register_text_color1"
-        android:id="@+id/phone"
-        android:inputType="number"
-        android:maxLength="10"
-        android:textColorHint="@color/hint"
-        android:layout_below="@+id/email"
-        />
-
-
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="DOB"
-        android:textColorHint="@color/hint"
-        android:textColor="@color/register_text_color1"
-        android:id="@+id/Age"
-        android:layout_below="@id/phone"
-        />
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/hint"
-        android:hint="Gender"
-        android:inputType="text"
-        android:textColor="@color/register_text_color1"
-        android:id="@+id/gender"
-        android:layout_below="@id/Age"
-        />
-
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Address"
-        android:inputType="text"
-        android:textColorHint="@color/hint"
-        android:textColor="@color/register_text_color1"
-        android:id="@+id/address"
-        android:layout_below="@id/gender"
-        />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/docpat"
-        android:padding="10dp"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
-        android:layout_below="@+id/address"
-        />
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Speciality"
-            android:visibility="gone"
-            android:textColorHint="@color/hint"
-            android:textColor="@color/register_text_color1"
-            android:id="@+id/speciality"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_height="match_parent"
+            >
 
-            android:layout_below="@id/docpat"
-            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="First name"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="3dp"
+                        android:textColor="@color/black"
+                        />
+                    <EditText
+                        android:id="@+id/firstname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/rt"
+                        android:hint="First Name"
+                        android:inputType="text"
+                        android:padding="@dimen/padding_register"
+                        android:textColor="@color/register_text_color1"
+                        android:textColorHint="@color/hint"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Last name"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:textColor="@color/black"
+                        />
+                    <EditText
+                        android:id="@+id/lastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@drawable/rt"
+                        android:hint="Last Name"
+                        android:inputType="text"
+                        android:padding="@dimen/padding_register"
+                        android:textColor="@color/register_text_color1"
+                        android:textColorHint="@color/hint"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Year of experience"
-            android:textColorHint="@color/hint"
-            android:id="@+id/year_of_experience"
-            android:visibility="gone"
-            android:layout_below="@id/speciality"
-            android:textColor="@color/register_text_color1"
-            android:inputType="number"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@color/hint"
-            android:layout_below="@id/year_of_experience"
-            android:inputType="textMultiLine"
-            android:minHeight="200dp"
-            android:visibility="gone"
-            android:textColor="@color/black"
-            android:hint="Summary about you"
-            android:id="@+id/aboutdoctor"
-            />
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Highest Qualification"
-    android:textColorHint="@color/hint"
-    android:textColor="@color/black"
-    android:inputType="text"
-    android:layout_below="@id/aboutdoctor"
-    android:visibility="gone"
-    android:id="@+id/qualification"
-    />
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Sign Up"
-    android:textColor="@color/black"
-    android:id="@+id/signup"
-    android:layout_below="@+id/qualification"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="30dp"
-    android:layout_marginBottom="20dp"
-    android:layout_marginEnd="0dp"
-    android:layout_marginStart="0dp"
-    android:padding="16dp"
-    />
-</RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/name"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/email_parent"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    />
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rt"
+                    android:hint="Email"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:inputType="text"
+                    android:padding="@dimen/padding_register"
+                    android:textColor="@color/register_text_color1"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/email_parent"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/phone_parent"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact number"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1.5"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/padding_register"
+                        android:textSize="15sp"
+                        android:text="+91"
+                        android:background="@drawable/white_box"
+                        android:textColor="#FFC107"
+                        android:id="@+id/country_code"
+                        android:inputType="phone"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="1dp"
+                        android:layout_marginBottom="3dp"
+
+                        />
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="wrap_content"
+                        android:hint="Mobile number"
+                        android:minWidth="60dp"
+                        android:padding="@dimen/padding_register"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:textSize="15sp"
+                        android:maxLength="10"
+                        android:background="@drawable/rt"
+                        android:textColor="@color/register_text_color1"
+                        android:id="@+id/phoneNo"
+                        android:inputType="number"
+                        android:textColorHint="@color/hint"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/phone_parent"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/dob_parent"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DOB"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    />
+
+                <EditText
+                    android:id="@+id/Age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/rt"
+                    android:hint="DOB"
+                    android:padding="@dimen/padding_register"
+                    android:textColor="@color/register_text_color1"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/dob_parent"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/gender_parent"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    />
+
+                <EditText
+                    android:id="@+id/gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dob_parent"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/rt"
+                    android:hint="Gender"
+                    android:inputType="text"
+                    android:padding="@dimen/padding_register"
+                    android:textColor="@color/register_text_color1"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/gender_parent"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/address_parent"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    />
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/rt"
+                    android:hint="Address"
+                    android:inputType="text"
+                    android:padding="@dimen/padding_register"
+                    android:textColor="@color/register_text_color1"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/docpat_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/address_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="18dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="3dp"
+                    android:text="**"
+                    android:textColor="#FF0303"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:padding="@dimen/padding_register"
+                    android:text="You are a "
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <Spinner
+                    android:id="@+id/docpat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="14dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/white_box"
+                    android:padding="@dimen/padding_register"
+
+                    android:textColorHint="@color/black" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/speciality_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="8dp"
+                android:layout_below="@+id/docpat_parent"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Speciality"
+                    android:id="@+id/text_speciality"
+                    android:layout_marginStart="3dp"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="69dp"
+                    android:layout_marginBottom="3dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:id="@+id/speciality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/rt"
+                    android:hint="Speciality"
+                    android:padding="@dimen/padding_register"
+                    android:textColor="@color/register_text_color1"
+                    android:textColorHint="@color/hint"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/yoe_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:layout_below="@+id/speciality_parent"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Year of experience"
+                    android:id="@+id/text_yoe"
+                    android:layout_marginStart="3dp"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginBottom="3dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Year of experience"
+                    android:background="@drawable/rt"
+                    android:textColorHint="@color/hint"
+                    android:id="@+id/year_of_experience"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/register_text_color1"
+                    android:inputType="number"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/about_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:layout_below="@+id/yoe_parent"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="About"
+                    android:id="@+id/text_about"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="69dp"
+                    android:layout_marginBottom="0dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/hint"
+                    android:inputType="textMultiLine"
+                    android:minHeight="150dp"
+                    android:background="@drawable/rt"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/black"
+                    android:hint="Summary about you"
+                    android:id="@+id/aboutdoctor"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/qualification_parent"
+                android:layout_below="@id/about_parent"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Qualification"
+                    android:id="@+id/text_qualification"
+                    android:layout_marginStart="3dp"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginBottom="0dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Highest Qualification"
+                    android:textColorHint="@color/hint"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_register"
+                    android:background="@drawable/rt"
+                    android:inputType="text"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="15sp"
+                    android:visibility="gone"
+                    android:id="@+id/qualification"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_below="@id/qualification_parent"
+                android:id="@+id/line"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginStart="1dp"
+                android:background="@color/hint"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hospital/Clinic Details"
+                android:textStyle="bold"
+
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:id="@+id/clinic_info"
+                android:layout_below="@id/line"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/clinicname_parent"
+                android:layout_below="@id/clinic_info"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hospital/Clinic Name"
+                    android:id="@+id/text_clinicname"
+                    android:layout_marginStart="3dp"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginBottom="0dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="hospital/clinic name"
+                    android:textColorHint="@color/hint"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_register"
+                    android:background="@drawable/rt"
+                    android:inputType="text"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="15sp"
+
+                    android:visibility="gone"
+                    android:id="@+id/organisation"
+                    />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/clinictype_parent"
+                android:layout_below="@id/clinicname_parent"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hospital/Clinic Type"
+                    android:id="@+id/text_clinictype"
+                    android:layout_marginStart="3dp"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginBottom="0dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="hospital/clinic type"
+                    android:textColorHint="@color/hint"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_register"
+                    android:background="@drawable/rt"
+                    android:inputType="text"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="15sp"
+                    android:id="@+id/clinic_type"
+                    />
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/clinicaddress_parent"
+                android:layout_below="@id/clinictype_parent"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address (Optional)"
+                    android:id="@+id/text_clinicaddress"
+                    android:layout_marginStart="3dp"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginBottom="0dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="hospital/clinic address"
+                    android:textColorHint="@color/hint"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_register"
+                    android:background="@drawable/rt"
+                    android:inputType="text"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="15sp"
+                    android:id="@+id/clinic_address"
+                    />
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="3dp"
+                android:id="@+id/clinicphone_parent"
+                android:layout_below="@id/clinicaddress_parent"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hospital/Clinic's Phone Number"
+                    android:id="@+id/text_clinicphone"
+                    android:layout_marginStart="3dp"
+                    android:padding="@dimen/padding_register"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginBottom="0dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contact Number"
+                    android:textColorHint="@color/hint"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_register"
+                    android:background="@drawable/rt"
+                    android:inputType="phone"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textSize="15sp"
+                    android:id="@+id/clinic_phone"
+                    />
+
+
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
+                android:textColor="@color/black"
+                android:id="@+id/signup"
+
+                android:layout_below="@id/clinicphone_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:padding="16dp"
+                />
+
+        </RelativeLayout>
     </ScrollView>
+
+
 </RelativeLayout>

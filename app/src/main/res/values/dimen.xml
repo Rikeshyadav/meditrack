@@ -2,5 +2,5 @@
 <resources>
 <!-- margin for register page-->
     <dimen name="margin_small">5dp</dimen>
-
+    <dimen name="padding_register">11dp</dimen>
 </resources>
