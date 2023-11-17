@@ -29,6 +29,7 @@
         <activity
             android:name=".HomePage"
             android:theme="@style/Theme.HomePage"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false" />
         <activity
             android:name=".firstpage"

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".RegisterPage">
 
@@ -31,7 +32,20 @@
             android:layout_margin="@dimen/margin_small"
             android:layout_height="match_parent"
             >
-
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:id="@+id/card1"
+    app:cardCornerRadius="12dp"
+    android:elevation="9dp"
+    app:cardBackgroundColor="#FBF9F9"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="9dp"
+        >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_alignParentTop="true"
@@ -441,6 +455,26 @@
                     android:textColorHint="@color/black" />
 
             </LinearLayout>
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:id="@+id/card2"
+            android:layout_below="@id/card1"
+            app:cardCornerRadius="12dp"
+            android:elevation="9dp"
+            app:cardBackgroundColor="#FBF9F9"
+            >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="9dp"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -450,7 +484,6 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="11dp"
                 android:layout_marginBottom="8dp"
-                android:layout_below="@+id/docpat_parent"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -616,39 +649,92 @@
                     />
 
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_below="@id/qualification_parent"
-                android:id="@+id/line"
-                android:layout_marginTop="60dp"
-                android:layout_marginBottom="0dp"
-                android:layout_marginEnd="1dp"
-                android:layout_marginStart="1dp"
-                android:background="@color/hint"
-                />
+
+        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hospital/Clinic Details"
                 android:textStyle="bold"
-
-                android:layout_marginTop="15dp"
+                 android:fontFamily="@font/gugi"
+                android:layout_marginTop="45dp"
                 android:textSize="18sp"
                 android:layout_marginBottom="30dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginStart="8dp"
                 android:textColor="@color/black"
                 android:id="@+id/clinic_info"
-                android:layout_below="@id/line"
+                android:layout_below="@id/card2"
                 />
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/work"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_below="@id/clinic_info"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hospital"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="6dp"
+                    android:id="@+id/hospital_radio"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:button="@color/white"
+                    android:padding="16dp"
+                    android:background="@drawable/register_selector_radiobutton"
+                    android:textColor="@drawable/register_text_color"
+                    android:elevation="4dp"
+                    android:textSize="@dimen/register_font_size"
+                    />
 
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clinic"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:id="@+id/clinic_radio"
+                    android:padding="16dp"
+                    android:textColor="@drawable/register_text_color"
+                    android:elevation="4dp"
+                    android:button="@color/black"
+                    android:background="@drawable/register_selector_radiobutton"
+                    android:textSize="@dimen/register_font_size"
+                    />
+
+            </RadioGroup>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:id="@+id/card3"
+            app:cardCornerRadius="12dp"
+            android:layout_below="@id/work"
+            android:elevation="9dp"
+            app:cardBackgroundColor="#FBF9F9"
+            >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="9dp"
+            >
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="@dimen/margin_small"
-    android:layout_below="@id/clinic_info"
     android:id="@+id/hos_or_clinic"
     >
 
@@ -661,48 +747,7 @@
         android:textColor="@color/black"
 
         />
-<RadioGroup
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:id="@+id/work"
-    >
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hospital"
-        android:layout_marginEnd="6dp"
-        android:layout_marginStart="6dp"
-        android:id="@+id/hospital_radio"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
-        android:button="@color/white"
-        android:padding="16dp"
-        android:background="@drawable/register_selector_radiobutton"
-        android:textColor="@drawable/register_text_color"
-        android:elevation="4dp"
-        android:textSize="@dimen/register_font_size"
-        />
 
-
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clinic"
-        android:layout_marginEnd="6dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
-        android:id="@+id/clinic_radio"
-        android:padding="16dp"
-        android:textColor="@drawable/register_text_color"
-        android:elevation="4dp"
-        android:button="@color/black"
-        android:background="@drawable/register_selector_radiobutton"
-        android:textSize="@dimen/register_font_size"
-        />
-
-</RadioGroup>
 </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -929,6 +974,8 @@
 
 
             </LinearLayout>
+        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -936,7 +983,7 @@
                 android:background="@drawable/orange_button"
                 android:textColor="@color/black"
                 android:id="@+id/signup"
-                android:layout_below="@id/clinicphone_parent"
+                android:layout_below="@id/card3"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"

@@ -11,4 +11,5 @@
 <color name="start_fragment_text_color">#000000</color>
     <color name="primary_color">#759EEE</color>
     <color name="transparentColor">#00000000</color>
+    <color name="register_Card_background_Color">#C1BEBE</color>
 </resources>
