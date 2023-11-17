@@ -5,11 +5,11 @@
       <shape android:shape="rectangle"/>
    </item>
    <item android:bottom="135dp"
-      android:left="-300dp"
-      android:right="-700dp"
+      android:left="-700dp"
+      android:right="-300dp"
       android:top="-100dp">
       <shape android:shape="oval">
-         <solid android:color="#64BDB2"/>
+         <solid android:color="#C3CAF3"/>
       </shape>
 
       <transition android:opacity="transparent"

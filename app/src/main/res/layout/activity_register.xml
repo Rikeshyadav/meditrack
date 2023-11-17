@@ -929,13 +929,13 @@
 
 
             </LinearLayout>
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign Up"
+                android:background="@drawable/orange_button"
                 android:textColor="@color/black"
                 android:id="@+id/signup"
-
                 android:layout_below="@id/clinicphone_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"

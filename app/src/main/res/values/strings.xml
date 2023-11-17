@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">meditrack</string>
+    <string name="app_name">TrackHealth</string>
     <string name="navigation_drawer_open">open navigation Drawer</string>
     <string name="navigation_drawer_close">close navigation Drawer</string>
     <!-- TODO: Remove or change this placeholder text -->

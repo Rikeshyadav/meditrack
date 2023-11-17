@@ -3,32 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".StartFragment3">
-    <RelativeLayout
+    tools:context=".StartFragment4">
+<RelativeLayout
+    android:background="@drawable/fun2"
+    android:layout_marginStart="0.03dp"
+    android:layout_marginEnd="0.03dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:elevation="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:lottie_rawRes="@raw/patient1"
+        android:id="@+id/s2"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="keep your data secure"
+        android:textColor="@color/start_fragment_text_color"
+        android:layout_below="@id/s2"
+        android:layout_centerHorizontal="true"
+        android:textSize="16sp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/but1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/fun"
-        >
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="45dp"
+        android:background="@drawable/orange_button"
+android:textSize="14sp"
+        android:elevation="4dp"
+        android:padding="15dp"
+        android:text="Get Started"
+        android:textColor="@color/white" />
 
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            app:lottie_rawRes="@raw/appointment"
-            android:id="@+id/s4"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="get online appointments"
-            android:textColor="@color/black"
-            android:layout_below="@id/s4"
-            android:layout_centerHorizontal="true"
-            android:textSize="16sp"/>
 
-    </RelativeLayout>
-
+</RelativeLayout>
 </FrameLayout>

@@ -6,4 +6,18 @@
     <dimen name="register_header_text_size">22sp</dimen>
     <dimen name="register_font_size">15sp</dimen>
     <dimen name="register_edit_text_size">15sp</dimen>
+    <dimen name="height">30dp</dimen>
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+
+        <item name="tabPaddingStart">0dp</item>
+        <item name="tabPaddingEnd">1dp</item>
+        <item name="tabPaddingTop">1dp</item>
+        <item name="tabPaddingBottom">0dp</item>
+    </style>
+
+    <style name="CustomTabText" parent="Widget.Design.TabLayout">
+        <item name="android:textSize">100sp</item>
+    </style>
+
+
 </resources>

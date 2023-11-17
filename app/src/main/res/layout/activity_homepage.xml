@@ -14,8 +14,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#A53434"
+            android:layout_height="48dp"
+            android:background="#BA3D3D"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
@@ -57,7 +57,7 @@
                 android:id="@+id/fab"
                 app:layout_anchor="@id/bottomAppbar"
                 app:maxImageSize="40dp"
-                android:tint="#0E0D0D"/>
+                android:tint="@color/black"/>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </RelativeLayout>
