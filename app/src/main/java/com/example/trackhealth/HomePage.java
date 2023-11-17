@@ -92,7 +92,7 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
 
                 }
 */
-                return false;
+                return true;
             }
         });
 
