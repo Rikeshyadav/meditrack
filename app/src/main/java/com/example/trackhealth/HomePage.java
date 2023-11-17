@@ -58,6 +58,7 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
         toolbar=findViewById(R.id.toolbar);
         //don't have action bar so we set custom toolbar as a action bar
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         drawerLayout=findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this, drawerLayout,toolbar,R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
@@ -91,7 +92,7 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
 
                 }
 */
-                return false;
+                return true;
             }
         });
 
