@@ -3,7 +3,7 @@
     <style name="Base.Theme.Trackhealth" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimary">#2C635C</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:statusBarColor">@color/blue</item>
@@ -30,7 +30,7 @@
     </style>
 
     <style name="Theme.HomePage" parent="Base.Theme.Trackhealth" >
-        <item name="colorPrimary">#A62D2D</item>
+        <item name="colorPrimary">#D37070</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
