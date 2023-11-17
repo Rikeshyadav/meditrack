@@ -37,26 +37,10 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
-        //intent data
-
         username = getIntent().getStringExtra("username");
 
-
-        nav = findViewById(R.id.navigation_drawer);
-
-        // Find the header view
-        View headerView = nav.getHeaderView(0);
-
-        // Find the TextView inside the header view
-        TextView headerText = headerView.findViewById(R.id.user1);
-
-        // Set the text of the TextView
-        headerText.setText(username);
-
-        //initialise all use item to prevent from null pointer error
         fab=findViewById(R.id.fab);
         toolbar=findViewById(R.id.toolbar);
-        //don't have action bar so we set custom toolbar as a action bar
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         drawerLayout=findViewById(R.id.drawer_layout);
@@ -65,6 +49,10 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView=findViewById(R.id.navigation_drawer);
+        View headerView = navigationView.getHeaderView(0);
+        TextView headerText = headerView.findViewById(R.id.user1);
+        headerText.setText(username);
+
         navigationView.setNavigationItemSelectedListener(this);
 
         bottomNavigationView=findViewById(R.id.bottom_navigation);
@@ -76,7 +64,6 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
                 int itemId=item.getItemId();
                 if(itemId==R.id.bottom_home){
                     openFragment(new HomeFragment());
-                    return true;
                 }
                 else if (itemId==R.id.bottom_schedule){
                     openFragment(new ScheduledFragment());

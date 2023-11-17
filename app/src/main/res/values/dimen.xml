@@ -19,5 +19,14 @@
         <item name="android:textSize">100sp</item>
     </style>
 
+<style name="text_active">
+
+    <item name="android:textSize">15sp</item>
+    <item name="itemIconTint">@color/white</item>
+</style>
+    <style name="text_inactive">
+        <item name="android:textSize">14sp</item>
+        <item name="itemIconTint">#938E8E</item>
+    </style>
 
 </resources>

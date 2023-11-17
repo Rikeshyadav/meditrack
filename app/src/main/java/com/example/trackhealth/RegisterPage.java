@@ -2,6 +2,7 @@ package com.example.trackhealth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -29,9 +30,9 @@ public class RegisterPage extends AppCompatActivity {
     RadioButton male_radio, female_radio, others_radio, clinic_radio, hospital_radio;
     TextView spec_text, yoe_text, about_text, qualification_text, text_clinicphone, text_clinic_header, text_clinic_name, text_clinic_type, text_clinic_address, country_code2;
     EditText speciality, yoe, aboutDoc, qualification, organisation, clinic_type, clinic_address, clinic_phone, dob;
-
-    View line1;
     AppCompatButton signup;
+
+    CardView card2,card3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,6 @@ public class RegisterPage extends AppCompatActivity {
 
         // id of line
 
-        line1 = findViewById(R.id.line);
         // id of edit text
         clinic_phone = findViewById(R.id.clinic_phone);
         dopcat = findViewById(R.id.docpat);
@@ -89,6 +89,13 @@ public class RegisterPage extends AppCompatActivity {
         //date of birth
 
         dob = findViewById(R.id.Age);
+
+
+        //id of cardView
+
+        card2=findViewById(R.id.card2);
+        card3=findViewById(R.id.card3);
+
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +109,7 @@ public class RegisterPage extends AppCompatActivity {
                     public void onClick(View view) {
                         text_clinic_address.setText("Hospital Address");
                         text_clinic_name.setText("Hospital Name");
+                        card3.setVisibility(View.VISIBLE);
                         text_clinic_type.setText("Hospital Type");
                         text_clinicphone.setText("Hospital Phone Number");
                         text_clinic_address.setVisibility(View.VISIBLE);
@@ -128,6 +136,7 @@ public class RegisterPage extends AppCompatActivity {
                 text_clinic_address.setVisibility(View.VISIBLE);
                 text_clinic_name.setVisibility(View.VISIBLE);
                 text_clinic_type.setVisibility(View.VISIBLE);
+                card3.setVisibility(View.VISIBLE);
                 text_clinicphone.setVisibility(View.VISIBLE);
                 organisation.setVisibility(View.VISIBLE);
                 country_code2.setVisibility(View.VISIBLE);
@@ -160,13 +169,16 @@ public class RegisterPage extends AppCompatActivity {
                     about_text.setVisibility(View.VISIBLE);
                     aboutDoc.setVisibility(View.VISIBLE);
                     qualification_text.setVisibility(View.VISIBLE);
-                    line1.setVisibility(View.VISIBLE);
                     text_clinic_header.setVisibility(View.VISIBLE);
                     yoe.setVisibility(View.VISIBLE);
+                    card2.setVisibility(View.VISIBLE);
+                    card3.setVisibility(View.GONE);
                     country_code2.setVisibility(View.GONE);
                     text_clinic_address.setVisibility(View.GONE);
                     text_clinic_name.setVisibility(View.GONE);
                     text_clinic_type.setVisibility(View.GONE);
+                    hospital_radio.setVisibility(View.VISIBLE);
+                    clinic_radio.setVisibility(View.VISIBLE);
                     text_clinicphone.setVisibility(View.GONE);
                     organisation.setVisibility(View.GONE);
                     clinic_type.setVisibility(View.GONE);
@@ -181,10 +193,13 @@ public class RegisterPage extends AppCompatActivity {
                     aboutDoc.setVisibility(View.GONE);
                     about_text.setVisibility(View.GONE);
                     yoe_text.setVisibility(View.GONE);
-                    line1.setVisibility(View.GONE);
                     text_clinicphone.setVisibility(View.GONE);
                     qualification_text.setVisibility(View.GONE);
                     text_clinic_header.setVisibility(View.GONE);
+                    card2.setVisibility(View.GONE);
+                    card3.setVisibility(View.GONE);
+                    hospital_radio.setVisibility(View.GONE);
+                    clinic_radio.setVisibility(View.GONE);
                     country_code2.setVisibility(View.GONE);
                     spec_text.setVisibility(View.GONE);
                     qualification.setVisibility(View.GONE);
@@ -207,15 +222,17 @@ public class RegisterPage extends AppCompatActivity {
                     speciality.setVisibility(View.GONE);
                     aboutDoc.setVisibility(View.GONE);
                     yoe_text.setVisibility(View.GONE);
-                    line1.setVisibility(View.GONE);
                     qualification_text.setVisibility(View.GONE);
                     text_clinic_header.setVisibility(View.GONE);
                     about_text.setVisibility(View.GONE);
                     spec_text.setVisibility(View.GONE);
                     qualification.setVisibility(View.GONE);
                     yoe.setVisibility(View.GONE);
-
+                    card2.setVisibility(View.GONE);
+                    card3.setVisibility(View.GONE);
                     hosOrClinic.setVisibility(View.GONE);
+                    hospital_radio.setVisibility(View.GONE);
+                    clinic_radio.setVisibility(View.GONE);
                     country_code2.setVisibility(View.GONE);
                     text_clinic_address.setVisibility(View.GONE);
                     text_clinic_name.setVisibility(View.GONE);
