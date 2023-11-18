@@ -1,22 +1,33 @@
 package com.example.trackhealth;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.app.DatePickerDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,15 +35,20 @@ import java.util.Locale;
 
 public class RegisterPage extends AppCompatActivity {
     Spinner dopcat;
+int select=1;
+    ImageView img;
 
-    LinearLayout hosOrClinic;
+    ScrollView scroll;
     RadioGroup radiogroup_gender, radiogroup_work;
     RadioButton male_radio, female_radio, others_radio, clinic_radio, hospital_radio;
     TextView spec_text, yoe_text, about_text, qualification_text, text_clinicphone, text_clinic_header, text_clinic_name, text_clinic_type, text_clinic_address, country_code2;
-    EditText speciality, yoe, aboutDoc, qualification, organisation, clinic_type, clinic_address, clinic_phone, dob;
-    AppCompatButton signup;
+    TextView additional_det,verification_text,phone_text,doc_reg,pass_warn,docpat_warn;
+    EditText speciality, yoe, aboutDoc, qualification, organisation, clinic_type, clinic_address, clinic_phone, dob,phone_no,pass;
+    LinearLayout l1;
 
-    CardView card2,card3;
+    AppCompatButton signup,otp_but,verify_but,upload_doc;
+
+    CardView card2,card3,card4,card5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +72,18 @@ public class RegisterPage extends AppCompatActivity {
         spec_text = findViewById(R.id.text_speciality);
         about_text = findViewById(R.id.text_about);
         country_code2 = findViewById(R.id.country_code2);
-
+        doc_reg=findViewById(R.id.reg_document_header);
+        verification_text=findViewById(R.id.reg_verification_header);
+        additional_det=findViewById(R.id.edu_detail);
+        phone_text=findViewById(R.id.phone_for_verification);
+        pass_warn=findViewById(R.id.pass_warn);
+        docpat_warn=findViewById(R.id.docpat_warn);
         // id of line
+
+
+        //id of scrollView
+
+        scroll=findViewById(R.id.scroll);
 
         // id of edit text
         clinic_phone = findViewById(R.id.clinic_phone);
@@ -70,8 +96,24 @@ public class RegisterPage extends AppCompatActivity {
         aboutDoc = findViewById(R.id.aboutdoctor);
         qualification = findViewById(R.id.qualification);
         organisation = findViewById(R.id.organisation);
+        phone_no=findViewById(R.id.phoneNo);
+        pass=findViewById(R.id.pass);
+
+
+
+        //image view
+
+        img=findViewById(R.id.image1);
+
         // id of button
         signup = findViewById(R.id.signup);
+        otp_but=findViewById(R.id.get_otp_but);
+        verify_but=findViewById(R.id.verify_but_reg);
+        upload_doc=findViewById(R.id.upload_doc);
+
+
+        //layout
+        l1=findViewById(R.id.reg_otp);
 
 
         //radio button and group
@@ -80,10 +122,6 @@ public class RegisterPage extends AppCompatActivity {
         hospital_radio = findViewById(R.id.hospital_radio);
         clinic_radio = findViewById(R.id.clinic_radio);
 
-
-        //layout
-
-        hosOrClinic = findViewById(R.id.hos_or_clinic);
 
 
         //date of birth
@@ -95,6 +133,35 @@ public class RegisterPage extends AppCompatActivity {
 
         card2=findViewById(R.id.card2);
         card3=findViewById(R.id.card3);
+        card4=findViewById(R.id.card4);
+        card5=findViewById(R.id.card5);
+
+
+
+
+        otp_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(!phone_no.getText().toString().equals("") && phone_no.getText().toString().length()==10) {
+                    phone_text.setText("+91"+phone_no.getText().toString());
+                    l1.setVisibility(View.VISIBLE);
+                    verify_but.setVisibility(View.VISIBLE);
+
+                }
+                else if(!phone_no.getText().toString().equals("") && phone_no.getText().toString().length()!=10){
+                    Toast.makeText(getApplicationContext(),"invalid phone no.",Toast.LENGTH_SHORT).show();
+                    scroll.fullScroll(ScrollView.FOCUS_UP);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"empty phone no.",Toast.LENGTH_SHORT).show();
+                    scroll.fullScroll(ScrollView.FOCUS_UP);
+                }
+            }
+        });
+
+
+
 
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +169,12 @@ public class RegisterPage extends AppCompatActivity {
                 showDatePicker();
             }
         });
+
+
+
+
+
+
 
 
                 hospital_radio.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +185,12 @@ public class RegisterPage extends AppCompatActivity {
                         card3.setVisibility(View.VISIBLE);
                         text_clinic_type.setText("Hospital Type");
                         text_clinicphone.setText("Hospital Phone Number");
+
+                        clinic_address.setHint("Eg. Greater Noida, sector 45");
+                        organisation.setHint("Eg. Apollo Hospital");
+                        clinic_type.setHint("Eg. General Hospital");
+                        clinic_phone.setHint("Hospital Contact Number");
+
                         text_clinic_address.setVisibility(View.VISIBLE);
                         text_clinic_name.setVisibility(View.VISIBLE);
                         text_clinic_type.setVisibility(View.VISIBLE);
@@ -133,6 +212,14 @@ public class RegisterPage extends AppCompatActivity {
                 text_clinic_name.setText("Clinic Name");
                 text_clinic_type.setText("Clinic Type");
                 text_clinicphone.setText("Clinic Phone Number");
+
+                clinic_address.setHint("Eg. Greater Noida, sector 45");
+                organisation.setHint("Eg. Ravi health clinic");
+                clinic_type.setHint("Eg. Cardiac Clinic");
+                clinic_phone.setHint("Clinic Contact Number");
+
+
+
                 text_clinic_address.setVisibility(View.VISIBLE);
                 text_clinic_name.setVisibility(View.VISIBLE);
                 text_clinic_type.setVisibility(View.VISIBLE);
@@ -150,9 +237,49 @@ public class RegisterPage extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "chl project khtm .. so ja", Toast.LENGTH_LONG).show();
+
+                if(pass.getText().toString().length()<8 ){
+                    pass_warn.setText("** must be atleast 8 characters long");
+                    pass_warn.setVisibility(View.VISIBLE);
+                    scroll.fullScroll(ScrollView.FOCUS_UP);
+                }
+
+                if(pass.getText().toString().length()>=8 ) {
+                    if (!isValid(pass.getText().toString())) {
+                        pass_warn.setText("** must include atleast one Upper case,one Lowercase and one number character");
+                        scroll.fullScroll(ScrollView.FOCUS_UP);
+                        pass_warn.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        pass_warn.setVisibility(View.GONE);
+                        if(select==1) {
+                            docpat_warn.setVisibility(View.GONE);
+                            Toast.makeText(getApplicationContext(), "Registerd successfully", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            docpat_warn.setText("** kindly select one");
+                            docpat_warn.setTextSize(13);
+                            docpat_warn.setVisibility(View.VISIBLE);
+
+                        }
+                    }
+                }
+
+
+
             }
         });
+
+        upload_doc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent,1);
+            }
+        });
+
+
 
         dopcat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -162,93 +289,68 @@ public class RegisterPage extends AppCompatActivity {
                 String selectedOption = (String) adapterView.getItemAtPosition(i);
 
                 if (selectedOption.equals("Doctor")) {
-                    speciality.setVisibility(View.VISIBLE);
-                    qualification.setVisibility(View.VISIBLE);
-                    yoe_text.setVisibility(View.VISIBLE);
-                    spec_text.setVisibility(View.VISIBLE);
-                    about_text.setVisibility(View.VISIBLE);
-                    aboutDoc.setVisibility(View.VISIBLE);
-                    qualification_text.setVisibility(View.VISIBLE);
-                    text_clinic_header.setVisibility(View.VISIBLE);
-                    yoe.setVisibility(View.VISIBLE);
+                     if(!phone_no.getText().toString().equals(""))
+                    phone_text.setText(phone_no.getText().toString());
+                     select=1;
+                    docpat_warn.setVisibility(View.GONE);
+                    card5.setVisibility(View.VISIBLE);
                     card2.setVisibility(View.VISIBLE);
                     card3.setVisibility(View.GONE);
-                    country_code2.setVisibility(View.GONE);
-                    text_clinic_address.setVisibility(View.GONE);
-                    text_clinic_name.setVisibility(View.GONE);
-                    text_clinic_type.setVisibility(View.GONE);
+                    card4.setVisibility(View.VISIBLE);
+                    additional_det.setVisibility(View.VISIBLE);
+                    verification_text.setVisibility(View.VISIBLE);
+                    qualification_text.setVisibility(View.VISIBLE);
+                    text_clinic_header.setVisibility(View.VISIBLE);
+                    l1.setVisibility(View.GONE);
                     hospital_radio.setVisibility(View.VISIBLE);
                     clinic_radio.setVisibility(View.VISIBLE);
-                    text_clinicphone.setVisibility(View.GONE);
-                    organisation.setVisibility(View.GONE);
-                    clinic_type.setVisibility(View.GONE);
-                    clinic_address.setVisibility(View.GONE);
-                    clinic_phone.setVisibility(View.GONE);
-
-                    hosOrClinic.setVisibility(View.VISIBLE);
+                    otp_but.setVisibility(View.VISIBLE);
+                    verify_but.setVisibility(View.GONE);
+                    doc_reg.setVisibility(View.VISIBLE);
 
                 }
                 if (selectedOption.equals("patient")) {
-                    speciality.setVisibility(View.GONE);
-                    aboutDoc.setVisibility(View.GONE);
-                    about_text.setVisibility(View.GONE);
-                    yoe_text.setVisibility(View.GONE);
-                    text_clinicphone.setVisibility(View.GONE);
-                    qualification_text.setVisibility(View.GONE);
-                    text_clinic_header.setVisibility(View.GONE);
+                    select=1;
+                    card5.setVisibility(View.GONE);
+                    docpat_warn.setVisibility(View.GONE);
                     card2.setVisibility(View.GONE);
                     card3.setVisibility(View.GONE);
+                    card4.setVisibility(View.VISIBLE);
+                    additional_det.setVisibility(View.GONE);
+                    verification_text.setVisibility(View.GONE);
+                    qualification_text.setVisibility(View.GONE);
+                    text_clinic_header.setVisibility(View.GONE);
+                    l1.setVisibility(View.GONE);
+                    otp_but.setVisibility(View.VISIBLE);
+                    verify_but.setVisibility(View.GONE);
+                    doc_reg.setVisibility(View.GONE);
                     hospital_radio.setVisibility(View.GONE);
                     clinic_radio.setVisibility(View.GONE);
-                    country_code2.setVisibility(View.GONE);
-                    spec_text.setVisibility(View.GONE);
-                    qualification.setVisibility(View.GONE);
-                    yoe.setVisibility(View.GONE);
 
-                    hosOrClinic.setVisibility(View.GONE);
-
-                    text_clinic_address.setVisibility(View.GONE);
-                    text_clinic_name.setVisibility(View.GONE);
-                    text_clinic_type.setVisibility(View.GONE);
-                    text_clinicphone.setVisibility(View.GONE);
-                    organisation.setVisibility(View.GONE);
-                    clinic_type.setVisibility(View.GONE);
-                    clinic_address.setVisibility(View.GONE);
-                    clinic_phone.setVisibility(View.GONE);
-
-                    radiogroup_work.clearCheck();
                 }
                 if (selectedOption.equals("Select")) {
-                    speciality.setVisibility(View.GONE);
-                    aboutDoc.setVisibility(View.GONE);
-                    yoe_text.setVisibility(View.GONE);
-                    qualification_text.setVisibility(View.GONE);
-                    text_clinic_header.setVisibility(View.GONE);
-                    about_text.setVisibility(View.GONE);
-                    spec_text.setVisibility(View.GONE);
-                    qualification.setVisibility(View.GONE);
-                    yoe.setVisibility(View.GONE);
+                    card5.setVisibility(View.GONE);
+                    select=0;
                     card2.setVisibility(View.GONE);
                     card3.setVisibility(View.GONE);
-                    hosOrClinic.setVisibility(View.GONE);
+                    card4.setVisibility(View.GONE);
+                    additional_det.setVisibility(View.GONE);
+                    verification_text.setVisibility(View.GONE);
+                    qualification_text.setVisibility(View.GONE);
+                    text_clinic_header.setVisibility(View.GONE);
+                   l1.setVisibility(View.GONE);
+                    otp_but.setVisibility(View.GONE);
+                   verify_but.setVisibility(View.GONE);
+                    doc_reg.setVisibility(View.GONE);
                     hospital_radio.setVisibility(View.GONE);
                     clinic_radio.setVisibility(View.GONE);
-                    country_code2.setVisibility(View.GONE);
-                    text_clinic_address.setVisibility(View.GONE);
-                    text_clinic_name.setVisibility(View.GONE);
-                    text_clinic_type.setVisibility(View.GONE);
-                    text_clinicphone.setVisibility(View.GONE);
-                    organisation.setVisibility(View.GONE);
-                    clinic_type.setVisibility(View.GONE);
-                    clinic_address.setVisibility(View.GONE);
-                    clinic_phone.setVisibility(View.GONE);
-                    radiogroup_work.clearCheck();
                 }
             }
 
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                select=0;
 
             }
         });
@@ -285,4 +387,27 @@ public class RegisterPage extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            // The result is for picking a PDF file
+            img.setImageURI(data.getData());
+        }
+    }
+
+
+    public boolean isValid(String str){
+        int u=0,l=0,n=0;
+        for(int i=0;i<str.length();i++){
+            if(Character.isUpperCase(str.charAt(i))) u=1;
+            if(Character.isLowerCase(str.charAt(i))) l=1;
+            if(Character.isDigit(str.charAt(i))) n=1;
+            if((u+l+n)==3) return true;
+        }
+        return false;
+
+    }
 }
+
