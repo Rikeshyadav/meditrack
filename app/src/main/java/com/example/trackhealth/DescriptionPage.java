@@ -10,18 +10,16 @@ import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
 
-public class firstpage extends AppCompatActivity {
+public class DescriptionPage extends AppCompatActivity {
     ViewPager viewPager;
     TabLayout tabLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_firstpage);
-
+        setContentView(R.layout.activity_description_page);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
-
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), this);
         adapter.addFragment(new StartFragment1(), ".");
         adapter.addFragment(new StartFragment2(), ".");

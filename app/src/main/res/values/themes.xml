@@ -20,6 +20,12 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+
+    <style name="Theme.Register_process" parent="Base.Theme.Trackhealth" >
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
     <style name="Theme.StartFragment" parent="Base.Theme.Trackhealth" >
         <item name="colorPrimary">#C3CAF3</item>
     </style>

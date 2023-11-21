@@ -104,16 +104,22 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
         if (itemId==R.id.nav_editprofile){
             openFragment(new EditprofileFragment());
         }
-        else if (itemId==R.id.nav_notification) {
+       else if (itemId==R.id.nav_notification) {
             openFragment(new NotificationFragment());}
         else if(itemId==R.id.nav_privacy){
             openFragment(new privacyFragment());
         }else if(itemId==R.id.nav_trash){
+
             openFragment(new TrashFragment());}
+
+
         else if (itemId==R.id.nav_setting) {
+
             openFragment(new SettingFragment());
         }else if (itemId==R.id.nav_logout) {
-            Toast.makeText(this, "logout", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(this, LoginActivity.class);
+            startActivity(i);
+            Toast.makeText(this, "logging out", Toast.LENGTH_SHORT).show();
         }else if (itemId==R.id.nav_aboutus) {
             openFragment(new aboutUsFragment());
         }
@@ -129,7 +135,7 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
         super.onBackPressed();
     }
     }
-    private void openFragment(Fragment fragment){// help to load the fragment and also help us from writing and again and again code
+    private void openFragment(Fragment fragment){
         FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();

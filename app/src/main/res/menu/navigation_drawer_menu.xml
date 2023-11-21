@@ -11,28 +11,31 @@
        <item
             android:id="@+id/nav_editprofile"
            android:icon="@drawable/contact_icon"
-           android:title="profile"/>
+           android:title="Profile"/>
         <item
             android:id="@+id/nav_notification"
-            android:title="notification"
+            android:title="Notification"
             android:icon="@drawable/baseline_notifications_24"/>
         <item android:id="@+id/nav_privacy"
-            android:title="privacy"
+            android:title="Privacy"
             android:icon="@drawable/baseline_privacy_tip_24"
             />
+
         <item
             android:id="@+id/nav_trash"
-            android:title="trash"
+            android:title="Trash"
             android:icon="@drawable/baseline_restore_from_trash_24"/>
+
         <item
             android:id="@+id/nav_setting"
-            android:title="setting"
+            android:title="Setting"
             android:icon="@drawable/baseline_settings_24"/>
         <item android:id="@+id/nav_logout"
             android:title="Logout"
             android:icon="@drawable/baseline_logout_24"
             />
         <item android:id="@+id/nav_aboutus"
+            android:icon="@drawable/about"
             android:title="About Us"
            />
 
