@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     TextView t1,t2;
     EditText e1,e2;
     Button login;
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         t1=findViewById(R.id.appname);
         t2=findViewById(R.id.regclick);
         e1=findViewById(R.id.email);
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent t2 =new Intent(MainActivity.this, RegisterPage.class);
+              Intent t2 =new Intent(LoginActivity.this, RegisterPage.class);
               startActivity(t2);
             }
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "enter password!", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    Intent b1 = new Intent(MainActivity.this, HomePage.class);
+                    Intent b1 = new Intent(LoginActivity.this, HomePage.class);
                     Toast.makeText(getApplicationContext(), "welcome "+email, Toast.LENGTH_SHORT).show();
                     b1.putExtra("username",email);
                     startActivity(b1);
