@@ -1,5 +1,7 @@
 package com.example.trackhealth;
 import androidx.appcompat.app.AppCompatActivity;
+import static android.widget.Toast.makeText;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
