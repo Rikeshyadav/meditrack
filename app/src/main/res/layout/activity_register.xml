@@ -694,7 +694,6 @@
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="3dp"
                     android:textSize="@dimen/register_edit_text_size"
-                    android:visibility="gone"
                     android:id="@+id/qualification"
                     />
 
@@ -1277,7 +1276,7 @@ android:id="@+id/verify_but_reg"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="** upload degree marksheet with clear view"
+                android:text="** upload degree marksheet with a clear view"
 
                 android:id="@+id/upload_remark"
                 android:layout_marginStart="3dp"
@@ -1292,11 +1291,14 @@ android:id="@+id/verify_but_reg"
                 />
             <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="500dp"
+                    android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:scaleType="centerInside"
                     android:id="@+id/image1"
+                android:maxHeight="500dp"
+                    android:src="@drawable/add_photo"
+                android:minHeight="100dp"
                     android:layout_below="@id/upload_remark"
                     android:layout_marginStart="3dp"
                     android:padding="@dimen/padding_register"
@@ -1308,15 +1310,21 @@ android:id="@+id/verify_but_reg"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     />
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="upload"
                     android:layout_below="@id/image1"
                     android:id="@+id/upload_doc"
-                    android:textSize="13sp"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/gugi"
+                    android:textColor="@color/red"
+
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="9dp"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+
                     />
 
         </RelativeLayout>

@@ -11,9 +11,40 @@
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        app:lottie_rawRes="@raw/pulse"
+        app:lottie_rawRes="@raw/heart"
+app:lottie_colorFilter="@color/red2"
+
         android:id="@+id/s1"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"/>
+
+
+    <TextView
+        android:id="@+id/s2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/s1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-18dp"
+        android:fontFamily="@font/gugi"
+        android:text="TRACKHEALTH"
+        android:textColor="@color/black"
+        android:textSize="29sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BTech Final Year Project, NERIST"
+        android:textColor="#2C2C2C"
+        android:textSize="16sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/gugi"
+        android:layout_centerHorizontal="true"
+        />
+
+
 
 </RelativeLayout>
