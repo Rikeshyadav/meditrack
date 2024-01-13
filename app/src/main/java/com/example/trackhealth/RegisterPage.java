@@ -1,12 +1,14 @@
 package com.example.trackhealth;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -21,13 +23,28 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class RegisterPage extends AppCompatActivity {
     Spinner dopcat;
-    int select=1;
+    int select = 1;
     ImageView img;
 
     ScrollView scroll;
@@ -38,21 +55,22 @@ public class RegisterPage extends AppCompatActivity {
 
     TextView spec_text, yoe_text, about_text, qualification_text, text_clinicphone, text_clinic_header, text_clinic_name, text_clinic_type, text_clinic_address, country_code2;
 
-    TextView additional_det,verification_text,phone_text,doc_reg,pass_warn,docpat_warn,upload_warn;
+    TextView additional_det, verification_text, phone_text, doc_reg, pass_warn, docpat_warn, upload_warn;
 
-    EditText speciality, yoe, aboutDoc, qualification, organisation, clinic_type, clinic_address, clinic_phone, dob,phone_no,pass;
+    EditText speciality, yoe, aboutDoc, qualification, organisation, clinic_type, clinic_address, clinic_phone, dob, phone_no, pass;
+    EditText password, firstname, lastname, emailid, address;
 
     LinearLayout l1;
 
-    AppCompatButton signup,otp_but,verify_but;
+    AppCompatButton signup, otp_but, verify_but;
 
-    CardView card2,card3,card4,card5;
+    CardView card2, card3, card4, card5;
+    String doctorOrPatient = "null", gender = "null";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
 
 
         //id of text view
@@ -66,54 +84,58 @@ public class RegisterPage extends AppCompatActivity {
         spec_text = findViewById(R.id.text_speciality);
         about_text = findViewById(R.id.text_about);
         country_code2 = findViewById(R.id.country_code2);
-        doc_reg=findViewById(R.id.reg_document_header);
-        verification_text=findViewById(R.id.reg_verification_header);
-        additional_det=findViewById(R.id.edu_detail);
-        phone_text=findViewById(R.id.phone_for_verification);
-        pass_warn=findViewById(R.id.pass_warn);
-        docpat_warn=findViewById(R.id.docpat_warn);
-
+        doc_reg = findViewById(R.id.reg_document_header);
+        verification_text = findViewById(R.id.reg_verification_header);
+        additional_det = findViewById(R.id.edu_detail);
+        phone_text = findViewById(R.id.phone_for_verification);
+        pass_warn = findViewById(R.id.pass_warn);
+        docpat_warn = findViewById(R.id.docpat_warn);
 
 
         //id of scrollView
 
-        scroll=findViewById(R.id.scroll);
+        scroll = findViewById(R.id.scroll);
 
         // id of edit text
 
+        firstname = findViewById(R.id.firstname);
+        lastname = findViewById(R.id.lastname);
+        emailid = findViewById(R.id.email);
         clinic_phone = findViewById(R.id.clinic_phone);
         dopcat = findViewById(R.id.docpat);
         clinic_type = findViewById(R.id.clinic_type);
+        address = findViewById(R.id.address);
         clinic_address = findViewById(R.id.clinic_address);
         speciality = findViewById(R.id.speciality);
         yoe = findViewById(R.id.year_of_experience);
         aboutDoc = findViewById(R.id.aboutdoctor);
         qualification = findViewById(R.id.qualification);
         organisation = findViewById(R.id.organisation);
-        phone_no=findViewById(R.id.phoneNo);
-        pass=findViewById(R.id.pass);
-
+        phone_no = findViewById(R.id.phoneNo);
+        password = findViewById(R.id.pass);
 
 
         //image view
-        img=findViewById(R.id.image1);
+        img = findViewById(R.id.image1);
 
         // id of button
         signup = findViewById(R.id.signup);
-        otp_but=findViewById(R.id.get_otp_but);
-        verify_but=findViewById(R.id.verify_but_reg);
-        upload_warn=findViewById(R.id.upload_doc);
+        otp_but = findViewById(R.id.get_otp_but);
+        verify_but = findViewById(R.id.verify_but_reg);
+        upload_warn = findViewById(R.id.upload_doc);
 
 
         //layout
-        l1=findViewById(R.id.reg_otp);
+        l1 = findViewById(R.id.reg_otp);
 
 
         //radio button and group
         radiogroup_work = findViewById(R.id.work);
         hospital_radio = findViewById(R.id.hospital_radio);
         clinic_radio = findViewById(R.id.clinic_radio);
-
+        male_radio = findViewById(R.id.male);
+        female_radio = findViewById(R.id.female);
+        others_radio = findViewById(R.id.others);
 
 
         //date of birth
@@ -126,16 +148,37 @@ public class RegisterPage extends AppCompatActivity {
         });
 
 
-
-
-
         //id of cardView
-        card2=findViewById(R.id.card2);
-        card3=findViewById(R.id.card3);
-        card4=findViewById(R.id.card4);
-        card5=findViewById(R.id.card5);
+        card2 = findViewById(R.id.card2);
+        card3 = findViewById(R.id.card3);
+        card4 = findViewById(R.id.card4);
+        card5 = findViewById(R.id.card5);
 
 
+        //gender
+
+        male_radio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gender = "Male";
+            }
+        });
+
+
+        female_radio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gender = "Female";
+            }
+        });
+
+
+        others_radio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gender = "Other";
+            }
+        });
 
         //select
 
@@ -152,9 +195,10 @@ public class RegisterPage extends AppCompatActivity {
                 String selectedOption = (String) adapterView.getItemAtPosition(i);
 
                 if (selectedOption.equals("Doctor")) {
-                    if(!phone_no.getText().toString().equals(""))
+                    if (!phone_no.getText().toString().equals(""))
                         phone_text.setText(phone_no.getText().toString());
-                    select=1;
+                    select = 1;
+                    doctorOrPatient = "Doctor";
                     docpat_warn.setVisibility(View.GONE);
                     card5.setVisibility(View.VISIBLE);
                     card2.setVisibility(View.VISIBLE);
@@ -174,7 +218,8 @@ public class RegisterPage extends AppCompatActivity {
 
                 }
                 if (selectedOption.equals("patient")) {
-                    select=1;
+                    select = 1;
+                    doctorOrPatient = "Patient";
                     card5.setVisibility(View.GONE);
                     docpat_warn.setVisibility(View.GONE);
                     otp_but.setText("GET OTP");
@@ -196,7 +241,8 @@ public class RegisterPage extends AppCompatActivity {
                 }
                 if (selectedOption.equals("Select")) {
                     card5.setVisibility(View.GONE);
-                    select=0;
+                    select = 0;
+                    doctorOrPatient = "null";
                     card2.setVisibility(View.GONE);
                     upload_warn.setVisibility(View.GONE);
                     otp_but.setText("GET OTP");
@@ -214,9 +260,10 @@ public class RegisterPage extends AppCompatActivity {
                     clinic_radio.setVisibility(View.GONE);
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                select=0;
+                select = 0;
 
             }
         });
@@ -224,33 +271,33 @@ public class RegisterPage extends AppCompatActivity {
 
         // radio button
 
-                hospital_radio.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        text_clinic_address.setText("Hospital Address");
-                        text_clinic_name.setText("Hospital Name");
-                        card3.setVisibility(View.VISIBLE);
-                        text_clinic_type.setText("Hospital Type");
+        hospital_radio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                text_clinic_address.setText("Hospital Address");
+                text_clinic_name.setText("Hospital Name");
+                card3.setVisibility(View.VISIBLE);
+                text_clinic_type.setText("Hospital Type");
 
-                        text_clinicphone.setText("Hospital Phone Number");
+                text_clinicphone.setText("Hospital Phone Number");
 
-                        clinic_address.setHint("Eg. Greater Noida, sector 45");
-                        organisation.setHint("Eg. Apollo Hospital");
-                        clinic_type.setHint("Eg. General Hospital");
-                        clinic_phone.setHint("Hospital Contact Number");
+                clinic_address.setHint("Eg. Greater Noida, sector 45");
+                organisation.setHint("Eg. Apollo Hospital");
+                clinic_type.setHint("Eg. General Hospital");
+                clinic_phone.setHint("Hospital Contact Number");
 
-                        text_clinic_address.setVisibility(View.VISIBLE);
-                        text_clinic_name.setVisibility(View.VISIBLE);
-                        text_clinic_type.setVisibility(View.VISIBLE);
-                        text_clinicphone.setVisibility(View.VISIBLE);
-                        country_code2.setVisibility(View.VISIBLE);
-                        organisation.setVisibility(View.VISIBLE);
-                        clinic_type.setVisibility(View.VISIBLE);
-                        clinic_address.setVisibility(View.VISIBLE);
-                        clinic_phone.setVisibility(View.VISIBLE);
+                text_clinic_address.setVisibility(View.VISIBLE);
+                text_clinic_name.setVisibility(View.VISIBLE);
+                text_clinic_type.setVisibility(View.VISIBLE);
+                text_clinicphone.setVisibility(View.VISIBLE);
+                country_code2.setVisibility(View.VISIBLE);
+                organisation.setVisibility(View.VISIBLE);
+                clinic_type.setVisibility(View.VISIBLE);
+                clinic_address.setVisibility(View.VISIBLE);
+                clinic_phone.setVisibility(View.VISIBLE);
 
-                    }
-                });
+            }
+        });
 
 
         clinic_radio.setOnClickListener(new View.OnClickListener() {
@@ -267,7 +314,6 @@ public class RegisterPage extends AppCompatActivity {
                 clinic_phone.setHint("Clinic Contact Number");
 
 
-
                 text_clinic_address.setVisibility(View.VISIBLE);
                 text_clinic_name.setVisibility(View.VISIBLE);
                 text_clinic_type.setVisibility(View.VISIBLE);
@@ -282,38 +328,33 @@ public class RegisterPage extends AppCompatActivity {
         });
 
 
-
-
-
         otp_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(!phone_no.getText().toString().equals("") && phone_no.getText().toString().length()==10) {
-                    phone_text.setText("+91"+phone_no.getText().toString());
+                if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() == 10) {
+                    phone_text.setText("+91" + phone_no.getText().toString());
                     l1.setVisibility(View.VISIBLE);
                     verify_but.setVisibility(View.VISIBLE);
                     otp_but.setText("Resend OTP");
 
-                }
-                else if(!phone_no.getText().toString().equals("") && phone_no.getText().toString().length()!=10){
-                    Toast.makeText(getApplicationContext(),"invalid phone no.",Toast.LENGTH_SHORT).show();
+                } else if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() != 10) {
+                    Toast.makeText(getApplicationContext(), "invalid phone no.", Toast.LENGTH_SHORT).show();
                     scroll.fullScroll(ScrollView.FOCUS_UP);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"empty phone no.",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "empty phone no.", Toast.LENGTH_SHORT).show();
                     scroll.fullScroll(ScrollView.FOCUS_UP);
                 }
             }
-        });        img.setOnClickListener(new View.OnClickListener() {
+        });
+        img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
             }
         });
-
 
 
 // document image
@@ -322,38 +363,57 @@ public class RegisterPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
             }
         });
 
 
-
         signup.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
-                if(pass.getText().toString().length()<8 ){
+                if (password.getText().toString().length() < 8) {
                     pass_warn.setText("** must be atleast 8 characters long");
                     pass_warn.setVisibility(View.VISIBLE);
                     scroll.fullScroll(ScrollView.FOCUS_UP);
                 }
 
-                if(pass.getText().toString().length()>=8 ) {
-                    if (!isValid(pass.getText().toString())) {
+                if (password.getText().toString().length() >= 8) {
+
+                    if (!isValid(password.getText().toString())) {
+
                         pass_warn.setText("** must include atleast one Upper case,one Lowercase and one number character");
                         scroll.fullScroll(ScrollView.FOCUS_UP);
                         pass_warn.setVisibility(View.VISIBLE);
-                    }
-                    else {
+                    } else {
+
                         pass_warn.setVisibility(View.GONE);
-                        if(select==1) {
+                        if (select == 1) {
+
                             docpat_warn.setVisibility(View.GONE);
-                            Intent i=new Intent(getApplicationContext(), Register_process.class);
+
+                            String username = firstname.getText() + " " + lastname.getText();
+                            String email = emailid.getText().toString();
+                            String pass = password.getText().toString();
+                            String phone = phone_no.getText().toString();
+                            String dateofbirth = dob.getText().toString();
+                            String gen = gender;
+                            String addres = address.getText().toString();
+                            Toast.makeText(getApplicationContext(), doctorOrPatient, Toast.LENGTH_SHORT).show();
+                            if (doctorOrPatient.equals("Patient")) {
+                                Toast.makeText(getApplicationContext(), "inside", Toast.LENGTH_SHORT).show();
+                                sendPatient(username, email, pass, phone, dateofbirth, gen, addres);
+                            } else {
+                                sendDoctor(username, email, pass, phone, dateofbirth, gen, addres, speciality.getText().toString(), yoe.getText().toString(), qualification.getText().toString(), aboutDoc.getText().toString(), organisation.getText().toString(), clinic_type.getText().toString(), clinic_address.getText().toString(), clinic_phone.getText().toString());
+                            }
+
+
+                            Intent i = new Intent(getApplicationContext(), Register_process.class);
                             startActivity(i);
 
                             Toast.makeText(getApplicationContext(), "Registration under process", Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        } else {
                             docpat_warn.setText("** kindly select one option");
                             docpat_warn.setTextSize(13);
                             docpat_warn.setVisibility(View.VISIBLE);
@@ -363,17 +423,85 @@ public class RegisterPage extends AppCompatActivity {
                 }
 
 
-
             }
         });
 
 
+    }
 
+    public void sendPatient(String username, String email, String password, String phone, String dob, String gender, String address) {
+        String temp = "https://demo-uw46.onrender.com/api/patient/register";
+        HashMap<String, String> jsonobj = new HashMap<>();
+        jsonobj.put("doctor_patient", "patient");
 
+        jsonobj.put("username", username);
+        jsonobj.put("email", email);
+        jsonobj.put("password", password);
+        jsonobj.put("phone", phone);
+        jsonobj.put("dob", dob);
+        jsonobj.put("gender", gender);
+        jsonobj.put("address", address);
+
+        JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println("sorry : " + response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("sorry : " + error);
+            }
+        });
+        RequestQueue q = Volley.newRequestQueue(RegisterPage.this);
+
+        q.add(j);
 
     }
 
 
+    public void sendDoctor(String username,String email,String password,String phone,String dob,String gender,String address,String speciality,String yoe,String qualification,String about,String hosName,String hosType,String hosAddress,String hosPhone){
+        String temp="https://demo-uw46.onrender.com/api/doctor/register";
+        ArrayList<String> clinic_hospital=new ArrayList<>();
+        clinic_hospital.add(hosName);
+        clinic_hospital.add(hosType);
+        clinic_hospital.add(hosAddress);
+        clinic_hospital.add(hosPhone);
+        HashMap<String,String> jsonobj=new HashMap<>();
+        jsonobj.put("doctor_patient","patient");
+
+        jsonobj.put("username", username);
+        jsonobj.put("email", email);
+        jsonobj.put("password", password);
+        jsonobj.put("phone", phone);
+        jsonobj.put("dob", dob);
+        jsonobj.put("gender", gender);
+        jsonobj.put("address", address);
+        jsonobj.put("speciality",speciality);
+        jsonobj.put("yoe",yoe);
+        jsonobj.put("qualification",qualification);
+        jsonobj.put("about",about);
+        jsonobj.put("clinic_hospital",clinic_hospital.toString());
+
+        JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp,new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println("sorry : "+response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("sorry : "+error);
+            }
+        });
+        RequestQueue q= Volley.newRequestQueue(RegisterPage.this);
+
+        q.add(j);
+
+    }
     private void showDatePicker() {
         final Calendar calendar = Calendar.getInstance();
         int currentYear = calendar.get(Calendar.YEAR);
@@ -436,5 +564,9 @@ public class RegisterPage extends AppCompatActivity {
         return false;
 
     }
+
+
+
+
 }
 
