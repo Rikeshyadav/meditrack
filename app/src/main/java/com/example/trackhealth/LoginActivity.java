@@ -125,6 +125,7 @@ startActivity(i);
                     Toast.makeText(getApplicationContext(), "enter password!", Toast.LENGTH_SHORT).show();
                 } else {
                     if(!doctororpatient.equals("null")) {
+
                         progressBar.setVisibility(View.VISIBLE);
                         authPatient(phone, pass,doctororpatient);
                         //progressBar.setVisibility(View.GONE);

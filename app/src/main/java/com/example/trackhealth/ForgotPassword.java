@@ -13,8 +13,10 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,9 @@ import java.util.HashMap;
 public class ForgotPassword extends AppCompatActivity {
    EditText phone,getOtp;
    ProgressBar pb;
+    Spinner spinner;
+   String doctororpatient="null";
+
    TextView result;
    AppCompatButton but,proceed;
     String otp="",pass="";
@@ -46,6 +51,38 @@ result=findViewById(R.id.resultforgotpass);
 getOtp=findViewById(R.id.otp_ForgotPage);
 proceed=findViewById(R.id.ForgetProceedButton);
 pb=findViewById(R.id.forgotprogress);
+spinner=findViewById(R.id.forgotSpinner);
+
+
+        String[] st = {"Select", "Doctor", "Patient"};
+        RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner1, st);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+      spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+          @Override
+          public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+              String selectedOption = (String) adapterView.getItemAtPosition(i);
+
+              if (selectedOption.equals("Doctor")) {
+                  doctororpatient = "Doctor";
+              } else if (selectedOption.equals("Patient")) {
+                  doctororpatient = "Patient";
+              } else if (selectedOption.equals("Select")) {
+                  doctororpatient = "null";
+              } else {
+                  doctororpatient = "null";
+              }
+          }
+
+          @Override
+          public void onNothingSelected(AdapterView<?> adapterView) {
+
+          }
+      });
+
+
+
+
 
 
     proceed.setOnClickListener(new View.OnClickListener() {
@@ -132,10 +169,17 @@ pb=findViewById(R.id.forgotprogress);
 
     public void getpass(String myphone){
         myphone=myphone.trim();
-        String temp = "https://demo-uw46.onrender.com/api/patient/getPassword";
+        String temp="";
+        if(doctororpatient.equals("Patient")) {
+            temp = "https://demo-uw46.onrender.com/api/patient/getPassword";
+        }
+        else{
+            temp = "https://demo-uw46.onrender.com/api/doctor/getPassword";
+        }
         try{
             pb.setVisibility(View.VISIBLE);
             HashMap<String,String> jsonobj=new HashMap<>();
+
             jsonobj.put("phone",myphone);
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp,new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
 
@@ -152,23 +196,27 @@ pb=findViewById(R.id.forgotprogress);
                                 pb.setVisibility(View.GONE);
 
                             pb.setVisibility(View.GONE);
+                            spinner.setVisibility(View.GONE);
                             getOtp.setVisibility(View.VISIBLE);
                             but.setVisibility(View.VISIBLE);
                             proceed.setVisibility(View.GONE);
+                            //spinner.setVisibility(View.GONE);
                         }
 else{
-
+                              pb.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(),"user doesn't exists", Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (JSONException e) {
-
+                        Toast.makeText(getApplicationContext(),"error", Toast.LENGTH_SHORT).show();
+pb.setVisibility(View.GONE);
                         throw new RuntimeException(e);
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    pb.setVisibility(View.GONE);
                 }
             });
             RequestQueue q= Volley.newRequestQueue(ForgotPassword.this);
@@ -177,6 +225,8 @@ else{
 
 
         }catch (Exception e){
+            Toast.makeText(getApplicationContext(),"error", Toast.LENGTH_SHORT).show();
+            pb.setVisibility(View.GONE);
 
         }
     }
@@ -207,6 +257,7 @@ else{
                                 otp=response.getString("otp");
                                 sms.sendTextMessage(phone.getText().toString().trim(),null,"Your OTP for TrackHealth App verification is "+response.getString("otp"),null,null);
                                 pb.setVisibility(View.GONE);
+
                                 Toast.makeText(getApplicationContext(),"otp sent",Toast.LENGTH_LONG).show();
                                 pb.setVisibility(View.GONE);
                             }else{
@@ -219,6 +270,7 @@ else{
 
                     } catch (JSONException e) {
                         pb.setVisibility(View.GONE);
+                        Toast.makeText(getApplicationContext(),"error", Toast.LENGTH_SHORT).show();
                         throw new RuntimeException(e);
                     }
                 }
@@ -234,7 +286,8 @@ else{
 
 
         }catch (Exception e){
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            pb.setVisibility(View.GONE);
+            Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
         }
     }
 

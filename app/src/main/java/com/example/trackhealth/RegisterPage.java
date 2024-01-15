@@ -554,7 +554,7 @@ progress=findViewById(R.id.progressregister);
         clinic_hospital.add(hosAddress);
         clinic_hospital.add(hosPhone);
         HashMap<String,String> jsonobj=new HashMap<>();
-        jsonobj.put("doctor_patient","patient");
+        jsonobj.put("doctor_patient",doctorOrPatient);
 
         jsonobj.put("username", username);
         jsonobj.put("email", email);
