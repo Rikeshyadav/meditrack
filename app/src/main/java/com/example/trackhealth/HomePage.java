@@ -2,6 +2,7 @@ package com.example.trackhealth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -21,6 +23,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 public class HomePage extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
    DrawerLayout drawerLayout;
@@ -129,15 +133,38 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }else{
+        }
+        else{
+    if(this.getSupportFragmentManager().getBackStackEntryCount()==1){
+
+        setAlert("Do you want to exit?","yes","no");
+    }
+    else {
         super.onBackPressed();
     }
     }
+    }
+
+
+
+    public void setAlert(String msg,String pos,String neg){
+        AlertDialog.Builder b=new AlertDialog.Builder(this);
+        b.setMessage(msg);
+        b.setPositiveButton(pos,(DialogInterface.OnClickListener) (dialog,which)->{
+            finishAffinity();
+        });
+        b.setNegativeButton(neg,(DialogInterface.OnClickListener) (dialog,which)->{
+            dialog.cancel();
+        });
+        AlertDialog ad=b.create();
+        ad.show();
+
+    }
     private void openFragment(Fragment fragment){
         FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container,fragment);
+        transaction.replace(R.id.fragment_container,fragment).addToBackStack("tag");
         transaction.commit();
     }
 }
