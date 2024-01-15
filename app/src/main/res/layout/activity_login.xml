@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="100dp"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/gugi"
         android:text="TrackHealth"
@@ -47,16 +47,18 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:drawableLeft="@drawable/user"
                 android:drawablePadding="8dp"
-                android:inputType="text"
+                android:inputType="phone"
+                android:maxLength="10"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="60dp"
                 android:textColorHighlight="@color/cardview_dark_background"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/white_box"
-                android:hint="username"
+                android:hint="phone number"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHint="#C1CCCA"
@@ -82,14 +84,55 @@
                 android:textColor="@color/black"
                 android:textColorHint="#C1CCCA"
                 android:textSize="18sp" />
-            <ProgressBar
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/white_box"
+                android:id="@+id/identity"
                 android:layout_below="@id/pass"
-                android:layout_margin="20dp"
-                android:visibility="gone"
+                >
+
+<Spinner
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/loginSpinner"
+    android:pointerIcon="all_scroll"
+
+    android:background="@color/transparentColor"
+    android:padding="@dimen/padding_register"
+
+    android:textColorHint="@color/black" />
+
+            </LinearLayout>
+            <ProgressBar
                 android:id="@+id/progress"
-                />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               android:visibility="gone"
+                android:layout_below="@id/identity"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="5dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Forgot password?"
+                android:id="@+id/forgotpass"
+                android:layout_below="@+id/progress"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/blue"
+                android:textSize="16sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
                 android:id="@+id/login"
@@ -99,12 +142,12 @@
                 android:elevation="15dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_below="@id/progress"
+                android:layout_below="@id/forgotpass"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_login"
                 android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="60dp"
                 android:text="login" />
         </RelativeLayout>
@@ -142,7 +185,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginEnd="0dp"
             android:layout_marginTop="20dp"
-
+            android:textStyle="bold"
             android:textColor="#2A46DF"
             android:textSize="17sp"
             />
