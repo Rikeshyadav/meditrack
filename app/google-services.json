@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "519295508243",
+    "project_id": "trackhealth-a6b29",
+    "storage_bucket": "trackhealth-a6b29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519295508243:android:017e7854bdfcbafcb184e6",
+        "android_client_info": {
+          "package_name": "com.example.trackhealth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWvVKE14UEV0I1UbBduDx0DS93dS-ONnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

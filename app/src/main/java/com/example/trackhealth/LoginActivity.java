@@ -131,7 +131,7 @@ startActivity(i);
                         //progressBar.setVisibility(View.GONE);
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "selected empty!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "empty selection!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -178,7 +178,8 @@ progressBar.setVisibility(View.GONE);
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("sorry : "+error);
+                Toast.makeText(getApplicationContext(),"check your internet connection", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
         RequestQueue q= Volley.newRequestQueue(LoginActivity.this);

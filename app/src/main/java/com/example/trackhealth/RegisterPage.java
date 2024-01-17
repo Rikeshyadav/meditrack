@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.telephony.SmsManager;
 import android.view.View;
@@ -39,6 +40,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,16 +54,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class RegisterPage extends AppCompatActivity {
     Spinner dopcat;
     int select = 1;
+    FirebaseAuth auth;
     ImageView img;
-    String phh="";
-    ProgressBar progress;
+    String phh="",verificationId="";
+    ProgressBar progress,progress2;
     String verified_phone="";
     String otp="";
     boolean verified=false,existUser=false;
+
 
     ScrollView scroll;
 
@@ -76,7 +85,7 @@ public class RegisterPage extends AppCompatActivity {
     AppCompatButton signup, otp_but, verify_but;
 
     CardView card2, card3, card4, card5;
-    String doctorOrPatient = "null", gender = "null";
+    String doctorOrPatient = "null", gender = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +93,7 @@ public class RegisterPage extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 progress=findViewById(R.id.progressregister);
+        progress2=findViewById(R.id.progressregister2);
 
         //id of text view
         text_clinicphone = findViewById(R.id.text_clinicphone);
@@ -102,7 +112,7 @@ progress=findViewById(R.id.progressregister);
         phone_text = findViewById(R.id.phone_for_verification);
         pass_warn = findViewById(R.id.pass_warn);
         docpat_warn = findViewById(R.id.docpat_warn);
-
+        auth= FirebaseAuth.getInstance();
 
         //id of scrollView
 
@@ -213,6 +223,14 @@ progress=findViewById(R.id.progressregister);
                     card5.setVisibility(View.VISIBLE);
                     card2.setVisibility(View.VISIBLE);
                     card3.setVisibility(View.GONE);
+                    if(!verified) {
+                        otp_but.setText("Get OTP");
+                        otp_but.setFocusable(true);
+                    }
+                    else{
+                        otp_but.setText("verified");
+                        otp_but.setFocusable(false);
+                    }
                     card4.setVisibility(View.VISIBLE);
                     upload_warn.setVisibility(View.GONE);
                     additional_det.setVisibility(View.VISIBLE);
@@ -242,9 +260,16 @@ progress=findViewById(R.id.progressregister);
                         verification_text.setVisibility(View.GONE);
                         upload_warn.setVisibility(View.GONE);
                         text_clinic_header.setVisibility(View.GONE);
-
-                        otp_but.setVisibility(View.VISIBLE);
-                        verify_but.setVisibility(View.GONE);
+                    otp_but.setVisibility(View.VISIBLE);
+                    verify_but.setVisibility(View.GONE);
+                if(!verified) {
+                    otp_but.setText("Get OTP");
+                    otp_but.setFocusable(true);
+                }
+                else{
+                    otp_but.setText("verified");
+                    otp_but.setFocusable(false);
+                }
                         doc_reg.setVisibility(View.GONE);
                         hospital_radio.setVisibility(View.GONE);
                         clinic_radio.setVisibility(View.GONE);
@@ -260,6 +285,7 @@ progress=findViewById(R.id.progressregister);
                     upload_warn.setVisibility(View.GONE);
                     otp_but.setText("GET OTP");
                     card3.setVisibility(View.GONE);
+
                     card4.setVisibility(View.GONE);
                     additional_det.setVisibility(View.GONE);
                     verification_text.setVisibility(View.GONE);
@@ -344,15 +370,8 @@ progress=findViewById(R.id.progressregister);
 
                 String verotp=otpedit.getText().toString().trim();
                 if(!verotp.equals("")){
-                    if(otp.equals(verotp)){
-                        verified=true;
-                        verify_but.setText("Verified");
-                        otpedit.setVisibility(View.GONE);
-                        otp_but.setVisibility(View.GONE);
-                    }
-                    else{
-                        Toast.makeText(RegisterPage.this, "wrong otp", Toast.LENGTH_SHORT).show();
-                    }
+
+               signin(verotp);
                 }
                 else{
                     Toast.makeText(RegisterPage.this, "empty otp", Toast.LENGTH_SHORT).show();
@@ -371,7 +390,10 @@ progress=findViewById(R.id.progressregister);
                    // verify_but.setVisibility(View.VISIBLE);
                     if(!verified) {
                         progress.setVisibility(View.VISIBLE);
-                        sendmsg(phone_no.getText().toString().trim());
+                       // sendmsg(phone_no.getText().toString().trim());
+                     getotpFirebase(phone_no.getText().toString().trim());
+
+
                     }
                     else Toast.makeText(getApplicationContext(), "already verified", Toast.LENGTH_SHORT).show();
 
@@ -406,12 +428,11 @@ progress=findViewById(R.id.progressregister);
             }
         });
 
-
         signup.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-
+                progress2.setVisibility(View.VISIBLE);
                 if (password.getText().toString().length() < 8) {
                     pass_warn.setText("** must be atleast 8 characters long");
                     pass_warn.setVisibility(View.VISIBLE);
@@ -431,56 +452,62 @@ progress=findViewById(R.id.progressregister);
                         if (select == 1) {
 
                             docpat_warn.setVisibility(View.GONE);
-                            String username = firstname.getText() + " " + lastname.getText();
+                            String username = firstname.getText().toString().trim() + " " + lastname.getText().toString().trim();
+                            username=username.trim();
                             String email = emailid.getText().toString().trim();
                             String pass = password.getText().toString().trim();
                             String phone = phone_no.getText().toString().trim();
                             String dateofbirth = dob.getText().toString().trim();
                             String gen = gender.trim();
                             String addres = address.getText().toString().trim();
+
+
                              if(!existUser) {
-
-                                  if(verified_phone.equals(phone)){
                                  if (verified) {
+                                     progress2.setVisibility(View.VISIBLE);
 
-                                     if (doctorOrPatient.equals("Patient")) {
+                                     if(verified_phone.equals(phone)) {
 
-                                         sendPatient(username, email, pass, phone, dateofbirth, gen, addres);
+                                         if (doctorOrPatient.equals("Patient")) {
 
-                                     } else {
-                                         sendDoctor(username, email, pass, phone, dateofbirth, gen, addres, speciality.getText().toString().trim(), yoe.getText().toString().trim(), qualification.getText().toString().trim(), aboutDoc.getText().toString().trim(), organisation.getText().toString().trim(), clinic_type.getText().toString().trim(), clinic_address.getText().toString().trim(), clinic_phone.getText().toString().trim());
+                                             sendPatient(username, email, pass, phone, dateofbirth, gen, addres);
 
+                                         } else {
+                                             sendDoctor(username, email, pass, phone, dateofbirth, gen, addres, speciality.getText().toString().trim(), yoe.getText().toString().trim(), qualification.getText().toString().trim(), aboutDoc.getText().toString().trim(), organisation.getText().toString().trim(), clinic_type.getText().toString().trim(), clinic_address.getText().toString().trim(), clinic_phone.getText().toString().trim());
+
+                                         }
+                                         progress2.setVisibility(View.GONE);
                                      }
-                                 } else {
-                                     Toast.makeText(getApplicationContext(), "verify phone no.", Toast.LENGTH_SHORT).show();
+
+
+else{
+                                             verified = false;
+                                             verified_phone = "";
+                                             verify_but.setText("Verify");
+                                             otp_but.setVisibility(View.VISIBLE);
+                                             verify_but.setVisibility(View.GONE);
+
+                                             if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() == 10) {
+                                                 Toast.makeText(getApplicationContext(), "verify changed phone no.", Toast.LENGTH_SHORT).show();
+                                                 phone_text.setText("+91" + phone_no.getText().toString());
+
+                                             } else if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() != 10) {
+                                                 Toast.makeText(getApplicationContext(), "invalid phone no.", Toast.LENGTH_SHORT).show();
+                                                 scroll.fullScroll(ScrollView.FOCUS_UP);
+                                             } else {
+                                                 Toast.makeText(getApplicationContext(), "empty phone no.", Toast.LENGTH_SHORT).show();
+                                                 scroll.fullScroll(ScrollView.FOCUS_UP);
+                                             }
+
+                                         }
+                                     }else{
+                                     Toast.makeText(getApplicationContext(),"verify phone no.", Toast.LENGTH_SHORT).show();
                                  }
+                                      //
 
                              }
-                                  else{
-                                      verified=false;
-                                      verified_phone="";
-                                      verify_but.setText("Verify");
-                                      otp_but.setVisibility(View.VISIBLE);
-                                      verify_but.setVisibility(View.GONE);
-
-                                      if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() == 10) {
-                                          Toast.makeText(getApplicationContext(), "verify changed phone no.", Toast.LENGTH_SHORT).show();
-                                          phone_text.setText("+91" + phone_no.getText().toString());
-
-                                      } else if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() != 10) {
-                                          Toast.makeText(getApplicationContext(), "invalid phone no.", Toast.LENGTH_SHORT).show();
-                                          scroll.fullScroll(ScrollView.FOCUS_UP);
-                                      } else {
-                                          Toast.makeText(getApplicationContext(), "empty phone no.", Toast.LENGTH_SHORT).show();
-                                          scroll.fullScroll(ScrollView.FOCUS_UP);
-                                      }
 
 
-
-
-
-                                  }
-                        }
                              else{
                                  Toast.makeText(getApplicationContext(),"user already exist", Toast.LENGTH_SHORT).show();
                              }
@@ -502,102 +529,208 @@ progress=findViewById(R.id.progressregister);
     }
 
     public void sendPatient(String username, String email, String password, String phone, String dob, String gender, String address) {
-        String temp = "https://demo-uw46.onrender.com/api/patient/register";
 
-        HashMap<String, String> jsonobj = new HashMap<>();
-        jsonobj.put("doctor_patient", "patient");
+                String temp = "https://demo-uw46.onrender.com/api/patient/register";
 
-        jsonobj.put("username", username);
-        jsonobj.put("email", email);
-        jsonobj.put("password", password);
-        jsonobj.put("phone",verified_phone);
-        jsonobj.put("dob", dob);
-        jsonobj.put("gender", gender);
-        jsonobj.put("address", address);
+                HashMap<String, String> jsonobj = new HashMap<>();
+                jsonobj.put("doctor_patient", "patient");
 
-        JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-
-                try {
-                    if(response.getString("success").equals("true")) {
-                        Toast.makeText(getApplicationContext(), "registered successfully", Toast.LENGTH_LONG).show();
-                        Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(i);
+                jsonobj.put("username", username);
+                jsonobj.put("email", email);
+                jsonobj.put("password", password);
+                jsonobj.put("phone",verified_phone);
+                jsonobj.put("dob", dob);
+                jsonobj.put("gender", gender);
+                jsonobj.put("address", address);
+                boolean allow=true;
+                String key="";
+                for(Map.Entry<String,String> a:jsonobj.entrySet()){
+                    String value=a.getValue();
+                    if(value.equals("")){
+                        allow=false;
+                        key=a.getKey();
+                        break;
                     }
-                    else{
-                        Toast.makeText(RegisterPage.this, "something went wrong", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                }
+                if(allow) {
+
+                    JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                            try {
+                                if (response.getString("success").equals("true")) {
+
+                                    Toast.makeText(getApplicationContext(), "registered successfully", Toast.LENGTH_LONG).show();
+                                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+                                    startActivity(i);
+                                    progress2.setVisibility(View.GONE);
+                                } else {
+
+                                    Toast.makeText(RegisterPage.this, "user already exists", Toast.LENGTH_SHORT).show();
+                                    progress2.setVisibility(View.GONE);
+                                }
+                            } catch (JSONException e) {
+                                progress2.setVisibility(View.GONE);
+                                Toast.makeText(RegisterPage.this, "error : "+e, Toast.LENGTH_SHORT).show();
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                            progress2.setVisibility(View.GONE);
+                            progress.setVisibility(View.GONE);
+                        }
+                    });
+                    RequestQueue q = Volley.newRequestQueue(RegisterPage.this);
+
+                    q.add(j);
+                }
+                else{
+
+
+                    scroll.fullScroll(scroll.FOCUS_UP);
+                    Toast.makeText(getApplicationContext(), "empty " + key, Toast.LENGTH_SHORT).show();
+
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("sorry : " + error);
-            }
-        });
-        RequestQueue q = Volley.newRequestQueue(RegisterPage.this);
-
-        q.add(j);
-
-    }
 
 
     public void sendDoctor(String username,String email,String password,String phone,String dob,String gender,String address,String speciality,String yoe,String qualification,String about,String hosName,String hosType,String hosAddress,String hosPhone){
-        String temp="https://demo-uw46.onrender.com/api/doctor/register";
-        ArrayList<String> clinic_hospital=new ArrayList<>();
-        clinic_hospital.add(hosName);
-        clinic_hospital.add(hosType);
-        clinic_hospital.add(hosAddress);
-        clinic_hospital.add(hosPhone);
-        HashMap<String,String> jsonobj=new HashMap<>();
-        jsonobj.put("doctor_patient",doctorOrPatient);
 
-        jsonobj.put("username", username);
-        jsonobj.put("email", email);
-        jsonobj.put("password", password);
-        jsonobj.put("phone", verified_phone);
-        jsonobj.put("dob", dob);
-        jsonobj.put("gender", gender);
-        jsonobj.put("address", address);
-        jsonobj.put("speciality",speciality);
-        jsonobj.put("yoe",yoe);
-        jsonobj.put("qualification",qualification);
-        jsonobj.put("about",about);
-        jsonobj.put("clinic_hospital",clinic_hospital.toString());
-        JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp,new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
+            String temp="https://demo-uw46.onrender.com/api/doctor/register";
+            ArrayList<String> clinic_hospital=new ArrayList<>();
+            clinic_hospital.add(hosName);
+            clinic_hospital.add(hosType);
+            clinic_hospital.add(hosAddress);
+            clinic_hospital.add(hosPhone);
+            HashMap<String,String> jsonobj=new HashMap<>();
 
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    if(response.getString("success").equals("true")) {
-                        Intent i = new Intent(getApplicationContext(), Register_process.class);
-                        startActivity(i);
-                        Toast.makeText(getApplicationContext(), "Registration under process", Toast.LENGTH_LONG).show();
+            jsonobj.put("doctor_patient", doctorOrPatient);
 
-                    }
-                    else{
-                        Toast.makeText(RegisterPage.this, "something went wrong", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
+            jsonobj.put("username", username);
+            jsonobj.put("email", email);
+            jsonobj.put("password", password);
+            jsonobj.put("phone", verified_phone);
+            jsonobj.put("dob", dob);
+            jsonobj.put("gender", gender);
+            jsonobj.put("address", address);
+            jsonobj.put("speciality", speciality);
+            jsonobj.put("yoe", yoe);
+            jsonobj.put("qualification", qualification);
+            jsonobj.put("about", about);
+            jsonobj.put("clinic_hospital", clinic_hospital.toString());
+            boolean allow=true;
+            boolean allow2=true;
+            String key="";
+            for(Map.Entry<String,String> a:jsonobj.entrySet()){
+                String value=a.getValue();
+                if(value.equals("")){
+                    allow=false;
+                    key=a.getKey();
+                    break;
                 }
+            }
+            if(speciality.equals("")) {
+                Toast.makeText(getApplicationContext(), "empty speciality", Toast.LENGTH_SHORT).show();
+                allow2=false;
+
 
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("sorry : "+error);
+
+            else if(yoe.equals("")) {
+                Toast.makeText(getApplicationContext(), "empty year of experience", Toast.LENGTH_SHORT).show();
+                allow2=false;
+
             }
-        });
-        RequestQueue q= Volley.newRequestQueue(RegisterPage.this);
 
-        q.add(j);
+            else if(qualification.equals("")) {
+                Toast.makeText(getApplicationContext(), "empty qualification", Toast.LENGTH_SHORT).show();
+                allow2=false;
 
-    }
+            }
+
+            else if(about.equals("")) {
+                Toast.makeText(getApplicationContext(), "empty about", Toast.LENGTH_SHORT).show();
+                allow2=false;
+
+            }
+
+            else if(hosName.equals("")) {
+                Toast.makeText(getApplicationContext(), "empty hospital/clinic name", Toast.LENGTH_SHORT).show();
+                allow2=false;
+
+            }
+
+            else if(hosAddress.equals("")) {
+                Toast.makeText(getApplicationContext(), "empty hospital/clinic address", Toast.LENGTH_SHORT).show();
+                allow2=false;
+
+            }
+
+            else if(hosType.equals("")) {
+                Toast.makeText(getApplicationContext(), "empty hospital/clinic type", Toast.LENGTH_SHORT).show();
+                allow2=false;
+
+            }
+
+            else if(hosPhone.equals("")) {
+                Toast.makeText(getApplicationContext(), "empty hospital/clinic phone", Toast.LENGTH_SHORT).show();
+                allow2=false;
+
+            }
+
+
+            if(allow) {
+
+                if (allow2) {
+                    JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response.getString("success").equals("true")) {
+                                    progress2.setVisibility(View.GONE);
+                                    Intent i = new Intent(getApplicationContext(), Register_process.class);
+                                    startActivity(i);
+                                    Toast.makeText(getApplicationContext(), "Registration under process", Toast.LENGTH_LONG).show();
+
+                                } else {
+                                    progress2.setVisibility(View.GONE);
+                                    Toast.makeText(RegisterPage.this, "user already exists", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                            progress.setVisibility(View.GONE);
+                            progress2.setVisibility(View.GONE);
+
+                        }
+                    });
+                    RequestQueue q = Volley.newRequestQueue(RegisterPage.this);
+
+                    q.add(j);
+                }
+            }
+            else{
+
+
+                    scroll.fullScroll(scroll.FOCUS_UP);
+                    Toast.makeText(getApplicationContext(), "empty " + key, Toast.LENGTH_SHORT).show();
+
+            }
+        }
+
     private void showDatePicker() {
         final Calendar calendar = Calendar.getInstance();
         int currentYear = calendar.get(Calendar.YEAR);
@@ -665,129 +798,82 @@ progress=findViewById(R.id.progressregister);
 
 
 
-    public void getOtp(String phone){
-        String token="00501cc79e211e158fb6a251af6c5f32";
-        String temp = "https://demo-uw46.onrender.com/api/getotp";
-        HashMap<String,String> jsonobj=new HashMap<>();
-        jsonobj.put("token",token);
-        jsonobj.put("phone", "+91"+phone);
-
-        JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp,new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    if(Boolean.parseBoolean(response.getString("success"))){
-
-                        otp=response.getString("otp");
-                        verified_phone=phone;
-                        progress.setVisibility(View.GONE);
-                        otpedit.setText("");
-                        otpedit.setVisibility(View.VISIBLE);
-
-                        verify_but.setVisibility(View.VISIBLE);
-
-                        Toast.makeText(getApplicationContext(),"otp sent", Toast.LENGTH_LONG).show();
-                    }
-                    else{
-
-                        Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-
-                    Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_SHORT).show();
-                    throw new RuntimeException(e);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("sorry : "+error);
-            }
-        });
-        RequestQueue q= Volley.newRequestQueue(RegisterPage.this);
-
-        q.add(j);
-    }
 
 
-    public void sendmsg(String myphone){
-        myphone=myphone.trim();
-        phh=myphone;
-        if(myphone.equals("")){
-            Toast.makeText(getApplicationContext(),"please enter phone no.",Toast.LENGTH_SHORT).show();
-        }
-        String temp = "https://demo-uw46.onrender.com/api/getotpsms";
-        try{
-            progress.setVisibility(View.VISIBLE);
-            //  HashMap<String,String> jsonobj=new HashMap<>();
-            //jsonobj.put("phone",myphone);
-            JsonObjectRequest j = new JsonObjectRequest(Request.Method.GET, temp,null, new Response.Listener<JSONObject>() {
-
-                @Override
-                public void onResponse(JSONObject response) {
-                    progress.setVisibility(View.GONE);
-                    try {
-
-                        if(Boolean.parseBoolean(response.getString("success"))){
-
-                            if(ContextCompat.checkSelfPermission(RegisterPage.this, android.Manifest.permission.SEND_SMS)== PackageManager.PERMISSION_GRANTED){
-                                progress.setVisibility(View.VISIBLE);
-                                SmsManager sms=SmsManager.getDefault();
-                                otp=response.getString("otp");
-                                verified_phone=phh;
-                                progress.setVisibility(View.GONE);
-                                otpedit.setText("");
-                                otpedit.setVisibility(View.VISIBLE);
-
-                                verify_but.setVisibility(View.VISIBLE);
-
-                                sms.sendTextMessage(phone_no.getText().toString().trim(),null,"Your OTP for TrackHealth App verification is "+response.getString("otp"),null,null);
-                                progress.setVisibility(View.GONE);
-                                Toast.makeText(getApplicationContext(),"otp sent",Toast.LENGTH_LONG).show();
-
-                                progress.setVisibility(View.GONE);
-                            }else{
-
-                                ActivityCompat.requestPermissions(RegisterPage.this,new String[]{Manifest.permission.SEND_SMS},100);
-                            }
-
-                        }
-
-                    } catch (JSONException e) {
-                        progress.setVisibility(View.GONE);
-                        throw new RuntimeException(e);
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    System.out.println("sorry : "+error);
-                }
-            });
-            RequestQueue q= Volley.newRequestQueue(RegisterPage.this);
-
-            q.add(j);
-
-
-        }catch (Exception e){
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if(requestCode==100 && grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-            //sendmsg(e1.getText().toString());
+    public void signin(String otp){
+        if(!verificationId.equals("")) {
+            PhoneAuthCredential p = PhoneAuthProvider.getCredential(verificationId, otp);
+            verifyit(p);
         }
         else{
-            Toast.makeText(getApplicationContext(),"Permission Denied!, kindly allow sms permission", Toast.LENGTH_LONG).show();        }
+            progress.setVisibility(View.GONE);
+            Intent i=new Intent(this, LoginActivity.class);
+            startActivity(i);
+            Toast.makeText(getApplicationContext(), "retry again", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
+
+
+
+    public void verifyit(PhoneAuthCredential pac){
+        //pb.setVisibility(View.GONE);
+        auth.signInWithCredential(pac)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        progress.setVisibility(View.GONE);
+                        verified=true;
+                        verified_phone=phone_no.getText().toString();
+                        verify_but.setText("Verified");
+                        otp_but.setVisibility(View.GONE);
+                        otpedit.setVisibility(View.GONE);
+
+                        Toast.makeText(getApplicationContext(), "Verification successful", Toast.LENGTH_SHORT).show();
+                    } else {
+                        progress.setVisibility(View.GONE);
+                        otpedit.setVisibility(View.GONE);
+                        otpedit.setVisibility(View.GONE);
+                        if(!verified)
+                        Toast.makeText(getApplicationContext(), "Verification failed", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(getApplicationContext(), "already verified", Toast.LENGTH_SHORT).show();
+                    }
+                });    }
+
+    public void getotpFirebase(String phone2) {
+
+        PhoneAuthProvider.getInstance().verifyPhoneNumber("+91" + phone2, 60, TimeUnit.SECONDS, RegisterPage.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+                progress.setVisibility(View.VISIBLE);
+                verifyit(phoneAuthCredential);
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+                progress.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                verificationId=s;
+
+
+
+
+                super.onCodeSent(s, forceResendingToken);
+                progress.setVisibility(View.GONE);
+verify_but.setVisibility(View.VISIBLE);
+otpedit.setVisibility(View.VISIBLE);
+                Toast.makeText(getApplicationContext(), "otp sent to +91"+phone_no.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 

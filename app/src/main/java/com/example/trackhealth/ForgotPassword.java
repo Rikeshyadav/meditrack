@@ -1,6 +1,7 @@
 package com.example.trackhealth;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
@@ -10,7 +11,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,17 +29,26 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.Firebase;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class ForgotPassword extends AppCompatActivity {
    EditText phone,getOtp;
    ProgressBar pb;
+   FirebaseAuth auth;
     Spinner spinner;
-   String doctororpatient="null";
+   String doctororpatient="null",verificationId="";
 
    TextView result;
    AppCompatButton but,proceed;
@@ -45,20 +57,22 @@ public class ForgotPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-but=findViewById(R.id.ForgetotpButton);
-phone=findViewById(R.id.phoneForgetPage);
-result=findViewById(R.id.resultforgotpass);
-getOtp=findViewById(R.id.otp_ForgotPage);
-proceed=findViewById(R.id.ForgetProceedButton);
-pb=findViewById(R.id.forgotprogress);
-spinner=findViewById(R.id.forgotSpinner);
+        but=findViewById(R.id.ForgetotpButton);
+        phone=findViewById(R.id.phoneForgetPage);
 
 
+
+        result=findViewById(R.id.resultforgotpass);
+        getOtp=findViewById(R.id.otp_ForgotPage);
+        proceed=findViewById(R.id.ForgetProceedButton);
+        pb=findViewById(R.id.forgotprogress);
+        spinner=findViewById(R.id.forgotSpinner);
+        auth= FirebaseAuth.getInstance();
         String[] st = {"Select", "Doctor", "Patient"};
         RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner1, st);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-      spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
           @Override
           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
               String selectedOption = (String) adapterView.getItemAtPosition(i);
@@ -91,8 +105,15 @@ spinner=findViewById(R.id.forgotSpinner);
 
             String ph = phone.getText().toString().trim();
             if (!ph.equals("") && ph.length() == 10) {
-
+                //pb.setVisibility(View.VISIBLE);
                 getpass(ph);
+
+                //sendmsg(ph);
+
+                //but.setVisibility(View.VISIBLE);
+                //getOtp.setVisibility(View.VISIBLE);
+
+
 
 
             } else {
@@ -100,6 +121,7 @@ spinner=findViewById(R.id.forgotSpinner);
                 getOtp.setVisibility(View.GONE);
                 but.setVisibility(View.GONE);
                 proceed.setVisibility(View.VISIBLE);
+                phone.setText(ph);
                 Toast.makeText(getApplicationContext(),"invalid number", Toast.LENGTH_SHORT).show();
 
 
@@ -110,16 +132,17 @@ spinner=findViewById(R.id.forgotSpinner);
     but.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            String enterOtp = getOtp.getText().toString().trim();
-            if(enterOtp.equals(otp) && !enterOtp.equals("")){
-             result.setText("**Your password is "+pass);
-                getOtp.setVisibility(View.GONE);
-                but.setVisibility(View.GONE);
-                proceed.setVisibility(View.VISIBLE);
+
+            pb.setVisibility(View.VISIBLE);
+            if(!getOtp.getText().toString().trim().equals("")) {
+                String enterOtp = getOtp.getText().toString().trim();
+                signin(enterOtp);
             }
             else{
-                result.setText("otp doesn't matched");
+                pb.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(),"enter otp", Toast.LENGTH_LONG).show();
             }
+
         }
     });
 }
@@ -158,7 +181,7 @@ spinner=findViewById(R.id.forgotSpinner);
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("sorry : "+error);
+                Toast.makeText(getApplicationContext(),"check your internet connection", Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue q= Volley.newRequestQueue(ForgotPassword.this);
@@ -190,16 +213,9 @@ spinner=findViewById(R.id.forgotSpinner);
 
                         if(Boolean.parseBoolean(response.getString("success"))){
                             pass=response.getString("password");
-
                                 pb.setVisibility(View.VISIBLE);
-                                sendmsg(phone.getText().toString().trim());
-                                pb.setVisibility(View.GONE);
+                                getotpFirebase(phone.getText().toString().trim());
 
-                            pb.setVisibility(View.GONE);
-                            spinner.setVisibility(View.GONE);
-                            getOtp.setVisibility(View.VISIBLE);
-                            but.setVisibility(View.VISIBLE);
-                            proceed.setVisibility(View.GONE);
                             //spinner.setVisibility(View.GONE);
                         }
 else{
@@ -217,6 +233,7 @@ pb.setVisibility(View.GONE);
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     pb.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(),"check your internet connection", Toast.LENGTH_SHORT).show();
                 }
             });
             RequestQueue q= Volley.newRequestQueue(ForgotPassword.this);
@@ -231,6 +248,41 @@ pb.setVisibility(View.GONE);
         }
     }
 
+
+    public void getotpFirebase(String phone2) {
+
+        PhoneAuthProvider.getInstance().verifyPhoneNumber("+91" + phone2, 60, TimeUnit.SECONDS, ForgotPassword.this, new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+
+pb.setVisibility(View.VISIBLE);
+verifyit(phoneAuthCredential);
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+                pb.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(),e.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                verificationId=s;
+                //phone.setEnabled(false);
+               phone.setFocusable(false);
+               //phone.setTextColor(getColor(R.color.hint2));
+
+                spinner.setVisibility(View.GONE);
+                getOtp.setVisibility(View.VISIBLE);
+                proceed.setVisibility(View.GONE);
+                but.setVisibility(View.VISIBLE);
+                super.onCodeSent(s, forceResendingToken);
+                pb.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(), "otp sent to +91"+phone.getText().toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     public void sendmsg(String myphone){
         myphone=myphone.trim();
@@ -251,7 +303,9 @@ pb.setVisibility(View.GONE);
 
                         if(Boolean.parseBoolean(response.getString("success"))){
 
-                            if(ContextCompat.checkSelfPermission(ForgotPassword.this, android.Manifest.permission.SEND_SMS)== PackageManager.PERMISSION_GRANTED){
+getotpFirebase(phone.getText().toString());
+
+                           /* if(ContextCompat.checkSelfPermission(ForgotPassword.this, android.Manifest.permission.SEND_SMS)== PackageManager.PERMISSION_GRANTED){
                                 pb.setVisibility(View.VISIBLE);
                                 SmsManager sms=SmsManager.getDefault();
                                 otp=response.getString("otp");
@@ -264,7 +318,7 @@ pb.setVisibility(View.GONE);
 
                                 ActivityCompat.requestPermissions(ForgotPassword.this,new String[]{Manifest.permission.SEND_SMS},100);
                             }
-
+*/
 
                         }
 
@@ -277,7 +331,7 @@ pb.setVisibility(View.GONE);
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    System.out.println("sorry : "+error);
+                    Toast.makeText(getApplicationContext(),"no internet connection", Toast.LENGTH_SHORT).show();
                 }
             });
             RequestQueue q= Volley.newRequestQueue(ForgotPassword.this);
@@ -291,22 +345,37 @@ pb.setVisibility(View.GONE);
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    public void verifyit(PhoneAuthCredential pac){
+        //pb.setVisibility(View.GONE);
+        auth.signInWithCredential(pac)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        pb.setVisibility(View.GONE);
+                        result.setText("**Your password is "+pass);
+                        getOtp.setVisibility(View.GONE);
+                        but.setVisibility(View.GONE);
+                        phone.setFocusable(true);
+                        proceed.setVisibility(View.VISIBLE);
+                        Toast.makeText(getApplicationContext(), "Verification successful", Toast.LENGTH_SHORT).show();
+                    } else {
+                        pb.setVisibility(View.GONE);
 
-        if(requestCode==100 && grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-            //sendmsg(e1.getText().toString());
+                    }
+                });    }
 
+ public void signin(String otp){
+        if(!verificationId.equals("")) {
+            PhoneAuthCredential p = PhoneAuthProvider.getCredential(verificationId, otp);
+            verifyit(p);
         }
         else{
-            getOtp.setVisibility(View.GONE);
-            but.setVisibility(View.GONE);
-            proceed.setVisibility(View.VISIBLE);
-            Toast.makeText(getApplicationContext(),"Permission Denied!, kindly allow sms permission", Toast.LENGTH_LONG).show();
+            pb.setVisibility(View.GONE);
+            Intent i=new Intent(this, LoginActivity.class);
+            startActivity(i);
+            Toast.makeText(getApplicationContext(), "retry again", Toast.LENGTH_SHORT).show();
         }
+
     }
-
-
 }
