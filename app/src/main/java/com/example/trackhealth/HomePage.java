@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,10 +29,12 @@ import java.util.List;
 
 public class HomePage extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
    DrawerLayout drawerLayout;
+   SharedPreferences sp,boot;
    String username;
    BottomNavigationView bottomNavigationView;
    NavigationView nav;
    FragmentManager fragmentManager;
+    TextView headerText;
    Toolbar toolbar;
    FloatingActionButton fab;
 
@@ -40,7 +43,8 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
-
+        sp=getSharedPreferences("user",MODE_PRIVATE);
+        boot=getSharedPreferences("boot",MODE_PRIVATE);
         username = getIntent().getStringExtra("username");
 
         fab=findViewById(R.id.fab);
@@ -54,8 +58,8 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
         toggle.syncState();
         NavigationView navigationView=findViewById(R.id.navigation_drawer);
         View headerView = navigationView.getHeaderView(0);
-        TextView headerText = headerView.findViewById(R.id.user1);
-        headerText.setText(username);
+        headerText = headerView.findViewById(R.id.user1);
+        headerText.setText(sp.getString("name","user"));
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -68,8 +72,10 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
                 int itemId=item.getItemId();
                 if(itemId==R.id.bottom_home){
                     openFragment(new HomeFragment());
+
                 }
                 else if (itemId==R.id.bottom_schedule){
+
                     openFragment(new ScheduledFragment());
                 }
                else if(itemId==R.id.bottom_search){
@@ -104,6 +110,7 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         int itemId=item.getItemId();
         if (itemId==R.id.nav_editprofile){
             openFragment(new EditprofileFragment());
@@ -122,6 +129,7 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
             openFragment(new SettingFragment());
         }else if (itemId==R.id.nav_logout) {
             Intent i=new Intent(this, LoginActivity.class);
+            boot.edit().putBoolean("islogged",false).apply();
             startActivity(i);
             Toast.makeText(this, "logging out", Toast.LENGTH_SHORT).show();
         }else if (itemId==R.id.nav_aboutus) {
@@ -133,6 +141,7 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
 
     @Override
     public void onBackPressed() {
+
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         }
@@ -166,5 +175,11 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
         FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container,fragment).addToBackStack("tag");
         transaction.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        headerText.setText(sp.getString("name","user"));
     }
 }
