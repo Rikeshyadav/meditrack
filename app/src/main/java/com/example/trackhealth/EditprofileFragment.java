@@ -1,8 +1,9 @@
 package com.example.trackhealth;
 
-import static android.content.Intent.getIntent;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -33,6 +34,7 @@ public class EditprofileFragment extends Fragment {
     TextView name, email, phone, address, hospital,hosparent;
     ProgressBar pb;
    AppCompatButton editbut;
+   SharedPreferences sp;
    RelativeLayout layout;
     String doctororpatient="",ph="",pass="";
 
@@ -42,6 +44,7 @@ public class EditprofileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_editprofile, container, false);
 editbut=view.findViewById(R.id.peditbutton);
+sp=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         name = view.findViewById(R.id.pname);
         pb=view.findViewById(R.id.profile_progress);
         pb.setVisibility(View.VISIBLE);
@@ -53,9 +56,9 @@ editbut=view.findViewById(R.id.peditbutton);
         phone = view.findViewById(R.id.pphone);
         address = view.findViewById(R.id.paddress);
         hospital = view.findViewById(R.id.phospital);
-        ph = getActivity().getIntent().getStringExtra("phone");
-        doctororpatient=getActivity().getIntent().getStringExtra("identity");
-        pass = getActivity().getIntent().getStringExtra("pass");
+        ph = sp.getString("phone","");
+        doctororpatient=sp.getString("identity","");
+        pass =sp.getString("pass","");
 
 editbut.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -132,4 +135,11 @@ getvalues();
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        pb.setVisibility(View.VISIBLE);
+        layout.setVisibility(View.GONE);
+        getvalues();
+    }
 }
