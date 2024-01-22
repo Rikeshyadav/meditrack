@@ -1,31 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".EditprofileFragment">
-<ProgressBar
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:visibility="visible"
-    android:id="@+id/profile_progress"
-    />
-    <RelativeLayout
-        android:visibility="gone"
-        android:id="@+id/pro_layout"
-        android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".editProfile">
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="130dp"
-            android:layout_height="150dp"
+            android:layout_width="128dp"
+            android:layout_height="88dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="12dp"
             android:src="@android:drawable/sym_def_app_icon" />
 
         <ScrollView
@@ -51,7 +39,7 @@
                     android:layout_marginTop="4dp"
                     android:textSize="20sp"/>
 
-                <TextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
@@ -59,122 +47,112 @@
                     android:layout_marginTop="35dp"
                     android:padding="5dp"
                     android:textColor="@color/black"
-                    android:id="@+id/pname"
-                    android:text=""
+                    android:textColorHint="@color/hint"
+                    android:id="@+id/epname"
                     android:textSize="20sp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pname"
+                    android:layout_below="@id/epname"
                     android:padding="4dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_marginStart="8dp"
                     android:text="Email"
                     android:textSize="20sp"/>
-                <TextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pname"
+                    android:layout_below="@id/epname"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="27dp"
-                    android:gravity=""
                     android:padding="5dp"
-                    android:id="@+id/pemail"
-                    android:text=""
+                    android:id="@+id/epemail"
+                    android:textColorHint="@color/hint"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pemail"
+                    android:layout_below="@id/epemail"
                     android:padding="4dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_marginStart="8dp"
                     android:text="Phone no:"
                     android:textSize="20sp"/>
-                <TextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pemail"
+                    android:layout_below="@id/epemail"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="35dp"
-                    android:textColorHint="@color/black"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/hint"
                     android:padding="5dp"
-                    android:id="@+id/pphone"
-                    android:text=""
+                    android:id="@+id/epphone"
                     android:textSize="20sp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pphone"
+                    android:layout_below="@id/epphone"
                     android:padding="4dp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:layout_marginStart="8dp"
                     android:text="Address"
                     android:textSize="20sp"/>
-                <TextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/pphone"
+                    android:layout_below="@id/epphone"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="35dp"
-                    android:textColorHint="@color/black"
+                    android:textColorHint="@color/hint"
                     android:textColor="@color/black"
                     android:padding="5dp"
-                    android:id="@+id/paddress"
-                    android:text=""
-                    android:textSize="20sp" />
+                    android:id="@+id/epaddress"
+                    android:textSize="20dp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/paddress"
+                    android:layout_below="@id/epaddress"
                     android:padding="4dp"
-                    android:id="@+id/hosparent"
-                    android:visibility="gone"
                     android:layout_marginStart="8dp"
                     android:text="Hospital Name"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textSize="20sp"/>
-                <TextView
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/paddress"
+                    android:layout_below="@id/epaddress"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="35dp"
-                    android:text=""
-                    android:textColorHint="@color/black"
+                    android:textColorHint="@color/hint"
                     android:textColor="@color/black"
                     android:padding="5dp"
-                    android:id="@+id/phospital"
+                    android:id="@+id/ephospital"
                     android:textSize="20sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/peditbutton"
+                    android:id="@+id/epbutton"
                     android:layout_width="118dp"
                     android:layout_height="48dp"
-                    android:layout_below="@id/phospital"
+                    android:layout_below="@id/ephospital"
                     android:layout_marginStart="140dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="60dp"
                     android:layout_marginEnd="10dp"
-                    android:textSize="16sp"
-                    android:elevation="8dp"
-                    android:text="Edit"
-                    android:padding="10dp"
-                    android:background="@drawable/orange_button2"
-                    android:textColor="@color/white"
+                    android:backgroundTint="#1565C0"
+                    android:text="Save"
+                    android:textColor="#0C0C0C"
                     android:textStyle="bold" />
             </RelativeLayout>
         </ScrollView>
 
     </RelativeLayout>
 
-</FrameLayout>

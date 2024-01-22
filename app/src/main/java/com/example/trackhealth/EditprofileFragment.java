@@ -1,64 +1,135 @@
 package com.example.trackhealth;
 
+import static android.content.Intent.getIntent;
+
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditprofileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Objects;
+
 public class EditprofileFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public EditprofileFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment EditprofileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static EditprofileFragment newInstance(String param1, String param2) {
-        EditprofileFragment fragment = new EditprofileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    TextView name, email, phone, address, hospital,hosparent;
+    ProgressBar pb;
+   AppCompatButton editbut;
+   RelativeLayout layout;
+    String doctororpatient="",ph="",pass="";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_editprofile, container, false);
+        View view = inflater.inflate(R.layout.fragment_editprofile, container, false);
+editbut=view.findViewById(R.id.peditbutton);
+        name = view.findViewById(R.id.pname);
+        pb=view.findViewById(R.id.profile_progress);
+        pb.setVisibility(View.VISIBLE);
+        layout=view.findViewById(R.id.pro_layout);
+        layout.setVisibility(View.GONE);
+        email = view.findViewById(R.id.pemail);
+        hosparent=view.findViewById(R.id.hosparent);
+        hosparent.setVisibility(View.GONE);
+        phone = view.findViewById(R.id.pphone);
+        address = view.findViewById(R.id.paddress);
+        hospital = view.findViewById(R.id.phospital);
+        ph = getActivity().getIntent().getStringExtra("phone");
+        doctororpatient=getActivity().getIntent().getStringExtra("identity");
+        pass = getActivity().getIntent().getStringExtra("pass");
+
+editbut.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent i=new Intent(getActivity(), editProfile.class);
+        i.putExtra("ph",ph);
+        i.putExtra("identity",doctororpatient);
+        i.putExtra("email",email.getText().toString().trim());
+        i.putExtra("address",address.getText().toString().trim());
+        i.putExtra("name",name.getText().toString().trim());
+        startActivity(i);
     }
+});
+getvalues();
+        return view;
+    }
+
+    public void getvalues() {
+        String temp = "";
+        if (doctororpatient.equals("Patient")) {
+            temp = "https://demo-uw46.onrender.com/api/patient/auth";
+        } else {
+            temp = "https://demo-uw46.onrender.com/api/doctor/auth";
+        }
+        try {
+          //  pb.setVisibility(View.VISIBLE);
+            HashMap<String, String> jsonobj = new HashMap<>();
+
+            jsonobj.put("phone", ph);
+            jsonobj.put("password", pass);
+            JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    //pb.setVisibility(View.GONE);
+                    try {
+
+                        if (Boolean.parseBoolean(response.getString("success"))) {
+                            pb.setVisibility(View.GONE);
+                            layout.setVisibility(View.VISIBLE);
+                            name.setText(response.getString("username"));
+                      email.setText(response.getString("email"));
+                       phone.setText(ph);
+                       address.setText(response.getString("address"));
+                       if(doctororpatient.equals("Doctor")) {
+                           hosparent.setVisibility(View.VISIBLE);
+                            hospital.setText(response.getString("speciality"));
+                       }
+
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(getActivity(), "error"+e, Toast.LENGTH_SHORT).show();
+                      //  pb.setVisibility(View.GONE);
+                        throw new RuntimeException(e);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                  //  pb.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), "check your internet connection", Toast.LENGTH_SHORT).show();
+                }
+            });
+            RequestQueue q = Volley.newRequestQueue(requireActivity());
+
+            q.add(j);
+
+
+        } catch (
+                Exception e) {
+            Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+     //       pb.setVisibility(View.GONE);
+
+        }
+    }
+
 }

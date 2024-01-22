@@ -11,6 +11,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -43,12 +44,16 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     ProgressBar progressBar;
 
+    SharedPreferences sp,boot;
+
      String patientMsg ="";
      boolean bol=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        sp=getSharedPreferences("user",MODE_PRIVATE);
+        boot=getSharedPreferences("boot",MODE_PRIVATE);
         t1=findViewById(R.id.appname);
         t2=findViewById(R.id.regclick);
         e1=findViewById(R.id.email);
@@ -161,9 +166,20 @@ startActivity(i);
 progressBar.setVisibility(View.GONE);
                 try {
                     if(Boolean.parseBoolean(response.getString("success"))){
+
                         Intent b1 = new Intent(LoginActivity.this, HomePage.class);
                         Toast.makeText(getApplicationContext(),response.getString("msg"), Toast.LENGTH_SHORT).show();
                         b1.putExtra("username", response.getString("username"));
+                       sp.edit().putString("name",response.getString("username")).apply();
+                       boot.edit().putBoolean("islogged",true).apply();
+                        b1.putExtra("email", response.getString("email"));
+                        b1.putExtra("phone", phone);
+                        b1.putExtra("pass", password);
+                        b1.putExtra("identity",doctororpatient);
+                        b1.putExtra("address", response.getString("address"));
+                        if(identity.equals("Doctor")) {
+                         b1.putExtra("speciality",response.getString("speciality"));
+                        }
                         startActivity(b1);
                     }
                     else{
