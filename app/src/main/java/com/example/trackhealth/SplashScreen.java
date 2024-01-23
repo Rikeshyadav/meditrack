@@ -16,23 +16,31 @@ SharedPreferences sp;
 sp=getSharedPreferences("boot",MODE_PRIVATE);
 boolean islogged=sp.getBoolean("islogged",false);
 
+        if(!islogged) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(!islogged) {
+
                     Intent i = new Intent(SplashScreen.this, DescriptionPage.class);
                     startActivity(i);
                     finish();
-                }
-                else{
-                    Intent i = new Intent(SplashScreen.this, HomePage.class);
-                    startActivity(i);
-                    finish();
-                }
+
             }
         },4000);
 
     }
+        else{
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    Intent i = new Intent(SplashScreen.this, HomePage.class);
+                    startActivity(i);
+                    finish();
+                }
+
+            },1160);
+        }
 
 
-}
+}}

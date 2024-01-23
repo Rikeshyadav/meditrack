@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import java.util.Objects;
 public class EditprofileFragment extends Fragment {
     TextView name, email, phone, address, hospital,hosparent;
     ProgressBar pb;
+    ImageView re;
    AppCompatButton editbut;
    SharedPreferences sp;
    RelativeLayout layout;
@@ -52,6 +54,8 @@ sp=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         layout.setVisibility(View.GONE);
         email = view.findViewById(R.id.pemail);
         hosparent=view.findViewById(R.id.hosparent);
+        re=view.findViewById(R.id.pretry);
+        re.setVisibility(View.GONE);
         hosparent.setVisibility(View.GONE);
         phone = view.findViewById(R.id.pphone);
         address = view.findViewById(R.id.paddress);
@@ -59,6 +63,15 @@ sp=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         ph = sp.getString("phone","");
         doctororpatient=sp.getString("identity","");
         pass =sp.getString("pass","");
+
+        re.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                re.setVisibility(View.GONE);
+                pb.setVisibility(View.VISIBLE);
+                getvalues();
+            }
+        });
 
 editbut.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -98,6 +111,7 @@ getvalues();
 
                         if (Boolean.parseBoolean(response.getString("success"))) {
                             pb.setVisibility(View.GONE);
+                            re.setVisibility(View.GONE);
                             layout.setVisibility(View.VISIBLE);
                             name.setText(response.getString("username"));
                       email.setText(response.getString("email"));
@@ -111,15 +125,17 @@ getvalues();
                         }
                     } catch (JSONException e) {
                         Toast.makeText(getActivity(), "error"+e, Toast.LENGTH_SHORT).show();
-                      //  pb.setVisibility(View.GONE);
+                        pb.setVisibility(View.GONE);
+                        re.setVisibility(View.VISIBLE);
                         throw new RuntimeException(e);
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                  //  pb.setVisibility(View.GONE);
-                    Toast.makeText(getActivity(), "check your internet connection", Toast.LENGTH_SHORT).show();
+                    pb.setVisibility(View.GONE);
+                    re.setVisibility(View.VISIBLE);
+                    Toast.makeText(getActivity(),error.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
             RequestQueue q = Volley.newRequestQueue(requireActivity());
@@ -129,6 +145,8 @@ getvalues();
 
         } catch (
                 Exception e) {
+            pb.setVisibility(View.GONE);
+            re.setVisibility(View.VISIBLE);
             Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
      //       pb.setVisibility(View.GONE);
 

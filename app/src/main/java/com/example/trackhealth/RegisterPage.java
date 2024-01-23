@@ -581,7 +581,7 @@ else{
                         @Override
                         public void onErrorResponse(VolleyError error) {
 
-                            Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
                             progress2.setVisibility(View.GONE);
                             progress.setVisibility(View.GONE);
                         }

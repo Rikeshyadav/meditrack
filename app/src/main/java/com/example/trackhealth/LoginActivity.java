@@ -195,7 +195,7 @@ progressBar.setVisibility(View.GONE);
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"check your internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
         });
@@ -232,6 +232,10 @@ progressBar.setVisibility(View.GONE);
         finishAffinity();
     }
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        e1.setText("");
+        e2.setText("");
+    }
 }

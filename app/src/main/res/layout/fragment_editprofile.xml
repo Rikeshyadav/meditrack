@@ -12,6 +12,15 @@
     android:visibility="visible"
     android:id="@+id/profile_progress"
     />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:src="@drawable/refresh"
+        android:id="@+id/pretry"
+        />
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/pro_layout"
