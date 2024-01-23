@@ -169,17 +169,18 @@ progressBar.setVisibility(View.GONE);
 
                         Intent b1 = new Intent(LoginActivity.this, HomePage.class);
                         Toast.makeText(getApplicationContext(),response.getString("msg"), Toast.LENGTH_SHORT).show();
-                        b1.putExtra("username", response.getString("username"));
+
                        sp.edit().putString("name",response.getString("username")).apply();
                        boot.edit().putBoolean("islogged",true).apply();
-                        b1.putExtra("email", response.getString("email"));
-                        b1.putExtra("phone", phone);
-                        b1.putExtra("pass", password);
-                        b1.putExtra("identity",doctororpatient);
-                        b1.putExtra("address", response.getString("address"));
+                        sp.edit().putString("email", response.getString("email")).apply();
+                        sp.edit().putString("phone", phone).apply();
+                        sp.edit().putString("pass", password).apply();
+                        sp.edit().putString("identity",doctororpatient).apply();
+                        sp.edit().putString("address", response.getString("address")).apply();
                         if(identity.equals("Doctor")) {
-                         b1.putExtra("speciality",response.getString("speciality"));
+                         sp.edit().putString("speciality",response.getString("speciality")).apply();
                         }
+
                         startActivity(b1);
                     }
                     else{
@@ -194,7 +195,7 @@ progressBar.setVisibility(View.GONE);
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"check your internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
             }
         });
@@ -231,6 +232,10 @@ progressBar.setVisibility(View.GONE);
         finishAffinity();
     }
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        e1.setText("");
+        e2.setText("");
+    }
 }

@@ -45,7 +45,7 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
         setContentView(R.layout.activity_homepage);
         sp=getSharedPreferences("user",MODE_PRIVATE);
         boot=getSharedPreferences("boot",MODE_PRIVATE);
-        username = getIntent().getStringExtra("username");
+        username = sp.getString("name","user");
 
         fab=findViewById(R.id.fab);
         toolbar=findViewById(R.id.toolbar);

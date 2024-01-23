@@ -174,14 +174,14 @@ public class ForgotPassword extends AppCompatActivity {
 
                 } catch (JSONException e) {
 
-                    Toast.makeText(getApplicationContext(),"Something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"error\n"+e, Toast.LENGTH_SHORT).show();
                     throw new RuntimeException(e);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"check your internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue q= Volley.newRequestQueue(ForgotPassword.this);
@@ -194,10 +194,10 @@ public class ForgotPassword extends AppCompatActivity {
         myphone=myphone.trim();
         String temp="";
         if(doctororpatient.equals("Patient")) {
-            temp = "https://demo-uw46.onrender.com/api/patient/getPassword";
+            temp = "https://demo-uw46.onrender.com/api/patient/getDetails";
         }
         else{
-            temp = "https://demo-uw46.onrender.com/api/doctor/getPassword";
+            temp = "https://demo-uw46.onrender.com/api/doctor/getDetails";
         }
         try{
             pb.setVisibility(View.VISIBLE);
