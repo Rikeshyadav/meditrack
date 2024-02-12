@@ -48,7 +48,6 @@
                     app:itemTextAppearanceActive="@style/text_active"
                     app:itemTextAppearanceInactive="@style/text_inactive"
                     android:layout_gravity="center"
-
                     android:background="@android:color/transparent"
                     app:labelVisibilityMode="labeled"
                     app:menu="@menu/bottom_navigation_menu" />

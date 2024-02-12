@@ -197,6 +197,7 @@ progressBar.setVisibility(View.GONE);
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
+                //authPatient(phone,password,identity);
             }
         });
         RequestQueue q= Volley.newRequestQueue(LoginActivity.this);
@@ -235,7 +236,6 @@ progressBar.setVisibility(View.GONE);
     @Override
     protected void onResume() {
         super.onResume();
-        e1.setText("");
-        e2.setText("");
+
     }
 }
