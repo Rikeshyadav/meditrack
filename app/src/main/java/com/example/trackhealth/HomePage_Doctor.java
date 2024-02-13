@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,10 +27,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.List;
 import java.util.Objects;
 
-public class HomePage extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
+public class HomePage_Doctor extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
    DrawerLayout drawerLayout;
    SharedPreferences sp,boot;
    ImageView profile_photo;
@@ -49,7 +47,7 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
+        setContentView(R.layout.activity_homepage_doctor);
         sp=getSharedPreferences("user",MODE_PRIVATE);
         boot=getSharedPreferences("boot",MODE_PRIVATE);
         username = sp.getString("name","user");
@@ -87,18 +85,21 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
 
                 int itemId=item.getItemId();
                 if(itemId==R.id.bottom_home){
+                    toolbar.setTitle("Home");
                     openFragment(new HomeFragment(),"home");
 
                 }
                 else if (itemId==R.id.bottom_schedule){
-
+                    toolbar.setTitle("Schedule");
                     openFragment(new ScheduledFragment(),"schedule");
                 }
                else if(itemId==R.id.bottom_search){
+                    toolbar.setTitle("Search");
                 openFragment(new SearchFragment(),"search");
 
                 }
                   else if(itemId==R.id.bottom_call){
+                    toolbar.setTitle("Call");
                     openFragment(new CallFragment(),"call");
 
                 }
@@ -116,8 +117,8 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
     fab.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-           Toast.makeText(HomePage.this,"add person",Toast.LENGTH_SHORT).show();
-            Intent fab=new Intent(HomePage.this, AddPatientPage.class);
+           Toast.makeText(HomePage_Doctor.this,"add person",Toast.LENGTH_SHORT).show();
+            Intent fab=new Intent(HomePage_Doctor.this, AddPatientPage.class);
             startActivity(fab);
         }
     });
@@ -135,20 +136,27 @@ public class HomePage extends AppCompatActivity  implements NavigationView.OnNav
 
         int itemId=item.getItemId();
         if (itemId==R.id.nav_editprofile){
-            openFragment(new EditprofileFragment(),"profile");}
+            openFragment(new EditprofileFragment(),"profile");
+            toolbar.setTitle("Profile");
+        }
        else if (itemId==R.id.nav_notification) {
+            toolbar.setTitle("Notification");
             openFragment(new NotificationFragment(),"notification");}
         else if(itemId==R.id.nav_privacy){
             openFragment(new privacyFragment(),"privacy");
         }else if(itemId==R.id.nav_trash){
-            openFragment(new TrashFragment(),"trash");}
+            openFragment(new TrashFragment(),"trash");
+            toolbar.setTitle("Pending");
+        }
         else if (itemId==R.id.nav_setting) {
             openFragment(new SettingFragment(),"setting");
+            toolbar.setTitle("Setting");
         }else if (itemId==R.id.nav_logout) {
            setAlert("Do you want to logout?","yes","no","logout");
            unchecknav();
             openFragment(new HomeFragment(),"home");
         }else if (itemId==R.id.nav_aboutus) {
+            toolbar.setTitle("About");
             openFragment(new aboutUsFragment(),"about");
         }
         drawerLayout.closeDrawer(GravityCompat.START);

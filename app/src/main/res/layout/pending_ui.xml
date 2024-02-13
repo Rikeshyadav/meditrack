@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#5190D8"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp"
+    android:text="Hospital/Clinic :"
+    android:textSize="19sp"
+    android:textColor="@color/white"
+    android:id="@+id/pending_rec_hos"
+    />
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="1dp"
+    app:cardBackgroundColor="#D8EFEC"
+    android:layout_below="@id/pending_rec_hos"
+    android:layout_height="wrap_content"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pendocnm_parent"
+            android:layout_alignParentTop="true"
+            android:weightSum="10"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Doctor Name : "
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_weight="3"
+         />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:id="@+id/pendocnm"
+                android:text=""
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_below="@id/pendocnm_parent"
+            android:id="@+id/pendocspec_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Specification : "
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_weight="3"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:id="@+id/pendocspec"
+                android:text=""
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_below="@id/pendocspec_parent"
+            android:id="@+id/pendocqua_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Qualification : "
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_weight="3"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:id="@+id/pendocqua"
+                android:text=""
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_below="@id/pendocqua_parent"
+            android:id="@+id/pendocissue_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Patient issue : "
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_weight="3"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text=""
+                android:id="@+id/pendocissue"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_below="@id/pendocissue_parent"
+            android:id="@+id/pendocbut_parent"
+            android:orientation="horizontal">
+         <androidx.appcompat.widget.AppCompatButton
+             android:layout_width="0dp"
+             android:layout_weight="5"
+             android:id="@+id/pending_accept"
+             android:layout_height="wrap_content"
+             android:text="Accept"
+             android:background="#447322"
+             android:textSize="16sp"
+             android:textColor="@color/white"
+             android:layout_margin="10dp"
+             android:padding="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:text="Reject"
+                android:textColor="@color/white"
+                android:background="#A10505"
+                android:textSize="16sp"
+                android:id="@+id/pending_reject"
+                android:layout_margin="10dp"
+                android:padding="10dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
+</RelativeLayout>

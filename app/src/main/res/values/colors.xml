@@ -10,7 +10,7 @@
     <color name="hint3">#9EA1A1</color>
     <color name="register_text_color1">#1E1E1E</color>
     <color name="register_bg_color1">#FCFBFD</color>
-<color name="start_fragment_text_color">#000000</color>
+    <color name="start_fragment_text_color">#000000</color>
     <color name="primary_color">#759EEE</color>
     <color name="red2">#E42828</color>
     <color name="transparentColor">#00000000</color>
