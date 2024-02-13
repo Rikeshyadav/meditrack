@@ -1,21 +1,18 @@
 package com.example.trackhealth;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import static android.widget.Toast.makeText;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -166,8 +163,13 @@ startActivity(i);
 progressBar.setVisibility(View.GONE);
                 try {
                     if(Boolean.parseBoolean(response.getString("success"))){
-
-                        Intent b1 = new Intent(LoginActivity.this, HomePage.class);
+                        Intent b1;
+if(doctororpatient.equals("Patient")) {
+    b1 = new Intent(LoginActivity.this, HomePage_Doctor.class);
+}
+else{
+    b1 = new Intent(LoginActivity.this, HomePage_Doctor.class);
+}
                         Toast.makeText(getApplicationContext(),response.getString("msg"), Toast.LENGTH_SHORT).show();
 
                        sp.edit().putString("name",response.getString("username")).apply();

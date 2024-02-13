@@ -34,7 +34,7 @@ boolean islogged=sp.getBoolean("islogged",false);
                 @Override
                 public void run() {
 
-                    Intent i = new Intent(SplashScreen.this, HomePage.class);
+                    Intent i = new Intent(SplashScreen.this, HomePage_Doctor.class);
                     startActivity(i);
                     finish();
                 }

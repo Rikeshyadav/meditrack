@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="58dp"
+            android:layout_width="match_parent"
+            android:id="@+id/pending_rec"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textColor="@color/purple"/>
+            />
 
 </FrameLayout>

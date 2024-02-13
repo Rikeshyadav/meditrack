@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TrashFragment">
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+    >
+    <TextView
+        android:id="@+id/pending_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="58dp"
+        android:fontFamily="@font/gugi"
+        android:text="Pending Request"
+        android:textColor="#266291"
+
+        android:textSize="35sp"
+        android:textStyle="bold" />
+  <androidx.recyclerview.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:id="@+id/pending_rec"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/pending_title"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+/>
+  </RelativeLayout>
+</FrameLayout>
