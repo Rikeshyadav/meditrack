@@ -76,7 +76,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         bottomNavigationView=findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setBackground(null);
+        bottomNavigationView.setBackground(null);//use due to transparent in bottomnavigation
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -87,7 +87,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
                 if(itemId==R.id.bottom_home){
                     toolbar.setTitle("Home");
                     openFragment(new HomeFragment(),"home");
-
+               
                 }
                 else if (itemId==R.id.bottom_schedule){
                     toolbar.setTitle("Schedule");
