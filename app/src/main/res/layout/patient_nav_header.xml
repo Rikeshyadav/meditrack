@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="155dp"
+    android:layout_marginTop="2dp"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:background="#309BDC"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<com.google.android.material.imageview.ShapeableImageView
+    android:layout_width="115sp"
+    android:layout_height="115sp"
+    android:contentDescription="icon"
+    android:id="@+id/navHeaderImageView"
+    app:shapeAppearanceOverlay="@style/roundedImageview"
+    android:src="@drawable/img_1"
+    android:scaleType="centerCrop"
+    app:strokeWidth="2.5dp"
+    android:clickable="true"
+    app:strokeColor="#93490A"
+ />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/userp1"
+        android:padding="2dp"
+        android:textColor="@color/black"
+        android:text="Rohan gautam "
+        android:textSize="17sp" />
+</RelativeLayout>

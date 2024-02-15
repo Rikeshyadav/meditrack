@@ -4,13 +4,16 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">#2C635C</item>
-        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorPrimaryVariant">@color/register_bg_color1</item>
         <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:statusBarColor">@color/blue</item>
-        <item name="android:color">@color/red </item>
+        <item name="android:statusBarColor">#BEC9D6</item>
+        <item name="android:color">#882525</item>
 
     </style>
-
+    <style name="myfun">
+        <item name="android:textSize">34sp</item>
+        <item name="android:colorPrimary">#6D78CC</item>
+    </style>
     <style name="Theme.Trackhealth" parent="Base.Theme.Trackhealth" >
         <item name="colorPrimary">@color/white</item>
     </style>

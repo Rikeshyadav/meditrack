@@ -8,20 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-public class NotificationFragment extends Fragment {
-
-
-    public NotificationFragment() {
+public class patient_scheduledFragment extends Fragment {
+    public patient_scheduledFragment() {
         // Required empty public constructor
     }
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        return inflater.inflate(R.layout.fragment_patient_scheduled, container, false);
     }
 }

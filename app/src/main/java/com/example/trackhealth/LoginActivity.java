@@ -165,7 +165,7 @@ progressBar.setVisibility(View.GONE);
                     if(Boolean.parseBoolean(response.getString("success"))){
                         Intent b1;
 if(doctororpatient.equals("Patient")) {
-    b1 = new Intent(LoginActivity.this, HomePage_Doctor.class);
+    b1 = new Intent(LoginActivity.this, HomePage_Patient.class);
 }
 else{
     b1 = new Intent(LoginActivity.this, HomePage_Doctor.class);
