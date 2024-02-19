@@ -13,9 +13,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,26 +28,35 @@ import com.google.android.material.navigation.NavigationView;
 
 import org.checkerframework.checker.units.qual.Length;
 
+import java.util.Objects;
+
 public class HomePage_Patient extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
  DrawerLayout drawerLayout;
  NavigationView navigationView;
 
  FragmentManager fragmentManager;
+ LinearLayout home_search;
+ SharedPreferences sp,boot;
+ boolean back=false;
  BottomNavigationView bottomNavigationView;
- Toolbar toolbar;
+ //Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sp=getSharedPreferences("user",MODE_PRIVATE);
+        boot=getSharedPreferences("boot",MODE_PRIVATE);
         setContentView(R.layout.activity_home_page_patient);
         navigationView=findViewById(R.id.navigation_drawer2);
         bottomNavigationView=findViewById(R.id.bottom_navigation1);
-        toolbar=findViewById(R.id.toolbar1);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        unchecknav();
+       // toolbar=findViewById(R.id.toolbar1);
+       // setSupportActionBar(toolbar);
+       // getSupportActionBar().setTitle("");
         drawerLayout=findViewById(R.id.drawer_layout1);
-        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
-         drawerLayout.addDrawerListener(toggle);
-         toggle.syncState();
+       // ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        // drawerLayout.addDrawerListener(toggle);
+       //  toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
         for (int i = 0; i < navigationView.getMenu().size(); i++) {
@@ -54,24 +66,31 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
         bottomNavigationView=findViewById(R.id.bottom_navigation1);
       //  bottomNavigationView.setBackground(null);
         fragmentManager =getSupportFragmentManager();
-        openFragment(new Patient_HomeFragment());
+        openFragment(new Patient_HomeFragment(),"home");
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
 
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId=item.getItemId();
                 if(itemId==R.id.bottom_home){
-                    toolbar.setTitle("Patient HOME");
-                    openFragment(new Patient_HomeFragment());
+                    //toolbar.setTitle("Home");
+               //     home_search.setVisibility(View.VISIBLE);
+                  //toolbar.setPadding(5,15,5,15);
+                  //toolbar.setBackgroundColor(getColor(R.color.patient_home_toolbar));
+                    openFragment(new Patient_HomeFragment(),"home");
                 }
                 else if (itemId==R.id.bottom_schedule){
-                    toolbar.setTitle(("scheduled"));
-                openFragment((new patient_scheduledFragment()));
+                    //toolbar.setTitle(("scheduled"));
+
+                   // toolbar.setBackgroundColor(getColor(R.color.red));
+                openFragment((new patient_scheduledFragment()),"schedule");
                 } else if (itemId==R.id.bottom_search) {
-                    toolbar.setTitle("Search");
+
+                 //   toolbar.setTitle("Search");
                     Toast.makeText(getApplicationContext(),"search", Toast.LENGTH_SHORT).show();
                 }else if (itemId==R.id.bottom_call) {
-                    toolbar.setTitle("call");
+
+                   // toolbar.setTitle("call");
                     Toast.makeText(getApplicationContext(),"call", Toast.LENGTH_SHORT).show();
                 }
                 return true;
@@ -91,24 +110,29 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
 
         int itemId= item.getItemId();
         if(itemId==R.id.patient_nav_editprofile){
-            toolbar.setTitle("Profile");
-            openFragment(new patient_edit_profile());
+            //toolbar.setTitle("Profile");
+            openFragment(new patient_edit_profile(),"profile");
         }
         else if (itemId==R.id.patient_nav_notify) {
-            toolbar.setTitle("Notification");
-            openFragment(new patient_nav_notification());
+           // toolbar.setTitle("Notification");
+            openFragment(new patient_nav_notification(),"notification");
             Toast.makeText(getApplicationContext(),"Notification", Toast.LENGTH_SHORT).show();
 
         }
         else if(itemId==R.id.nav_trash){
-            openFragment(new TrashFragment());
-            toolbar.setTitle("Pending");
+            openFragment(new TrashFragment(),"trash");
+            //toolbar.setTitle("Pending");
         }
         else if (itemId==R.id.patient_nav_setting) {
-            toolbar.setTitle("Setting");
+            //toolbar.setTitle("Setting");
             Toast.makeText(getApplicationContext(),"setting", Toast.LENGTH_SHORT).show();
         }else if (itemId==R.id.patient_nav_about) {
-            toolbar.setTitle("about us");
+            //toolbar.setTitle("about us");
+        }
+        else if(itemId==R.id.patient_nav_logout){
+            setAlert("Do you want to logout?","yes","no","logout");
+            unchecknav();
+            openFragment(new Patient_HomeFragment(),"logout");
         }
        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -122,12 +146,61 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
         }
         super.onBackPressed();
     }
-    private void openFragment(Fragment fragment){
-        FragmentTransaction transaction=fragmentManager.beginTransaction();
-        transaction.replace(R.id.patient_container, fragment);
-        transaction.commit();
+    public void openFragment(Fragment fragment,String tag) {
+        back=false;
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        boolean fragmentInStack = isFragmentInBackStack(fragment,tag);
 
+        if (fragmentInStack) {
+            popBackStackUntilFragment(fragment,tag);
+        } else {
+
+            String curr="";
+            try{
+                curr=getSupportFragmentManager().getBackStackEntryAt(fragmentManager.getBackStackEntryCount()-1).getName();
+                if(!tag.equals(curr)){
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.patient_container, fragment)
+                            .addToBackStack(tag) // Add to back stack to allow popping
+                            .commit();
+                }
+            }
+            catch(NullPointerException e){
+
+                fragmentManager.beginTransaction()
+                        .replace(R.id.patient_container, new Patient_HomeFragment())
+                        .addToBackStack(tag) // Add to back stack to allow popping
+                        .commit();
+            }
+
+        }
     }
+
+    private boolean isFragmentInBackStack(Fragment fragment,String tag) {
+        // Check if the fragment is in the back stack
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        for (int i = 0; i < fragmentManager.getBackStackEntryCount()-1; i++) {
+            FragmentManager.BackStackEntry entry = fragmentManager.getBackStackEntryAt(i);
+            if (tag.equals(entry.getName())) {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void popBackStackUntilFragment(Fragment fragment,String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        while (fragmentManager.getBackStackEntryCount() > 0) {
+            FragmentManager.BackStackEntry entry = fragmentManager.getBackStackEntryAt(fragmentManager.getBackStackEntryCount() - 1);
+            if (Objects.equals(entry.getName(), tag)) {
+                break;
+            } else {
+                fragmentManager.popBackStackImmediate();
+            }
+        }
+    }
+
 
     private void showEnlargedImageDialog(){
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -146,4 +219,46 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
        AlertDialog alertDialog=builder.create();
        alertDialog.show();
     }
+
+    public void unchecknav(){
+        navigationView.getMenu().getItem(0).setChecked(false);
+        navigationView.getMenu().getItem(1).setChecked(false);
+        navigationView.getMenu().getItem(2).setChecked(false);
+        navigationView.getMenu().getItem(3).setChecked(false);
+        navigationView.getMenu().getItem(4).setChecked(false);
+        navigationView.getMenu().getItem(5).setChecked(false);
+    }
+
+    public void setAlert(String msg,String pos,String neg,String flag){
+
+        AlertDialog.Builder b=new AlertDialog.Builder(this);
+        b.setMessage(msg);
+        b.setPositiveButton(pos,(DialogInterface.OnClickListener) (dialog,which)->{
+            if(flag.equals("exit"))
+                finishAffinity();
+            else if(flag.equals("logout")){
+                Intent i=new Intent(HomePage_Patient.this, LoginActivity.class);
+                boot.edit().putBoolean("islogged",false).apply();
+                startActivity(i);
+                Toast.makeText(this, "logging out", Toast.LENGTH_SHORT).show();
+            }
+
+        });
+        b.setNegativeButton(neg,(DialogInterface.OnClickListener) (dialog,which)->{
+
+            dialog.cancel();
+        });
+        AlertDialog ad=b.create();
+        ad.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+
+                ad.getWindow().getDecorView().setBackgroundColor(getResources().getColor(R.color.black));
+            }
+        });
+
+        ad.show();
+
+    }
+
 }

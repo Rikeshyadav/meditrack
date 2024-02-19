@@ -1,15 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginTop="57dp"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".patient_edit_profile">
-
-
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="match_parent"
-        android:text="fun" />
+        android:background="@drawable/backgroundpatient"
+        android:layout_height="310dp">
 
-</FrameLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/prof_image"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:background="@color/blue"
+            android:padding="3dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_person_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.106"
+            app:shapeAppearanceOverlay="@style/roundedImageview"
+            app:strokeColor="@color/black"
+            app:strokeWidth="2dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/uplodimage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="fill_vertical"
+            android:clickable="true"
+            android:contentDescription="camera"
+            android:focusable="true"
+            android:src="@drawable/baseline_photo_camera_24"
+            app:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/prof_image"
+            app:layout_constraintEnd_toEndOf="@+id/prof_image" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/prof_image">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rikesh yadav"
+                android:padding="3dp"
+                android:id="@+id/nametext"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:textColor="#040303"
+                android:textSize="22sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="wereresa@gmail.com"
+                android:padding="3dp"
+
+                android:id="@+id/nametext1"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="340dp"
+        android:layout_height="390dp"
+        android:id="@+id/tl"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="268dp"
+        android:background="@color/white">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Blood Group: "
+                        android:layout_margin="5dp"
+                        android:padding="3dp"
+                        android:textSize="21sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="0+"
+                        android:layout_margin="5dp"
+                        android:padding="3dp"
+                        android:textSize="21sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Phone: "
+                        android:layout_margin="5dp"
+                        android:padding="3dp"
+                        android:textSize="21sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_marginStart="10dp"
+                        android:padding="3dp"
+                        android:text="909090090"
+                        android:textColor="@color/black"
+                        android:textSize="21sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Age: "
+                        android:layout_margin="5dp"
+                        android:padding="3dp"
+                        android:textSize="21sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:padding="3dp"
+                        android:text="25 yrs"
+                        android:textColor="@color/black"
+                        android:textSize="21sp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Aadhaar No: "
+                        android:layout_margin="5dp"
+                        android:padding="3dp"
+                        android:textSize="21sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:padding="3dp"
+                        android:layout_margin="5dp"
+                        android:text="89340593049"
+                        android:textColor="@color/black"
+                        android:textSize="21sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Address: "
+                        android:layout_margin="5dp"
+                        android:padding="3dp"
+                        android:textSize="21sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:padding="3dp"
+                        android:layout_margin="5dp"
+                        android:text="Nerist"
+                        android:textColor="@color/black"
+                        android:textSize="21sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="Gender: "
+                        android:layout_margin="5dp"
+                        android:padding="3dp"
+                        android:textSize="21sp"
+                        android:textColor="@color/black"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:padding="3dp"
+                        android:layout_margin="5dp"
+                        android:text="Male"
+                        android:textColor="@color/black"
+                        android:textSize="21sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:text="Edit"
+        android:layout_margin="8dp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#AE7241"
+        android:layout_below="@+id/tl"
+        android:padding="4dp"
+        android:textSize="20sp"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

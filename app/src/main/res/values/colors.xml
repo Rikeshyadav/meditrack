@@ -15,4 +15,5 @@
     <color name="red2">#E42828</color>
     <color name="transparentColor">#00000000</color>
     <color name="register_Card_background_Color">#C1BEBE</color>
+    <color name="patient_home_toolbar">#2583EF</color>
 </resources>

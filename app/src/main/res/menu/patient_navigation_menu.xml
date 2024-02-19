@@ -19,7 +19,7 @@
         android:title="Setting"
         android:icon="@drawable/baseline_settings_24"/>
     <item
-        android:id="@+id/patient_nav_exist"
+        android:id="@+id/patient_nav_logout"
         android:title="Logout"
         android:icon="@drawable/baseline_logout_24"/>
     <item android:id="@+id/patient_nav_about"

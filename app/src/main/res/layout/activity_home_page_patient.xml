@@ -10,7 +10,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.appcompat.widget.Toolbar
+    <!--<androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="52dp"
         app:title="patient"
@@ -20,7 +20,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
        android:background="#9FE3DA"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
-        />
+        />-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
