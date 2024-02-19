@@ -15,6 +15,7 @@ SharedPreferences sp;
         setContentView(R.layout.activity_splash_screen);
 sp=getSharedPreferences("boot",MODE_PRIVATE);
 boolean islogged=sp.getBoolean("islogged",false);
+String user=sp.getString("identity","");
 
         if(!islogged) {
         new Handler().postDelayed(new Runnable() {
@@ -29,18 +30,32 @@ boolean islogged=sp.getBoolean("islogged",false);
         },4000);
 
     }
-        else{
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
+        else {
 
-                    Intent i = new Intent(SplashScreen.this, HomePage_Doctor.class);
-                    startActivity(i);
-                    finish();
-                }
+            if (user.equals("Doctor")) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
-            },1160);
+                        Intent i = new Intent(SplashScreen.this, HomePage_Doctor.class);
+                        startActivity(i);
+                        finish();
+                    }
+
+                }, 1160);
+            }
+            else{
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent i = new Intent(SplashScreen.this, HomePage_Patient.class);
+                        startActivity(i);
+                        finish();
+                    }
+
+                }, 1160);
+            }
         }
-
 
 }}
