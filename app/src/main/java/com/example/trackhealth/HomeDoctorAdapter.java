@@ -21,18 +21,17 @@ public class HomeDoctorAdapter extends RecyclerView.Adapter<HomeDoctorAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.pending_ui, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.doctor_rec_ui, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         List item = data.get(position);
-        holder.hosname.setText(item.get(0).toString());
-        holder.docname.setText(item.get(1).toString());
-        holder.spec.setText(item.get(2).toString());
-        holder.qua.setText(item.get(3).toString());
-        holder.issue.setText(item.get(4).toString());
+        holder.pname.setText(item.get(0).toString());
+        holder.pdob.setText(item.get(1).toString());
+        holder.pgender.setText(item.get(2).toString());
+
     }
 
     @Override
@@ -41,15 +40,13 @@ public class HomeDoctorAdapter extends RecyclerView.Adapter<HomeDoctorAdapter.My
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView hosname,docname,spec,qua,issue;
-
+        public TextView pname,pdob,pgender;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            hosname = itemView.findViewById(R.id.pending_rec_hos);
-            docname = itemView.findViewById(R.id.pendocnm);
-            spec = itemView.findViewById(R.id.pendocspec);
-            qua = itemView.findViewById(R.id.pendocqua);
-            issue = itemView.findViewById(R.id.pendocissue);
+            pname = itemView.findViewById(R.id.homerecpat);
+            pdob = itemView.findViewById(R.id.homerecdob);
+            pgender = itemView.findViewById(R.id.homerecgen);
+
 
         }
     }

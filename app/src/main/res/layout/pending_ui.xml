@@ -30,7 +30,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pendocnm_parent"
+            android:id="@+id/homerecpat_parent"
             android:layout_alignParentTop="true"
             android:weightSum="10"
             android:orientation="horizontal">
@@ -58,8 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="10"
-            android:layout_below="@id/pendocnm_parent"
-            android:id="@+id/pendocspec_parent"
+            android:layout_below="@id/homerecpat_parent"
+            android:id="@+id/homerecdob_parent"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -86,8 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="10"
-            android:layout_below="@id/pendocspec_parent"
-            android:id="@+id/pendocqua_parent"
+            android:layout_below="@id/homerecdob_parent"
+            android:id="@+id/homerecgen_parent"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="0dp"
@@ -113,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="10"
-            android:layout_below="@id/pendocqua_parent"
+            android:layout_below="@id/homerecgen_parent"
             android:id="@+id/pendocissue_parent"
             android:orientation="horizontal">
             <TextView

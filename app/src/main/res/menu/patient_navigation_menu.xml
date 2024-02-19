@@ -10,6 +10,11 @@
     <item android:id="@+id/patient_nav_notify"
         android:title="Notification"
         android:icon="@drawable/baseline_notifications_24"/>
+    <item
+        android:id="@+id/nav_trash"
+        android:title="Pending"
+        android:icon="@drawable/baseline_schedule_24"/>
+
     <item android:id="@+id/patient_nav_setting"
         android:title="Setting"
         android:icon="@drawable/baseline_settings_24"/>

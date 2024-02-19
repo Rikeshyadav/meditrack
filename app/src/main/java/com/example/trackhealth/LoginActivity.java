@@ -22,9 +22,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -178,9 +180,17 @@ else{
                         sp.edit().putString("phone", phone).apply();
                         sp.edit().putString("pass", password).apply();
                         sp.edit().putString("identity",doctororpatient).apply();
+                        sp.edit().putString("dob",response.getString("dob")).apply();
+                        sp.edit().putString("gender",response.getString("gender")).apply();
                         sp.edit().putString("address", response.getString("address")).apply();
                         if(identity.equals("Doctor")) {
                          sp.edit().putString("speciality",response.getString("speciality")).apply();
+                            sp.edit().putString("qualification",response.getString("qualification")).apply();
+                            JSONObject jo=new JSONObject();
+                            jo=response.getJSONObject("clinic_hospital");
+                            String clinic_name=jo.getString("name");
+                            sp.edit().putString("clinic_name",clinic_name).apply();
+
                         }
 
                         startActivity(b1);
@@ -203,7 +213,12 @@ else{
             }
         });
         RequestQueue q= Volley.newRequestQueue(LoginActivity.this);
-
+        RetryPolicy retryPolicy = new DefaultRetryPolicy(
+                30000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        );
+        j.setRetryPolicy(retryPolicy);
         q.add(j);
 
     }

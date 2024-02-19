@@ -41,7 +41,6 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
    FragmentManager fragmentManager;
     TextView headerText;
    Toolbar toolbar;
-   FloatingActionButton fab;
 
 
     @Override
@@ -52,7 +51,6 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         boot=getSharedPreferences("boot",MODE_PRIVATE);
         username = sp.getString("name","user");
 
-        fab=findViewById(R.id.fab);
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -76,12 +74,12 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
 
         bottomNavigationView=findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setBackground(null);//use due to transparent in bottomnavigation
+        //use due to transparent in bottomnavigation
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-          unchecknav();
+         unchecknav();
 
                 int itemId=item.getItemId();
                 if(itemId==R.id.bottom_home){
@@ -114,14 +112,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
 
     fragmentManager =getSupportFragmentManager();
     openFragment(new HomeFragment(),"home");
-    fab.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-           Toast.makeText(HomePage_Doctor.this,"add person",Toast.LENGTH_SHORT).show();
-            Intent fab=new Intent(HomePage_Doctor.this, AddPatientPage.class);
-            startActivity(fab);
-        }
-    });
+
 
     }
 
@@ -144,9 +135,6 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
             openFragment(new NotificationFragment(),"notification");}
         else if(itemId==R.id.nav_privacy){
             openFragment(new privacyFragment(),"privacy");
-        }else if(itemId==R.id.nav_trash){
-            openFragment(new TrashFragment(),"trash");
-            toolbar.setTitle("Pending");
         }
         else if (itemId==R.id.nav_setting) {
             openFragment(new SettingFragment(),"setting");
@@ -170,7 +158,6 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         navigationView.getMenu().getItem(3).setChecked(false);
         navigationView.getMenu().getItem(4).setChecked(false);
         navigationView.getMenu().getItem(5).setChecked(false);
-        navigationView.getMenu().getItem(6).setChecked(false);
     }
     @Override
     public void onBackPressed() {
