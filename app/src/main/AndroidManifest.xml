@@ -53,7 +53,7 @@
             android:name=".HomePage_Doctor"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="false"
-            android:theme="@style/Theme.HomePage" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".DescriptionPage"
             android:exported="false"

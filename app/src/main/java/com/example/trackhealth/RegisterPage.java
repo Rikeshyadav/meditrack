@@ -53,6 +53,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -66,7 +67,7 @@ public class RegisterPage extends AppCompatActivity {
     ProgressBar progress,progress2;
     String verified_phone="";
     String otp="";
-    boolean verified=false,existUser=false;
+    boolean verified=true,existUser=false;
 
 
     ScrollView scroll;
@@ -102,6 +103,8 @@ progress=findViewById(R.id.progressregister);
         text_clinic_name = findViewById(R.id.text_clinicname);
         text_clinic_address = findViewById(R.id.text_clinicaddress);
         text_clinic_type = findViewById(R.id.text_clinictype);
+        radiogroup_gender=findViewById(R.id.gender);
+        radiogroup_gender.clearCheck();
         yoe_text = findViewById(R.id.text_yoe);
         spec_text = findViewById(R.id.text_speciality);
         about_text = findViewById(R.id.text_about);
@@ -210,73 +213,7 @@ progress=findViewById(R.id.progressregister);
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
                 String selectedOption = (String) adapterView.getItemAtPosition(i);
-
-
-                if (selectedOption.equals("Doctor")) {
-                        select = 1;
-
-                    select = 1;
-                    doctorOrPatient = "Doctor";
-                    docpat_warn.setVisibility(View.GONE);
-                    card5.setVisibility(View.VISIBLE);
-                    card2.setVisibility(View.VISIBLE);
-                    card3.setVisibility(View.GONE);
-                    if(!verified) {
-                        otp_but.setText("Get OTP");
-                        otp_but.setFocusable(true);
-                    }
-                    else{
-                        otp_but.setText("verified");
-                        otp_but.setFocusable(false);
-                    }
-                    card4.setVisibility(View.VISIBLE);
-                    upload_warn.setVisibility(View.GONE);
-                    additional_det.setVisibility(View.VISIBLE);
-                    verification_text.setVisibility(View.VISIBLE);
-                    qualification_text.setVisibility(View.VISIBLE);
-                    text_clinic_header.setVisibility(View.VISIBLE);
-
-                    hospital_radio.setVisibility(View.VISIBLE);
-                    clinic_radio.setVisibility(View.VISIBLE);
-                    otp_but.setVisibility(View.VISIBLE);
-                    verify_but.setVisibility(View.GONE);
-                    doc_reg.setVisibility(View.VISIBLE);
-
-
-                }
-                if (selectedOption.equals("patient")) {
-                    select = 1;
-
-                        doctorOrPatient = "Patient";
-                        card5.setVisibility(View.GONE);
-                        docpat_warn.setVisibility(View.GONE);
-                        otp_but.setText("GET OTP");
-                        card2.setVisibility(View.GONE);
-                        card3.setVisibility(View.GONE);
-                        card4.setVisibility(View.VISIBLE);
-                        additional_det.setVisibility(View.GONE);
-                        verification_text.setVisibility(View.GONE);
-                        upload_warn.setVisibility(View.GONE);
-                        text_clinic_header.setVisibility(View.GONE);
-                    otp_but.setVisibility(View.VISIBLE);
-                    verify_but.setVisibility(View.GONE);
-                if(!verified) {
-                    otp_but.setText("Get OTP");
-                    otp_but.setFocusable(true);
-                }
-                else{
-                    otp_but.setText("verified");
-                    otp_but.setFocusable(false);
-                }
-                        doc_reg.setVisibility(View.GONE);
-                        hospital_radio.setVisibility(View.GONE);
-                        clinic_radio.setVisibility(View.GONE);
-
-
-
-                }
                 if (selectedOption.equals("Select")) {
                     card5.setVisibility(View.GONE);
                     select = 0;
@@ -295,10 +232,91 @@ progress=findViewById(R.id.progressregister);
                     doc_reg.setVisibility(View.GONE);
                     hospital_radio.setVisibility(View.GONE);
                     clinic_radio.setVisibility(View.GONE);
+                }else{
+                if ((firstname.getText().toString().trim() + lastname.getText().toString().trim()).equals("")) {
+                    scroll.fullScroll(scroll.FOCUS_UP);
+                    dopcat.setSelection(0);
+                    Toast.makeText(getApplicationContext(), "empty username", Toast.LENGTH_SHORT).show();
+                } else if (emailid.getText().toString().trim().equals("")) {
+                    scroll.fullScroll(scroll.FOCUS_UP);
+                    dopcat.setSelection(0);
+                    Toast.makeText(getApplicationContext(), "empty email", Toast.LENGTH_SHORT).show();
+                } else if (dob.getText().toString().trim().equals("")) {
+                    scroll.fullScroll(scroll.FOCUS_UP);
+                    dopcat.setSelection(0);
+                    Toast.makeText(getApplicationContext(), "empty dob", Toast.LENGTH_SHORT).show();
+                } else if (gender.equals("")) {
+                    scroll.fullScroll(scroll.FOCUS_UP);
+                    dopcat.setSelection(0);
+                    Toast.makeText(getApplicationContext(), "empty gender", Toast.LENGTH_SHORT).show();
+                } else if (address.getText().toString().trim().equals("")) {
+                    scroll.fullScroll(scroll.FOCUS_UP);
+                    dopcat.setSelection(0);
+                    Toast.makeText(getApplicationContext(), "empty address", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (selectedOption.equals("Doctor")) {
+
+                        select = 1;
+                        doctorOrPatient = "Doctor";
+                        docpat_warn.setVisibility(View.GONE);
+                        card5.setVisibility(View.VISIBLE);
+                        card2.setVisibility(View.VISIBLE);
+                        card3.setVisibility(View.GONE);
+                        if (!verified) {
+                            otp_but.setText("Get OTP");
+                            otp_but.setFocusable(true);
+                        } else {
+                            otp_but.setText("verified");
+                            otp_but.setFocusable(false);
+                        }
+                        card4.setVisibility(View.VISIBLE);
+                        upload_warn.setVisibility(View.GONE);
+                        additional_det.setVisibility(View.VISIBLE);
+                        verification_text.setVisibility(View.VISIBLE);
+                        qualification_text.setVisibility(View.VISIBLE);
+                        text_clinic_header.setVisibility(View.VISIBLE);
+
+                        hospital_radio.setVisibility(View.VISIBLE);
+                        clinic_radio.setVisibility(View.VISIBLE);
+                        otp_but.setVisibility(View.VISIBLE);
+                        verify_but.setVisibility(View.GONE);
+                        doc_reg.setVisibility(View.VISIBLE);
+
+
+                    }
+                    if (selectedOption.equals("patient")) {
+                        select = 1;
+
+                        doctorOrPatient = "Patient";
+                        card5.setVisibility(View.GONE);
+                        docpat_warn.setVisibility(View.GONE);
+                        otp_but.setText("GET OTP");
+                        card2.setVisibility(View.GONE);
+                        card3.setVisibility(View.GONE);
+                        card4.setVisibility(View.VISIBLE);
+                        additional_det.setVisibility(View.GONE);
+                        verification_text.setVisibility(View.GONE);
+                        upload_warn.setVisibility(View.GONE);
+                        text_clinic_header.setVisibility(View.GONE);
+                        otp_but.setVisibility(View.VISIBLE);
+                        verify_but.setVisibility(View.GONE);
+                        if (!verified) {
+                            otp_but.setText("Get OTP");
+                            otp_but.setFocusable(true);
+                        } else {
+                            otp_but.setText("verified");
+                            otp_but.setFocusable(false);
+                        }
+                        doc_reg.setVisibility(View.GONE);
+                        hospital_radio.setVisibility(View.GONE);
+                        clinic_radio.setVisibility(View.GONE);
+
+
+                    }
+
                 }
-
+                }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 select = 0;
@@ -432,7 +450,7 @@ progress=findViewById(R.id.progressregister);
 
             @Override
             public void onClick(View view) {
-                progress2.setVisibility(View.VISIBLE);
+
                 if (password.getText().toString().length() < 8) {
                     pass_warn.setText("** must be atleast 8 characters long");
                     pass_warn.setVisibility(View.VISIBLE);
@@ -465,18 +483,64 @@ progress=findViewById(R.id.progressregister);
                              if(!existUser) {
                                  if (verified) {
                                      progress2.setVisibility(View.VISIBLE);
+                                     verified_phone=phone;
+                                     if (verified_phone.equals(phone)) {
+                                         progress2.setVisibility(View.VISIBLE);
 
-                                     if(verified_phone.equals(phone)) {
 
                                          if (doctorOrPatient.equals("Patient")) {
 
-                                             sendPatient(username, email, pass, phone, dateofbirth, gen, addres);
+                                                 progress2.setVisibility(View.VISIBLE);
+                                                 sendPatient(username, email, pass, phone, dateofbirth, gen, addres);
+
 
                                          } else {
-                                             sendDoctor(username, email, pass, phone, dateofbirth, gen, addres, speciality.getText().toString().trim(), yoe.getText().toString().trim(), qualification.getText().toString().trim(), aboutDoc.getText().toString().trim(), organisation.getText().toString().trim(), clinic_type.getText().toString().trim(), clinic_address.getText().toString().trim(), clinic_phone.getText().toString().trim());
 
+
+                                             if (speciality.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty speciality", Toast.LENGTH_SHORT).show();
+                                             } else if (yoe.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty year of experience", Toast.LENGTH_SHORT).show();
+                                             } else if (qualification.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty qualification", Toast.LENGTH_SHORT).show();
+
+                                             } else if (about_text.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty about", Toast.LENGTH_SHORT).show();
+
+                                             } else if (organisation.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic name", Toast.LENGTH_SHORT).show();
+
+                                             } else if (clinic_address.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic address", Toast.LENGTH_SHORT).show();
+
+                                             } else if (clinic_type.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic type", Toast.LENGTH_SHORT).show();
+
+                                             } else if (clinic_phone.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic phone", Toast.LENGTH_SHORT).show();
+
+                                             }
+                                             else if(aboutDoc.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty about", Toast.LENGTH_SHORT).show();
+
+                                             }
+else {
+                                                progress2.setVisibility(View.VISIBLE);
+
+                                                 sendDoctor(username, email, pass, phone, dateofbirth, gen, addres, speciality.getText().toString().trim(), yoe.getText().toString().trim(), qualification.getText().toString().trim(), aboutDoc.getText().toString().trim(), organisation.getText().toString().trim(), clinic_type.getText().toString().trim(), clinic_address.getText().toString().trim(), clinic_phone.getText().toString().trim());
+                                             }
                                          }
                                          progress2.setVisibility(View.GONE);
+
                                      }
 
 
@@ -529,32 +593,25 @@ else{
     }
 
     public void sendPatient(String username, String email, String password, String phone, String dob, String gender, String address) {
-
+        progress2.setVisibility(View.VISIBLE);
                 String temp = "https://demo-uw46.onrender.com/api/patient/register";
-
-                HashMap<String, String> jsonobj = new HashMap<>();
+              JSONObject inner2=new JSONObject();
+                JSONObject jsonobj=new JSONObject();
+        try {
                 jsonobj.put("doctor_patient", "patient");
-
-                jsonobj.put("username", username);
+                  jsonobj.put("username", username);
                 jsonobj.put("email", email);
                 jsonobj.put("password", password);
                 jsonobj.put("phone",verified_phone);
                 jsonobj.put("dob", dob);
                 jsonobj.put("gender", gender);
                 jsonobj.put("address", address);
-                boolean allow=true;
-                String key="";
-                for(Map.Entry<String,String> a:jsonobj.entrySet()){
-                    String value=a.getValue();
-                    if(value.equals("")){
-                        allow=false;
-                        key=a.getKey();
-                        break;
-                    }
-                }
-                if(allow) {
+                jsonobj.put("doctor",inner2);
 
-                    JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+                    JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, jsonobj, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {
@@ -590,28 +647,27 @@ else{
 
                     q.add(j);
                 }
-                else{
-
-
-                    scroll.fullScroll(scroll.FOCUS_UP);
-                    Toast.makeText(getApplicationContext(), "empty " + key, Toast.LENGTH_SHORT).show();
-
-                }
-            }
 
 
     public void sendDoctor(String username,String email,String password,String phone,String dob,String gender,String address,String speciality,String yoe,String qualification,String about,String hosName,String hosType,String hosAddress,String hosPhone){
-
+progress2.setVisibility(View.VISIBLE);
             String temp="https://demo-uw46.onrender.com/api/doctor/register";
-            ArrayList<String> clinic_hospital=new ArrayList<>();
-            clinic_hospital.add(hosName);
-            clinic_hospital.add(hosType);
-            clinic_hospital.add(hosAddress);
-            clinic_hospital.add(hosPhone);
-            HashMap<String,String> jsonobj=new HashMap<>();
+            JSONObject clinic_hospital=new JSONObject();
 
+        try {
+            clinic_hospital.put("name", hosName);
+            clinic_hospital.put("type", hosType);
+            clinic_hospital.put("address", address);
+            clinic_hospital.put("phone", hosPhone);
+
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+            JSONObject jsonobj=new JSONObject();
+        JSONObject inner2=new JSONObject();
+
+        try {
             jsonobj.put("doctor_patient", doctorOrPatient);
-
             jsonobj.put("username", username);
             jsonobj.put("email", email);
             jsonobj.put("password", password);
@@ -623,72 +679,13 @@ else{
             jsonobj.put("yoe", yoe);
             jsonobj.put("qualification", qualification);
             jsonobj.put("about", about);
-            jsonobj.put("clinic_hospital", clinic_hospital.toString());
-            boolean allow=true;
-            boolean allow2=true;
-            String key="";
-            for(Map.Entry<String,String> a:jsonobj.entrySet()){
-                String value=a.getValue();
-                if(value.equals("")){
-                    allow=false;
-                    key=a.getKey();
-                    break;
-                }
-            }
-            if(speciality.equals("")) {
-                Toast.makeText(getApplicationContext(), "empty speciality", Toast.LENGTH_SHORT).show();
-                allow2=false;
+            jsonobj.put("clinic_hospital", clinic_hospital);
 
-
-            }
-
-            else if(yoe.equals("")) {
-                Toast.makeText(getApplicationContext(), "empty year of experience", Toast.LENGTH_SHORT).show();
-                allow2=false;
-
-            }
-
-            else if(qualification.equals("")) {
-                Toast.makeText(getApplicationContext(), "empty qualification", Toast.LENGTH_SHORT).show();
-                allow2=false;
-
-            }
-
-            else if(about.equals("")) {
-                Toast.makeText(getApplicationContext(), "empty about", Toast.LENGTH_SHORT).show();
-                allow2=false;
-
-            }
-
-            else if(hosName.equals("")) {
-                Toast.makeText(getApplicationContext(), "empty hospital/clinic name", Toast.LENGTH_SHORT).show();
-                allow2=false;
-
-            }
-
-            else if(hosAddress.equals("")) {
-                Toast.makeText(getApplicationContext(), "empty hospital/clinic address", Toast.LENGTH_SHORT).show();
-                allow2=false;
-
-            }
-
-            else if(hosType.equals("")) {
-                Toast.makeText(getApplicationContext(), "empty hospital/clinic type", Toast.LENGTH_SHORT).show();
-                allow2=false;
-
-            }
-
-            else if(hosPhone.equals("")) {
-                Toast.makeText(getApplicationContext(), "empty hospital/clinic phone", Toast.LENGTH_SHORT).show();
-                allow2=false;
-
-            }
-
-
-            if(allow) {
-
-                if (allow2) {
-                    JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
+            jsonobj.put("patient",inner2);
+        } catch (JSONException e) {
+        throw new RuntimeException(e);
+    }
+                    JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, jsonobj, new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject response) {
@@ -721,15 +718,6 @@ else{
 
                     q.add(j);
                 }
-            }
-            else{
-
-
-                    scroll.fullScroll(scroll.FOCUS_UP);
-                    Toast.makeText(getApplicationContext(), "empty " + key, Toast.LENGTH_SHORT).show();
-
-            }
-        }
 
     private void showDatePicker() {
         final Calendar calendar = Calendar.getInstance();
@@ -833,8 +821,7 @@ else{
                         Toast.makeText(getApplicationContext(), "Verification successful", Toast.LENGTH_SHORT).show();
                     } else {
                         progress.setVisibility(View.GONE);
-                        otpedit.setVisibility(View.GONE);
-                        otpedit.setVisibility(View.GONE);
+                        //otpedit.setVisibility(View.GONE);
                         if(!verified)
                         Toast.makeText(getApplicationContext(), "Verification failed", Toast.LENGTH_SHORT).show();
                         else

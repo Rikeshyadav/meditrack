@@ -99,7 +99,12 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
             openFragment(new patient_nav_notification());
             Toast.makeText(getApplicationContext(),"Notification", Toast.LENGTH_SHORT).show();
 
-        }else if (itemId==R.id.patient_nav_setting) {
+        }
+        else if(itemId==R.id.nav_trash){
+            openFragment(new TrashFragment());
+            toolbar.setTitle("Pending");
+        }
+        else if (itemId==R.id.patient_nav_setting) {
             toolbar.setTitle("Setting");
             Toast.makeText(getApplicationContext(),"setting", Toast.LENGTH_SHORT).show();
         }else if (itemId==R.id.patient_nav_about) {
