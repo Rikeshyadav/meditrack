@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class EditprofileFragment extends Fragment {
-    TextView name, email, phone, address, hospital,hosparent;
+    TextView name, email, phone, state,city, hospital,hosparent;
     ProgressBar pb;
     ImageView re;
    AppCompatButton editbut;
@@ -60,7 +60,7 @@ sp=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         re.setVisibility(View.GONE);
         hosparent.setVisibility(View.GONE);
         phone = view.findViewById(R.id.pphone);
-        address = view.findViewById(R.id.paddress);
+        city= view.findViewById(R.id.pacity);
         hospital = view.findViewById(R.id.phospital);
         ph = sp.getString("phone","");
         doctororpatient=sp.getString("identity","");
@@ -82,7 +82,7 @@ editbut.setOnClickListener(new View.OnClickListener() {
         i.putExtra("ph",ph);
         i.putExtra("identity",doctororpatient);
         i.putExtra("email",email.getText().toString().trim());
-        i.putExtra("address",address.getText().toString().trim());
+        i.putExtra("city",city.getText().toString().trim());
         i.putExtra("name",name.getText().toString().trim());
         startActivity(i);
     }
@@ -118,7 +118,7 @@ getvalues();
                             name.setText(response.getString("username"));
                       email.setText(response.getString("email"));
                        phone.setText(ph);
-                       address.setText(response.getString("address"));
+                       city.setText(response.getString("city"));
                        if(doctororpatient.equals("Doctor")) {
                            hosparent.setVisibility(View.VISIBLE);
                             hospital.setText(response.getString("speciality"));
@@ -142,7 +142,7 @@ getvalues();
             });
             RequestQueue q = Volley.newRequestQueue(requireActivity());
             RetryPolicy retryPolicy = new DefaultRetryPolicy(
-                    30000,
+                    20000,
                     DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
             );

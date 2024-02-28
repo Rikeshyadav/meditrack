@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 public class SplashScreen extends AppCompatActivity {
 SharedPreferences sp;
@@ -13,9 +14,10 @@ SharedPreferences sp;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-sp=getSharedPreferences("boot",MODE_PRIVATE);
+sp=getSharedPreferences("user",MODE_PRIVATE);
 boolean islogged=sp.getBoolean("islogged",false);
-String user=sp.getString("identity","");
+String user=sp.getString("identity","").trim();
+
 
         if(!islogged) {
         new Handler().postDelayed(new Runnable() {
@@ -44,7 +46,7 @@ String user=sp.getString("identity","");
 
                 }, 1160);
             }
-            else{
+            else if(user.equals("Patient")){
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -56,6 +58,20 @@ String user=sp.getString("identity","");
 
                 }, 1160);
             }
+            else{
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent i = new Intent(SplashScreen.this, DescriptionPage.class);
+                        startActivity(i);
+                        finish();
+
+                    }
+                },4000);
+
+            }
+
         }
 
 }}

@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -76,12 +77,14 @@ public class RegisterPage extends AppCompatActivity {
 
     RadioButton male_radio, female_radio, others_radio, clinic_radio, hospital_radio;
 
-    TextView spec_text, yoe_text, about_text, qualification_text, text_clinicphone, text_clinic_header, text_clinic_name, text_clinic_type, text_clinic_address, country_code2;
+    TextView spec_text, yoe_text, about_text, qualification_text, text_clinicphone, text_clinic_header, text_clinic_name, text_clinic_type, text_clinic_state,text_clinic_city, country_code2;
 
     TextView additional_det, verification_text, phone_text, doc_reg, pass_warn, docpat_warn, upload_warn;
 
-    EditText speciality, yoe, aboutDoc, qualification, organisation, clinic_type, clinic_address, clinic_phone, dob, phone_no, pass;
-    EditText password, firstname, lastname, emailid, address,otpedit;
+    EditText speciality, yoe, aboutDoc, qualification, organisation, clinic_type, clinic_phone, dob, phone_no, pass;
+    EditText password, firstname, lastname, emailid, otpedit;
+
+    AutoCompleteTextView city,state,clinic_state,clinic_city;
 
     AppCompatButton signup, otp_but, verify_but;
 
@@ -101,7 +104,8 @@ progress=findViewById(R.id.progressregister);
         qualification_text = findViewById(R.id.text_qualification);
         text_clinic_header = findViewById(R.id.clinic_info);
         text_clinic_name = findViewById(R.id.text_clinicname);
-        text_clinic_address = findViewById(R.id.text_clinicaddress);
+        text_clinic_state = findViewById(R.id.text_clinicstate);
+        text_clinic_city=findViewById(R.id.text_cliniccity);
         text_clinic_type = findViewById(R.id.text_clinictype);
         radiogroup_gender=findViewById(R.id.gender);
         radiogroup_gender.clearCheck();
@@ -129,8 +133,8 @@ progress=findViewById(R.id.progressregister);
         clinic_phone = findViewById(R.id.clinic_phone);
         dopcat = findViewById(R.id.docpat);
         clinic_type = findViewById(R.id.clinic_type);
-        address = findViewById(R.id.address);
-        clinic_address = findViewById(R.id.clinic_address);
+        clinic_state = findViewById(R.id.clinic_state);
+        clinic_city = findViewById(R.id.clinic_city);
         speciality = findViewById(R.id.speciality);
         yoe = findViewById(R.id.year_of_experience);
         aboutDoc = findViewById(R.id.aboutdoctor);
@@ -139,6 +143,9 @@ progress=findViewById(R.id.progressregister);
         phone_no = findViewById(R.id.phoneNo);
         password = findViewById(R.id.pass);
         otpedit = findViewById(R.id.reg_otp);
+
+        state=findViewById(R.id.state);
+        city=findViewById(R.id.city);
 
         //image view
         img = findViewById(R.id.image1);
@@ -158,6 +165,18 @@ progress=findViewById(R.id.progressregister);
         female_radio = findViewById(R.id.female);
         others_radio = findViewById(R.id.others);
 
+
+
+        String[] cities={"Guwahati","Patna","Delhi","Mumbai","Kolkata","Kerela","Chennai","Raipur","Panaji","Bangalore","Itanagar","Bhubneshwar","Hyderabad","Nirjuli","Noida","Bhopal","Indore","Sikunderabad"};
+        String[] states={"Assam","UP","Bihar","Andhra Pradesh","Uttrakhand","West Bengal","Meghalaya","Sikkim","Punjab","Haryana","Madhya Pradesh","Maharashtra","Gujrat","J&K","Himachal Pradesh","Tamil Nadu",
+                "Jharkhand","Odisha","Rajasthan","Goa","Arunachal Pradesh","Karnataka"};
+
+        RegisterSpinnerApdater stateAdapter=new RegisterSpinnerApdater(this,R.layout.spinner_login,states);
+        RegisterSpinnerApdater cityAdapter=new RegisterSpinnerApdater(this,R.layout.spinner_login,cities);
+        city.setAdapter(cityAdapter);
+        clinic_city.setAdapter(cityAdapter);
+        state.setAdapter(stateAdapter);
+        clinic_state.setAdapter(stateAdapter);
 
         //date of birth
         dob = findViewById(R.id.Age);
@@ -204,7 +223,7 @@ progress=findViewById(R.id.progressregister);
         //select
         otpedit.setVisibility(View.GONE);
         String[] st = {"Select", "Doctor", "patient"};
-        RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner1, st);
+        RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner_login, st);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dopcat.setAdapter(adapter);
 
@@ -249,11 +268,17 @@ progress=findViewById(R.id.progressregister);
                     scroll.fullScroll(scroll.FOCUS_UP);
                     dopcat.setSelection(0);
                     Toast.makeText(getApplicationContext(), "empty gender", Toast.LENGTH_SHORT).show();
-                } else if (address.getText().toString().trim().equals("")) {
+                } else if (state.getText().toString().trim().equals("")) {
                     scroll.fullScroll(scroll.FOCUS_UP);
                     dopcat.setSelection(0);
-                    Toast.makeText(getApplicationContext(), "empty address", Toast.LENGTH_SHORT).show();
-                } else {
+                    Toast.makeText(getApplicationContext(), "empty state", Toast.LENGTH_SHORT).show();
+                }
+                else if (city.getText().toString().trim().equals("")) {
+                    scroll.fullScroll(scroll.FOCUS_UP);
+                    dopcat.setSelection(0);
+                    Toast.makeText(getApplicationContext(), "empty city", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     if (selectedOption.equals("Doctor")) {
 
                         select = 1;
@@ -330,25 +355,29 @@ progress=findViewById(R.id.progressregister);
         hospital_radio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                text_clinic_address.setText("Hospital Address");
+                text_clinic_state.setText("Hospital State");
+                text_clinic_city.setText("Hospital City");
                 text_clinic_name.setText("Hospital Name");
                 card3.setVisibility(View.VISIBLE);
                 text_clinic_type.setText("Hospital Type");
                 text_clinicphone.setText("Hospital Phone Number");
 
-                clinic_address.setHint("Eg. Greater Noida, sector 45");
+                clinic_state.setHint("Eg. UP");
+                clinic_city.setHint("Eg. Delhi");
                 organisation.setHint("Eg. Apollo Hospital");
                 clinic_type.setHint("Eg. General Hospital");
                 clinic_phone.setHint("Hospital Contact Number");
 
-                text_clinic_address.setVisibility(View.VISIBLE);
+                text_clinic_city.setVisibility(View.VISIBLE);
+                text_clinic_state.setVisibility(View.VISIBLE);
                 text_clinic_name.setVisibility(View.VISIBLE);
                 text_clinic_type.setVisibility(View.VISIBLE);
                 text_clinicphone.setVisibility(View.VISIBLE);
                 country_code2.setVisibility(View.VISIBLE);
                 organisation.setVisibility(View.VISIBLE);
                 clinic_type.setVisibility(View.VISIBLE);
-                clinic_address.setVisibility(View.VISIBLE);
+                clinic_city.setVisibility(View.VISIBLE);
+                clinic_state.setVisibility(View.VISIBLE);
                 clinic_phone.setVisibility(View.VISIBLE);
 
             }
@@ -358,18 +387,21 @@ progress=findViewById(R.id.progressregister);
         clinic_radio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                text_clinic_address.setText("Clinic Address");
+                text_clinic_state.setText("Clinic State");
+                text_clinic_city.setText("Clinic City");
                 text_clinic_name.setText("Clinic Name");
                 text_clinic_type.setText("Clinic Type");
                 text_clinicphone.setText("Clinic Phone Number");
+                clinic_state.setHint("Eg. UP");
+                clinic_city.setHint("Eg. Delhi");
 
-                clinic_address.setHint("Eg. Greater Noida, sector 45");
                 organisation.setHint("Eg. Ravi health clinic");
                 clinic_type.setHint("Eg. Cardiac Clinic");
                 clinic_phone.setHint("Clinic Contact Number");
 
 
-                text_clinic_address.setVisibility(View.VISIBLE);
+                text_clinic_city.setVisibility(View.VISIBLE);
+                text_clinic_state.setVisibility(View.VISIBLE);
                 text_clinic_name.setVisibility(View.VISIBLE);
                 text_clinic_type.setVisibility(View.VISIBLE);
                 card3.setVisibility(View.VISIBLE);
@@ -377,7 +409,8 @@ progress=findViewById(R.id.progressregister);
                 organisation.setVisibility(View.VISIBLE);
                 country_code2.setVisibility(View.VISIBLE);
                 clinic_type.setVisibility(View.VISIBLE);
-                clinic_address.setVisibility(View.VISIBLE);
+                clinic_city.setVisibility(View.VISIBLE);
+                clinic_state.setVisibility(View.VISIBLE);
                 clinic_phone.setVisibility(View.VISIBLE);
             }
         });
@@ -477,7 +510,8 @@ progress=findViewById(R.id.progressregister);
                             String phone = phone_no.getText().toString().trim();
                             String dateofbirth = dob.getText().toString().trim();
                             String gen = gender.trim();
-                            String addres = address.getText().toString().trim();
+                            String statee = state.getText().toString().trim();
+                            String cityy=city.getText().toString().trim();
 
 
                              if(!existUser) {
@@ -491,7 +525,7 @@ progress=findViewById(R.id.progressregister);
                                          if (doctorOrPatient.equals("Patient")) {
 
                                                  progress2.setVisibility(View.VISIBLE);
-                                                 sendPatient(username, email, pass, phone, dateofbirth, gen, addres);
+                                                 sendPatient(username, email, pass, phone, dateofbirth, gen, statee,cityy);
 
 
                                          } else {
@@ -515,11 +549,18 @@ progress=findViewById(R.id.progressregister);
                                                  scroll.fullScroll(scroll.FOCUS_UP);
                                                  Toast.makeText(getApplicationContext(), "empty hospital/clinic name", Toast.LENGTH_SHORT).show();
 
-                                             } else if (clinic_address.getText().toString().trim().equals("")) {
+                                             } else if (clinic_state.getText().toString().trim().equals("")) {
                                                  scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic address", Toast.LENGTH_SHORT).show();
+                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic state", Toast.LENGTH_SHORT).show();
 
-                                             } else if (clinic_type.getText().toString().trim().equals("")) {
+                                             }
+                                             else if (clinic_city.getText().toString().trim().equals("")) {
+                                                 scroll.fullScroll(scroll.FOCUS_UP);
+                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic city", Toast.LENGTH_SHORT).show();
+
+                                             }
+
+                                             else if (clinic_type.getText().toString().trim().equals("")) {
                                                  scroll.fullScroll(scroll.FOCUS_UP);
                                                  Toast.makeText(getApplicationContext(), "empty hospital/clinic type", Toast.LENGTH_SHORT).show();
 
@@ -536,7 +577,7 @@ progress=findViewById(R.id.progressregister);
 else {
                                                 progress2.setVisibility(View.VISIBLE);
 
-                                                 sendDoctor(username, email, pass, phone, dateofbirth, gen, addres, speciality.getText().toString().trim(), yoe.getText().toString().trim(), qualification.getText().toString().trim(), aboutDoc.getText().toString().trim(), organisation.getText().toString().trim(), clinic_type.getText().toString().trim(), clinic_address.getText().toString().trim(), clinic_phone.getText().toString().trim());
+                                                 sendDoctor(username, email, pass, phone, dateofbirth, gen, statee,cityy, speciality.getText().toString().trim(), yoe.getText().toString().trim(), qualification.getText().toString().trim(), aboutDoc.getText().toString().trim(), organisation.getText().toString().trim(), clinic_type.getText().toString().trim(), clinic_state.getText().toString().trim(),clinic_city.getText().toString().trim(), clinic_phone.getText().toString().trim());
                                              }
                                          }
                                          progress2.setVisibility(View.GONE);
@@ -592,7 +633,7 @@ else{
 
     }
 
-    public void sendPatient(String username, String email, String password, String phone, String dob, String gender, String address) {
+    public void sendPatient(String username, String email, String password, String phone, String dob, String gender, String state,String city) {
         progress2.setVisibility(View.VISIBLE);
                 String temp = "https://demo-uw46.onrender.com/api/patient/register";
               JSONObject inner2=new JSONObject();
@@ -605,7 +646,8 @@ else{
                 jsonobj.put("phone",verified_phone);
                 jsonobj.put("dob", dob);
                 jsonobj.put("gender", gender);
-                jsonobj.put("address", address);
+                jsonobj.put("state", state);
+                jsonobj.put("city",city);
                 jsonobj.put("doctor",inner2);
 
         } catch (JSONException e) {
@@ -649,7 +691,7 @@ else{
                 }
 
 
-    public void sendDoctor(String username,String email,String password,String phone,String dob,String gender,String address,String speciality,String yoe,String qualification,String about,String hosName,String hosType,String hosAddress,String hosPhone){
+    public void sendDoctor(String username,String email,String password,String phone,String dob,String gender,String state,String city,String speciality,String yoe,String qualification,String about,String hosName,String hosType,String hosState,String hosCity,String hosPhone){
 progress2.setVisibility(View.VISIBLE);
             String temp="https://demo-uw46.onrender.com/api/doctor/register";
             JSONObject clinic_hospital=new JSONObject();
@@ -657,7 +699,8 @@ progress2.setVisibility(View.VISIBLE);
         try {
             clinic_hospital.put("name", hosName);
             clinic_hospital.put("type", hosType);
-            clinic_hospital.put("address", address);
+            clinic_hospital.put("state",hosState);
+            clinic_hospital.put("city",hosCity);
             clinic_hospital.put("phone", hosPhone);
 
         } catch (JSONException e) {
@@ -674,7 +717,8 @@ progress2.setVisibility(View.VISIBLE);
             jsonobj.put("phone", verified_phone);
             jsonobj.put("dob", dob);
             jsonobj.put("gender", gender);
-            jsonobj.put("address", address);
+            jsonobj.put("state", state);
+            jsonobj.put("city",city);
             jsonobj.put("speciality", speciality);
             jsonobj.put("yoe", yoe);
             jsonobj.put("qualification", qualification);

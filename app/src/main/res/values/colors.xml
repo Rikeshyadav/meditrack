@@ -8,10 +8,14 @@
     <color name="hint">#8C8989</color>
     <color name="hint2">#BCC1C0</color>
     <color name="hint3">#9EA1A1</color>
+    <color name="red_pulse">#DA4040</color>
+    <color name="green_button">#64BC43</color>
     <color name="register_text_color1">#1E1E1E</color>
     <color name="register_bg_color1">#FCFBFD</color>
     <color name="start_fragment_text_color">#000000</color>
     <color name="primary_color">#759EEE</color>
+    <color name="ratingcolor">#ffe234</color>
+    <color name="rating_normal">#CFCDCD</color>
     <color name="red2">#E42828</color>
     <color name="transparentColor">#00000000</color>
     <color name="register_Card_background_Color">#C1BEBE</color>

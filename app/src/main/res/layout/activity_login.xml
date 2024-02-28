@@ -93,28 +93,40 @@
                 android:layout_marginEnd="30dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="5dp"
-                android:background="@drawable/white_box"
+android:background="@drawable/white_box"
                 android:id="@+id/identity"
                 android:layout_below="@id/pass"
                 >
 
-<Spinner
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/loginSpinner"
-    android:pointerIcon="all_scroll"
+                <Spinner
+                    android:id="@+id/loginSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dropDownSelector="@color/black"
+                    android:padding="8dp"
+                    android:pointerIcon="all_scroll"
 
-    android:background="@color/transparentColor"
-    android:padding="8dp"
-
-    android:textColorHint="@color/black" />
+                    android:textColorHint="@color/black" />
 
             </LinearLayout>
+<!--
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                app:lottie_rawRes="@raw/pulse"
+                android:visibility="gone"
+                app:lottie_colorFilter="@color/hint"
+                app:lottie_autoPlay="true"
+                android:layout_below="@id/identity"
+                android:id="@+id/progress"
+                app:lottie_loop="true"
+                />-->
             <ProgressBar
                 android:id="@+id/progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:visibility="gone"
+              android:visibility="gone"
+
                 android:layout_below="@id/identity"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"

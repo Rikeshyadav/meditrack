@@ -2,16 +2,70 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Search"
-        android:gravity="center"
-        android:textColor="@color/purple"
-        android:textSize="30sp"/>
+        android:layout_marginTop="48dp"
+        >
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="2dp" >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:id="@+id/search_page_progress"
+                />
+            <com.google.android.material.tabs.TabLayout
+                android:layout_width="match_parent"
+                app:tabTextColor="@color/black"
+                android:layout_alignParentTop="true"
+                android:id="@+id/tabLayout_search"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/doctor_search"
+                    android:layout_width="wrap_content"
+                    android:text="Doctor"
+                    android:layout_height="wrap_content"
+
+                    />
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/hospital_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hospital"
+                    />
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/clinic_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clinic"
+                    />
+            </com.google.android.material.tabs.TabLayout>
+<androidx.viewpager2.widget.ViewPager2
+    android:layout_width="match_parent"
+    android:layout_below="@id/tabLayout_search"
+    android:layout_height="match_parent"
+    android:id="@+id/viewpager_search"
+    />
+            </RelativeLayout>
+        </FrameLayout>
+    </RelativeLayout>
 </FrameLayout>

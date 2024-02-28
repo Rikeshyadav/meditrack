@@ -25,7 +25,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class editProfile extends AppCompatActivity {
-EditText name,email,address,ph;
+EditText name,email,city,state,ph;
 SharedPreferences sp;
 AppCompatButton save;
 String identity="";
@@ -36,9 +36,11 @@ String identity="";
         sp=getSharedPreferences("user",MODE_PRIVATE);
         name=findViewById(R.id.epname);
         email=findViewById(R.id.epemail);
-        address=findViewById(R.id.epaddress);
+        state=findViewById(R.id.epstate);
+        city=findViewById(R.id.epcity);
         name.setText(getIntent().getStringExtra("name"));
-        address.setText(getIntent().getStringExtra("address"));
+        state.setText(getIntent().getStringExtra("state"));
+        city.setText(getIntent().getStringExtra("city"));
         email.setText(getIntent().getStringExtra("email"));
         ph=findViewById(R.id.epphone);
         ph.setText(getIntent().getStringExtra("ph"));
@@ -51,8 +53,9 @@ String identity="";
             public void onClick(View view) {
                 String nm=name.getText().toString().trim();
                 String em=email.getText().toString().trim();
-                String ad=address.getText().toString().trim();
-                updateprofile(nm,em,ad,ph.getText().toString().trim());
+                String cityy=city.getText().toString().trim();
+                String statee=state.getText().toString().trim();
+                updateprofile(nm,em,statee,cityy,ph.getText().toString().trim());
 
 
             }
@@ -61,7 +64,7 @@ String identity="";
 
     }
 
-    public void updateprofile(String nm,String em,String ad,String ph){
+    public void updateprofile(String nm,String em,String state,String city,String ph){
         String temp = "";
         if (identity.equals("Patient")) {
             temp = "https://demo-uw46.onrender.com/api/patient/update/"+ph;
@@ -75,7 +78,8 @@ String identity="";
             jsonobj.put("username", nm);
             jsonobj.put("email",em);
             jsonobj.put("phone",ph);
-            jsonobj.put("address",ad);
+            jsonobj.put("state",state);
+            jsonobj.put("city",city);
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.PUT, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
 
                 @Override

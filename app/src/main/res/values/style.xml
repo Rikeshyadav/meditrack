@@ -38,4 +38,10 @@
 
     </style>
 
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="android:progressBackgroundTint">#CFCDCD</item>
+        <item name="colorControlActivated">@color/ratingcolor</item>
+    </style>
+
 </resources>

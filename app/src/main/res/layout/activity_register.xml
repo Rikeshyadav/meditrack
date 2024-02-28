@@ -428,22 +428,30 @@
             </RadioGroup>
 
             </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gender_parent"
+            android:id="@id/place_parent"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="11dp"
+            android:weightSum="10"
+            android:layout_marginBottom="6dp"
+            android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="5"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_below="@+id/gender_parent"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="11dp"
-                android:layout_marginBottom="6dp"
-                android:id="@+id/address_parent"
+                android:id="@+id/state_parent"
                 >
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Address"
+                    android:text="State"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginEnd="3dp"
@@ -453,8 +461,8 @@
                     android:textColor="@color/black"
                     />
 
-                <EditText
-                    android:id="@+id/address"
+                <AutoCompleteTextView
+                    android:id="@+id/state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
@@ -462,7 +470,7 @@
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="3dp"
                     android:background="@drawable/rt"
-                    android:hint="Address"
+                    android:hint="Eg. Assam"
                     android:inputType="text"
                     android:padding="@dimen/padding_register"
                     android:textColor="@color/register_text_color1"
@@ -470,12 +478,50 @@
                     android:textSize="@dimen/register_edit_text_size" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/city_parent"
+                >
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="City"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/register_font_size"
+                    android:textColor="@color/black"
+                    />
+
+                <AutoCompleteTextView
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:background="@drawable/rt"
+                    android:hint="Eg. Guwahati"
+                    android:inputType="text"
+                    android:padding="@dimen/padding_register"
+                    android:textColor="@color/register_text_color1"
+                    android:textColorHint="@color/hint"
+                    android:textSize="@dimen/register_edit_text_size" />
+            </LinearLayout>
+
+        </LinearLayout>
             <LinearLayout
                 android:id="@+id/docpat_parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/address_parent"
+                android:layout_below="@+id/place_parent"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="0dp"
@@ -926,25 +972,29 @@
             </LinearLayout>
 
 
-
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/clinictype_parent"
+    android:id="@+id/clinicaddress_parent"
+    android:layout_marginStart="3dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="11dp"
+    android:layout_marginBottom="3dp"
+    android:weightSum="10"
+    android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="5"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="11dp"
-                android:layout_marginBottom="3dp"
-                android:id="@+id/clinicaddress_parent"
-                android:layout_below="@id/clinictype_parent"
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address (Optional)"
-                    android:id="@+id/text_clinicaddress"
+                    android:text="State"
+                    android:id="@+id/text_clinicstate"
                     android:layout_marginStart="3dp"
                     android:padding="@dimen/padding_register"
                     android:layout_marginTop="3dp"
@@ -955,7 +1005,7 @@
                     android:textStyle="bold"
                     />
 
-                <EditText
+                <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/hint"
@@ -968,13 +1018,51 @@
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="3dp"
                     android:textSize="@dimen/register_edit_text_size"
-                    android:id="@+id/clinic_address"
+                    android:id="@+id/clinic_state"
                     />
-
-
             </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="City"
+                        android:id="@+id/text_cliniccity"
+                        android:layout_marginStart="3dp"
+                        android:padding="@dimen/padding_register"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="11dp"
+                        android:textSize="@dimen/register_font_size"
+                        android:layout_marginBottom="0dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        />
+
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/hint"
+                        android:textColor="@color/black"
+                        android:padding="@dimen/padding_register"
+                        android:background="@drawable/rt"
+                        android:inputType="text"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:textSize="@dimen/register_edit_text_size"
+                        android:id="@+id/clinic_city"
+                        />
 
 
+                </LinearLayout>
+
+</LinearLayout>
 
 
             <LinearLayout

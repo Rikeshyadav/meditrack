@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".doctor_search_viewpager">
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:id="@+id/layout_hosclinic_search"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/hosclinic_search_top_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#3B5878"
+        android:gravity="center"
+
+        android:orientation="vertical"
+        android:padding="20dp">
+
+<!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:gravity="start"
+            android:backgroundTint="@color/white"
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <Spinner
+                android:id="@+id/spinner_doctor_filter"
+                android:layout_weight="4.2"
+                android:layout_width="0dp"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:pointerIcon="all_scroll"
+                android:background="@drawable/rectangle_box"
+                android:textColorHint="@color/black"
+                />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3.8"
+                android:hint="place"
+                android:layout_marginStart="1dp"
+                android:visibility="gone"
+                android:id="@+id/doctor_search_stateorcity"
+                android:textColorHint="@color/hint3"
+                android:background="@color/white"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textColor="@color/black" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:id="@+id/doctor_location"
+                android:visibility="gone"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:src="@drawable/baseline_location_on_24" />
+        </LinearLayout>
+-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="custom"
+               app:startIconDrawable="@drawable/user"
+               app:startIconTint="@color/hint3"
+               android:elevation="4dp"
+               app:endIconTint="@color/black"
+                android:id="@+id/doctor_search_txtinputlayout"
+                android:textColorHint="@color/hint3"
+                app:endIconDrawable="@drawable/baseline_search_24"
+                android:layout_weight="10">
+
+
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:id="@+id/doctor_searchtxt"
+                    android:background="@drawable/rectangle_box"
+                    android:inputType="text"
+
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/filter_section"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:weightSum="20"
+        android:layout_below="@+id/hosclinic_search_top_header"
+        android:orientation="horizontal">
+
+
+
+   <TextView
+        android:layout_width="80dp"
+       android:layout_height="match_parent"
+       android:textSize="12sp"
+       android:gravity="center"
+       android:layout_weight="5"
+       android:clickable="true"
+       android:focusable="true"
+       android:padding="1dp"
+       android:layout_margin="2dp"
+       android:textStyle="bold"
+       android:fontFamily="@font/gugi"
+        android:text="filters"
+       android:id="@+id/filter_but"
+       android:background="@drawable/filter_button_selector"
+    android:textColor="#4C4C4C"
+        />
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:endIconDrawable="@drawable/cross2"
+            app:endIconMode="custom"
+            app:endIconTint="#232323"
+            android:id="@+id/para_but_hosclinic_search_filter_parent"
+            android:gravity="center"
+            android:layout_weight="5"
+            app:boxBackgroundColor="@color/white"
+            >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Doctor Name"
+                android:id="@+id/para_but_hosclinic_search_filter"
+                android:editable="false"
+                android:textSize="12sp"
+                android:padding="6dp"
+                android:background="@drawable/search_box"
+                android:textColor="@color/hint"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:endIconDrawable="@drawable/cross2"
+            app:endIconMode="custom"
+            app:endIconTint="#232323"
+            android:visibility="gone"
+            android:id="@+id/state_but_doctor_search_filter_parent"
+            android:layout_weight="5"
+            app:boxBackgroundColor="@color/white"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textSize="12sp"
+                android:editable="false"
+
+                android:id="@+id/state_but_doctor_search_filter"
+                android:padding="6dp"
+                android:background="@drawable/search_box"
+                android:textColor="@color/hint"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            app:endIconDrawable="@drawable/cross2"
+            app:endIconMode="custom"
+            android:visibility="gone"
+            app:endIconTint="#232323"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:id="@+id/city_but_doctor_search_filter_parent"
+
+            app:boxBackgroundColor="@color/white"
+            >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="City"
+                android:id="@+id/city_but_doctor_search_filter"
+                android:textSize="12sp"
+                android:editable="false"
+                android:padding="6dp"
+                android:background="@drawable/search_box"
+                android:textColor="@color/hint"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:weightSum="20"
+        android:id="@+id/filter_section2"
+        android:layout_below="@+id/filter_section"
+        android:orientation="horizontal">
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:endIconDrawable="@drawable/cross2"
+            app:endIconMode="custom"
+            app:endIconTint="#232323"
+            android:id="@+id/yoe_but_doctor_search_filter_parent"
+            android:visibility="gone"
+            android:gravity="center"
+            android:layout_weight="5"
+            app:boxBackgroundColor="@color/white"
+            >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text=""
+                android:id="@+id/rate_but_hosclinic_search_filter"
+                android:editable="false"
+                android:textSize="12sp"
+                android:padding="6dp"
+                android:background="@drawable/search_box"
+                android:textColor="@color/hint"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:endIconDrawable="@drawable/cross2"
+            app:endIconMode="custom"
+            app:endIconTint="#232323"
+            android:visibility="gone"
+            android:gravity="center"
+            android:id="@+id/type_but_clinic_search_filter_parent"
+            android:layout_weight="5"
+            app:boxBackgroundColor="@color/white"
+            >
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="12sp"
+                android:editable="false"
+
+                android:id="@+id/gender_but_doctor_search_filter"
+                android:padding="6dp"
+                android:background="@drawable/search_box"
+                android:textColor="@color/hint"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_below="@id/filter_section2"
+        android:layout_width="wrap_content"
+        android:id="@+id/hr"
+        android:layout_marginTop="5dp"
+        android:background="#CAC7C7"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+
+        android:layout_marginBottom="10dp"
+        android:layout_height="0.4dp"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/filter_frame"
+        />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"
+        android:layout_below="@id/hr"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/hosclinic_search_progress"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/doctor_search_rec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/hr"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:layout_below="@id/hr"
+        app:lottie_rawRes="@raw/empty1"
+android:visibility="gone"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        android:id="@+id/search_hosclinic_lottie"/>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/search_hosclinic_lottie"
+    android:id="@+id/hosclinic_search_empty_msg"
+    android:text="No Data"
+    android:visibility="gone"
+    android:fontFamily="@font/gugi"
+    android:textSize="17sp"
+    android:padding="10dp"
+
+    android:gravity="center"
+    android:textColor="@color/black"
+    />
+</RelativeLayout>
+</FrameLayout>
