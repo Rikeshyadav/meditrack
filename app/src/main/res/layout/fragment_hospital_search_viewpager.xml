@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".hospital_search_viewpager">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/hospital_search_top_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#3B5878"
+            android:gravity="center"
+            android:minHeight="150dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:gravity="start"
+                android:backgroundTint="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="10">
+                <Spinner
+                    android:id="@+id/spinner_hospital_filter"
+                    android:layout_weight="4.2"
+                    android:layout_width="0dp"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:pointerIcon="all_scroll"
+                    android:background="@drawable/rectangle_box"
+                    android:textColorHint="@color/black"
+                    />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.8"
+                    android:hint="place"
+                    android:layout_marginStart="1dp"
+                    android:visibility="gone"
+                    android:id="@+id/hospital_search_stateorcity"
+                    android:textColorHint="@color/hint3"
+                    android:background="@color/white"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="10dp"
+                    android:textColor="@color/black" />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:id="@+id/hospital_location"
+                    android:visibility="gone"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_location_on_24" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:backgroundTint="@color/white"
+                android:orientation="horizontal"
+                android:weightSum="12">
+                <Spinner
+                    android:textAlignment="center"
+                    android:id="@+id/spinner_hospital_search"
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:pointerIcon="all_scroll"
+                    android:background="@color/transparentColor"
+                    android:textColorHint="@color/black"
+                    />
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:hint="search here"
+                    android:textColorHint="@color/hint3"
+                    android:background="@color/white"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="10dp"
+
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@color/white"
+                    android:padding="10dp"
+                    android:src="@drawable/baseline_search_24" />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hospital_search_rec"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/hospital_search_top_header"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </RelativeLayout>
+</FrameLayout>

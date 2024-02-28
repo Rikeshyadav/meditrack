@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".delete_page">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete Account"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:fontFamily="@font/gugi"
+            android:id="@+id/delete_acc_txtHeading"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="If you delete your account , your medical records, payment records,etc will permanently removed and you will not be able to recover it."
+            android:textSize="17sp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#393737"
+            android:id="@+id/delete_acc_txtcontent"
+            android:layout_below="@id/delete_acc_txtHeading"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="89r75"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:textSize="22sp"
+            android:fontFamily="@font/gugi"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/delete_acc_txtcontent"
+            android:id="@+id/delete_token"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:hint="type here"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColorHint="@color/hint2"
+            android:layout_centerHorizontal="true"
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/delete_token"
+            android:id="@+id/delete_token_write"
+            />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    >
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:background="@color/blue"
+        android:id="@+id/delete_acc_confirm"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="Confirm"
+        />
+</LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

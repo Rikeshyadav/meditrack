@@ -15,13 +15,16 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -57,14 +60,14 @@ public class LoginActivity extends AppCompatActivity {
         t2=findViewById(R.id.regclick);
         e1=findViewById(R.id.email);
         e2=findViewById(R.id.pass);
-        Spinner docpat2=findViewById(R.id.loginSpinner);
+       Spinner docpat2=findViewById(R.id.loginSpinner);
         progressBar=findViewById(R.id.progress);
         login=findViewById(R.id.login);
         forgot=findViewById(R.id.forgotpass);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         String[] st = {"Select", "Doctor", "Patient"};
-        RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner1, st);
+        RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner_login, st);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         docpat2.setAdapter(adapter);
         docpat2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -128,14 +131,18 @@ startActivity(i);
                 } else if (pass.equals("")) {
                     Toast.makeText(getApplicationContext(), "enter password!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(!doctororpatient.equals("null")) {
+                    if(phone.length()==10) {
+                        if (!doctororpatient.equals("null")) {
 
-                        progressBar.setVisibility(View.VISIBLE);
-                        authPatient(phone, pass,doctororpatient);
-                        //progressBar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.VISIBLE);
+                            authPatient(phone, pass, doctororpatient);
+                            //progressBar.setVisibility(View.GONE);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "empty selection!", Toast.LENGTH_SHORT).show();
+                        }
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "empty selection!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"invalid phone number",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -154,16 +161,17 @@ startActivity(i);
         else{
             temp = "https://demo-uw46.onrender.com/api/doctor/auth";
         }
-
         HashMap<String,String> jsonobj=new HashMap<>();
-        jsonobj.put("password", password);
         jsonobj.put("phone", phone);
+        jsonobj.put("password",password);
+
         JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp,new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
 progressBar.setVisibility(View.GONE);
                 try {
+
                     if(Boolean.parseBoolean(response.getString("success"))){
                         Intent b1;
 if(doctororpatient.equals("Patient")) {
@@ -175,14 +183,15 @@ else{
                         Toast.makeText(getApplicationContext(),response.getString("msg"), Toast.LENGTH_SHORT).show();
 
                        sp.edit().putString("name",response.getString("username")).apply();
-                       boot.edit().putBoolean("islogged",true).apply();
+                       sp.edit().putBoolean("islogged",true).apply();
                         sp.edit().putString("email", response.getString("email")).apply();
                         sp.edit().putString("phone", phone).apply();
                         sp.edit().putString("pass", password).apply();
                         sp.edit().putString("identity",doctororpatient).apply();
                         sp.edit().putString("dob",response.getString("dob")).apply();
                         sp.edit().putString("gender",response.getString("gender")).apply();
-                        sp.edit().putString("address", response.getString("address")).apply();
+                        sp.edit().putString("city", response.getString("city")).apply();
+                        sp.edit().putString("state", response.getString("state")).apply();
                         if(identity.equals("Doctor")) {
                          sp.edit().putString("speciality",response.getString("speciality")).apply();
                             sp.edit().putString("qualification",response.getString("qualification")).apply();

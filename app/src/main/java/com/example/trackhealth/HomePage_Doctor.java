@@ -245,7 +245,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
             finishAffinity();
             else if(flag.equals("logout")){
                 Intent i=new Intent(this, LoginActivity.class);
-                boot.edit().putBoolean("islogged",false).apply();
+                sp.edit().putBoolean("islogged",false).apply();
                 startActivity(i);
                 Toast.makeText(this, "logging out", Toast.LENGTH_SHORT).show();
             }

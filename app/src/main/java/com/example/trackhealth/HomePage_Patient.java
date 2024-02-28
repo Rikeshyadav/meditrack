@@ -124,8 +124,7 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
             //toolbar.setTitle("Pending");
         }
         else if (itemId==R.id.patient_nav_setting) {
-            //toolbar.setTitle("Setting");
-            Toast.makeText(getApplicationContext(),"setting", Toast.LENGTH_SHORT).show();
+            openFragment(new SettingFragment(),"setting");
         }else if (itemId==R.id.patient_nav_about) {
             //toolbar.setTitle("about us");
         }

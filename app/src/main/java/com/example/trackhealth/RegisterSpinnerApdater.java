@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 public class RegisterSpinnerApdater extends ArrayAdapter<String>{
     private int customLayoutResourceId;
 
-    public RegisterSpinnerApdater(Context context, int layoutResourceId, String[] items) {
+    public RegisterSpinnerApdater(Context context, int layoutResourceId, String[] items ) {
         super(context, layoutResourceId, items);
         this.customLayoutResourceId = layoutResourceId;
     }
