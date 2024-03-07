@@ -48,32 +48,34 @@ import java.util.HashMap;
 import java.util.List;
 
 public class doctor_search_viewpager extends Fragment {
-RecyclerView recyclerView;
-ProgressBar progressBar_doctorSearch;
-boolean selectpara=false;
-LottieAnimationView lottieAnimationView;
-ViewGroup root;
-ImageView loc;
-int parabackup=0,placebackup=0,genderbackup=0,yoebackup=0;
+    RecyclerView recyclerView;
+    ProgressBar progressBar_doctorSearch;
+    Spinner parameter_filter;
+    boolean selectpara=false;
+    LottieAnimationView lottieAnimationView;
+    String[] parameterpop={"Doctor Name","Specialization","Qualification","Gender","State","City"};
+    ViewGroup root;
+    ImageView loc;
+    int parabackup=0,placebackup=0,genderbackup=0,yoebackup=0;
     String para="name",place="",key="username";
     String key1=key;
     TextView emptymsg;
     boolean statebool=false,citybool=false,yoebool=false,genderbool=false;
-TextInputLayout textInputLayout;
-String city="",state="",yoe_="",gender_="";
-int y=0;
-AutoCompleteTextView txt,spinner;
-TextView filter_but;
+    TextInputLayout textInputLayout;
+    String city="",state="",yoe_="",gender_="";
+    int y=0;
+    AutoCompleteTextView txt,spinner;
+    TextView filter_but;
 
-RelativeLayout layout;
-String parameter_="name",filter_="no";
-Spinner spinner2;
-Context context;
+    RelativeLayout layout;
+    String parameter_="name",filter_="no";
+    Spinner spinner2;
+    Context context;
     List<List> arr=new ArrayList<>();
 
-Doctor_search_adapter doctor_searchadapter;
-TextInputEditText cityEditText,stateEditText,paraEditText,genderEditText,yoeEditText;
-TextInputLayout parameter_button,state_button,city_button,gender_button,yoe_button;
+    Doctor_search_adapter doctor_searchadapter;
+    TextInputEditText cityEditText,stateEditText,paraEditText,genderEditText,yoeEditText;
+    TextInputLayout parameter_button,state_button,city_button,gender_button,yoe_button;
 
     public doctor_search_viewpager(Context context) {
         this.context=context;
@@ -84,25 +86,86 @@ TextInputLayout parameter_button,state_button,city_button,gender_button,yoe_butt
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_doctor_search_viewpager, container, false);
-         root = (ViewGroup) requireActivity().getWindow().getDecorView().getRootView();
+        root = (ViewGroup) requireActivity().getWindow().getDecorView().getRootView();
         txt=view.findViewById(R.id.doctor_searchtxt);
-        progressBar_doctorSearch=view.findViewById(R.id.hosclinic_search_progress);
-        lottieAnimationView=view.findViewById(R.id.search_hosclinic_lottie);
+        progressBar_doctorSearch=view.findViewById(R.id.doctor_search_progress);
+        lottieAnimationView=view.findViewById(R.id.search_doctor_lottie);
         recyclerView = (RecyclerView) view.findViewById(R.id.doctor_search_rec);
         textInputLayout=view.findViewById(R.id.doctor_search_txtinputlayout);
-        emptymsg=view.findViewById(R.id.hosclinic_search_empty_msg);
-        parameter_button=view.findViewById(R.id.para_but_hosclinic_search_filter_parent);
+        emptymsg=view.findViewById(R.id.doctor_search_empty_msg);
+        parameter_button=view.findViewById(R.id.para_but_doctor_search_filter_parent);
         state_button=view.findViewById(R.id.state_but_doctor_search_filter_parent);
         city_button=view.findViewById(R.id.city_but_doctor_search_filter_parent);
-        layout=view.findViewById(R.id.layout_hosclinic_search);
+        layout=view.findViewById(R.id.layout_doctor_search);
+        parameter_filter=view.findViewById(R.id.para_spinner_doctor_search_filter);
         filter_but=view.findViewById(R.id.filter_but);
-        paraEditText=view.findViewById(R.id.para_but_hosclinic_search_filter);
+        paraEditText=view.findViewById(R.id.para_but_doctor_search_filter);
         cityEditText=view.findViewById(R.id.city_but_doctor_search_filter);
         stateEditText=view.findViewById(R.id.state_but_doctor_search_filter);
-  gender_button=view.findViewById(R.id.type_but_clinic_search_filter_parent);
-  yoe_button=view.findViewById(R.id.yoe_but_doctor_search_filter_parent);
-  genderEditText=view.findViewById(R.id.gender_but_doctor_search_filter);
-  yoeEditText=view.findViewById(R.id.rate_but_hosclinic_search_filter);
+        gender_button=view.findViewById(R.id.type_but_doctor_search_filter_parent);
+        yoe_button=view.findViewById(R.id.yoe_but_doctor_search_filter_parent);
+        genderEditText=view.findViewById(R.id.gender_but_doctor_search_filter);
+        yoeEditText=view.findViewById(R.id.rate_but_doctor_search_filter);
+
+        RegisterSpinnerApdater filteradapter=new RegisterSpinnerApdater(getContext(),R.layout.spinner1,parameterpop);
+        parameter_filter.setAdapter(filteradapter);
+
+
+        parameter_filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String selectedOption = (String) adapterView.getItemAtPosition(i);
+                parabackup=i;
+                if (selectedOption.equals("Doctor Name")) {
+                    para="Doctor Name";
+                    key="username";
+                    selectpara=true;
+                }
+                else if(selectedOption.equals("Specialization")){
+                    para="Specialization";
+                    key="speciality";
+                    selectpara=true;
+                }
+                else if(selectedOption.equals("Qualification")){
+                    para="Qualification";
+                    key="qualification";
+                    selectpara=true;
+                }
+                else if(selectedOption.equals("Gender")){
+                    para="Gender";
+                    key="gender";
+                    selectpara=true;
+                }
+                else if(selectedOption.equals("State")){
+                    para="State";
+                    key="state";
+                    selectpara=true;
+                }
+                else if(selectedOption.equals("City")){
+                    para="City";
+                    key="city";
+                    selectpara=true;
+                }
+                else{
+                    para="Doctor Name";
+                    key="username";
+                    selectpara=false;
+                }
+
+                key1=key;
+                paraEditText.setText(para);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                para="name";
+                key="username";
+                selectpara=false;
+            }
+        });
+
         filter_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,22 +210,22 @@ TextInputLayout parameter_button,state_button,city_button,gender_button,yoe_butt
                 city="";
             }
         });
-txt.setOnKeyListener(new View.OnKeyListener() {
-    @Override
-    public boolean onKey(View view, int i, KeyEvent keyEvent) {
-        if(keyEvent.getAction()==KeyEvent.ACTION_DOWN && i==KeyEvent.KEYCODE_ENTER){
-           enterlogic();
-            return true;
-        }
-        return false;
-    }
-});
+        txt.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(keyEvent.getAction()==KeyEvent.ACTION_DOWN && i==KeyEvent.KEYCODE_ENTER){
+                    enterlogic();
+                    return true;
+                }
+                return false;
+            }
+        });
         textInputLayout.setEndIconOnClickListener(new View.OnClickListener() {
-        @Override
+            @Override
             public void onClick(View view) {
 
-           enterlogic();
-                }
+                enterlogic();
+            }
         });
 
         yoe_button.setEndIconOnClickListener(new View.OnClickListener() {
@@ -187,33 +250,111 @@ txt.setOnKeyListener(new View.OnKeyListener() {
     }
 
 
-public void enterlogic() {
+    public void searchDoctor2 (JSONObject jsonobj) {
+        progressBar_doctorSearch.setVisibility(View.VISIBLE);
+        emptymsg.setVisibility(View.GONE);
+        lottieAnimationView.setVisibility(View.GONE);
+        String temp = "https://demo-uw46.onrender.com/api/doctor/searchDoctors";
+
+        try {
+
+
+            JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, jsonobj, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+
+                        if (Boolean.parseBoolean(response.getString("success"))) {
+                            lottieAnimationView.setVisibility(View.GONE);
+                            emptymsg.setVisibility(View.GONE);
+                            JSONArray ja = response.getJSONArray("data");
+
+                            if (ja.length()>0) {
+                                arr=filterArray(ja);
+                                if(arr.size()>0) {
+                                    doctor_searchadapter = new Doctor_search_adapter(arr, context);
+                                    progressBar_doctorSearch.setVisibility(View.GONE);
+                                    recyclerView.setVisibility(View.VISIBLE);
+                                    recyclerView.setAdapter(doctor_searchadapter);
+                                    recyclerView.setHasFixedSize(true);
+                                }
+                                else{
+                                    Toast.makeText(getActivity(),"empty data",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                        }
+                        else{
+                            Toast.makeText(getActivity(),"no data",Toast.LENGTH_SHORT).show();
+                            progressBar_doctorSearch.setVisibility(View.GONE);
+                            lottieAnimationView.setVisibility(View.VISIBLE);
+                            emptymsg.setVisibility(View.VISIBLE);
+                            recyclerView.setVisibility(View.GONE);
+                        }
+                    } catch (JSONException e) {
+                        progressBar_doctorSearch.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.GONE);
+                        emptymsg.setVisibility(View.VISIBLE);
+                        lottieAnimationView.setVisibility(View.VISIBLE);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getActivity(),"volley error "+error.toString(), Toast.LENGTH_SHORT).show();
+                    progressBar_doctorSearch.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
+                }
+            });
+            RequestQueue q = Volley.newRequestQueue(requireActivity());
+            RetryPolicy retryPolicy = new DefaultRetryPolicy(
+                    30000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            );
+            j.setRetryPolicy(retryPolicy);
+            q.add(j);
+            q.add(j);
+
+
+        } catch (
+                Exception e) {
+            Toast.makeText(getActivity(), "catched error", Toast.LENGTH_SHORT).show();
+            progressBar_doctorSearch.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+        }
+
+    }
+
+
+
+    public void enterlogic() {
         recyclerView.setVisibility(View.GONE);
         progressBar_doctorSearch.setVisibility(View.VISIBLE);
-    String content=txt.getText().toString().trim();
-    if(!content.equals("")){
-        searchdoctor(content,key1,state,city);
+        String content=txt.getText().toString().trim();
+        if(!content.equals("")){
+            searchdoctor(content,key1,state,city);
+        }
+        else{
+            Toast.makeText(getActivity(),"empty search",Toast.LENGTH_SHORT).show();
+            recyclerView.setVisibility(View.GONE);
+            progressBar_doctorSearch.setVisibility(View.GONE);
+            emptymsg.setVisibility(View.GONE);
+            lottieAnimationView.setVisibility(View.GONE);
+        }
     }
-    else{
-        Toast.makeText(getActivity(),"empty search",Toast.LENGTH_SHORT).show();
-        recyclerView.setVisibility(View.GONE);
-        progressBar_doctorSearch.setVisibility(View.GONE);
-        emptymsg.setVisibility(View.GONE);
-        lottieAnimationView.setVisibility(View.GONE);
-    }
-}
     public void searchdoctor (String value,String parameter, String state,String city){
-progressBar_doctorSearch.setVisibility(View.VISIBLE);
+        progressBar_doctorSearch.setVisibility(View.VISIBLE);
         emptymsg.setVisibility(View.GONE);
         lottieAnimationView.setVisibility(View.GONE);
-          String temp = "https://demo-uw46.onrender.com/api/doctor/searchDoctors";
+        String temp = "https://demo-uw46.onrender.com/api/doctor/searchDoctors";
 
         try {
             HashMap<String, String> jsonobj = new HashMap<>();
             if(yoebool) jsonobj.put("yoe",yoe_);
             if(genderbool) jsonobj.put("gender",gender_);
-if(citybool) jsonobj.put("city",city);
-if(statebool) jsonobj.put("state",state);
+            if(citybool) jsonobj.put("city",city);
+            if(statebool) jsonobj.put("state",state);
             jsonobj.put(parameter,value);
 
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
@@ -284,27 +425,27 @@ if(statebool) jsonobj.put("state",state);
     }
 
     public void createWindow(){
-y=1;
+        y=1;
 
         LayoutInflater inflater=(LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View popup=inflater.inflate(R.layout.filter_layout,null);
+        View popup=inflater.inflate(R.layout.filter_layout_doctorsearch,null);
         int width=ViewGroup.LayoutParams.WRAP_CONTENT;
         int height=ViewGroup.LayoutParams.WRAP_CONTENT;
         PopupWindow popupWindow=new PopupWindow(popup,width,height,true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(true);
 
-       Spinner parameter_filter=popup.findViewById(R.id.para_spinner_doctor_search_filter);
         AutoCompleteTextView state_city_edit=popup.findViewById(R.id.state_filter_doctor_search);
         Spinner city_state_spinner=popup.findViewById(R.id.cityState_spinner_filter_doctor);
-        AppCompatButton close=popup.findViewById(R.id.close_button_filter_doctor_search);
+        AppCompatButton search=popup.findViewById(R.id.close_button_filter_doctor_search);
         AppCompatButton apply=popup.findViewById(R.id.apply_button_filter_doctor_search);
         Spinner genderspinner=popup.findViewById(R.id.typespinner_spinner_filter_doctor);
         Spinner yoespinner=popup.findViewById(R.id.ratespinner_spinner_filter_doctor);
 
-        String[] cityorstate={"select location","City","State"};
+        String[] cityorstate={"set location","City","State"};
         String[] genderstring={"select","Male","Female","Others"};
         String[] yoestring={"select","0+ years","1+ years","2+ years","3+ years","4+ years","5+ years","10+ years","15+ years","20+ years","25+ years","30+ years","35+ years","40+ years","45+ years","50+ years","55+ years","60+ years"};
+        JSONObject j = new JSONObject();
 
         RegisterSpinnerApdater cityStateAdapter=new RegisterSpinnerApdater(getActivity(),R.layout.spinner_login,cityorstate);
 
@@ -315,9 +456,8 @@ y=1;
         genderspinner.setAdapter(genderadapter);
         yoespinner.setAdapter(yoeadapter);
 
-        String[] parameterpop={"Doctor Name","Specialization","Qualification","Gender","State","City"};
-        RegisterSpinnerApdater filteradapter=new RegisterSpinnerApdater(getContext(),R.layout.spinner_login,parameterpop);
-        parameter_filter.setAdapter(filteradapter);
+
+
 
         String[] cities={"Guwahati","Patna","Delhi","Mumbai","Kolkata","Kerela","Chennai","Raipur","Panaji","Bangalore","Itanagar","Bhubneshwar","Hyderabad","Nirjuli","Noida","Bhopal","Indore","Sikunderabad"};
         String[] states={"Assam","UP","Bihar","Andhra Pradesh","Uttrakhand","West Bengal","Meghalaya","Sikkim","Punjab","Haryana","Madhya Pradesh","Maharashtra","Gujrat","J&K","Himachal Pradesh","Tamil Nadu",
@@ -326,37 +466,37 @@ y=1;
         RegisterSpinnerApdater stateAdapter=new RegisterSpinnerApdater(getActivity(),R.layout.spinner_login,states);
         RegisterSpinnerApdater cityAdapter=new RegisterSpinnerApdater(getActivity(),R.layout.spinner_login,cities);
 
-parameter_filter.setSelection(parabackup);
-genderspinner.setSelection(genderbackup);
-yoespinner.setSelection(yoebackup);
-city_state_spinner.setSelection(placebackup);
+        if(genderbool)genderspinner.setSelection(genderbackup);
+        if(yoebool)yoespinner.setSelection(yoebackup);
+        if(citybool || statebool ) {city_state_spinner.setSelection(placebackup);}
+
         yoespinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item=(String)adapterView.getItemAtPosition(i);
                 yoebackup=i;
-                   StringBuilder yearr= new StringBuilder();
-                   if(!item.equals("select")) {
-                       yoebool=true;
-                       for (int j = 0; j < item.length(); j++) {
-                           if (item.charAt(j) == '+') {
-                               break;
-                           } else {
-                               yearr.append(item.charAt(j));
-                           }
-                       }
-                       yoe_ = yearr.toString();
-                   }
-                   else {
-                       yoebool=false;
-                       yoe_="";
-                   }
+                StringBuilder yearr= new StringBuilder();
+                if(!item.equals("select")) {
+                    yoebool=true;
+                    for (int j = 0; j < item.length(); j++) {
+                        if (item.charAt(j) == '+') {
+                            break;
+                        } else {
+                            yearr.append(item.charAt(j));
+                        }
+                    }
+                    yoe_ = yearr.toString();
+                }
+                else {
+                    yoebool=false;
+                    yoe_="";
+                }
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-yoebool=false;
+                yoebool=false;
             }
         });
         genderspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -378,7 +518,7 @@ yoebool=false;
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
-genderbool=false;
+                genderbool=false;
             }
         });
 
@@ -388,7 +528,7 @@ genderbool=false;
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 String selection=(String)adapterView.getItemAtPosition(i);
- placebackup=i;
+                placebackup=i;
 
                 if(selection.equals("City")){
                     state_city_edit.setVisibility(View.VISIBLE);
@@ -399,9 +539,9 @@ genderbool=false;
                     state_city_edit.setAdapter(cityAdapter);
                 }
                 else if(selection.equals("State")){
-                   state_city_edit.setVisibility(View.VISIBLE);
+                    state_city_edit.setVisibility(View.VISIBLE);
 
-                   state_city_edit.setBackgroundColor(getResources().getColor(R.color.white));
+                    state_city_edit.setBackgroundColor(getResources().getColor(R.color.white));
                     state_city_edit.setHint("Eg. Assam");
 
                     statebool=true;
@@ -427,109 +567,125 @@ genderbool=false;
         });
 
 
-        close.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                recyclerView.setVisibility(View.GONE);
+
+                if(!state_city_edit.getText().equals("")) {
+                    if (citybool) {
+                        city = state_city_edit.getText().toString().trim();
+                        city_button.setVisibility(View.VISIBLE);
+                        cityEditText.setText("city : " + city);
+                        try {
+                            j.put("city", city);
+                        } catch (JSONException e) {
+
+                        }
+                    } else if (statebool) {
+                        state = state_city_edit.getText().toString().trim();
+                        state_button.setVisibility(View.VISIBLE);
+                        stateEditText.setText("state : " + state);
+
+                        try {
+                            j.put("state", state);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+
+                    } else {
+
+                        city = "";
+                        state = "";
+                        city_button.setVisibility(View.GONE);
+                        state_button.setVisibility(View.GONE);
+                        cityEditText.setText("");
+                        stateEditText.setText("");
+
+                    }
+                }
+                if (genderbool) {
+                    try {
+                        j.put("gender", gender_);
+                        genderEditText.setText("gender : "+gender_);
+                        gender_button.setVisibility(View.VISIBLE);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                else{
+                    genderEditText.setText("");
+                    gender_button.setVisibility(View.GONE);
+                }
+
+                if (yoebool) {
+                    try {
+                        j.put("yoe",yoe_);
+                        yoeEditText.setText(yoe_+"+ years of experience");
+                        yoe_button.setVisibility(View.VISIBLE);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
+                else{
+                    yoeEditText.setText("");
+                    yoe_button.setVisibility(View.GONE);
+
+                }
+
+
+                searchDoctor2(j);
                 popupWindow.dismiss();
             }
         });
-parameter_filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-        String selectedOption = (String) adapterView.getItemAtPosition(i);
-        parabackup=i;
-        if (selectedOption.equals("Doctor Name")) {
-            para="Doctor Name";
-            key="username";
-            selectpara=true;
-        }
-else if(selectedOption.equals("Specialization")){
-    para="Specialization";
-    key="speciality";
-            selectpara=true;
-        }
-        else if(selectedOption.equals("Qualification")){
-            para="Qualification";
-            key="qualification";
-            selectpara=true;
-        }
-        else if(selectedOption.equals("Gender")){
-            para="Gender";
-            key="gender";
-            selectpara=true;
-        }
-        else if(selectedOption.equals("State")){
-            para="State";
-            key="state";
-            selectpara=true;
-        }
-        else if(selectedOption.equals("City")){
-            para="City";
-            key="city";
-            selectpara=true;
-        }
-        else{
-            para="Doctor Name";
-            key="username";
-            selectpara=false;
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-para="name";
-key="username";
-selectpara=false;
-    }
-});
 
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(selectpara) parameter_button.setVisibility(View.VISIBLE);
-                 parameter_=para;
-                 key1=key;
-                 paraEditText.setText(parameter_);
-                 if(citybool){
-                     city_button.setVisibility(View.VISIBLE);
-                     city=state_city_edit.getText().toString().trim();
-                     state_button.setVisibility(View.GONE);
-                     cityEditText.setText(city);
-                     place=state_city_edit.getText().toString().trim();
-                 }
-                 else if(statebool){
-                     city_button.setVisibility(View.GONE);
-                     state_button.setVisibility(View.VISIBLE);
-                     state=state_city_edit.getText().toString().trim();
+                parameter_=para;
+                key1=key;
+                paraEditText.setText(parameter_);
+                if(citybool){
+                    city_button.setVisibility(View.VISIBLE);
+                    city=state_city_edit.getText().toString().trim();
+                    state_button.setVisibility(View.GONE);
+                    cityEditText.setText(city);
+                    place=state_city_edit.getText().toString().trim();
+                }
+                else if(statebool){
+                    city_button.setVisibility(View.GONE);
+                    state_button.setVisibility(View.VISIBLE);
+                    state=state_city_edit.getText().toString().trim();
                     stateEditText.setText(state);
-                     place=state_city_edit.getText().toString().trim();
+                    place=state_city_edit.getText().toString().trim();
 
-                 }
-                 else{
-                     place="";
-                     city_button.setVisibility(View.GONE);
-                     state_button.setVisibility(View.GONE);
-                 }
+                }
+                else{
+                    place="";
+                    city_button.setVisibility(View.GONE);
+                    state_button.setVisibility(View.GONE);
+                }
 
-                 if(genderbool) {
-                     gender_button.setVisibility(View.VISIBLE);
+                if(genderbool) {
+                    gender_button.setVisibility(View.VISIBLE);
 
-                     genderEditText.setText(gender_);
-                 }
-                 else{
-                     gender_button.setVisibility(View.GONE);
-                 }
-                 if(yoebool){
-                     yoe_button.setVisibility(View.VISIBLE);
-                     yoeEditText.setText(yoe_+"+ years of experience");
-                 }
-                 else{
-                     yoe_button.setVisibility(View.GONE);
-                 }
+                    genderEditText.setText(gender_);
+                }
+                else{
+                    gender_button.setVisibility(View.GONE);
+                }
+                if(yoebool){
+                    yoe_button.setVisibility(View.VISIBLE);
+                    yoeEditText.setText(yoe_+"+ years of experience");
+                }
+                else{
+                    yoe_button.setVisibility(View.GONE);
+                }
 
-                 popupWindow.dismiss();
+                popupWindow.dismiss();
             }
         });
 
@@ -547,13 +703,9 @@ selectpara=false;
 
                 applyDim(root,0.5f);
                 popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
-
-
             }
         });
-
     }
-
 
     public  void applyDim(@NonNull ViewGroup parent, float dimAmount){
         Drawable dim = new ColorDrawable(Color.BLACK);
@@ -574,12 +726,13 @@ selectpara=false;
         for(int i=0;i<jsonArray.length();i++){
             JSONObject j=jsonArray.getJSONObject(i);
             List<String> inner=new ArrayList<>();
-                inner.add(j.getString("username"));
-                inner.add(j.getString("state")+","+j.getString("city"));
-                inner.add(j.getString("speciality"));
-                inner.add(j.getString("qualification"));
-                inner.add(j.getString("phone"));
-                outer.add(inner);
+            inner.add(j.getString("username"));
+            inner.add(j.getString("state")+","+j.getString("city"));
+            inner.add(j.getString("speciality"));
+            inner.add(j.getString("qualification"));
+            inner.add(j.getString("phone"));
+            inner.add(j.getString("gender"));
+            outer.add(inner);
         }
 
         return outer;

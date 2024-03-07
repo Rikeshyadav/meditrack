@@ -3,7 +3,7 @@
     <style name="roundedImageview">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
-       
+
     </style>
     <style name="specificcorner">
         <item name="cornerSizeTopRight">75dp</item>
@@ -43,5 +43,17 @@
         <item name="android:progressBackgroundTint">#CFCDCD</item>
         <item name="colorControlActivated">@color/ratingcolor</item>
     </style>
+    <style name="autotextview" parent="ThemeOverlay.Material3.AutoCompleteTextView">
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:padding">0dp</item>
+    </style>
 
+    <style name="specificcorner1">
+        <item name="cornerSize">40dp</item>
+    </style>
+
+    <style name="TabTextStyle">
+        <item name="android:textSize">16sp</item>
+
+    </style>
 </resources>

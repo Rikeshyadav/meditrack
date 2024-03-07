@@ -4,69 +4,70 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:background="#DAE5F3"
     tools:context=".Patient_HomeFragment">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="169dp"
-        android:fitsSystemWindows="true"
+        android:layout_height="50dp"
         android:id="@+id/customtool"
-        android:background="#2583EF" >
-        <LinearLayout
-            android:layout_width="wrap_content"
+        android:background="#C19358" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffffff"
-            android:layout_marginStart="50dp"
-            android:orientation="horizontal">
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:layout_width="200dp"
-                    android:hint="search"
-                    android:textSize="20sp"
-                    android:padding="2dp"
-                    android:layout_margin="2dp"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content"
-                    android:background="#ffffffff"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_marginStart="200dp"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="3dp"
-                    android:paddingStart="4dp"
-                    android:backgroundTint="@color/hint"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/baseline_search_24"/>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
-    <RelativeLayout
+            app:endIconMode="custom"
+            android:layout_marginTop="80dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            app:startIconDrawable="@drawable/user"
+            app:startIconTint="@color/hint3"
+            android:elevation="4dp"
+            app:endIconTint="@color/black"
+            android:id="@+id/patient_home_searchlayout"
+            android:textColorHint="@color/hint3"
+            app:endIconDrawable="@drawable/baseline_search_24"
+            android:layout_weight="5">
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="search"
+                android:backgroundTint="@color/white"
+                android:id="@+id/patient_home_searchbar"
+                android:background="@drawable/rectangle_box"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/black" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/dashdesign"
-        android:layout_marginTop="135dp">
+    android:background="#DAE5F3"
+    android:layout_below="@id/patient_home_searchlayout"
+        android:layout_marginTop="30dp">
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:id="@+id/horizontal"
             android:layout_marginTop="0dp"
-            android:background="@drawable/dashdesign"
+            android:background="#DAE5F3"
+            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
+                android:padding="10dp"
                 android:orientation="horizontal">
                 <androidx.cardview.widget.CardView
                     android:layout_width="150dp"
                     android:layout_height="152dp"
                     app:cardCornerRadius="20dp"
                     android:layout_margin="4dp"
-                    app:cardBackgroundColor="#9F4427"
+                    android:background="@drawable/effect"
+                    app:cardBackgroundColor="#A5DAD3"
                     android:foreground="@drawable/effect"
                     android:clickable="true"
-                    app:cardElevation="10dp">
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="130dp"
@@ -77,8 +78,8 @@
                         <com.google.android.material.imageview.ShapeableImageView
                             android:layout_width="112dp"
                             android:layout_height="101dp"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginTop="12dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/diet"
                             app:shapeAppearanceOverlay="@style/createcircle"
@@ -93,8 +94,8 @@
                             android:fontFamily="@font/gugi"
                             android:paddingStart="34dp"
                             android:text="Diet"
-                            android:textColor="@color/blue"
-                            android:textSize="25sp" />
+                            android:textColor="@color/red"
+                            android:textSize="20sp" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -105,8 +106,8 @@
                     android:layout_margin="4dp"
                     android:foreground="@drawable/effect"
                     android:clickable="true"
-                    app:cardBackgroundColor="#E36138"
-                    app:cardElevation="10dp">
+                    app:cardBackgroundColor="#E6AA96"
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="129dp"
@@ -117,7 +118,7 @@
                         <com.google.android.material.imageview.ShapeableImageView
                             android:layout_width="112dp"
                             android:layout_height="101dp"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="6dp"
                             android:layout_marginTop="10dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/exercise"
@@ -134,7 +135,7 @@
                             android:paddingStart="3dp"
                             android:text="Exercise"
                             android:textColor="#191B1C"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -145,8 +146,8 @@
                     android:layout_margin="5dp"
                     android:foreground="@drawable/effect"
                     android:clickable="true"
-                    app:cardBackgroundColor="#2F978A"
-                    app:cardElevation="10dp">
+                    app:cardBackgroundColor="#A5DAD3"
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="129dp"
@@ -157,7 +158,7 @@
                         <com.google.android.material.imageview.ShapeableImageView
                             android:layout_width="112dp"
                             android:layout_height="101dp"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="6dp"
                             android:layout_marginTop="10dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/reportr"
@@ -168,13 +169,15 @@
                         <TextView
                             android:layout_width="114dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
+
                             android:layout_marginTop="9dp"
                             android:fontFamily="@font/gugi"
-                            android:paddingStart="13dp"
+
                             android:text="Report"
+                            android:gravity="center"
+                            android:layout_gravity="center"
                             android:textColor="@color/red"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -185,8 +188,8 @@
                     android:foreground="@drawable/effect"
                     android:clickable="true"
                     android:layout_margin="5dp"
-                    app:cardBackgroundColor="#9F4427"
-                    app:cardElevation="10dp">
+                    app:cardBackgroundColor="#BC7A65"
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="129dp"
@@ -197,7 +200,7 @@
                         <com.google.android.material.imageview.ShapeableImageView
                             android:layout_width="112dp"
                             android:layout_height="101dp"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="6dp"
                             android:layout_marginTop="10dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/medicine"
@@ -214,7 +217,7 @@
                             android:paddingStart="3dp"
                             android:text="Medicine"
                             android:textColor="#0E1B75"
-                            android:textSize="25sp" />
+                            android:textSize="20sp" />
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -223,17 +226,32 @@
             </LinearLayout>
 
         </HorizontalScrollView>
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="1dp"
+            android:id="@+id/linear"
+            android:background="#DAE5F3"
             android:layout_below="@+id/horizontal"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:padding="4dp"
+                android:text="Patient"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/linear"
+            android:layout_height="wrap_content">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/patient_recyclview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="1dp"
+                android:layout_margin="10dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </FrameLayout>
     </RelativeLayout>

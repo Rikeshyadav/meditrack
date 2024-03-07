@@ -29,12 +29,19 @@ public class Doctor_search_adapter extends RecyclerView.Adapter<Doctor_search_ad
 
     @Override
     public void onBindViewHolder(@NonNull Doctor_search_adapter.MyViewHolder holder, int position) {
-            List item=data.get(position);
-            holder.name.setText("Dr."+item.get(0).toString());
-            holder.address.setText(item.get(1).toString());
-            holder.specification.setText(item.get(2).toString());
-            holder.qualification.setText(item.get(3).toString());
-            //holder.contact.setText(item.get(4).toString());
+        List item=data.get(position);
+        holder.name.setText("Dr."+item.get(0).toString());
+        holder.address.setText(item.get(1).toString());
+        holder.specification.setText(item.get(2).toString());
+        holder.qualification.setText(item.get(3).toString());
+
+        //holder.contact.setText(item.get(4).toString());
+        if(item.get(5).toString().equals("male") || item.get(5).toString().equals("Male")){
+            holder.imageView.setImageResource(R.drawable.doctor_male);
+        }
+        else{
+            holder.imageView.setImageResource(R.drawable.doctor_female);
+        }
 
     }
 
@@ -49,7 +56,7 @@ public class Doctor_search_adapter extends RecyclerView.Adapter<Doctor_search_ad
         TextView name,qualification,specification,address;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-           imageView=itemView.findViewById(R.id.dp_doctor_searchdesign);
+            imageView=itemView.findViewById(R.id.dp_doctor_searchdesign);
             name=itemView.findViewById(R.id.name_doctor_searchdesign);
             qualification=itemView.findViewById(R.id.qualification_doctor_searchdesign);
             specification=itemView.findViewById(R.id.speciality_doctor_searchdesign);

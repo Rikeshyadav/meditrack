@@ -3,6 +3,7 @@
     android:orientation="horizontal"
     android:id="@+id/spinnerlayout"
     android:background="@color/white"
+    android:gravity="center_vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
@@ -10,7 +11,7 @@
         android:id="@+id/spinnerItem"
         android:gravity="center"
         android:textStyle="bold"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/spinnerstyle"
         android:textColor="#3F4040"
         android:textSize="15sp"

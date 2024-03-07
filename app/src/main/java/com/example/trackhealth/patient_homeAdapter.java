@@ -50,7 +50,7 @@ public class patient_homeAdapter extends RecyclerView.Adapter<patient_homeAdapte
         TextView txt1,txt2,txt3;
         public myholder(@NonNull View itemView) {
             super(itemView);
-            dp=itemView.findViewById(R.id.shapeimage);
+            dp=itemView.findViewById(R.id.dp_patient_page_doctor);
             txt1=itemView.findViewById(R.id.itemtext);
             txt2=itemView.findViewById(R.id.itemtext2);
             txt3=itemView.findViewById(R.id.itemtext3);

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/search_box"
+    android:backgroundTint="@color/white"
+    android:layout_height="wrap_content">
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Filters"
+    android:fontFamily="@font/gugi"
+    android:textColor="@color/black"
+    android:textSize="22sp"
+    android:layout_margin="10dp"
+    android:textStyle="bold"
+    android:id="@+id/hosclinic_search_filter_header"
+    android:layout_centerHorizontal="true"
+    />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hosclinic_search_filter_statecity_parent"
+        android:layout_below="@id/hosclinic_search_filter_header"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:weightSum="10"
+        >
+
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="State"
+            android:background="@drawable/rectangle_box"
+            android:id="@+id/cityState_spinner_filter_doctor"
+            android:layout_marginEnd="2dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:textSize="17sp"
+            />
+        <AutoCompleteTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:padding="10dp"
+            android:inputType="text"
+            android:focusable="true"
+            android:gravity="center"
+            android:textColorHint="#4D4E4E"
+            android:id="@+id/state_filter_doctor_search"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:background="@drawable/search_box"
+            android:autofillHints="name"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_search_filter_gender_parent"
+        android:layout_below="@id/hosclinic_search_filter_statecity_parent"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:weightSum="10"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:padding="10dp"
+            android:text="Gender"
+            android:focusable="true"
+            android:textColorHint="#4D4E4E"
+            android:id="@+id/typetxt_filter_doctor_search"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:autofillHints="name"
+            />
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="State"
+            android:background="@drawable/search_box"
+            android:id="@+id/typespinner_spinner_filter_doctor"
+            android:layout_marginEnd="2dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:textSize="17sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_search_filter_yoe_parent"
+        android:layout_below="@id/doctor_search_filter_gender_parent"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:weightSum="10"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:padding="10dp"
+            android:text="Year Of Experience"
+            android:focusable="true"
+            android:textColorHint="#4D4E4E"
+            android:id="@+id/yoetxt_filter_doctor_search"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:autofillHints="name"
+            />
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="State"
+            android:background="@drawable/search_box"
+            android:id="@+id/ratespinner_spinner_filter_doctor"
+            android:layout_marginEnd="2dp"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:textSize="17sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/doctor_search_filter_button_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/doctor_search_filter_yoe_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/close_button_filter_doctor_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="5"
+            android:background="@drawable/search_box"
+            android:backgroundTint="#1D5B8C"
+            android:fontFamily="@font/gugi"
+            android:padding="10dp"
+            android:text="Search"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="5"
+            android:background="@drawable/search_box"
+            android:backgroundTint="#1D5B8C"
+            android:id="@+id/apply_button_filter_doctor_search"
+            android:fontFamily="@font/gugi"
+            android:padding="10dp"
+            android:text="Set filter"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

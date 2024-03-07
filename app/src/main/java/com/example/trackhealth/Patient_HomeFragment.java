@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Patient_HomeFragment extends Fragment {
-
-
     RecyclerView recyclerView;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -44,9 +42,9 @@ public class Patient_HomeFragment extends Fragment {
         data.add(ob1);
         datamodel ob2=new datamodel(R.drawable.img,"DR. Jugal","eye","nerist");
         data.add(ob2);
-        datamodel ob3=new datamodel(R.drawable.logo,"DR. Armin","nose","Aiims");
+        datamodel ob3=new datamodel(R.drawable.logo,"DR. min","nose","Aiims");
         data.add(ob3);
-        datamodel ob4=new datamodel(R.drawable.img_1,"DR. Armin","nose","Aiims");
+        datamodel ob4=new datamodel(R.drawable.img_1,"DR. fun","nose","Aiims");
         data.add(ob4);
         datamodel ob5=new datamodel(R.drawable.img_1,"DR. richo","nose","Aiims");
         data.add(ob5);
@@ -58,8 +56,8 @@ public class Patient_HomeFragment extends Fragment {
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 outRect.left=spacingInPixels*6;
                 outRect.right=spacingInPixels*6;
-                //      outRect.top=spacingInPixels;
-                //   outRect.bottom=spacingInPixels;
+                outRect.top=spacingInPixels;
+                outRect.bottom=spacingInPixels;
             }
         });
         recyclerView.setAdapter(new patient_homeAdapter(data));

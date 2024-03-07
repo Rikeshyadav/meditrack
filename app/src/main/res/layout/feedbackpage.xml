@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/feedback"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Feedback Page"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_height="320dp"
+        android:orientation="vertical">
+
+        <RatingBar
+            android:id="@+id/star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:progressBackgroundTint="@color/black"
+            android:foregroundTint="#0277BD"
+            android:isIndicator="false"
+            android:contentDescription="rate"
+            android:numStars="5"
+            android:rating="0.5"
+            android:progressTint="@color/red"
+            android:stepSize="0.5" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/star"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/review1"
+            android:background="@drawable/editdesign"
+            android:hint="feedback"
+            android:textColor="@color/black"
+            android:textSize="19sp" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="skip"
+            android:background="@drawable/effect"
+            android:id="@+id/skip1"
+            android:backgroundTint="#0277BD"
+            android:clickable="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sumit"
+            android:background="@drawable/effect"
+            android:id="@+id/sumit1"
+            android:backgroundTint="#0277BD"
+            android:clickable="true"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+</LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
