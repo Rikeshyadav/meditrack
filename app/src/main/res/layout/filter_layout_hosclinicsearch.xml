@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rectangle_box"
+    android:backgroundTint="@color/white"
+    android:padding="2dp"
+    android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Filters"
+    android:fontFamily="@font/gugi"
+    android:textColor="@color/black"
+    android:textSize="22sp"
+    android:layout_margin="10dp"
+    android:textStyle="bold"
+    android:id="@+id/hosclinic_search_filter_header"
+    android:layout_centerHorizontal="true"
+    />
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:padding="12dp"
+        app:cardBackgroundColor="#ACC0D1"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:id="@+id/hospital_search_filter_card1"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hosclinic_search_filter_header"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:id="@+id/hosclinic_search_filter_statecity_parent2"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:weightSum="10"
+            >
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="State"
+                android:background="@drawable/rectangle_box"
+                android:id="@+id/cityState_spinner_filter_hosclinic2"
+                android:layout_marginEnd="2dp"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textSize="17sp"
+                />
+            <AutoCompleteTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:padding="10dp"
+                android:inputType="text"
+                android:hint="location"
+                android:focusable="true"
+                android:gravity="center"
+                android:textColorHint="#ACABAB"
+                android:id="@+id/state_filter_hosclinic_search2"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:background="@drawable/search_box"
+                android:autofillHints="name"
+                />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/hosclinic_search_filter_gender_parent2"
+            android:layout_below="@id/hosclinic_search_filter_statecity_parent2"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:weightSum="10"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:padding="10dp"
+                android:text="Type"
+                android:fontFamily="@font/gugi"
+                android:focusable="true"
+                android:textColorHint="#4D4E4E"
+                android:id="@+id/typetxt_filter_hosclinic_search2"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:autofillHints="name"
+                />
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="State"
+                android:background="@drawable/search_box"
+                android:id="@+id/typespinner_spinner_filter_hosclinic2"
+                android:layout_marginEnd="2dp"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textSize="17sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/hosclinic_search_filter_yoe_parent2"
+            android:layout_below="@id/hosclinic_search_filter_gender_parent2"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:weightSum="10"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:padding="10dp"
+                android:text="Rate"
+                android:fontFamily="@font/gugi"
+                android:focusable="true"
+                android:textColorHint="#4D4E4E"
+                android:id="@+id/yoetxt_filter_hosclinic_search2"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:autofillHints="name"
+                />
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="State"
+                android:background="@drawable/search_box"
+                android:id="@+id/ratespinner_spinner_filter_hosclinic2"
+                android:layout_marginEnd="2dp"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textSize="17sp"
+                />
+
+        </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/search_button_filter_hosclinic_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hosclinic_search_filter_yoe_parent2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/search_box"
+        android:backgroundTint="#1D5B8C"
+        android:fontFamily="@font/gugi"
+        android:minWidth="120dp"
+        android:padding="10dp"
+        android:text="search"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/filter_button_filter_hosclinic_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/hosclinic_search_filter_yoe_parent2"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="14dp"
+                android:background="@drawable/search_box"
+                android:backgroundTint="#1D5B8C"
+                android:fontFamily="@font/gugi"
+                android:minWidth="120dp"
+                android:padding="10dp"
+                android:text="set filter"
+                android:textColor="@color/white"
+                android:textSize="13sp" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+
+    </ScrollView>
+</RelativeLayout>

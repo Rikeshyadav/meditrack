@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_marginTop="2dp"
+    android:paddingEnd="3dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="3dp"
+    android:paddingStart="1dp"
+    android:background="@color/white"
+    android:layout_marginBottom="2dp"
+    android:elevation="1dp"
+    android:layout_height="wrap_content">
+
     <ImageView
-        android:layout_width="0dp"
-        android:layout_weight="3"
-        android:maxHeight="100dp"
-        android:maxWidth="100dp"
-        android:padding="10dp"
-        android:layout_margin="9dp"
-        android:src="@drawable/hospital2"
+        android:id="@+id/image_hosclinic_searchdesign2"
+        android:layout_width="wrap_content"
         android:layout_height="100dp"
-        />
+
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="9dp"
+        android:maxWidth="100dp"
+        android:maxHeight="100dp"
+        android:padding="10dp"
+        android:src="@drawable/hospital2" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="7"
+        android:id="@+id/main_content_hosclinic_search"
+        android:layout_toEndOf="@id/image_hosclinic_searchdesign2"
         android:layout_height="wrap_content"
         >
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dispur Hospital"
             android:textStyle="bold"
+            android:id="@+id/name_hosclinic_searchdesign2"
             android:textColor="@color/black"
             android:textSize="18sp"
             />
@@ -34,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Guwahati,Assam"
+                android:id="@+id/address_hosclinic_searchdesign2"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 />
@@ -49,30 +65,71 @@
             android:layout_height="wrap_content"
             android:text="Govt Hospital"
             android:textColor="@color/black"
+            android:id="@+id/type_hosclinic_searchdesign2"
             android:textSize="15sp"
             />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Contact : "
-                android:textColor="#5C5C5C"
-                android:textSize="16sp"
 
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="+916001188123"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-
-                />
-
-        </LinearLayout>
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call"
+        android:id="@+id/phone_hosclinic_searchdesign2"
+        android:background="@drawable/rectangle_box"
+        android:backgroundTint="#44852C"
+android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="25dp"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/main_content_hosclinic_search"
+        android:layout_toRightOf="@id/image_hosclinic_searchdesign2"
+        android:layout_marginBottom="6dp"
+        >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="4.3"
+        android:id="@+id/ratecount_hosclinic"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:fontFamily="@font/gugi"
+        />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"
+        android:isIndicator="true"
+        android:layout_marginTop="8dp"
+        android:numStars="5"
+        android:rating="1.4"
+        android:theme="@style/RatingBar"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(145 votes)"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        />
 </LinearLayout>
+
+
+</RelativeLayout>

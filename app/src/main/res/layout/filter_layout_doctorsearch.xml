@@ -14,45 +14,15 @@
     android:textSize="22sp"
     android:layout_margin="10dp"
     android:textStyle="bold"
-    android:id="@+id/doctor_search_filter_header"
+    android:id="@+id/hosclinic_search_filter_header"
     android:layout_centerHorizontal="true"
     />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/doctor_search_filter_parameter_parent"
-        android:layout_below="@id/doctor_search_filter_header"
-        android:orientation="horizontal"
-        android:layout_margin="10dp"
-        android:weightSum="10"
-        >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:text="Search Parameter"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:textSize="17sp"
-            />
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"
-            android:padding="10dp"
-            android:id="@+id/para_spinner_doctor_search_filter"
-            android:background="@drawable/rectangle_box"
-            android:autofillHints="name"
-            android:minHeight="10dp"
-            />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/doctor_search_filter_statecity_parent"
-        android:layout_below="@id/doctor_search_filter_parameter_parent"
+        android:id="@+id/hosclinic_search_filter_statecity_parent"
+        android:layout_below="@id/hosclinic_search_filter_header"
         android:orientation="horizontal"
         android:layout_margin="10dp"
         android:weightSum="10"
@@ -93,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/doctor_search_filter_gender_parent"
-        android:layout_below="@id/doctor_search_filter_statecity_parent"
+        android:layout_below="@id/hosclinic_search_filter_statecity_parent"
         android:orientation="horizontal"
         android:layout_margin="10dp"
         android:weightSum="10"
@@ -106,7 +76,7 @@
             android:text="Gender"
             android:focusable="true"
             android:textColorHint="#4D4E4E"
-            android:id="@+id/gendertxt_filter_doctor_search"
+            android:id="@+id/typetxt_filter_doctor_search"
             android:textSize="17sp"
             android:textColor="@color/black"
             android:autofillHints="name"
@@ -182,10 +152,10 @@
             android:layout_margin="10dp"
             android:layout_weight="5"
             android:background="@drawable/search_box"
-            android:backgroundTint="#E1444A"
+            android:backgroundTint="#1D5B8C"
             android:fontFamily="@font/gugi"
             android:padding="10dp"
-            android:text="Close"
+            android:text="Search"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -195,11 +165,11 @@
             android:layout_margin="10dp"
             android:layout_weight="5"
             android:background="@drawable/search_box"
-            android:backgroundTint="@color/green_button"
+            android:backgroundTint="#1D5B8C"
             android:id="@+id/apply_button_filter_doctor_search"
             android:fontFamily="@font/gugi"
             android:padding="10dp"
-            android:text="Apply"
+            android:text="Set filter"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>

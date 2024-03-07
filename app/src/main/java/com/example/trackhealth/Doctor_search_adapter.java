@@ -34,7 +34,14 @@ public class Doctor_search_adapter extends RecyclerView.Adapter<Doctor_search_ad
             holder.address.setText(item.get(1).toString());
             holder.specification.setText(item.get(2).toString());
             holder.qualification.setText(item.get(3).toString());
+
             //holder.contact.setText(item.get(4).toString());
+        if(item.get(5).toString().equals("male") || item.get(5).toString().equals("Male")){
+            holder.imageView.setImageResource(R.drawable.doctor_male);
+        }
+        else{
+            holder.imageView.setImageResource(R.drawable.doctor_female);
+        }
 
     }
 
