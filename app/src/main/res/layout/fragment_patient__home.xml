@@ -44,7 +44,7 @@
         android:layout_height="match_parent"
     android:background="#DAE5F3"
     android:layout_below="@id/patient_home_searchlayout"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="25dp">
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:id="@+id/horizontal"
@@ -238,6 +238,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:padding="4dp"
+                android:id="@+id/patient_homefragment_title"
                 android:text="Patient"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
@@ -247,12 +248,59 @@
             android:layout_marginTop="8dp"
             android:layout_below="@+id/linear"
             android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/patient_recyclview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="38dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/patientpage_home_progress"
+
+
+                />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:lottie_rawRes="@raw/empty1"
+               android:layout_alignParentTop="true"
+                android:layout_marginTop="25dp"
+                app:lottie_loop="true"
+                android:visibility="gone"
+                app:lottie_autoPlay="true"
+                android:id="@+id/home_patientpage_lottie"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/home_patientpage_lottie"
+                android:text="no data"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:id="@+id/home_patientpage_nodata"
+                />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/refresh_home_patientpage"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/baseline_refresh_24"
+                    android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
         </FrameLayout>
     </RelativeLayout>
 </RelativeLayout>
