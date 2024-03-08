@@ -115,10 +115,7 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.MyViewHo
         String temp = "https://demo-uw46.onrender.com/api/patient/updatepending/"+patient;
         try {
             JSONObject jj=new JSONObject();
-            jj.put("clinic_name",dclinic);
-            jj.put("doctor_name",dname);
-            jj.put("specification",specification);
-            jj.put("qualification",qualification);
+
             jj.put("phone",doctor);
             jj.put("pending",pending);
             jj.put("issue",issue);
@@ -188,7 +185,7 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.MyViewHo
                     try {
 
                         if (Boolean.parseBoolean(response.getString("success"))) {
-
+Toast.makeText(context.getApplicationContext(), "updated doctor",Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         //Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();

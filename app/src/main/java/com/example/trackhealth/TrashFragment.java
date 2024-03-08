@@ -4,14 +4,23 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.L;
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,11 +37,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class TrashFragment extends Fragment {
     RecyclerView recyclerView;
+    ProgressBar progressBar;
+    LottieAnimationView empty;
+    TextView nodata;
     List arr;
     SharedPreferences sp;
+    ImageView refresh;
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
     String patientn="";
     View view;
     @Override
@@ -41,8 +57,25 @@ public class TrashFragment extends Fragment {
 
         view=inflater.inflate(R.layout.fragment_pending, container, false);
         sp=view.getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-        searchDoctor(sp.getString("phone",""));
 
+        toolbar = view.findViewById(R.id.toolbar_pending_patientpage);
+        progressBar=view.findViewById(R.id.patientpage_pending_progress);
+        empty=view.findViewById(R.id.pending_patientpage_lottie);
+        progressBar.setVisibility(View.VISIBLE);
+        refresh=view.findViewById(R.id.refresh_pending_patientpage);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchDoctor(sp.getString("phone",""));
+            }
+        });
+        nodata=view.findViewById(R.id.pending_patientpage_nodata);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(null);
+        drawerLayout = requireActivity().findViewById(R.id.drawer_layout1);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(requireActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        searchDoctor(sp.getString("phone",""));
         return view;
     }
 
@@ -50,43 +83,62 @@ public class TrashFragment extends Fragment {
         String temp = "https://demo-uw46.onrender.com/api/patient/getDetails";
 
         try {
-            //  pb.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+            refresh.setVisibility(View.GONE);
             HashMap<String, String> jsonobj = new HashMap<>();
             jsonobj.put("phone", ph);
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
-                    //pb.setVisibility(View.GONE);
+
                     try {
 
                         if (Boolean.parseBoolean(response.getString("success"))) {
+                            empty.setVisibility(View.GONE);
+                            nodata.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
                           patientn=response.getString("username");
                           arr=filterArray(response.getJSONArray("doctoradd"));
-
-                            recyclerView = (RecyclerView) view.findViewById(R.id.pending_rec);
-                            pendingAdapter adapter = new pendingAdapter(arr,getActivity(),sp);
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setAdapter(adapter);
+                          if(arr.size()>0) {
+                              recyclerView = (RecyclerView) view.findViewById(R.id.pending_rec);
+                              pendingAdapter adapter = new pendingAdapter(arr, getActivity(), sp);
+                              recyclerView.setHasFixedSize(true);
+                              progressBar.setVisibility(View.GONE);
+                              recyclerView.setAdapter(adapter);
+                          }
+                          else{
+                              progressBar.setVisibility(View.GONE);
+                              empty.setVisibility(View.VISIBLE);
+                              nodata.setVisibility(View.VISIBLE);
+                          }
                         }
                         else{
-                          //  Toast.makeText(getApplicationContext(),"patient doesn't exists",Toast.LENGTH_SHORT).show();
+                          Toast.makeText(getActivity(),"empty request",Toast.LENGTH_SHORT).show();
+                          progressBar.setVisibility(View.GONE);
+                          empty.setVisibility(View.GONE);
+                          nodata.setVisibility(View.GONE);
+                          refresh.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e) {
-                        //Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();
-                        //pb.setVisibility(View.GONE);
-
-                        throw new RuntimeException(e);
+                        progressBar.setVisibility(View.GONE);
+                        empty.setVisibility(View.GONE);
+                        nodata.setVisibility(View.GONE);
+                        refresh.setVisibility(View.VISIBLE);
+                        Toast.makeText(getActivity(), "try again", Toast.LENGTH_SHORT).show();
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    //pb.setVisibility(View.GONE);
-                    //Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    nodata.setVisibility(View.GONE);
+                    empty.setVisibility(View.GONE);
+                    refresh.setVisibility(View.VISIBLE);
+                    Toast.makeText(getActivity(),"check internet connectivity", Toast.LENGTH_SHORT).show();
                 }
             });
-            RequestQueue q = Volley.newRequestQueue(getActivity());
+            RequestQueue q = Volley.newRequestQueue(requireActivity());
             RetryPolicy retryPolicy = new DefaultRetryPolicy(
                     30000,
                     DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
@@ -99,8 +151,6 @@ public class TrashFragment extends Fragment {
 
         } catch (
                 Exception e) {
-         //   pb.setVisibility(View.GONE);
-            //       pb.setVisibility(View.GONE);
 
         }
 
