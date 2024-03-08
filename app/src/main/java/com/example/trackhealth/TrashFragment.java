@@ -19,7 +19,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.airbnb.lottie.L;
 import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -37,7 +36,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class TrashFragment extends Fragment {
     RecyclerView recyclerView;
@@ -101,7 +99,7 @@ public class TrashFragment extends Fragment {
                           patientn=response.getString("username");
                           arr=filterArray(response.getJSONArray("doctoradd"));
                           if(arr.size()>0) {
-                              recyclerView = (RecyclerView) view.findViewById(R.id.pending_rec);
+                              recyclerView = (RecyclerView) view.findViewById(R.id.doctor_home_rec);
                               pendingAdapter adapter = new pendingAdapter(arr, getActivity(), sp);
                               recyclerView.setHasFixedSize(true);
                               progressBar.setVisibility(View.GONE);
