@@ -11,13 +11,49 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="58dp"
             android:layout_width="match_parent"
-            android:id="@+id/pending_rec"
+            android:id="@+id/doctor_home_rec"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 
             />
-
-
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+            android:id="@+id/doctor_home_progress"
+                />
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="290dp"
+            app:lottie_rawRes="@raw/empty1"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            app:lottie_loop="true"
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            android:id="@+id/doctor_home_lottie"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/refresh_doctor_homepage"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_refresh_24"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/doctor_home_lottie"
+            android:text="no data"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:id="@+id/nodata_doctorhome"
+            />
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

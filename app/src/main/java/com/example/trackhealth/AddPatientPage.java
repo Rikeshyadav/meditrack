@@ -199,7 +199,7 @@ if(!phone.equals("")) {
                             }
                         }
                         else{
-                            Toast.makeText(getApplicationContext(),"unable to update doctor side",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),"patient already added",Toast.LENGTH_SHORT).show();
                             pb.setVisibility(View.GONE);
                         }
                     } catch (JSONException e) {
@@ -266,7 +266,6 @@ if(!phone.equals("")) {
                     } catch (JSONException e) {
                         Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();
                         pb.setVisibility(View.GONE);
-                        throw new RuntimeException(e);
                     }
                 }
             }, new Response.ErrorListener() {

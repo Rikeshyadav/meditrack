@@ -11,8 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +39,10 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 RecyclerView recyclerView;
     HomeDoctorAdapter adapter;
+    ImageView refresh;
+    LottieAnimationView empty;
+    ProgressBar progressBar;
+    TextView nodata;
 FloatingActionButton fab;
    List arr=new ArrayList<>();
     View view;
@@ -47,12 +55,20 @@ SharedPreferences sp;
         View view=inflater.inflate(R.layout.fragment_home, container, false);
   fab=view.findViewById(R.id.fab);
    sp=view.getContext().getSharedPreferences("user",Context.MODE_PRIVATE);
+refresh=view.findViewById(R.id.refresh_doctor_homepage);
+nodata=view.findViewById(R.id.nodata_doctorhome);
+empty=view.findViewById(R.id.doctor_home_lottie);
+progressBar=view.findViewById(R.id.doctor_home_progress);
+
+        recyclerView = view.findViewById(R.id.doctor_home_rec);
 
         searchPatient(sp.getString("phone",""));
-        recyclerView = (RecyclerView) view.findViewById(R.id.pending_rec);
-
-
-
+refresh.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        searchPatient(sp.getString("phone",""));
+    }
+});
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +85,10 @@ SharedPreferences sp;
     public void searchPatient(String ph){
         String temp = "https://demo-uw46.onrender.com/api/doctor/getDetails";
         try {
+            refresh.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
             HashMap<String, String> jsonobj = new HashMap<>();
             jsonobj.put("phone", ph);
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
@@ -78,29 +98,59 @@ SharedPreferences sp;
                     //pb.setVisibility(View.GONE);
                     try {
                         if (Boolean.parseBoolean(response.getString("success"))) {
+
                             JSONArray ja = response.getJSONArray("patientadd");
-                            if (ja.length()>0) {
-                                arr=filterArray(response.getJSONArray("patientadd"));
-                                adapter = new HomeDoctorAdapter(arr);
-                                recyclerView.setAdapter(adapter);
-                                recyclerView.setHasFixedSize(true);
+                            if (ja.length() > 0) {
+
+                                arr = filterArray(response.getJSONArray("patientadd"));
+                                if (arr.size() > 0) {
+                                    progressBar.setVisibility(View.GONE);
+                                    empty.setVisibility(View.GONE);
+                                    refresh.setVisibility(View.GONE);
+                                    nodata.setVisibility(View.GONE);
+                                    adapter = new HomeDoctorAdapter(arr);
+                                    recyclerView.setAdapter(adapter);
+                                    recyclerView.setHasFixedSize(true);
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+                                    empty.setVisibility(View.VISIBLE);
+                                    nodata.setVisibility(View.VISIBLE);
+                                    refresh.setVisibility(View.GONE);
+                                    //  Toast.makeText(getApplicationContext(),"patient doesn't exists",Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                progressBar.setVisibility(View.GONE);
+                                empty.setVisibility(View.VISIBLE);
+                                nodata.setVisibility(View.VISIBLE);
+                                refresh.setVisibility(View.GONE);
                             }
                         }
                         else{
-                            //  Toast.makeText(getApplicationContext(),"patient doesn't exists",Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                            empty.setVisibility(View.GONE);
+                            nodata.setVisibility(View.GONE);
+                            refresh.setVisibility(View.VISIBLE);
+                            Toast.makeText(getActivity(), "fail to load", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         //Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();
                         //pb.setVisibility(View.GONE);
-
-                        throw new RuntimeException(e);
+                        progressBar.setVisibility(View.GONE);
+                        empty.setVisibility(View.GONE);
+                        nodata.setVisibility(View.GONE);
+                        refresh.setVisibility(View.VISIBLE);
+                        Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    //pb.setVisibility(View.GONE);
-                    //Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
+
+                    progressBar.setVisibility(View.GONE);
+                    empty.setVisibility(View.GONE);
+                    nodata.setVisibility(View.GONE);
+                    refresh.setVisibility(View.VISIBLE);
+                    Toast.makeText(getActivity(), "check your network connectivity", Toast.LENGTH_SHORT).show();
                 }
             });
             RequestQueue q = Volley.newRequestQueue(getActivity());
@@ -115,8 +165,11 @@ SharedPreferences sp;
 
         } catch (
                 Exception e) {
-            //   pb.setVisibility(View.GONE);
-            //       pb.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+            empty.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
+            refresh.setVisibility(View.VISIBLE);
+            Toast.makeText(getActivity(), "fail to load", Toast.LENGTH_SHORT).show();
 
         }
 
