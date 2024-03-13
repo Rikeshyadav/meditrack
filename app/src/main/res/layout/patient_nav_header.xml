@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="155dp"
+    android:layout_height="wrap_content"
+    android:minHeight="155dp"
     android:layout_marginTop="2dp"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:background="#309BDC"
+    android:background="#065A8E"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <com.google.android.material.imageview.ShapeableImageView
     android:layout_width="115sp"
     android:layout_height="115sp"
-    android:contentDescription="icon"
-    android:id="@+id/navHeaderImageView"
+    android:id="@+id/patient_navHeaderImageView"
     app:shapeAppearanceOverlay="@style/roundedImageview"
     android:src="@drawable/img_1"
     android:scaleType="centerCrop"
@@ -22,11 +22,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/userp1"
+        android:layout_below="@id/patient_navHeaderImageView"
+        android:id="@+id/patient_navusername"
         android:padding="2dp"
-        android:textColor="@color/black"
-        android:text="Rohan gautam "
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="2dp"
+        android:textColor="@color/white"
+        android:text="user"
         android:textSize="17sp" />
 </RelativeLayout>

@@ -45,8 +45,6 @@ public class TrashFragment extends Fragment {
     List arr;
     SharedPreferences sp;
     ImageView refresh;
-    DrawerLayout drawerLayout;
-    Toolbar toolbar;
     String patientn="";
     View view;
     @Override
@@ -56,7 +54,6 @@ public class TrashFragment extends Fragment {
         view=inflater.inflate(R.layout.fragment_pending, container, false);
         sp=view.getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 
-        toolbar = view.findViewById(R.id.toolbar_pending_patientpage);
         progressBar=view.findViewById(R.id.patientpage_pending_progress);
         empty=view.findViewById(R.id.pending_patientpage_lottie);
         progressBar.setVisibility(View.VISIBLE);
@@ -68,11 +65,7 @@ public class TrashFragment extends Fragment {
             }
         });
         nodata=view.findViewById(R.id.pending_patientpage_nodata);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(null);
-        drawerLayout = requireActivity().findViewById(R.id.drawer_layout1);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(requireActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+
         searchDoctor(sp.getString("phone",""));
         return view;
     }
@@ -123,7 +116,7 @@ public class TrashFragment extends Fragment {
                         empty.setVisibility(View.GONE);
                         nodata.setVisibility(View.GONE);
                         refresh.setVisibility(View.VISIBLE);
-                        Toast.makeText(getActivity(), "try again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), e.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }, new Response.ErrorListener() {

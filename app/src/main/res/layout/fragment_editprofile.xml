@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:visibility="visible"
+    android:visibility="gone"
     android:id="@+id/profile_progress"
     />
     <ImageView
@@ -25,7 +25,6 @@
 
         android:id="@+id/pro_layout"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:background="@color/white"
         android:layout_height="match_parent">
 
