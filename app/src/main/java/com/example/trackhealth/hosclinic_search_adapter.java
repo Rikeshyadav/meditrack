@@ -1,7 +1,10 @@
 package com.example.trackhealth;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -43,12 +48,16 @@ public class hosclinic_search_adapter extends RecyclerView.Adapter<hosclinic_sea
             public void onClick(View view) {
                 String phoneNumber = item.get(4).toString();
                 if (!phoneNumber.isEmpty()) {
-                    Intent myIntent = new Intent(Intent.ACTION_CALL);
-                    String phNum = "tel:" + phoneNumber;
-                    myIntent.setData(Uri.parse(phNum));
-                    view.getContext().startActivity(myIntent);
+                    if (ContextCompat.checkSelfPermission(view.getContext(), android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                        // You have permission, so proceed with making the call
+                        Intent myIntent = new Intent(Intent.ACTION_CALL);
+                        myIntent.setData(Uri.parse("tel:" + phoneNumber));
+                        view.getContext().startActivity(myIntent);
+                    } else {
+                        // Request the CALL_PHONE permission
+                        ActivityCompat.requestPermissions((Activity) view.getContext(), new String[]{Manifest.permission.CALL_PHONE}, 1);
+                    }
                 } else {
-
                     Toast.makeText(view.getContext(), "Phone number not available", Toast.LENGTH_SHORT).show();
                 }
             }

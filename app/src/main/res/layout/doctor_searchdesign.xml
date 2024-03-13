@@ -87,6 +87,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="6dp"
+        android:id="@+id/review_doctor_searchdesign"
         android:layout_marginBottom="6dp"
         android:layout_toRightOf="@+id/dp_doctor_searchdesign"
         android:layout_below="@id/maincontent_doctor_search_design">
@@ -141,6 +142,8 @@
         android:text="Call Doctor"
         android:src="@drawable/baseline_call_24"
         android:textColor="#F4F2F2"
+        android:backgroundTint="@color/green_button"
+        android:background="@drawable/orange_button"
         android:layout_marginEnd="10dp"
         android:id="@+id/contact_doctor_searchdesign"
         android:textSize="14sp"

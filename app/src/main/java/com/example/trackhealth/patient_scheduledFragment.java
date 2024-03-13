@@ -20,15 +20,6 @@ public class patient_scheduledFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_patient_scheduled, container, false);
-        toolbar = view.findViewById(R.id.customtool2);
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
-        // ((AppCompatActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // ((AppCompatActivity) requireActivity()).getSupportActionBar().setHomeAsUpIndicator(R.drawable.back); // Set your hamburger icon
-toolbar.setTitle("");
-        drawerLayout = requireActivity().findViewById(R.id.drawer_layout1);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(requireActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
 
     return view;
     }

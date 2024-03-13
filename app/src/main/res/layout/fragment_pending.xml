@@ -10,16 +10,6 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
     >
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:id="@+id/toolbar_pending_patientpage"
-        android:layout_alignParentTop="true"
-        android:background="#266291"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"/>
-
 
     <TextView
         android:id="@+id/pending_title"
@@ -27,8 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:layout_marginTop="25dp"
-        android:layout_below="@id/toolbar_pending_patientpage"
+        android:layout_marginTop="60dp"
+     android:layout_alignParentTop="true"
         android:fontFamily="@font/gugi"
         android:text="Pending Request"
         android:textColor="#266291"

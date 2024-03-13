@@ -2,6 +2,8 @@ package com.example.trackhealth;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.os.Bundle;
 
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +35,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +54,7 @@ public class Patient_HomeFragment extends Fragment {
     ProgressBar progressBar;
     TextView nodata;
     LottieAnimationView empty;
+    NavigationView navigationView;
     patient_homeAdapter adapter;
     List arr=new ArrayList<>();
     DrawerLayout drawerLayout;
@@ -75,16 +82,17 @@ public class Patient_HomeFragment extends Fragment {
                 searchDoctors(sp.getString("phone",""));
             }
         });
-        toolbar = view.findViewById(R.id.customtool);
+       /* toolbar = view.findViewById(R.id.customtool);
         ((AppCompatActivity) getActivity()).setSupportActionBar(null);
         drawerLayout = requireActivity().findViewById(R.id.drawer_layout1);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(requireActivity(), drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
-         toggle.syncState();
+         toggle.syncState();*/
+
+
         searchDoctors(sp.getString("phone",""));
         return view;
     }
-
 
     public void searchDoctors(String ph){
         String temp = "https://demo-uw46.onrender.com/api/patient/getDetails";

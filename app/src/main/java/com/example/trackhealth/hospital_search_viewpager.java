@@ -475,7 +475,8 @@ public class hospital_search_viewpager extends Fragment {
         RegisterSpinnerApdater stateAdapter = new RegisterSpinnerApdater(getActivity(), R.layout.spinner_login, states);
         RegisterSpinnerApdater cityAdapter = new RegisterSpinnerApdater(getActivity(), R.layout.spinner_login, cities);
 
-
+        if(ratebool2)ratespinner2.setSelection(ratebackup);
+        if(typebool2)typespinner2.setSelection(typebackup);
 
 
         ratespinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -684,7 +685,9 @@ public class hospital_search_viewpager extends Fragment {
                     rateEditText.setText("");
                 }
 
-
+                typebackup=typebackup2;
+                ratebackup=ratebackup2;
+                placebackup=placebackup2;
                 searchhospital(j);
                 popupWindow.dismiss();
             }

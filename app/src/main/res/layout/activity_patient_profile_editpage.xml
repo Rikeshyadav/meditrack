@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Patient_profile_editpage">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/backgroundpatient"
+            android:layout_alignParentTop="true"
+            android:id="@+id/top_patient_editpage"
+            android:layout_height="wrap_content">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/prof_image2_patient"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:background="@color/blue"
+                    android:padding="3dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/baseline_person_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.306"
+                    app:shapeAppearanceOverlay="@style/roundedImageview"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="2dp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/uplodimage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="fill_vertical"
+                    android:clickable="true"
+                    android:foregroundTint="@color/black"
+                    android:contentDescription="camera"
+                    android:focusable="true"
+
+                    android:src="@drawable/baseline_photo_camera_24"
+                    app:backgroundTint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/prof_image2_patient"
+                    app:layout_constraintEnd_toEndOf="@+id/prof_image2_patient" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/prof_image2_patient">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:padding="3dp"
+                            android:id="@+id/patient_profile_name2"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"
+                            android:textColor="#040303"
+                            android:textSize="22sp" />
+                </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:elevation="10dp"
+            app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="@color/white"
+            android:layout_margin="10dp"
+            android:layout_below="@id/top_patient_editpage"
+            android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_profile_patient_backicon"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/edit_profile_patient_backicon"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_nametitle"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Eg. Rikesh"
+            android:textColorHint="@color/hint2"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/edit_profile_patient_backicon"
+            android:padding="6dp"
+            android:minWidth="290dp"
+            android:background="@drawable/rectangle_box"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_nameValue"/>
+
+
+        <View
+            android:layout_below="@id/patient_profileedit_nametitle"
+            android:layout_width="wrap_content"
+            android:id="@+id/hr0"
+            android:layout_marginTop="8dp"
+            android:background="#CAC7C7"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State"
+            android:textSize="16sp"
+            android:layout_below="@id/hr0"
+            android:padding="6dp"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_statetitle"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Eg. Assam"
+            android:layout_below="@id/hr0"
+            android:textColorHint="@color/hint2"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:minWidth="290dp"
+            android:background="@drawable/rectangle_box"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_stateValue"/>
+
+
+        <View
+            android:layout_below="@id/patient_profileedit_statetitle"
+            android:layout_width="wrap_content"
+            android:id="@+id/hr"
+            android:layout_marginTop="8dp"
+            android:background="#CAC7C7"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:layout_below="@id/hr"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_citytitle"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:hint="Eg. Guwahati"
+            android:padding="6dp"
+            android:background="@drawable/rectangle_box"
+            android:layout_below="@id/hr"
+            android:minWidth="290dp"
+            android:textColorHint="@color/hint2"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_cityValue"/>
+
+        <View
+            android:layout_below="@id/patient_profileedit_citytitle"
+            android:layout_width="wrap_content"
+            android:id="@+id/hr2"
+            android:layout_marginTop="8dp"
+            android:background="#CAC7C7"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phone"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:layout_below="@id/hr2"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_phonetitle"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:maxLength="10"
+            android:inputType="number"
+            android:textColorHint="@color/hint2"
+            android:hint="+91XXXXXXXXXX"
+            android:textSize="16sp"
+            android:minWidth="290dp"
+            android:background="@drawable/rectangle_box"
+            android:padding="6dp"
+            android:layout_below="@id/hr2"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_phoneValue"/>
+
+        <View
+            android:layout_below="@id/patient_profileedit_phonetitle"
+            android:layout_width="wrap_content"
+            android:id="@+id/hr3"
+            android:layout_marginTop="8dp"
+            android:background="#CAC7C7"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:layout_below="@id/hr3"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_gendertitle"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Eg. Male"
+            android:textSize="16sp"
+            android:minWidth="290dp"
+            android:padding="6dp"
+            android:background="@drawable/rectangle_box"
+            android:textColorHint="@color/hint2"
+            android:layout_below="@id/hr3"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_genderValue"/>
+
+        <View
+            android:layout_below="@id/patient_profileedit_gendertitle"
+            android:layout_width="wrap_content"
+            android:id="@+id/hr4"
+            android:layout_marginTop="8dp"
+            android:background="#CAC7C7"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOB"
+            android:textSize="16sp"
+            android:padding="6dp"
+            android:layout_below="@id/hr4"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_dobtitle"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:hint="Eg. 06/04/2005"
+            android:layout_below="@id/hr4"
+            android:textColorHint="@color/hint2"
+            android:layout_alignParentEnd="true"
+            android:padding="6dp"
+            android:background="@drawable/rectangle_box"
+            android:minWidth="290dp"
+            android:textColor="@color/black"
+            android:id="@+id/patient_profileedit_dobValue"/>
+
+        <View
+            android:layout_below="@id/patient_profileedit_dobtitle"
+            android:layout_width="wrap_content"
+            android:id="@+id/hr5"
+            android:layout_marginTop="8dp"
+            android:background="#CAC7C7"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:layout_below="@id/hr5"
+            android:id="@+id/patient_profileedit_progress"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="update"
+            android:layout_below="@id/patient_profileedit_progress"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:background="#2C6FA5"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/patient_profileedit_updatebut"
+            android:layout_marginTop="10dp"
+
+            />
+</RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+

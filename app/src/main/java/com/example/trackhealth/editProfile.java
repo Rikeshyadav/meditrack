@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -28,6 +29,7 @@ public class editProfile extends AppCompatActivity {
 EditText name,email,city,state,ph;
 SharedPreferences sp;
 AppCompatButton save;
+TextView user;
 String identity="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {

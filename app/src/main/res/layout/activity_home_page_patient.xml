@@ -7,20 +7,22 @@
      android:id="@+id/drawer_layout1"
     android:layout_height="match_parent"
     tools:context=".HomePage_Patient">
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--<androidx.appcompat.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="48dp"
         app:title="patient"
+        app:titleTextColor="@color/white"
         android:id="@+id/toolbar1"
         android:fitsSystemWindows="true"
         android:elevation="5dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
-       android:background="#9FE3DA"
+        android:background="#5F8CBD"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
-        />-->
+        />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

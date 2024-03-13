@@ -6,49 +6,19 @@
     android:layout_height="match_parent"
     android:background="#DAE5F3"
     tools:context=".Patient_HomeFragment">
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/customtool"
-        android:background="#C19358" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:endIconMode="custom"
-            android:layout_marginTop="80dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            app:startIconDrawable="@drawable/user"
-            app:startIconTint="@color/hint3"
-            android:elevation="4dp"
-            app:endIconTint="@color/black"
-            android:id="@+id/patient_home_searchlayout"
-            android:textColorHint="@color/hint3"
-            app:endIconDrawable="@drawable/baseline_search_24"
-            android:layout_weight="5">
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="search"
-                android:backgroundTint="@color/white"
-                android:id="@+id/patient_home_searchbar"
-                android:background="@drawable/rectangle_box"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textColor="@color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
+
 
 <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
     android:background="#DAE5F3"
-    android:layout_below="@id/patient_home_searchlayout"
+   android:layout_alignParentTop="true"
         android:layout_marginTop="25dp">
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:id="@+id/horizontal"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="25dp"
             android:background="#DAE5F3"
             android:layout_marginBottom="10dp"
             android:layout_height="wrap_content">
@@ -226,38 +196,66 @@
             </LinearLayout>
 
         </HorizontalScrollView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:id="@+id/linear"
-            android:background="#DAE5F3"
-            android:layout_below="@+id/horizontal"
-            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/horizontal"
                 android:layout_marginStart="8dp"
                 android:padding="4dp"
                 android:id="@+id/patient_homefragment_title"
                 android:text="Patient"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
-        </LinearLayout>
+
+
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_marginTop="8dp"
-            android:layout_below="@+id/linear"
+            android:layout_below="@+id/patient_homefragment_title"
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/patient_recyclview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="custom"
+                    android:layout_margin="10dp"
+                    app:startIconDrawable="@drawable/user"
+                    android:layout_alignParentTop="true"
+                    app:startIconTint="@color/hint3"
+                    android:elevation="4dp"
+                    app:endIconTint="@color/black"
+                    android:id="@+id/patient_home_searchlayout"
+                    android:textColorHint="@color/hint3"
+                    app:endIconDrawable="@drawable/baseline_search_24"
+                    android:layout_weight="5">
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="search"
+                        android:backgroundTint="@color/white"
+                        android:id="@+id/patient_home_searchbar"
+                        android:background="@drawable/rectangle_box"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/patient_recyclview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_below="@id/patient_home_searchlayout"
+                    android:layout_marginBottom="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <ProgressBar
                 android:layout_width="wrap_content"
@@ -273,10 +271,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:lottie_rawRes="@raw/empty1"
-               android:layout_alignParentTop="true"
+             android:visibility="gone"
+                android:layout_below="@id/patient_home_searchlayout"
                 android:layout_marginTop="25dp"
                 app:lottie_loop="true"
-                android:visibility="gone"
+
                 app:lottie_autoPlay="true"
                 android:id="@+id/home_patientpage_lottie"/>
 

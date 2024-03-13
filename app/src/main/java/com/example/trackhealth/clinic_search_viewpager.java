@@ -463,7 +463,7 @@ public class clinic_search_viewpager extends Fragment {
         ratespinner2.setAdapter(rateadapter);
         JSONObject j = new JSONObject();
         try {
-            j.put("hospital_clinic","hospital");
+            j.put("hospital_clinic","clinic");
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -690,7 +690,9 @@ public class clinic_search_viewpager extends Fragment {
                     rateEditText.setText("");
                 }
 
-
+                typebackup=typebackup2;
+                ratebackup=ratebackup2;
+                placebackup=placebackup2;
                 searchhospital(j);
                 popupWindow.dismiss();
             }

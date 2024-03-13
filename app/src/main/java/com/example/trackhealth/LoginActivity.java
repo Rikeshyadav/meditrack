@@ -190,6 +190,17 @@ else{
                         sp.edit().putString("identity",doctororpatient).apply();
                         sp.edit().putString("dob",response.getString("dob")).apply();
                         sp.edit().putString("gender",response.getString("gender")).apply();
+                        try {
+                            if(!response.getString("photo").equals("")) {
+                                sp.edit().putString("photo", response.getString("photo")).apply();
+                            }
+                            else{
+                                sp.edit().putString("photo","").apply();
+                            }
+                        }
+                        catch (Exception e){
+                            sp.edit().putString("photo","").apply();
+                        }
                         sp.edit().putString("city", response.getString("city")).apply();
                         sp.edit().putString("state", response.getString("state")).apply();
                         if(identity.equals("Doctor")) {

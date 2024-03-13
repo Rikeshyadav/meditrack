@@ -484,10 +484,12 @@ progress=findViewById(R.id.progressregister);
             @Override
             public void onClick(View view) {
 
+                progress2.setVisibility(View.VISIBLE);
                 if (password.getText().toString().length() < 8) {
                     pass_warn.setText("** must be atleast 8 characters long");
                     pass_warn.setVisibility(View.VISIBLE);
                     scroll.fullScroll(ScrollView.FOCUS_UP);
+                    progress2.setVisibility(View.GONE);
                 }
 
                 if (password.getText().toString().length() >= 8) {
@@ -497,6 +499,7 @@ progress=findViewById(R.id.progressregister);
                         pass_warn.setText("** must include atleast one Upper case,one Lowercase and one number character");
                         scroll.fullScroll(ScrollView.FOCUS_UP);
                         pass_warn.setVisibility(View.VISIBLE);
+                        progress2.setVisibility(View.GONE);
                     } else {
 
                         pass_warn.setVisibility(View.GONE);
@@ -525,6 +528,7 @@ progress=findViewById(R.id.progressregister);
                                          if (doctorOrPatient.equals("Patient")) {
 
                                                  progress2.setVisibility(View.VISIBLE);
+signup.setVisibility(View.GONE);
                                                  sendPatient(username, email, pass, phone, dateofbirth, gen, statee,cityy);
 
 
@@ -576,11 +580,10 @@ progress=findViewById(R.id.progressregister);
                                              }
 else {
                                                 progress2.setVisibility(View.VISIBLE);
-
+                signup.setVisibility(View.GONE);
                                                  sendDoctor(username, email, pass, phone, dateofbirth, gen, statee,cityy, speciality.getText().toString().trim(), yoe.getText().toString().trim(), qualification.getText().toString().trim(), aboutDoc.getText().toString().trim(), organisation.getText().toString().trim(), clinic_type.getText().toString().trim(), clinic_state.getText().toString().trim(),clinic_city.getText().toString().trim(), clinic_phone.getText().toString().trim());
                                              }
                                          }
-                                         progress2.setVisibility(View.GONE);
 
                                      }
 
@@ -664,16 +667,17 @@ else{
                                     Toast.makeText(getApplicationContext(), "registered successfully", Toast.LENGTH_LONG).show();
                                     Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                                     startActivity(i);
-                                    progress2.setVisibility(View.GONE);
                                 } else {
 
                                     Toast.makeText(RegisterPage.this, "user already exists", Toast.LENGTH_SHORT).show();
                                     progress2.setVisibility(View.GONE);
+                                    signup.setVisibility(View.VISIBLE);
+
                                 }
                             } catch (JSONException e) {
                                 progress2.setVisibility(View.GONE);
+                                signup.setVisibility(View.VISIBLE);
                                 Toast.makeText(RegisterPage.this, "error : "+e, Toast.LENGTH_SHORT).show();
-                                throw new RuntimeException(e);
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -683,6 +687,7 @@ else{
                             Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
                             progress2.setVisibility(View.GONE);
                             progress.setVisibility(View.GONE);
+
                         }
                     });
                     RequestQueue q = Volley.newRequestQueue(RegisterPage.this);
@@ -693,6 +698,7 @@ else{
 
     public void sendDoctor(String username,String email,String password,String phone,String dob,String gender,String state,String city,String speciality,String yoe,String qualification,String about,String hosName,String hosType,String hosState,String hosCity,String hosPhone){
 progress2.setVisibility(View.VISIBLE);
+
             String temp="https://demo-uw46.onrender.com/api/doctor/register";
             JSONObject clinic_hospital=new JSONObject();
 
@@ -727,7 +733,7 @@ progress2.setVisibility(View.VISIBLE);
 
             jsonobj.put("patient",inner2);
         } catch (JSONException e) {
-        throw new RuntimeException(e);
+
     }
                     JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, jsonobj, new Response.Listener<JSONObject>() {
 
@@ -735,17 +741,17 @@ progress2.setVisibility(View.VISIBLE);
                         public void onResponse(JSONObject response) {
                             try {
                                 if (response.getString("success").equals("true")) {
-                                    progress2.setVisibility(View.GONE);
-                                    Intent i = new Intent(getApplicationContext(), Register_process.class);
+                                    Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                                     startActivity(i);
-                                    Toast.makeText(getApplicationContext(), "Registration under process", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Registered Successfully", Toast.LENGTH_LONG).show();
 
                                 } else {
                                     progress2.setVisibility(View.GONE);
                                     Toast.makeText(RegisterPage.this, "user already exists", Toast.LENGTH_SHORT).show();
+                                    signup.setVisibility(View.VISIBLE);
                                 }
                             } catch (JSONException e) {
-                                throw new RuntimeException(e);
+                                signup.setVisibility(View.VISIBLE);
                             }
 
                         }
@@ -755,6 +761,7 @@ progress2.setVisibility(View.VISIBLE);
                             Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
                             progress.setVisibility(View.GONE);
                             progress2.setVisibility(View.GONE);
+                            signup.setVisibility(View.VISIBLE);
 
                         }
                     });
