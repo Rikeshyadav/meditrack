@@ -314,7 +314,7 @@ public class doctor_search_viewpager extends Fragment {
             );
             j.setRetryPolicy(retryPolicy);
             q.add(j);
-            q.add(j);
+           // q.add(j);
 
 
         } catch (

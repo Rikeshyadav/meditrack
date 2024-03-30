@@ -5,69 +5,316 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="58dp"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:id="@+id/doctor_home_rec"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:background="#DAE5F3"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp">
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:id="@+id/horizontal"
+                    android:layout_marginTop="25dp"
+                    android:background="#DAE5F3"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+                            android:padding="10dp"
+                            android:orientation="horizontal">
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="150dp"
+                                    android:layout_height="152dp"
+                                    app:cardCornerRadius="20dp"
+                                    android:layout_margin="4dp"
+                                    android:background="@drawable/effect"
+                                    app:cardBackgroundColor="#A5DAD3"
+                                    android:foreground="@drawable/effect"
+                                    android:clickable="true"
+                                    app:cardElevation="6dp">
 
-            />
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-            android:id="@+id/doctor_home_progress"
-                />
-        <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="match_parent"
-            android:layout_height="290dp"
-            app:lottie_rawRes="@raw/empty1"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            app:lottie_loop="true"
-            android:visibility="gone"
-            app:lottie_autoPlay="true"
-            android:id="@+id/doctor_home_lottie"/>
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/refresh_doctor_homepage"
-            android:layout_centerVertical="true"
-            android:src="@drawable/baseline_refresh_24"
-            android:visibility="gone"
-            android:layout_centerHorizontal="true"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/doctor_home_lottie"
-            android:text="no data"
-            android:visibility="gone"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:id="@+id/nodata_doctorhome"
-            />
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:layout_width="wrap_content"
+                                        <LinearLayout
+                                            android:layout_width="130dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="12dp"
+                                            android:orientation="vertical">
+
+                                                <com.google.android.material.imageview.ShapeableImageView
+                                                    android:layout_width="112dp"
+                                                    android:layout_height="101dp"
+                                                    android:layout_marginStart="6dp"
+                                                    android:layout_marginTop="12dp"
+                                                    android:scaleType="centerCrop"
+                                                    android:src="@drawable/diet"
+                                                    app:shapeAppearanceOverlay="@style/createcircle"
+                                                    app:strokeColor="@color/black"
+                                                    app:strokeWidth="0.5dp" />
+
+                                                <TextView
+                                                    android:layout_width="114dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="10dp"
+                                                    android:layout_marginTop="9dp"
+                                                    android:fontFamily="@font/gugi"
+                                                    android:paddingStart="34dp"
+                                                    android:text="Diet"
+                                                    android:textColor="@color/red"
+                                                    android:textSize="20sp" />
+                                        </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="150dp"
+                                    android:layout_height="152dp"
+                                    app:cardCornerRadius="20dp"
+                                    android:layout_margin="4dp"
+                                    android:foreground="@drawable/effect"
+                                    android:clickable="true"
+                                    app:cardBackgroundColor="#E6AA96"
+                                    app:cardElevation="6dp">
+
+                                        <LinearLayout
+                                            android:layout_width="129dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="12dp"
+                                            android:orientation="vertical">
+
+                                                <com.google.android.material.imageview.ShapeableImageView
+                                                    android:layout_width="112dp"
+                                                    android:layout_height="101dp"
+                                                    android:layout_marginStart="6dp"
+                                                    android:layout_marginTop="10dp"
+                                                    android:scaleType="centerCrop"
+                                                    android:src="@drawable/exercise"
+                                                    app:shapeAppearanceOverlay="@style/createcircle"
+                                                    app:strokeColor="@color/black"
+                                                    app:strokeWidth="0.5dp" />
+
+                                                <TextView
+                                                    android:layout_width="114dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="10dp"
+                                                    android:layout_marginTop="9dp"
+                                                    android:fontFamily="@font/gugi"
+                                                    android:paddingStart="3dp"
+                                                    android:text="Exercise"
+                                                    android:textColor="#191B1C"
+                                                    android:textSize="20sp" />
+                                        </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="150dp"
+                                    android:layout_height="152dp"
+                                    app:cardCornerRadius="20dp"
+                                    android:layout_margin="5dp"
+                                    android:foreground="@drawable/effect"
+                                    android:clickable="true"
+                                    app:cardBackgroundColor="#A5DAD3"
+                                    app:cardElevation="6dp">
+
+                                        <LinearLayout
+                                            android:layout_width="129dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="12dp"
+                                            android:orientation="vertical">
+
+                                                <com.google.android.material.imageview.ShapeableImageView
+                                                    android:layout_width="112dp"
+                                                    android:layout_height="101dp"
+                                                    android:layout_marginStart="6dp"
+                                                    android:layout_marginTop="10dp"
+                                                    android:scaleType="centerCrop"
+                                                    android:src="@drawable/reportr"
+                                                    app:shapeAppearanceOverlay="@style/createcircle"
+                                                    app:strokeColor="@color/black"
+                                                    app:strokeWidth="0.5dp" />
+
+                                                <TextView
+                                                    android:layout_width="114dp"
+                                                    android:layout_height="wrap_content"
+
+                                                    android:layout_marginTop="9dp"
+                                                    android:fontFamily="@font/gugi"
+
+                                                    android:text="Report"
+                                                    android:gravity="center"
+                                                    android:layout_gravity="center"
+                                                    android:textColor="@color/red"
+                                                    android:textSize="20sp" />
+                                        </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="150dp"
+                                    android:layout_height="152dp"
+                                    app:cardCornerRadius="20dp"
+                                    android:foreground="@drawable/effect"
+                                    android:clickable="true"
+                                    android:layout_margin="5dp"
+                                    app:cardBackgroundColor="#BC7A65"
+                                    app:cardElevation="6dp">
+
+                                        <LinearLayout
+                                            android:layout_width="129dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginStart="12dp"
+                                            android:orientation="vertical">
+
+                                                <com.google.android.material.imageview.ShapeableImageView
+                                                    android:layout_width="112dp"
+                                                    android:layout_height="101dp"
+                                                    android:layout_marginStart="6dp"
+                                                    android:layout_marginTop="10dp"
+                                                    android:scaleType="centerCrop"
+                                                    android:src="@drawable/medicine"
+                                                    app:shapeAppearanceOverlay="@style/createcircle"
+                                                    app:strokeColor="@color/black"
+                                                    app:strokeWidth="0.5dp" />
+
+                                                <TextView
+                                                    android:layout_width="114dp"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="10dp"
+                                                    android:layout_marginTop="9dp"
+                                                    android:fontFamily="@font/gugi"
+                                                    android:paddingStart="3dp"
+                                                    android:text="Medicine"
+                                                    android:textColor="#0E1B75"
+                                                    android:textSize="20sp" />
+                                        </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+                </HorizontalScrollView>
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#1E4065"
-                    android:src="@drawable/add_circle"
-                    app:itemIconTint="@drawable/icon_tint_color_bar"
-                    android:contentDescription="search"
-                    android:id="@+id/fab"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/horizontal"
+                    android:layout_marginStart="8dp"
+                    android:padding="4dp"
+                    android:id="@+id/patient_homefragment_title"
+                    android:text="Patient List"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
 
-                    app:maxImageSize="30dp"
-                    />
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/patient_homefragment_title"
+                    android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:endIconMode="custom"
+                                    android:layout_margin="10dp"
+                                    app:startIconDrawable="@drawable/user"
+                                    android:layout_alignParentTop="true"
+                                    app:startIconTint="@color/hint3"
+                                    android:elevation="4dp"
+                                    app:endIconTint="@color/black"
+                                    android:id="@+id/patient_home_searchlayout"
+                                    android:textColorHint="@color/hint3"
+                                    app:endIconDrawable="@drawable/baseline_search_24"
+                                    android:layout_weight="5">
+                                        <AutoCompleteTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:hint="search"
+                                            android:backgroundTint="@color/white"
+                                            android:id="@+id/patient_home_searchbar"
+                                            android:background="@drawable/rectangle_box"
+                                            android:inputType="text"
+                                            android:maxLines="1"
+                                            android:textColor="@color/black" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/doctor_home_rec"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_below="@id/patient_home_searchlayout"
+                                    android:layout_marginBottom="10dp"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+                                <ProgressBar
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="38dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:id="@+id/doctor_home_progress"
+
+
+                                    />
+
+                                <com.airbnb.lottie.LottieAnimationView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="200dp"
+                                    app:lottie_rawRes="@raw/empty1"
+                                    android:visibility="gone"
+                                    android:layout_below="@id/patient_home_searchlayout"
+                                    android:layout_marginTop="25dp"
+                                    app:lottie_loop="true"
+
+                                    app:lottie_autoPlay="true"
+                                    android:id="@+id/doctor_home_lottie"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/doctor_home_lottie"
+                                    android:text="no data"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:visibility="gone"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="20dp"
+                                    android:id="@+id/nodata_doctorhome"
+                                    />
+                                <ImageView
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:id="@+id/refresh_doctor_homepage"
+                                    android:visibility="gone"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/baseline_refresh_24"
+                                    android:layout_centerHorizontal="true"/>
+
+
+
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="#1E4065"
+                                    android:src="@drawable/add_circle"
+                                    app:itemIconTint="@drawable/icon_tint_color_bar"
+                                    android:id="@+id/fab"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentRight="true"
+                                    app:maxImageSize="30dp"
+                                    />
+                        </RelativeLayout>
+                </FrameLayout>
         </RelativeLayout>
 </FrameLayout>
+
+
+

@@ -15,7 +15,10 @@ import androidx.fragment.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +27,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -64,10 +68,12 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         headerText = headerView.findViewById(R.id.user1);
         headerText.setText(sp.getString("name","user"));
          profile_photo=headerView.findViewById(R.id.pphoto);
+        setPhoto();
          profile_photo.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
                  openFragment(new EditprofileFragment(),"profile");
+                 setPhoto();
                  drawerLayout.closeDrawer(GravityCompat.START);
              }
          });
@@ -116,6 +122,21 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
 
     }
 
+    public void setPhoto(){
+        String photo= sp.getString("photo","");
+        if(!photo.equals("")) {
+            Bitmap b = getbitmap(photo);
+            profile_photo.setImageBitmap(b);
+        }
+        else{
+            profile_photo.setImageResource(R.drawable.baseline_person_24);
+        }
+    }
+    public Bitmap getbitmap(String s){
+        byte[] bytes= Base64.decode(s,Base64.DEFAULT);
+        Bitmap bitmap2= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        return bitmap2;
+    }
 
 
     @Override
