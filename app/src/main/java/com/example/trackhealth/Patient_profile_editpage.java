@@ -52,10 +52,10 @@ public class Patient_profile_editpage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_profile_editpage);
-        fbut=findViewById(R.id.uplodimage);
+        fbut=findViewById(R.id.uplodimage_doctor_profile);
         imageView=findViewById(R.id.prof_image2_patient);
         sp2 = getSharedPreferences("user", Context.MODE_PRIVATE);
-        username=findViewById(R.id.patient_profile_name2);
+        username=findViewById(R.id.doctor_profile_name2);
         back=findViewById(R.id.edit_profile_patient_backicon);
         username.setText(sp2.getString("name",""));
         progressBar = findViewById(R.id.patient_profileedit_progress);

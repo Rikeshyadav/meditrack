@@ -205,11 +205,21 @@ else{
                         sp.edit().putString("state", response.getString("state")).apply();
                         if(identity.equals("Doctor")) {
                          sp.edit().putString("speciality",response.getString("speciality")).apply();
+                            sp.edit().putString("yoe",response.getString("yoe")).apply();
                             sp.edit().putString("qualification",response.getString("qualification")).apply();
+                            sp.edit().putString("about",response.getString("about")).apply();
                             JSONObject jo=new JSONObject();
                             jo=response.getJSONObject("clinic_hospital");
                             String clinic_name=jo.getString("name");
+                            String clinic_type=jo.getString("type");
+                            String clinic_state=jo.getString("state");
+                            String clinic_city=jo.getString("city");
+                            String clinic_phone=jo.getString("phone");
                             sp.edit().putString("clinic_name",clinic_name).apply();
+                            sp.edit().putString("clinic_type",clinic_type).apply();
+                            sp.edit().putString("clinic_state",clinic_state).apply();
+                            sp.edit().putString("clinic_city",clinic_city).apply();
+                            sp.edit().putString("clinic_phone",clinic_phone).apply();
 
                         }
 

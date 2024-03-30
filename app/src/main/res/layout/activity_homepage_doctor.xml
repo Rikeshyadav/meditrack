@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             app:title="Doctor"
-            android:background="#B54848"
+            android:background="#5F8CBD"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"/>
@@ -24,7 +24,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="?actionBarSize"
+            android:layout_marginBottom="60dp"
             android:id="@+id/fragment_container"/>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout

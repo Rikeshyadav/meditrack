@@ -1,119 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#5190D8"
+    android:background="@color/transparentColor"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:layout_margin="5dp"
+    android:layout_margin="2dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="6dp"
-        android:text="Hospital/Clinic :"
-        android:textSize="19sp"
-        android:textColor="@color/white"
-        android:id="@+id/pending_rec_hos"
-        />
+
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        app:cardCornerRadius="4dp"
-        android:layout_margin="1dp"
-        app:cardBackgroundColor="#D8EFEC"
-        android:layout_below="@id/pending_rec_hos"
         android:layout_height="wrap_content"
-        >
+        android:layout_margin="2dp"
+        app:cardBackgroundColor="#f5f5f5"
+        app:cardCornerRadius="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:padding="10dp"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:layout_width="40dp"
+                android:src="@drawable/baseline_heart_broken_24"
+                android:layout_marginStart="360dp"
+                android:layout_marginTop="4dp"
+                android:id="@+id/critical_patient_page_doctor"
+                android:layout_alignParentEnd="true"
+                android:padding="4dp"
+                android:layout_height="40dp"/>
+            <com.google.android.material.imageview.ShapeableImageView
+
+                android:layout_width="110dp"
+                android:id="@+id/dp_patient_page_doctor"
+                android:layout_height="110dp"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img"
+                app:shapeAppearanceOverlay="@style/roundedImageview"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp" />
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/homerecpat_parent"
-                android:layout_alignParentTop="true"
-                android:weightSum="10"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_toRightOf="@id/dp_patient_page_doctor"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="4dp"
+                android:paddingTop="8dp">
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Patient : "
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_weight="3"
-                    />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="7"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     android:id="@+id/homerecpat"
-                    android:text=""
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
+                    android:layout_marginStart="1dp"
+                    android:textColor="@color/black"
+                    android:padding="2dp"
+                    android:fontFamily="@font/gugi"
+                    android:text="Dr.Rikesh Yadav"
+                    android:textSize="22dp" />
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="10"
-                android:layout_below="@id/homerecpat_parent"
-                android:id="@+id/homerecdob_parent"
-                android:orientation="horizontal">
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="DOB : "
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:layout_weight="3"
-                    />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="7"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     android:id="@+id/homerecdob"
-                    android:text=""
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="10"
-                android:layout_below="@id/homerecdob_parent"
-                android:id="@+id/homerecgen_parent"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Gender : "
-                    android:textSize="16sp"
+                    android:layout_marginStart="4dp"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_weight="3"
-                    />
+                    android:padding="1dp"
+                    android:layout_marginTop="1dp"
+                    android:text="Eye Specialist"
+                    android:textSize="16dp" />
+
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="7"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     android:id="@+id/homerecgen"
-                    android:text=""
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_marginStart="4dp"
+                    android:textColor="@color/black"
+                    android:padding="1dp"
+                    android:layout_marginTop="1dp"
+                    android:text="MBB"
+                    android:textSize="16dp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:padding="5dp"
+                        android:background="@color/white"
+                        android:foregroundTint="@color/red"
+                        android:src="@drawable/hospital2"
+                        />
+                    <TextView
+                        android:id="@+id/dhospital_patient_homepage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:textColor="@color/black"
+                        android:padding="1dp"
+                        android:text="Trims"
+                        android:layout_marginTop="4dp"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
             </LinearLayout>
-
-
-
         </RelativeLayout>
-
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
+
+
+
