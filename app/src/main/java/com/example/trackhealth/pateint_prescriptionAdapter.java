@@ -30,7 +30,7 @@ public class pateint_prescriptionAdapter extends RecyclerView.Adapter<pateint_pr
     public void onBindViewHolder(@androidx.annotation.NonNull myholder holder, int position) {
         datamodel2 currentItem=data.get(position);
         holder.text1.setText(data.get(position).getTxt1());
-        holder.text2.setText(data.get(position).getTxt2());
+       // holder.text2.setText(data.get(position).getTxt2());
         holder.text3.setText(data.get(position).getTxt3());
         holder.text4.setText(data.get(position).getTxt4());
 
@@ -60,6 +60,7 @@ public class pateint_prescriptionAdapter extends RecyclerView.Adapter<pateint_pr
                 if(position !=RecyclerView.NO_POSITION){
                     datamodel2 clickedItem=data.get(position);
                     Intent intent=new Intent(v.getContext(), User_prescription_activity_page.class);
+
                     v.getContext().startActivity(intent);
                 }
             }

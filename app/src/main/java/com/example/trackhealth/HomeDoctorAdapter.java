@@ -1,8 +1,10 @@
 package com.example.trackhealth;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,7 @@ public class HomeDoctorAdapter extends RecyclerView.Adapter<HomeDoctorAdapter.My
         holder.pdob.setText(item.get(1).toString());
         holder.pgender.setText(item.get(2).toString());
 
+
     }
 
     @Override
@@ -39,15 +42,24 @@ public class HomeDoctorAdapter extends RecyclerView.Adapter<HomeDoctorAdapter.My
         return data.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView pname,pdob,pgender;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             pname = itemView.findViewById(R.id.homerecpat);
             pdob = itemView.findViewById(R.id.homerecdob);
             pgender = itemView.findViewById(R.id.homerecgen);
+            itemView.setOnClickListener(this);
 
+        }
 
+        @Override
+        public void onClick(View v) {
+            int position=getAdapterPosition();
+            if(position !=RecyclerView.NO_POSITION){
+                Intent intent=new Intent(v.getContext(), Patient_ListRecyview_inDoctor.class);
+                v.getContext().startActivity(intent);
+            }
         }
     }
 }

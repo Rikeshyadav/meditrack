@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fnd"
+    tools:context=".Patient_ListRecyview_inDoctor">
+
+    <TextView
+        android:layout_width="388dp"
+        android:layout_height="74dp"
+        android:layout_centerHorizontal="true"
+        android:padding="8dp"
+        android:text="Check health"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:contentDescription="roller"
+        app:tabBackground="@color/tabBackgroundColor1"
+        app:tabIndicatorColor="#0C0C0C"
+        app:tabTextColor="#EA3E09"
+        android:layout_marginTop="80dp"
+        app:tabTextAppearance="@style/TabTextStyle"
+        android:layout_height="60dp"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        android:id="@+id/Doctor_tablayout"/>
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_marginTop="139dp"
+        android:layout_height="match_parent"
+        android:id="@+id/Doctorview_pager"/>
+</RelativeLayout>

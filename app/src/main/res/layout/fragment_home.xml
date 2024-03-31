@@ -305,6 +305,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:backgroundTint="#1E4065"
+                                    android:contentDescription="add"
                                     android:src="@drawable/add_circle"
                                     app:itemIconTint="@drawable/icon_tint_color_bar"
                                     android:id="@+id/fab"
