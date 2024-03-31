@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#DA9B9B"
+    android:background="#75B2F8"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
@@ -15,43 +15,65 @@
         app:cardCornerRadius="15dp"
         android:elevation="5dp"
        app:cardBackgroundColor="#EFF3F2"
-        android:padding="4dp">
+        android:padding="9dp">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/problem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Cancer"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:id="@+id/problem"
             android:layout_height="wrap_content"
-            android:text="problem:follow this medicine"
-            android:textColor="@color/black"
-            android:textSize="19sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="1dp"
             android:id="@+id/time1"
-            android:text="1:45pm"
-            android:textColor="@color/black"
-            android:textSize="19sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="40dp"
-            android:id="@+id/year"
-            android:text="23-jun-2024"
-            android:textColor="@color/black"
-            android:textSize="19sp" />
+            android:layout_marginBottom="15dp"
+            android:layout_below="@id/problem"
+            android:layout_marginStart="10dp"
+            android:text="Last Visited"
+            android:textColor="@color/hint"
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="80dp"
-            android:text="by: Dr Mohan"
-            android:id="@+id/doctor1"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@+id/time1"
+            android:layout_below="@id/problem"
+            android:id="@+id/year"
+            android:text="23-jun-2024"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="19dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@id/problem"
+            android:text="on going"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/doctor1"
+            android:textColor="#2C7730"
+            android:textSize="15sp" />
+
+
+</RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
