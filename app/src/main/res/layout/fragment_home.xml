@@ -30,6 +30,7 @@
                                     android:layout_height="152dp"
                                     app:cardCornerRadius="20dp"
                                     android:layout_margin="4dp"
+                                    android:id="@+id/diet_doctor_page"
                                     android:background="@drawable/effect"
                                     app:cardBackgroundColor="#A5DAD3"
                                     android:foreground="@drawable/effect"
@@ -71,6 +72,7 @@
                                     android:layout_height="152dp"
                                     app:cardCornerRadius="20dp"
                                     android:layout_margin="4dp"
+                                    android:id="@+id/exercise_doctor_page"
                                     android:foreground="@drawable/effect"
                                     android:clickable="true"
                                     app:cardBackgroundColor="#E6AA96"
@@ -154,6 +156,7 @@
                                     app:cardCornerRadius="20dp"
                                     android:foreground="@drawable/effect"
                                     android:clickable="true"
+                                    android:id="@+id/medicine_doctor_page"
                                     android:layout_margin="5dp"
                                     app:cardBackgroundColor="#BC7A65"
                                     app:cardElevation="6dp">

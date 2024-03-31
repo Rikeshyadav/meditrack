@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
 RecyclerView recyclerView;
     HomeDoctorAdapter adapter;
     ImageView refresh;
+    CardView diet,medicine,exercise;
     LottieAnimationView empty;
     ProgressBar progressBar;
     TextView nodata;
@@ -59,7 +61,9 @@ refresh=view.findViewById(R.id.refresh_doctor_homepage);
 nodata=view.findViewById(R.id.nodata_doctorhome);
 empty=view.findViewById(R.id.doctor_home_lottie);
 progressBar=view.findViewById(R.id.doctor_home_progress);
-
+diet=view.findViewById(R.id.diet_doctor_page);
+exercise=view.findViewById(R.id.exercise_doctor_page);
+medicine=view.findViewById(R.id.medicine_doctor_page);
         recyclerView = view.findViewById(R.id.doctor_home_rec);
 
         searchPatient(sp.getString("phone",""));
@@ -75,6 +79,32 @@ refresh.setOnClickListener(new View.OnClickListener() {
                 Toast.makeText(getActivity(),"add person",Toast.LENGTH_SHORT).show();
                 Intent fab=new Intent(getActivity(), AddPatientPage.class);
                 startActivity(fab);
+            }
+        });
+
+
+        exercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(),Knowledgegyan.class);
+                i.putExtra("page","Exercise");
+                getActivity().startActivity(i);
+            }
+        });
+        diet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(),Knowledgegyan.class);
+                i.putExtra("page","diet");
+                getActivity().startActivity(i);
+            }
+        });
+        medicine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(),Knowledgegyan.class);
+                i.putExtra("page","medicine");
+                getActivity().startActivity(i);
             }
         });
         return view;
