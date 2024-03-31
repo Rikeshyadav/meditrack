@@ -294,6 +294,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
     protected void onResume() {
         super.onResume();
         back=false;
+        setPhoto();
         headerText.setText("Dr."+sp.getString("name","user"));
     }
 }
