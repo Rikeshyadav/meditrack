@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="155dp"
+    android:layout_height="wrap_content"
     android:padding="10dp"
-    android:background="#4CDACD">
+    android:background="#6F92B5">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/pphoto"
@@ -15,17 +15,29 @@
         android:scaleType="centerCrop"
         app:strokeColor="@color/blue"
         android:layout_marginTop="5dp"
+        android:layout_marginStart="2dp"
         android:src="@drawable/doctorimage_2"
         app:shapeAppearanceOverlay="@style/roundedImageview" />
     <TextView
         android:id="@+id/user1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DR.Ganguly"
-        android:textSize="17sp"
+        android:text="DR.Asok Agarwal"
+        android:textSize="18sp"
         android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"/>
+        android:layout_below="@id/pphoto"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"/>
+    <TextView
+        android:id="@+id/user2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5 Yrs Experience"
+        android:textSize="13sp"
+        android:textColor="#515151"
+        android:layout_below="@id/user1"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginStart="10dp"/>
 
-
-</LinearLayout>
+</RelativeLayout>

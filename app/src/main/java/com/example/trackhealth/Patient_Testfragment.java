@@ -29,7 +29,7 @@ public class Patient_Testfragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_patient__testfragment, container, false);
-       textView=view.findViewById(R.id.mariz);
+      // textView=view.findViewById(R.id.mariz);
        // textView1=view.findViewById(R.id.issu1);
         recyclerView=view.findViewById(R.id.prescr_recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));

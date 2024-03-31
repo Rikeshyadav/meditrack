@@ -236,31 +236,22 @@
                 android:layout_height="wrap_content"
                 >
 
-                <com.google.android.material.textfield.TextInputLayout
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/patient_home_searchlayout2"
+                    style="@style/CustomSearchViewStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:endIconMode="custom"
-                    android:layout_margin="10dp"
-                    app:startIconDrawable="@drawable/user"
                     android:layout_alignParentTop="true"
-                    app:startIconTint="@color/hint3"
-                    android:elevation="4dp"
-                    app:endIconTint="@color/black"
-                    android:id="@+id/patient_home_searchlayout"
-                    android:textColorHint="@color/hint3"
-                    app:endIconDrawable="@drawable/baseline_search_24"
-                    android:layout_weight="5">
-                    <AutoCompleteTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="search"
-                        android:backgroundTint="@color/white"
-                        android:id="@+id/patient_home_searchbar"
-                        android:background="@drawable/rectangle_box"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/searchfun"
+                    app:closeIcon="@drawable/baseline_clear_24"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="search...."
+                    app:searchHintIcon="@null"
+                    app:searchIcon="@drawable/baseline_search_24" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/patient_recyclview"
@@ -269,7 +260,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_below="@id/patient_home_searchlayout"
+                    android:layout_below="@id/patient_home_searchlayout2"
                     android:layout_marginBottom="10dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

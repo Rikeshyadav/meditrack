@@ -3,6 +3,7 @@ package com.example.trackhealth;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,23 +32,22 @@ public class Exercise extends Fragment {
                              Bundle savedInstanceState) {
 
         View view=inflater.inflate(R.layout.fragment_exercise, container, false);
+        Toolbar toolbar=view.findViewById(R.id.toolbar1);
 
 
-        RecyclerView recyclerView=view.findViewById(R.id.recycleviewpost);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,
-                StaggeredGridLayoutManager.VERTICAL));
+      /*  RecyclerView recyclerView=view.findViewById(R.id.recycleviewpost);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1,
+                StaggeredGridLayoutManager.HORIZONTAL));
 
         postitemList=new ArrayList<>();
-        postitemList.add(new postitem_exercisegyan(R.drawable.img_2));
-        postitemList.add(new postitem_exercisegyan(R.drawable.walking));
-        postitemList.add(new postitem_exercisegyan(R.drawable.mediexercise));
         postitemList.add(new postitem_exercisegyan(R.drawable.erxercise_mental));
-        postitemList.add(new postitem_exercisegyan(R.drawable.sitting));
-        postitemList.add(new postitem_exercisegyan(R.drawable.img_1));
+        postitemList.add(new postitem_exercisegyan(R.drawable.mediexercise));
+        postitemList.add(new postitem_exercisegyan(R.drawable.compo_exercise));
         postitemList.add(new postitem_exercisegyan(R.drawable.office_yoga));
         postitemList.add(new postitem_exercisegyan(R.drawable.yoga_benefits));
         postadapter=new Postadapter_exercisegyan(getActivity(),postitemList);
-        recyclerView.setAdapter(postadapter);
+
+        recyclerView.setAdapter(postadapter);*/
 
         recyclerView1=view.findViewById(R.id.search_recy);
 
@@ -70,12 +70,15 @@ public class Exercise extends Fragment {
         recyclerView1.setLayoutManager(gridLayoutManager);
         String description = "12 April";
         String description1 = "yoga is good";
+      //  String description = getResources().getString(R.string.date);
         dataModels1=new ArrayList<>();
         datafun=new dataModel_exerciseGyan("Yoga and there benefits","Yoga is a mind and body practice that can build strength and flexibility. It may also help manage pain and reduce stress. ","fact",R.drawable.yoga);
         dataModels1.add(datafun);
         datafun=new dataModel_exerciseGyan("Yoga Or Gym: Which Is Better For Your Health?",description,"fact",R.drawable.ladies);
         dataModels1.add(datafun);
         datafun=new dataModel_exerciseGyan("Benefits of medication:fact and its steps...",description1,"31-03",R.drawable.meditation);
+        dataModels1.add(datafun);
+        datafun=new dataModel_exerciseGyan("The Top 10 Benefits of Regular Physical Activity",description1,"date",R.drawable.regual);
         dataModels1.add(datafun);
         datafun=new dataModel_exerciseGyan("The Top 10 Benefits of Regular Physical Activity",description1,"date",R.drawable.regual);
         dataModels1.add(datafun);

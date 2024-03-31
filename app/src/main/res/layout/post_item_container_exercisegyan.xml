@@ -7,7 +7,9 @@
     android:layout_marginStart="3dp"
     android:layout_marginTop="2dp"
     app:riv_corner_radius="1dp"
+    android:padding="10dp"
+    android:scaleType="centerCrop"
     android:layout_marginBottom="3dp"
-    android:layout_height="wrap_content">
+    android:layout_height="200dp">
 
 </com.makeramen.roundedimageview.RoundedImageView>
