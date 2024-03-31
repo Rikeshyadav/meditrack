@@ -66,7 +66,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         navigationView=findViewById(R.id.navigation_drawer);
         View headerView = navigationView.getHeaderView(0);
         headerText = headerView.findViewById(R.id.user1);
-        headerText.setText(sp.getString("name","user"));
+        headerText.setText("Dr. "+sp.getString("name","user"));
          profile_photo=headerView.findViewById(R.id.pphoto);
         setPhoto();
          profile_photo.setOnClickListener(new View.OnClickListener() {
@@ -294,6 +294,6 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
     protected void onResume() {
         super.onResume();
         back=false;
-        headerText.setText(sp.getString("name","user"));
+        headerText.setText("Dr."+sp.getString("name","user"));
     }
 }

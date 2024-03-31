@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
 RecyclerView recyclerView;
     HomeDoctorAdapter adapter;
     ImageView refresh;
+    List<List> outer=new ArrayList<>();
     CardView diet,medicine,exercise;
     LottieAnimationView empty;
     ProgressBar progressBar;
@@ -67,6 +69,22 @@ medicine=view.findViewById(R.id.medicine_doctor_page);
         recyclerView = view.findViewById(R.id.doctor_home_rec);
 
         searchPatient(sp.getString("phone",""));
+
+        SearchView searchView=view.findViewById(R.id.patient_home_searchlayout);
+
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
 refresh.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -110,11 +128,26 @@ refresh.setOnClickListener(new View.OnClickListener() {
         return view;
     }
 
-
+    private void searchList(String text) {
+        List<List> dataSearchList = new ArrayList<>();
+        for (int i=0;i<outer.size();i++) {
+            if (outer.get(i).get(0).toString().toLowerCase().contains(text.toLowerCase())) {
+                dataSearchList.add(outer.get(i));
+            }
+        }
+        if (dataSearchList.isEmpty()) {
+            Toast.makeText(getActivity(), "Not Found", Toast.LENGTH_SHORT).show();
+        }
+System.out.println("hello"+dataSearchList);
+        adapter = new HomeDoctorAdapter(dataSearchList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+    }
 
     public void searchPatient(String ph){
         String temp = "https://demo-uw46.onrender.com/api/doctor/getDetails";
         try {
+            recyclerView.setVisibility(View.GONE);
             refresh.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             empty.setVisibility(View.GONE);
@@ -139,6 +172,7 @@ refresh.setOnClickListener(new View.OnClickListener() {
                                     refresh.setVisibility(View.GONE);
                                     nodata.setVisibility(View.GONE);
                                     adapter = new HomeDoctorAdapter(arr);
+                                    recyclerView.setVisibility(View.VISIBLE);
                                     recyclerView.setAdapter(adapter);
                                     recyclerView.setHasFixedSize(true);
                                 } else {
@@ -208,7 +242,7 @@ refresh.setOnClickListener(new View.OnClickListener() {
 
 
     public List filterArray(JSONArray jsonArray) throws JSONException {
-        List<List> outer=new ArrayList<>();
+        outer=new ArrayList<>();
 
         for(int i=0;i<jsonArray.length();i++){
 

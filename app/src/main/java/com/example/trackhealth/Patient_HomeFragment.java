@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -53,6 +54,7 @@ public class Patient_HomeFragment extends Fragment {
     RecyclerView recyclerView;
     Toolbar toolbar;
     ImageView refresh;
+    List<List> outer=new ArrayList<>();
     ProgressBar progressBar;
     TextView nodata;
     LottieAnimationView empty;
@@ -98,6 +100,23 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
                 getActivity().startActivity(i);
             }
         });
+
+        SearchView searchView=view.findViewById(R.id.patient_home_searchlayout2);
+
+        searchView.clearFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
+
         medicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,12 +143,30 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
         return view;
     }
 
+    private void searchList(String text) {
+        List<List> dataSearchList = new ArrayList<>();
+        for (int i=0;i<outer.size();i++) {
+            if (outer.get(i).get(1).toString().toLowerCase().contains(text.toLowerCase())) {
+                dataSearchList.add(outer.get(i));
+            }
+        }
+        if (dataSearchList.isEmpty()) {
+            Toast.makeText(getActivity(), "Not Found", Toast.LENGTH_SHORT).show();
+        }
+        System.out.println("hello"+dataSearchList);
+        adapter = new patient_homeAdapter(dataSearchList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+    }
+
     public void searchDoctors(String ph){
+        outer=new ArrayList<>();
         String temp = "https://demo-uw46.onrender.com/api/patient/getDetails";
         try {
             progressBar.setVisibility(View.VISIBLE);
             refresh.setVisibility(View.GONE);
             empty.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
             nodata.setVisibility(View.GONE);
             HashMap<String, String> jsonobj = new HashMap<>();
             jsonobj.put("phone", ph);
@@ -146,6 +183,7 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
                                 arr = filterArray(response.getJSONArray("doctoradd"));
                                 if (arr.size() > 0) {
                                     adapter = new patient_homeAdapter(arr);
+                                    recyclerView.setVisibility(View.VISIBLE);
                                     recyclerView.setAdapter(adapter);
                                     progressBar.setVisibility(View.GONE);
                                     refresh.setVisibility(View.GONE);
@@ -213,7 +251,7 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
 
 
     public List filterArray(JSONArray jsonArray) throws JSONException {
-        List<List> outer=new ArrayList<>();
+       outer=new ArrayList<>();
 
         for(int i=0;i<jsonArray.length();i++){
 
