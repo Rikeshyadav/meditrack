@@ -37,6 +37,15 @@
         android:theme="@style/Theme.Trackhealth"
         tools:targetApi="31">
         <activity
+            android:name=".image_Activity_exerciseGyan"
+            android:exported="false" />
+        <activity
+            android:name=".Exercisegyan_second2"
+            android:exported="false" />
+        <activity
+            android:name=".Knowledgegyan"
+            android:exported="false" />
+        <activity
             android:name=".Patient_profile_editpage"
             android:exported="false" />
         <activity

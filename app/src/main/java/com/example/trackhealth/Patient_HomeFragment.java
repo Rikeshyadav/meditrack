@@ -1,6 +1,7 @@
 package com.example.trackhealth;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -54,6 +56,7 @@ public class Patient_HomeFragment extends Fragment {
     ProgressBar progressBar;
     TextView nodata;
     LottieAnimationView empty;
+   CardView diet,medicine,exercise;
     NavigationView navigationView;
     patient_homeAdapter adapter;
     List arr=new ArrayList<>();
@@ -65,7 +68,9 @@ public class Patient_HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_patient__home, container, false);
-
+diet=view.findViewById(R.id.diet_card);
+exercise=view.findViewById(R.id.exercise_knowledge_card);
+medicine=view.findViewById(R.id.exercise_medicine_card);
         recyclerView=view.findViewById(R.id.patient_recyclview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         sp= requireActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
@@ -76,6 +81,31 @@ public class Patient_HomeFragment extends Fragment {
         empty=view.findViewById(R.id.home_patientpage_lottie);
         nodata=view.findViewById(R.id.home_patientpage_nodata);
         refresh=view.findViewById(R.id.refresh_home_patientpage);
+
+        exercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(),Knowledgegyan.class);
+                i.putExtra("page","Exercise");
+                getActivity().startActivity(i);
+            }
+        });
+        diet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(),Knowledgegyan.class);
+                i.putExtra("page","diet");
+                getActivity().startActivity(i);
+            }
+        });
+        medicine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(),Knowledgegyan.class);
+                i.putExtra("page","medicine");
+                getActivity().startActivity(i);
+            }
+        });
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
