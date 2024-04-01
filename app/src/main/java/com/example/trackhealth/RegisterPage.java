@@ -68,7 +68,7 @@ public class RegisterPage extends AppCompatActivity {
     ProgressBar progress,progress2;
     String verified_phone="";
     String otp="";
-    boolean verified=true,existUser=false;
+    boolean verified=false ,existUser=false;
 
 
     ScrollView scroll;
