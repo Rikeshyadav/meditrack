@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class Doctor_in_PatientFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_doctor_in__patient, container, false);
        Button b1=view.findViewById(R.id.feed);//this is popup trigger id
-        TextView t1map=view.findViewById(R.id.loc1);
+        ImageView t1map=view.findViewById(R.id.loc1);
         TextView loc=view.findViewById(R.id.loc);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override

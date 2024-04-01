@@ -18,9 +18,9 @@ public class User_prescription_activity_page extends AppCompatActivity {
         setContentView(R.layout.activity_user_prescription_page);
         tabLayout=findViewById(R.id.Patinet_tablayout2);
         viewPager2=findViewById(R.id.Patient_pager2);
-        tabLayout.addTab(tabLayout.newTab().setText("ANALYSIS"));
+        tabLayout.addTab(tabLayout.newTab().setText("PRESCRIPTION"));
         tabLayout.addTab(tabLayout.newTab().setText("MEDICINE"));
-        tabLayout.addTab(tabLayout.newTab().setText("CHAT"));
+        tabLayout.addTab(tabLayout.newTab().setText("ANALYSIS"));
         tabLayout.addTab(tabLayout.newTab().setText("CHAT"));
         adapter=new MessageAdapter2(this);
         viewPager2.setAdapter(adapter);
