@@ -69,7 +69,7 @@ public class ForgotPassword extends AppCompatActivity {
         spinner=findViewById(R.id.forgotSpinner);
         auth= FirebaseAuth.getInstance();
         String[] st = {"Select", "Doctor", "Patient"};
-        RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner1, st);
+        RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner_login, st);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
