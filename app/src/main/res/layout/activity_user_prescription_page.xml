@@ -13,10 +13,13 @@
         android:layout_height="74dp"
         android:layout_centerHorizontal="true"
         android:padding="8dp"
-        android:text="Mohan problem 1:cancer"
+        android:text="Act on it"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="#FF8F00"
         android:textSize="25sp" />
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:contentDescription="roller"
@@ -26,9 +29,10 @@
             app:tabTextColor="#EA3E09"
             app:tabTextAppearance="@style/TabTextStyle"
             android:layout_height="60dp"
-            app:tabMode="fixed"
+            app:tabMode="scrollable"
             app:tabGravity="fill"
             android:id="@+id/Patinet_tablayout2"/>
+    </HorizontalScrollView>
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_marginTop="139dp"

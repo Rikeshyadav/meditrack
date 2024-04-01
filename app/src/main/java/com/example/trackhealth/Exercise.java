@@ -68,19 +68,23 @@ public class Exercise extends Fragment {
         });
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1);
         recyclerView1.setLayoutManager(gridLayoutManager);
-        String description = "12 April";
-        String description1 = "yoga is good";
-      //  String description = getResources().getString(R.string.date);
+        String description0 = getString(R.string.date);
+        String description1 = getString(R.string.information1);
+        String description2 = getString(R.string.information2);
+        String description3 = getString(R.string.information3);
+        String description4 = getString(R.string.information4);
+        String description5 = getString(R.string.information5);
+
         dataModels1=new ArrayList<>();
-        datafun=new dataModel_exerciseGyan("Yoga and there benefits","Yoga is a mind and body practice that can build strength and flexibility. It may also help manage pain and reduce stress. ","fact",R.drawable.yoga);
+        datafun=new dataModel_exerciseGyan("7 Best Exercises for Diabetes",description0,"fact",R.drawable.yoga);
         dataModels1.add(datafun);
-        datafun=new dataModel_exerciseGyan("Yoga Or Gym: Which Is Better For Your Health?",description,"fact",R.drawable.ladies);
+        datafun=new dataModel_exerciseGyan("Yoga and it's Types",description1,"fact",R.drawable.ladies);
         dataModels1.add(datafun);
-        datafun=new dataModel_exerciseGyan("Benefits of medication:fact and its steps...",description1,"31-03",R.drawable.meditation);
+        datafun=new dataModel_exerciseGyan("Benefits of medication:fact and its steps...",description2,"31-03",R.drawable.meditation);
         dataModels1.add(datafun);
-        datafun=new dataModel_exerciseGyan("The Top 10 Benefits of Regular Physical Activity",description1,"date",R.drawable.regual);
+        datafun=new dataModel_exerciseGyan("The Top 10 Benefits of Regular Physical Activity",description3,"date",R.drawable.regual);
         dataModels1.add(datafun);
-        datafun=new dataModel_exerciseGyan("The Top 10 Benefits of Regular Physical Activity",description1,"date",R.drawable.regual);
+        datafun=new dataModel_exerciseGyan("The Top 10 Benefits of Regular Physical Activity",description4,"date",R.drawable.regual);
         dataModels1.add(datafun);
 
         adapter=new myadapterfor_list(getActivity(),dataModels1);

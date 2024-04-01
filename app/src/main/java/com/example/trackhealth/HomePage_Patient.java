@@ -155,7 +155,7 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
         } else if (itemId == R.id.patient_nav_logout) {
             setAlert("Do you want to logout?", "yes", "no", "logout");
             unchecknav();
-            openFragment(new Patient_HomeFragment(), "logout");
+           // openFragment(new Patient_HomeFragment(), "logout");
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -274,7 +274,7 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
                 finishAffinity();
             else if (flag.equals("logout")) {
                 Intent i = new Intent(HomePage_Patient.this, LoginActivity.class);
-                boot.edit().putBoolean("islogged", false).apply();
+                sp.edit().putBoolean("islogged", false).apply();
                 startActivity(i);
                 Toast.makeText(this, "logging out", Toast.LENGTH_SHORT).show();
             }
