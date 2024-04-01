@@ -127,15 +127,17 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="510dp"
         android:textColor="@color/black"
-        android:textSize="20sp"/>
-    <TextView
-        android:layout_width="match_parent"
+        android:textSize="19sp"/>
+    <ImageView
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="map://///"
+        android:minHeight="38dp"
+        android:src="@drawable/baseline_location_on_24"
         android:id="@+id/loc1"
         android:clickable="true"
+        android:background="#C2DBF8"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="540dp"
+        android:layout_marginTop="550dp"
         android:textColor="@color/black"
         android:textSize="15sp"/>
     <TextView
