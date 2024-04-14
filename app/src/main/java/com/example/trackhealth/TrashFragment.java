@@ -151,17 +151,15 @@ public class TrashFragment extends Fragment {
 
 
     public List filterArray(JSONArray jsonArray) throws JSONException {
-        JSONArray newarr=new JSONArray();
     List<List> outer=new ArrayList<>();
-
         for(int i=0;i<jsonArray.length();i++){
 
             JSONObject j=jsonArray.getJSONObject(i);
             List<String> inner=new ArrayList<>();
             if(j.getString("pending").equals("true")){
                 inner.add(j.getString("clinic_name"));
-                inner.add(j.getString("doctor_name"));
-                inner.add(j.getString("specification"));
+                inner.add(j.getString("username"));
+                inner.add(j.getString("speciality"));
                 inner.add(j.getString("qualification"));
                 inner.add(j.getString("issue"));
                 inner.add(j.getString("phone"));

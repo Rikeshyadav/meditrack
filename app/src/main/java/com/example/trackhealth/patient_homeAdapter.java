@@ -1,6 +1,9 @@
 package com.example.trackhealth;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +38,10 @@ public class patient_homeAdapter extends RecyclerView.Adapter<patient_homeAdapte
         holder.dspec.setText(data.get(position).get(2).toString());
         holder.dhospital.setText(data.get(position).get(3).toString());
         holder.dqua.setText(data.get(position).get(4).toString());
+        if(!data.get(position).get(0).toString().equals("")) {
+            holder.dp.setImageBitmap(getbitmap(data.get(position).get(0).toString()));
+        }
+        
     }
 
 
@@ -64,5 +71,11 @@ public class patient_homeAdapter extends RecyclerView.Adapter<patient_homeAdapte
                 v.getContext().startActivity(intent);
             }
         }
+    }
+
+    public Bitmap getbitmap(String s){
+        byte[] bytes= Base64.decode(s,Base64.DEFAULT);
+        Bitmap bitmap2= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        return bitmap2;
     }
 }

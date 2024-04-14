@@ -190,7 +190,6 @@ jsonObject.put("state",hstate.getText().toString());
         try {
             //  pb.setVisibility(View.VISIBLE);
             JSONObject jsonobj=new JSONObject();
-
             jsonobj.put("username", nm);
             jsonobj.put("email",em);
             jsonobj.put("phone",ph);
@@ -203,7 +202,6 @@ jsonObject.put("state",hstate.getText().toString());
             jsonobj.put("about",about);
             jsonobj.put("qualification",qualif);
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.PUT, temp, jsonobj, new Response.Listener<JSONObject>() {
-
                 @Override
                 public void onResponse(JSONObject response) {
                     //pb.setVisibility(View.GONE);
