@@ -170,10 +170,11 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.MyViewHo
 
         try {
             JSONObject jj=new JSONObject();
-            jj.put("patient_name",sp.getString("name",""));
+            jj.put("username",sp.getString("name",""));
             jj.put("dob",sp.getString("dob",""));
             jj.put("gender",sp.getString("gender",""));
             jj.put("address",sp.getString("address",""));
+            jj.put("photo",sp.getString("photo",""));
             jj.put("phone",patient);
             jj.put("pending",pending);
             jj.put("issue",issue);

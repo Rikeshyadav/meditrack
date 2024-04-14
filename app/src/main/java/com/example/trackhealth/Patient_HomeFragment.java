@@ -258,15 +258,21 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
             JSONObject j=jsonArray.getJSONObject(i);
             List<String> inner=new ArrayList<>();
             if(j.getString("pending").equals("false")){
-                inner.add("");
-                inner.add(j.getString("doctor_name"));
-                inner.add(j.getString("specification"));
+                try {
+                    inner.add(j.getString("photo"));
+                }
+                catch (Exception e){
+                    inner.add("");
+                }
+                inner.add(j.getString("username"));
+                inner.add(j.getString("speciality"));
                 try {
                     inner.add(j.getString("clinic_name"));
                 }catch(Exception e){
-                    inner.add(j.getString("doctor_name"));
+                    inner.add(j.getString("username"));
                 }
                 inner.add(j.getString("qualification"));
+
                 outer.add(inner);
 
             }

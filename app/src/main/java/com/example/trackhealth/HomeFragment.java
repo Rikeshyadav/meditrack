@@ -249,12 +249,18 @@ System.out.println("hello"+dataSearchList);
             JSONObject j=jsonArray.getJSONObject(i);
             List<String> inner=new ArrayList<>();
             if(j.getString("pending").equals("false")){
-                inner.add(j.getString("patient_name"));
+                inner.add(j.getString("username"));
                 inner.add(j.getString("dob"));
                 inner.add(j.getString("gender"));
                 inner.add(j.getString("address"));
                 inner.add(j.getString("issue"));
                 inner.add(j.getString("phone"));
+                try {
+                    inner.add(j.getString("photo"));
+                }
+                catch(Exception e){
+                    inner.add("");
+                }
                 outer.add(inner);
 
             }

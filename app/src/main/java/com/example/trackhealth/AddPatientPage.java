@@ -242,12 +242,17 @@ if(!phone.equals("")) {
         try {
             JSONObject jj=new JSONObject();
             jj.put("clinic_name",dclinic);
-            jj.put("doctor_name",dname);
-            jj.put("specification",specification);
+            jj.put("username",dname);
+            jj.put("speciality",specification);
             jj.put("qualification",qualification);
             jj.put("issue",issue);
             jj.put("phone",sp.getString("phone",""));
             jj.put("pending","true");
+            jj.put("about",sp.getString("about",""));
+            jj.put("state",sp.getString("state",""));
+            jj.put("city",sp.getString("city",""));
+            jj.put("photo",sp.getString("photo",""));
+
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.PUT, temp,jj, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
