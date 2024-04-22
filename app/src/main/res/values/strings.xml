@@ -10,6 +10,7 @@
     </style>
     <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
 
+
     <string name="date">
        "A well-rounded exercise routine should include a variety of activities. These workouts can help you improve and maintain your fitness, strength, and flexibility.
 
@@ -47,7 +48,8 @@ Another low-impact form of exercise, Pilates earns a spot on this list for good 
 
 "
     </string>
-
+    <string name="channel_name">Trial</string>
+    <string name="channel_description">This is a trial</string>
 <string name="information1">
 "Yoga is an excellent way to get sweaty and centered, whether you're a total newbie or longtime pro. Plus, there are some seriously awesome health benefits of yoga that you can score from a daily practice.
 

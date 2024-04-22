@@ -269,10 +269,13 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
                 try {
                     inner.add(j.getString("clinic_name"));
                 }catch(Exception e){
-                    inner.add(j.getString("username"));
+                    inner.add("");
                 }
                 inner.add(j.getString("qualification"));
-
+                inner.add(j.getString("about"));
+                inner.add(j.getString("phone"));
+                sp.edit().putString("curphone",j.getString("phone")).apply();
+                sp.edit().putString("curname",j.getString("username")).apply();
                 outer.add(inner);
 
             }
