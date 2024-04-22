@@ -261,6 +261,7 @@ if(!phone.equals("")) {
                         if (Boolean.parseBoolean(response.getString("success"))) {
                             pb.setVisibility(View.GONE);
                             add.setText("added");
+                            add.setBackgroundDrawable(getDrawable(R.drawable.green_button));
                             Toast.makeText(getApplicationContext(),"added successfully",Toast.LENGTH_SHORT).show();
                         }
                         else{

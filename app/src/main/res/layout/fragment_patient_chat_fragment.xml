@@ -5,11 +5,50 @@
     android:layout_height="match_parent"
     android:background="#C9CDD1"
     tools:context=".Patient_chat_fragment">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:id="@+id/chatrecpat"
+    android:layout_above="@+id/chateditpatient_ll"
+    />
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/chateditpatient_ll"
+     android:gravity="center"
+     android:layout_margin="10dp"
+     android:weightSum="10"
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-     android:text="chat"/>
+     android:layout_alignParentBottom="true"
+     android:orientation="horizontal"
+     >
+     <EditText
+         android:layout_width="0dp"
+         android:layout_weight="8.5"
+         android:layout_height="wrap_content"
+         android:id="@+id/chateditpatient"
+         android:textSize="18sp"
+         android:padding="15dp"
+         android:layout_margin="2dp"
+         android:textColor="@color/black"
+         android:background="@drawable/search_box"
+         android:backgroundTint="#A7A8AA"
+         android:hint="Enter Message"
 
+         />
+     <ImageView
+         android:layout_width="0dp"
+         android:layout_weight="1.5"
+         android:layout_height="50dp"
+         android:src="@drawable/send_icon"
+         android:id="@+id/chatsendpat"
+         android:layout_margin="2dp"
+         />
+ </LinearLayout>
+</RelativeLayout>
 </FrameLayout>

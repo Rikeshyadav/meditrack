@@ -10,20 +10,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1F4F8">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp">
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="horizontal"
+    android:id="@+id/dipll"
     android:layout_marginTop="40dp"
     android:layout_height="wrap_content">
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="190dp"
+        android:layout_width="160dp"
         android:padding="4dp"
         android:id="@+id/doctorpho"
-        android:layout_height="330dp"
+        android:layout_height="250dp"
         android:layout_marginStart="14dp"
         android:contentDescription="image_access"
         app:shapeAppearanceOverlay="@style/specificcorner1"
-        android:src="@drawable/img_2"
+        android:src="@drawable/user"
         android:scaleType="centerCrop"
      />
     <LinearLayout
@@ -35,27 +41,75 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dr.Mohan sharma faturiya"
+            android:text="Dr."
             android:textSize="20sp"
+            android:fontFamily="@font/gugi"
             android:id="@+id/Dn"
             android:textStyle="bold"
             android:textColor="@color/black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:text="Heart surgeon specialist"
+            android:layout_marginTop="6dp"
+            android:text="specialist"
             android:textSize="15sp"
             android:id="@+id/skill"
             android:textColor="#00695C"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="6dp"
+            android:layout_marginTop="6dp"
+            android:text="6 yrs of practice"
+            android:textSize="15sp"
+            android:id="@+id/dipyoe"
+            android:textColor="@color/black"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="2dp"
+                android:layout_gravity="center"
+                android:src="@drawable/hospital2"
+                />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="2dp"
             android:text="TRIMS"
             android:id="@+id/pl"
             android:textSize="15sp"
-            android:textColor="#00695C"/>
+            android:textColor="@color/black"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/baseline_location_on_24"
+                android:id="@+id/loc1"
+                android:clickable="true"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guwahati,Assam"
+            android:id="@+id/loc"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+        </LinearLayout>
+
         <RatingBar
             android:id="@+id/rating_doctor_patientpage"
             style="?android:attr/ratingBarStyleSmall"
@@ -73,11 +127,11 @@
             />
         <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
         <ImageView
             android:layout_width="40dp"
-            android:layout_marginTop="50dp"
             android:layout_height="80dp"
             android:contentDescription="call"
             android:layout_marginStart="30dp"
@@ -86,7 +140,6 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="80dp"
-            android:layout_marginTop="50dp"
             android:contentDescription="video"
             android:layout_marginStart="50dp"
             android:background="@drawable/fnd"
@@ -96,56 +149,35 @@
     </LinearLayout>
 </LinearLayout>
 <TextView
-    android:layout_marginTop="400dp"
+    android:layout_marginTop="20dp"
     android:layout_marginStart="20dp"
     android:layout_width="wrap_content"
     android:text="About"
+    android:layout_below="@+id/dipll"
+    android:id="@+id/dipabout_title"
     android:textColor="#1565C0"
     android:textSize="25sp"
     android:layout_height="wrap_content"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="445dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/dipabout_title"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="10dp"
+        android:textSize="17sp"
+        android:id="@+id/dipabout"
         android:text="“While the journey seems long and hard at the beginning with perseverance and  dedication the rewards at the end last a lifetime.”"
         android:textColor="@color/black"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Location:"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="510dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trims,Naharlagun,Arunachal Pradesh"
-        android:id="@+id/loc"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="510dp"
-        android:textColor="@color/black"
-        android:textSize="19sp"/>
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:minHeight="38dp"
-        android:src="@drawable/baseline_location_on_24"
-        android:id="@+id/loc1"
-        android:clickable="true"
-        android:background="#C2DBF8"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="550dp"
-        android:textColor="@color/black"
-        android:textSize="15sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time"
-    android:layout_marginStart="10dp"
-        android:layout_marginTop="590dp"
+        android:text="Available Period"
+        android:layout_marginTop="20dp"
+        android:id="@+id/dip_timetitle"
+    android:layout_marginStart="20dp"
+        android:layout_below="@id/dipabout"
         android:textColor="@color/black"
         android:textSize="20sp"/>
     <TextView
@@ -153,31 +185,185 @@
         android:layout_height="wrap_content"
         android:text="Monday to Friday from 9:30 to 2 :00 pm"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="620dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="feedback"
-        android:background="@drawable/rectangle_box"
-        android:id="@+id/feed"
-        android:backgroundTint="#0277BD"
-        android:clickable="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="660dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:id="@+id/feedback1"
-        android:text="“Try to maintain the health and follow prescription“"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="740dp"
+        android:layout_below="@id/dip_timetitle"
+        android:id="@+id/dip_time"
         android:textColor="@color/black"
         android:textSize="20sp"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/feed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dip_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Write a review"
+            android:textColor="@color/black"
+            app:strokeWidth="1.3dp"
+            app:cornerRadius="20dp"
+            app:strokeColor="#393838"
+            android:padding="10dp"
+            android:textSize="15sp"
+            app:icon="@drawable/editicon"
+            app:iconTint="@color/black" />
+
+        <View android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:id="@+id/diphr1"
+            android:layout_below="@id/feed"
+            android:layout_margin="2dp"
+            />
+
+        <TextView
+            android:id="@+id/dipsort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/diphr1"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="2dp"
+            android:text="Sort by"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/dipradio"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/dipsort"
+            >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/register_selector_radiobutton"
+                android:textColor="@drawable/register_text_color"
+                android:elevation="4dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:text="All"
+                android:padding="10dp"
+                android:id="@+id/dipall"
+                android:button="@color/black"
+                android:textSize="15sp"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 star"
+                android:layout_marginEnd="2.5dp"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:padding="10dp"
+                android:elevation="4dp"
+                android:button="@color/black"
+                android:id="@+id/dip5"
+                android:background="@drawable/register_selector_radiobutton"
+                android:textColor="@drawable/register_text_color"
+                android:textSize="@dimen/register_font_size"
+                />
+
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 star"
+                android:layout_marginEnd="2.5dp"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:padding="10dp"
+                android:elevation="4dp"
+                android:button="@color/black"
+                android:id="@+id/dip4"
+                android:background="@drawable/register_selector_radiobutton"
+                android:textColor="@drawable/register_text_color"
+                android:textSize="@dimen/register_font_size"
+                />
+
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 star"
+                android:layout_marginEnd="2.5dp"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:padding="10dp"
+                android:elevation="4dp"
+                android:button="@color/black"
+                android:id="@+id/dip3"
+                android:background="@drawable/register_selector_radiobutton"
+                android:textColor="@drawable/register_text_color"
+                android:textSize="@dimen/register_font_size"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 star"
+                android:layout_marginEnd="2.5dp"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:padding="10dp"
+                android:elevation="4dp"
+                android:button="@color/black"
+                android:id="@+id/dip2"
+                android:background="@drawable/register_selector_radiobutton"
+                android:textColor="@drawable/register_text_color"
+                android:textSize="@dimen/register_font_size"
+                />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 star"
+                android:layout_marginEnd="2.5dp"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:padding="10dp"
+                android:elevation="4dp"
+                android:button="@color/black"
+                android:id="@+id/dip1"
+                android:background="@drawable/register_selector_radiobutton"
+                android:textColor="@drawable/register_text_color"
+                android:textSize="@dimen/register_font_size"
+                />
+        </RadioGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_below="@id/dipradio"
+            android:id="@+id/diprecreview"
+            />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            android:id="@+id/reviewprogress"
+            android:layout_below="@id/dipradio"
+            />
+    </RelativeLayout>
 </FrameLayout>
 </ScrollView>

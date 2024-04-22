@@ -255,6 +255,8 @@ System.out.println("hello"+dataSearchList);
                 inner.add(j.getString("address"));
                 inner.add(j.getString("issue"));
                 inner.add(j.getString("phone"));
+                sp.edit().putString("curphone",j.getString("phone")).apply();
+                sp.edit().putString("curname",j.getString("username")).apply();
                 try {
                     inner.add(j.getString("photo"));
                 }

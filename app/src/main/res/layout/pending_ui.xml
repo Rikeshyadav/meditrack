@@ -139,6 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="10"
+            android:gravity="end"
             android:layout_below="@id/pendocissue_parent"
             android:id="@+id/pendocbut_parent"
             android:orientation="horizontal">

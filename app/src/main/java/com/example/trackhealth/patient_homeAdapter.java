@@ -1,6 +1,8 @@
 package com.example.trackhealth;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -68,6 +70,14 @@ public class patient_homeAdapter extends RecyclerView.Adapter<patient_homeAdapte
             int position=getAdapterPosition();
             if(position !=RecyclerView.NO_POSITION){
                 Intent intent=new Intent(v.getContext(), user_report_homepage.class);
+                SharedPreferences sp=v.getContext().getSharedPreferences("docpat", Context.MODE_PRIVATE);
+                sp.edit().putString("dname",data.get(position).get(1).toString()).apply();
+                sp.edit().putString("dspec",data.get(position).get(2).toString()).apply();
+                sp.edit().putString("dhos",data.get(position).get(3).toString()).apply();
+                sp.edit().putString("dqua",data.get(position).get(4).toString()).apply();
+                sp.edit().putString("dphoto",data.get(position).get(0).toString()).apply();
+                sp.edit().putString("dabout",data.get(position).get(5).toString()).apply();
+                sp.edit().putString("dphone",data.get(position).get(6).toString()).apply();
                 v.getContext().startActivity(intent);
             }
         }

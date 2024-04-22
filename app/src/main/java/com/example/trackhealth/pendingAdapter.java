@@ -2,6 +2,7 @@ package com.example.trackhealth;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.MyViewHo
            updatePatient(patient,item.get(5).toString(),"false",item.get(4).toString());
            updateDoctor(item.get(5).toString(),patient,"false",item.get(4).toString());
            holder.accept.setText("accepted");
-           holder.reject.setClickable(false);
+           holder.reject.setVisibility(View.GONE);
            holder.accept.setClickable(false);
            holder.reject.setBackgroundColor(context.getColor(R.color.hint));
            holder.accept.setBackgroundColor(context.getColor(R.color.hint));
@@ -83,7 +84,7 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.MyViewHo
                 updatePatient(patient,item.get(5).toString(),"delete",item.get(4).toString());
                 holder.reject.setText("rejected");
                 holder.reject.setClickable(false);
-                holder.accept.setClickable(false);
+                holder.accept.setVisibility(View.GONE);
                 holder.reject.setBackgroundColor(context.getColor(R.color.hint));
                 holder.accept.setBackgroundColor(context.getColor(R.color.hint));
             }
