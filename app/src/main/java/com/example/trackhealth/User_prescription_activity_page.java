@@ -21,7 +21,7 @@ public class User_prescription_activity_page extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("PRESCRIPTION"));
         tabLayout.addTab(tabLayout.newTab().setText("MEDICINE"));
         tabLayout.addTab(tabLayout.newTab().setText("ANALYSIS"));
-        tabLayout.addTab(tabLayout.newTab().setText("CHAT"));
+        tabLayout.addTab(tabLayout.newTab().setText("REPORT"));
         adapter=new MessageAdapter2(this);
         viewPager2.setAdapter(adapter);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

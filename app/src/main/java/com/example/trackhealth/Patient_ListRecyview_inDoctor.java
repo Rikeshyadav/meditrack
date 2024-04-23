@@ -20,6 +20,7 @@ public class Patient_ListRecyview_inDoctor extends AppCompatActivity {
         doctor_view=findViewById(R.id.Doctorview_pager);
         doctor_tablayout.addTab(doctor_tablayout.newTab().setText("PATIENT"));
         doctor_tablayout.addTab(doctor_tablayout.newTab().setText("PROBLEM"));
+        doctor_tablayout.addTab(doctor_tablayout.newTab().setText("CHAT"));
         adapterdoctor=new ViewPage_DoctorAdapter(this);
         doctor_view.setAdapter(adapterdoctor);
         doctor_tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

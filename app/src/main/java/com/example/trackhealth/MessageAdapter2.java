@@ -17,8 +17,6 @@ public class MessageAdapter2 extends FragmentStateAdapter {
             return new Patient_Analysisfragment();
         } else if (position==1) {
             return new patient_medicinefragment();
-        } else if (position==2) {
-            return new Patient_chat_fragment();
         }else {
             return new Patient_Analysisfragment();
         }
