@@ -4,10 +4,12 @@
     <string name="navigation_drawer_close">close navigation Drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <style name="CustomSearchViewStyle" parent="Widget.AppCompat.SearchView">
         <!-- Customize other attributes as needed -->
         <item name="android:textColor">#00695C</item>
     </style>
+
     <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
 
 
@@ -50,7 +52,7 @@ Another low-impact form of exercise, Pilates earns a spot on this list for good 
     </string>
     <string name="channel_name">Trial</string>
     <string name="channel_description">This is a trial</string>
-<string name="information1">
+    <string name="information1">
 "Yoga is an excellent way to get sweaty and centered, whether you're a total newbie or longtime pro. Plus, there are some seriously awesome health benefits of yoga that you can score from a daily practice.
 
 Whether you want a physically demanding yoga class, or a relaxing, meditative one, there are plenty of different yoga styles to suit a variety of skill levels and needs.
@@ -117,16 +119,16 @@ Restorative yoga focuses on winding down after a long day and relaxing your mind
     How to practice:
 You'll spend more time in fewer postures throughout a restorative yoga class. Many of the poses are modified to be easier and more relaxing. Like Iyengar, many props are used and placed just right, such as blankets, bolsters, and eye pillows. All of the props are there to help you sink deeper into relaxation."
 </string>
-<string name="information2">
+    <string name="information2">
 
 </string>
-<string name="information3">
+    <string name="information3">
 
 </string>
-<string name="information4">
+    <string name="information4">
 
 </string>
-<string name="information5">
+    <string name="information5">
 
 </string>
 </resources>

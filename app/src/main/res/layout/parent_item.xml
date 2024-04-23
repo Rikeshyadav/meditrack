@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:backgroundTint="#F6F2F4"
+    app:cardElevation="20dp"
+    android:outlineSpotShadowColor="#11453F"
+    android:outlineAmbientShadowColor="#0A4E45"
+    android:layout_margin="2dp"
+    app:cardCornerRadius="15dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:text="Issue:"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:id="@+id/name_problem"
+            android:layout_marginStart="80dp"
+            android:padding="5dp"
+            android:text="fever"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="44dp"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:text="Date:"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="44dp"
+            android:padding="10dp"
+            android:id="@+id/date_shower"
+            android:textColor="#151717"
+            android:text="12-12-23"/>
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:id="@+id/more_option"
+                android:contentDescription="suggestion"
+                android:layout_marginStart="340dp"
+                android:padding="5dp"
+                android:src="@drawable/baseline_more_horiz_24"/>
+
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/toggle"
+            android:layout_width="100dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="90dp"
+            android:textOff="G"
+            android:textOn="C"
+            android:textSize="200sp"
+            android:textStyle="bold"
+            app:showText="true"
+            app:thumbTint="#73B0D5"
+            app:trackTint="#3D9E92" />
+
+        <TextView
+            android:id="@+id/go_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="90dp"
+            android:text="Going on"
+            android:textColor="#B51C1C"
+            android:textSize="20sp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp"
+        android:id="@+id/Expandableparent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            android:layout_marginHorizontal="11dp"/>
+    </RelativeLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
