@@ -1,6 +1,8 @@
 package com.example.trackhealth;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -18,16 +20,18 @@ import java.util.List;
 
 public class HomeDoctorAdapter extends RecyclerView.Adapter<HomeDoctorAdapter.MyViewHolder> {
     private List<List> data;
-
-    public HomeDoctorAdapter(List<List> data) {
+Context context;
+    public HomeDoctorAdapter(List<List> data,Context context) {
         this.data = data;
+        this.context=context;
+
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.doctor_rec_ui, parent, false);
-        return new MyViewHolder(itemView);
+        return new MyViewHolder(itemView,data);
     }
 
     @Override
@@ -36,6 +40,7 @@ public class HomeDoctorAdapter extends RecyclerView.Adapter<HomeDoctorAdapter.My
         holder.pname.setText(item.get(0).toString());
         holder.pdob.setText(item.get(1).toString());
         holder.pgender.setText(item.get(2).toString());
+
         try {
             if(!item.get(6).toString().equals("")) {
                 holder.img.setImageBitmap(getbitmap(item.get(6).toString()));
@@ -45,6 +50,8 @@ public class HomeDoctorAdapter extends RecyclerView.Adapter<HomeDoctorAdapter.My
             holder.img.setImageResource(R.drawable.user);
         }
 
+
+
     }
 
     @Override
@@ -53,27 +60,35 @@ public class HomeDoctorAdapter extends RecyclerView.Adapter<HomeDoctorAdapter.My
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView pname,pdob,pgender;
+        public TextView pname, pdob, pgender;
         public ImageView img;
-        public MyViewHolder(@NonNull View itemView) {
+        private List<List> data; // Add a reference to data variable
+
+        public MyViewHolder(@NonNull View itemView, List<List> data) { // Pass data as a parameter
             super(itemView);
+            this.data = data; // Assign passed data to local variable
+
             pname = itemView.findViewById(R.id.homerecpat);
             pdob = itemView.findViewById(R.id.homerecdob);
             pgender = itemView.findViewById(R.id.homerecgen);
-            img=itemView.findViewById(R.id.dp_patient_page_doctor);
+            img = itemView.findViewById(R.id.dp_patient_page_doctor);
             itemView.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View v) {
-            int position=getAdapterPosition();
-            if(position !=RecyclerView.NO_POSITION){
-                Intent intent=new Intent(v.getContext(), Patient_ListRecyview_inDoctor.class);
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Intent intent = new Intent(v.getContext(), Patient_ListRecyview_inDoctor.class);
+                SharedPreferences sp = v.getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+                sp.edit().putString("curphone2", data.get(position).get(5).toString()).apply();
+                sp.edit().putString("curname", data.get(position).get(0).toString()).apply();
+
                 v.getContext().startActivity(intent);
             }
         }
     }
+
 
     public Bitmap getbitmap(String s){
         byte[] bytes= Base64.decode(s,Base64.DEFAULT);

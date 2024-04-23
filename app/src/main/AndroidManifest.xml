@@ -38,6 +38,9 @@
         android:theme="@style/Theme.Trackhealth"
         tools:targetApi="31">
         <activity
+            android:name=".LabAssistant"
+            android:exported="false" />
+        <activity
             android:name=".Patient_ListRecyview_inDoctor"
             android:exported="false" />
         <activity

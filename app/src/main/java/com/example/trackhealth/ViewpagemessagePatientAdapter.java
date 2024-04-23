@@ -17,6 +17,8 @@ public class ViewpagemessagePatientAdapter extends FragmentStateAdapter {
                 return new Doctor_in_PatientFragment();
             } else if (position==1) {
                 return new Patient_Testfragment();
+            }else if(position==2){
+                return new Patient_chat_fragment();
             }
             else {
                 return new Doctor_in_PatientFragment();
@@ -25,6 +27,6 @@ public class ViewpagemessagePatientAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }

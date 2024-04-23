@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         forgot=findViewById(R.id.forgotpass);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        String[] st = {"Select", "Doctor", "Patient"};
+        String[] st = {"Select", "Doctor", "Patient","Lab Assistant"};
         RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner_login, st);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         docpat2.setAdapter(adapter);
@@ -86,6 +86,10 @@ public class LoginActivity extends AppCompatActivity {
                 else if (selectedOption.equals("Select"))
                 {
                     doctororpatient="null";
+                }
+                else if (selectedOption.equals("Lab Assistant"))
+                {
+                    doctororpatient="Lab Assistant";
                 }
                 else{
                     doctororpatient="null";
@@ -177,6 +181,9 @@ progressBar.setVisibility(View.GONE);
 if(doctororpatient.equals("Patient")) {
     b1 = new Intent(LoginActivity.this, HomePage_Patient.class);
 }
+                        else if(doctororpatient.equals("Lab Assistant")) {
+                            b1 = new Intent(LoginActivity.this,LabAssistant.class);
+                        }
 else{
     b1 = new Intent(LoginActivity.this, HomePage_Doctor.class);
 }

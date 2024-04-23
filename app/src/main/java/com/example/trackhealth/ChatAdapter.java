@@ -19,6 +19,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         this.arr=data;
         this.context=context;
     }
+
+    public void updateData(List<List> messageList) {
+        this.arr = messageList;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public ChatAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

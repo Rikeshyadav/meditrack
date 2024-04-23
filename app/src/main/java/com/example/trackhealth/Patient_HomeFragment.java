@@ -154,7 +154,7 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
             Toast.makeText(getActivity(), "Not Found", Toast.LENGTH_SHORT).show();
         }
         System.out.println("hello"+dataSearchList);
-        adapter = new patient_homeAdapter(dataSearchList);
+        adapter = new patient_homeAdapter(dataSearchList,getActivity());
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
     }
@@ -182,7 +182,7 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
                             if (ja.length()>0) {
                                 arr = filterArray(response.getJSONArray("doctoradd"));
                                 if (arr.size() > 0) {
-                                    adapter = new patient_homeAdapter(arr);
+                                    adapter = new patient_homeAdapter(arr,getActivity());
                                     recyclerView.setVisibility(View.VISIBLE);
                                     recyclerView.setAdapter(adapter);
                                     progressBar.setVisibility(View.GONE);
@@ -274,8 +274,7 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
                 inner.add(j.getString("qualification"));
                 inner.add(j.getString("about"));
                 inner.add(j.getString("phone"));
-                sp.edit().putString("curphone",j.getString("phone")).apply();
-                sp.edit().putString("curname",j.getString("username")).apply();
+
                 outer.add(inner);
 
             }

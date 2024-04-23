@@ -20,9 +20,10 @@ import java.util.List;
 public class patient_homeAdapter extends RecyclerView.Adapter<patient_homeAdapter.myholder> {
 
     private static List<List>data;
-
-    public patient_homeAdapter(List<List> data) {
+Context context;
+    public patient_homeAdapter(List<List> data,Context context) {
         this.data = data;
+        this.context=context;
     }
 
     @NonNull
@@ -42,8 +43,9 @@ public class patient_homeAdapter extends RecyclerView.Adapter<patient_homeAdapte
         holder.dqua.setText(data.get(position).get(4).toString());
         if(!data.get(position).get(0).toString().equals("")) {
             holder.dp.setImageBitmap(getbitmap(data.get(position).get(0).toString()));
+
         }
-        
+
     }
 
 
@@ -78,6 +80,10 @@ public class patient_homeAdapter extends RecyclerView.Adapter<patient_homeAdapte
                 sp.edit().putString("dphoto",data.get(position).get(0).toString()).apply();
                 sp.edit().putString("dabout",data.get(position).get(5).toString()).apply();
                 sp.edit().putString("dphone",data.get(position).get(6).toString()).apply();
+                SharedPreferences sp2=v.getContext().getSharedPreferences("user",Context.MODE_PRIVATE);
+                sp2.edit().putString("curphone2",data.get(position).get(6).toString()).apply();
+                sp2.edit().putString("curname",data.get(position).get(1).toString()).apply();
+
                 v.getContext().startActivity(intent);
             }
         }

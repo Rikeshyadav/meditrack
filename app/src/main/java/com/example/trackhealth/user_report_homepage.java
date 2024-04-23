@@ -20,6 +20,7 @@ public class user_report_homepage extends AppCompatActivity {
          viewPager2=findViewById(R.id.Patient_pager);
         tabLayout.addTab(tabLayout.newTab().setText("DOCTOR"));
         tabLayout.addTab(tabLayout.newTab().setText("Problem"));
+        tabLayout.addTab(tabLayout.newTab().setText("CHAT"));
          adapter1=new ViewpagemessagePatientAdapter(this);
          viewPager2.setAdapter(adapter1);
          tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
