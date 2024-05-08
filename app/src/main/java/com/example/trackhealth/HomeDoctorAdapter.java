@@ -83,7 +83,8 @@ Context context;
                 SharedPreferences sp = v.getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
                 sp.edit().putString("curphone2", data.get(position).get(5).toString()).apply();
                 sp.edit().putString("curname", data.get(position).get(0).toString()).apply();
-
+                SharedPreferences sp2=v.getContext().getSharedPreferences("issue", Context.MODE_PRIVATE);
+               sp2.edit().putString("idno",sp.getString("phone","")+data.get(position).get(5).toString()).apply();
                 v.getContext().startActivity(intent);
             }
         }

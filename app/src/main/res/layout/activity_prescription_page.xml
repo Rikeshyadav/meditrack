@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#DAE5F3"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".prescriptionParent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:id="@+id/preslayout"
+        android:layout_height="match_parent"
+        >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:layout_height="match_parent"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Apollo Hospital"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/prestitle"
+                    android:fontFamily="@font/gugi"
+                    android:layout_margin="10dp"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="240dp"
+                    android:layout_below="@id/prestitle"
+                    android:hint="Enter prescription here"
+                    android:gravity="start"
+                    android:textColor="@color/black"
+                    android:id="@+id/presedit"
+                    android:textSize="17sp"
+                    android:padding="12dp"
+android:layout_marginTop="20dp"
+                    android:background="@drawable/searchfun"
+                    />
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    app:cardBackgroundColor="@color/transparentColor"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/prescard1"
+                    android:layout_below="@id/presedit"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Medicine"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/gugi"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:id="@+id/presmedtitle"
+                            />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/presmedadd"
+                            android:id="@+id/presmedrec"
+                            />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:id="@+id/presmedadd"
+                            android:layout_margin="10dp"
+                            android:text="Add"
+                            android:background="@drawable/green_button"
+                            android:textSize="17sp"
+                            android:layout_alignParentEnd="true"
+                            />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardBackgroundColor="@color/transparentColor"
+                    android:id="@+id/prescard2"
+                    android:layout_below="@id/prescard1"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:padding="10dp"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Test"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/gugi"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="10dp"
+                            android:id="@+id/prestesttitle"
+                            />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/prestestadd"
+                            android:id="@+id/prestestrec"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/prestestadd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/green_button"
+                            android:text="Add"
+                            android:textSize="17sp" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+<ProgressBar
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/prescard2"
+    android:visibility="gone"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/presprogress"
+    />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/presprogress"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="40dp"
+                    android:id="@+id/uploadpres"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:text="Upload Prescription"
+                    android:background="@drawable/orange_button2"
+                    android:textSize="17sp"
+                    android:padding="10dp"
+
+                    />
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+</FrameLayout>

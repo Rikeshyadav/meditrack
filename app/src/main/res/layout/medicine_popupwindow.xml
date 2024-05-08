@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp"
+    app:cardBackgroundColor="@color/white"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+        android:id="@+id/mpopdesgin_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/gugi"
+        android:text="Add Medicine"
+        android:textSize="18sp"/>
+
+        <ImageView
+            android:id="@+id/popmedcross"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/cross2"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp" />
+    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        android:id="@+id/mpopdesgin_mname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mpopdesgin_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rectangle_box"
+        android:hint="Enter Medicine Name"
+        android:padding="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="14"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/mpopdesgin_morningll"
+        android:layout_below="@id/mpopdesgin_mname"
+        >
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:buttonTintMode="multiply"
+            android:buttonTint="@color/green_button"
+            android:gravity="center"
+
+            android:layout_height="30dp"
+            android:id="@+id/mpopdesgin_morning"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4.5"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:text="Morning"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="17sp"
+            />
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="7.5"
+android:visibility="gone"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/mpopdesgin_morningspin"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="14"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/mpopdesgin_afterll"
+        android:orientation="horizontal"
+        android:layout_below="@id/mpopdesgin_morningll"
+        >
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:buttonTintMode="multiply"
+            android:layout_height="30dp"
+            android:id="@+id/mpopdesgin_after"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4.5"
+            android:layout_height="wrap_content"
+            android:text="Afternoon"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:gravity="center"
+            android:textSize="17sp"
+            />
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="7.5"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/mpopdesgin_afterspin"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="14"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        android:id="@+id/mpopdesgin_eveningll"
+
+        android:layout_below="@id/mpopdesgin_afterll"
+        >
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:buttonTintMode="multiply"
+            android:layout_height="30dp"
+            android:id="@+id/mpopdesgin_evening"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4.5"
+            android:layout_height="wrap_content"
+            android:text="Evening"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="17sp"
+            />
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="7.5"
+            android:gravity="center"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:id="@+id/mpopdesgin_eveningspin"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:weightSum="14"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/mpopdesgin_nightll"
+        android:layout_below="@id/mpopdesgin_eveningll"
+        >
+        <CheckBox
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="30dp"
+            android:buttonTintMode="multiply"
+            android:id="@+id/mpopdesgin_night"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4.5"
+            android:layout_height="wrap_content"
+            android:text="Night"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            />
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_weight="7.5"
+            android:gravity="center"
+android:visibility="gone"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/mpopdesgin_nightspin"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Duration"
+        android:layout_below="@id/mpopdesgin_nightll"
+        android:layout_marginStart="10dp"
+        android:id="@+id/mpopdesgin_duration"
+        android:layout_marginTop="20dp"
+        android:textSize="17sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/gugi"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/mpopdesgin_duration_ll"
+        android:layout_below="@id/mpopdesgin_duration"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        >
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:layout_height="wrap_content"
+        android:hint="Start Date"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:id="@+id/mpopdesginStartdate"
+        android:textColor="@color/black"
+        android:background="@drawable/search_box"
+        android:layout_below="@id/mpopdesgin_duration"
+        android:layout_margin="10dp"
+        />
+<TextView
+    android:layout_width="0dp"
+    android:layout_weight="2"
+    android:layout_height="wrap_content"
+    android:text="to"
+    android:gravity="center"
+    android:layout_margin="10dp"
+    android:textSize="19sp"
+    android:textColor="@color/black"
+    />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:hint="End Date"
+            android:id="@+id/mpopdesginEnddate"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:background="@drawable/search_box"
+            android:layout_below="@id/mpopdesgin_duration"
+            android:layout_margin="10dp"
+            />
+    </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity"
+            android:layout_below="@id/mpopdesgin_duration_ll"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/mpopdesgin_quantitytitle"
+            android:layout_marginTop="20dp"
+            android:textSize="17sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/gugi"
+            />
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/mpopdesgin_quan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mpopdesgin_quantitytitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/rectangle_box"
+            android:hint="Enter Quantity"
+            android:padding="15dp"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_below="@id/mpopdesgin_quan"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/mpopdesgin_view"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mpopdesgin_view"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/mpopupdesing_add"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/blue_box"
+        android:padding="10dp"
+        android:text="Add" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mpopdesgin_view"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/mpopupdesing_delete"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/blue_box"
+            android:backgroundTint="#AA1919"
+            android:padding="10dp"
+            android:text="Delete" />
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

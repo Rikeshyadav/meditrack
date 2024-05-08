@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".prescriptionParent">
+
+    <!--android:background="#DAE5F3"-->
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/preslayout"
+        android:layout_height="match_parent"
+        >
+<ProgressBar
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/progress_pparent"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/refresh"
+            android:id="@+id/retry_pparent"/>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:weightSum="10"
+     android:layout_marginTop="10dp"
+     android:layout_marginBottom="5dp"
+     android:layout_marginStart="5dp"
+     android:layout_marginEnd="5dp"
+     android:id="@+id/pparent_issue"
+     android:gravity="center"
+     android:orientation="horizontal"
+     >
+     <TextView
+         android:layout_width="0dp"
+         android:layout_height="match_parent"
+         android:text="Diagnosis : "
+         android:gravity="center"
+         android:textStyle="bold"
+         android:padding="10dp"
+         android:layout_weight="4"
+         android:textSize="18sp"
+         android:textColor="@color/black"
+         />
+     <TextView
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:text="Diabeties"
+         android:padding="10dp"
+         android:id="@+id/pparent_issuevalue"
+         android:layout_weight="6"
+         android:textSize="18sp"
+         android:textColor="@color/black"
+         />
+ </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.2dp"
+            android:background="#4E4D4D"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/pparent_view"
+            android:layout_below="@id/pparent_issue"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pparent_view"
+            android:layout_marginStart="10dp"
+            android:id="@+id/presparentrec"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/presparentadd"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/add_plus" />
+    </RelativeLayout>
+</FrameLayout>

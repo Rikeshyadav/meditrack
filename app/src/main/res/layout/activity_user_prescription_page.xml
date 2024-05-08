@@ -7,23 +7,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/fnd"
     tools:context=".user_report_homepage">
-
-    <TextView
-        android:layout_width="388dp"
-        android:layout_height="74dp"
-        android:layout_centerHorizontal="true"
-        android:padding="8dp"
-        android:text="Act on it"
-        android:textAlignment="center"
-        android:textColor="#FF8F00"
-        android:textSize="25sp" />
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/pp_horizon"
+        android:layout_height="wrap_content">
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:contentDescription="roller"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="2dp"
             app:tabBackground="@color/tabBackgroundColor1"
             app:tabIndicatorColor="#0C0C0C"
             app:tabTextColor="#EA3E09"
@@ -35,7 +26,7 @@
     </HorizontalScrollView>
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
-        android:layout_marginTop="139dp"
         android:layout_height="match_parent"
+        android:layout_below="@id/pp_horizon"
         android:id="@+id/Patient_pager2"/>
 </RelativeLayout>

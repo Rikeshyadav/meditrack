@@ -11,7 +11,7 @@ public class User_prescription_activity_page extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager2;
 
-    MessageAdapter2 adapter;
+    DoctorPrescription_viewpager adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,7 @@ public class User_prescription_activity_page extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("MEDICINE"));
         tabLayout.addTab(tabLayout.newTab().setText("ANALYSIS"));
         tabLayout.addTab(tabLayout.newTab().setText("REPORT"));
-        adapter=new MessageAdapter2(this);
+        adapter=new DoctorPrescription_viewpager(this,getIntent().getStringExtra("issueid"));
         viewPager2.setAdapter(adapter);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

@@ -32,7 +32,7 @@ public class pateint_prescriptionAdapter extends RecyclerView.Adapter<pateint_pr
         holder.text1.setText(data.get(position).getTxt1());
        // holder.text2.setText(data.get(position).getTxt2());
         holder.text3.setText(data.get(position).getTxt3());
-        holder.text4.setText(data.get(position).getTxt4());
+     //   holder.text4.setText(data.get(position).getTxt4());
 
 
     }
@@ -43,14 +43,14 @@ public class pateint_prescriptionAdapter extends RecyclerView.Adapter<pateint_pr
     }
 
     public  static class myholder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView text1,text2,text3,text4;
+        TextView text1,text2,text3;
       public myholder(@NonNull View itemView){
           super(itemView);
 
           text1=itemView.findViewById(R.id.problem);
           text2=itemView.findViewById(R.id.time1);
           text3=itemView.findViewById(R.id.year);
-          text4=itemView.findViewById(R.id.doctor1);
+         // text4=itemView.findViewById(R.id.doctor1);
           itemView.setOnClickListener(this);
       }
 
