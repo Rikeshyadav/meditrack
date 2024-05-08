@@ -1,22 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginTop="48dp"
     android:layout_height="match_parent"
+    android:background="#DAE5F3"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#DAE5F3"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="25dp">
-                <HorizontalScrollView
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/dappbar"
+                    android:layout_width="match_parent"
+                    android:background="#DAE5F3"
+                    android:layout_height="260dp">
+
+                        <com.google.android.material.appbar.CollapsingToolbarLayout
+                            android:id="@+id/collapsing_toolbar_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="260dp"
+                            app:titleCollapseMode="scale"
+                            app:title="TrackHealth"
+                            android:background="#DAE5F3"
+                            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+<!--
+                            <com.denzcoskun.imageslider.ImageSlider
+                                android:id="@+id/homepage_slider1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="260dp"
+                                android:layout_marginStart="20dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginEnd="20dp"
+                                android:layout_marginBottom="10dp"
+                                android:fitsSystemWindows="true"
+                                app:iss_auto_cycle="true"
+                                app:iss_corner_radius="20"
+                                app:iss_delay="500"
+                                app:iss_period="2000" />-->
+                        <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:id="@+id/horizontal"
                     android:layout_marginTop="55dp"
                     android:background="#DAE5F3"
                     android:layout_marginBottom="10dp"
+                    app:layout_collapseMode="parallax"
                     android:layout_height="wrap_content">
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -193,22 +220,24 @@
                         </LinearLayout>
                 </HorizontalScrollView>
 
-                <TextView
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+                </com.google.android.material.appbar.AppBarLayout>
+
+
+          <!--      <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/horizontal"
-                    android:layout_marginStart="8dp"
-                    android:padding="4dp"
-                    android:id="@+id/patient_homefragment_title"
-                    android:text="Patient List"
-                    android:textColor="@color/black"
-                    android:textSize="22sp" />
-
-
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/dappbar"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+-->
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="8dp"
+                    android:background="#DAE5F3"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:nestedScrollingEnabled="true"
                     android:layout_below="@+id/patient_homefragment_title"
                     android:layout_height="wrap_content">
                         <RelativeLayout
@@ -247,12 +276,13 @@
 
                                 <ProgressBar
                                     android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginBottom="38dp"
+                                    android:layout_below="@id/patient_home_searchlayout"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginTop="50dp"
                                     android:layout_centerHorizontal="true"
                                     android:id="@+id/doctor_home_progress"
-
-
                                     />
 
                                 <com.airbnb.lottie.LottieAnimationView
@@ -263,7 +293,6 @@
                                     android:layout_below="@id/patient_home_searchlayout"
                                     android:layout_marginTop="25dp"
                                     app:lottie_loop="true"
-
                                     app:lottie_autoPlay="true"
                                     android:id="@+id/doctor_home_lottie"/>
 
@@ -283,32 +312,39 @@
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:id="@+id/refresh_doctor_homepage"
-                                    android:visibility="gone"
                                     android:layout_centerVertical="true"
+                                    android:visibility="gone"
+                                    android:layout_below="@id/patient_home_searchlayout"
+                                    android:layout_marginTop="50dp"
                                     android:src="@drawable/baseline_refresh_24"
                                     android:layout_centerHorizontal="true"/>
 
 
 
-
-                                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:backgroundTint="#1E4065"
-                                    android:contentDescription="add"
-                                    android:src="@drawable/add_circle"
-                                    app:itemIconTint="@drawable/icon_tint_color_bar"
-                                    android:id="@+id/fab"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_alignParentRight="true"
-                                    app:maxImageSize="30dp"
-                                    />
                         </RelativeLayout>
+
                 </FrameLayout>
-        </RelativeLayout>
-</FrameLayout>
+                <!--</androidx.core.widget.NestedScrollView>-->
+
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#1E4065"
+                    android:layout_gravity="bottom|end"
+                    android:contentDescription="add"
+                    android:src="@drawable/add_circle"
+                    app:itemIconTint="@drawable/icon_tint_color_bar"
+                    android:id="@+id/fab"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    app:maxImageSize="30dp"
+                    />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 

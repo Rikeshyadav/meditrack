@@ -3,7 +3,6 @@ package com.example.trackhealth;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -11,7 +10,7 @@ import com.google.android.material.tabs.TabLayout;
 public class user_report_homepage extends AppCompatActivity {
   TabLayout tabLayout;
   ViewPager2 viewPager2;
-  ViewpagemessagePatientAdapter adapter1;
+  ViewPage_PatientAdapter adapter1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +20,7 @@ public class user_report_homepage extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("DOCTOR"));
         tabLayout.addTab(tabLayout.newTab().setText("Problem"));
         tabLayout.addTab(tabLayout.newTab().setText("CHAT"));
-         adapter1=new ViewpagemessagePatientAdapter(this);
+         adapter1=new ViewPage_PatientAdapter(this);
          viewPager2.setAdapter(adapter1);
          tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
              @Override

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="5dp"
+    android:layout_margin="10dp"
+    android:elevation="4dp"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sno. 12"
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+        android:id="@+id/pparent_sno"
+        android:textColor="@color/hint3"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:text="Pid"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:id="@+id/pparent_pid"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:text="1673848@75867"
+            android:textSize="18sp"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:text="note"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:padding="10dp"
+            android:id="@+id/pparent_note"
+            android:textColor="@color/black"
+            android:text="1673848@75867fa"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="18sp"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:text="date"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:id="@+id/pparent_date"
+            android:text="16/04/2024"
+            android:maxLines="1"
+            android:textSize="18sp"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:text="Total Test"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:text="2"
+            android:maxLines="1"
+            android:id="@+id/pparent_test"
+            android:maxLength="15"
+            android:textSize="18sp"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:text="Total Medicine"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:text="5"
+            android:maxLines="1"
+            android:id="@+id/pparent_medicine"
+            android:maxLength="15"
+            android:textSize="18sp"
+            android:background="@drawable/rectangle_box"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</LinearLayout>
+</androidx.cardview.widget.CardView>

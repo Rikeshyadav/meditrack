@@ -5,16 +5,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class MessageAdapter2 extends FragmentStateAdapter {
-    public MessageAdapter2(@NonNull FragmentActivity fragmentActivity) {
+public class DoctorPrescription_viewpager extends FragmentStateAdapter {
+
+    String issueid;
+    public DoctorPrescription_viewpager(@NonNull FragmentActivity fragmentActivity, String issueid) {
         super(fragmentActivity);
+        this.issueid=issueid;
+
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
          if(position==0) {
-            return new Patient_Analysisfragment();
+            return new prescriptionParent(issueid);
         } else if (position==1) {
             return new patient_medicinefragment();
         }else {

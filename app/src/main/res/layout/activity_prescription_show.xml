@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:padding="1dp"
+    tools:context=".PrescriptionShow">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Apollo Hospital"
+        android:layout_marginBottom="15dp"
+        android:textSize="22sp"
+        android:id="@+id/presshowtitle"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/presshowtitle"
+        >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Dr. Mohan Singh"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:id="@+id/presshowdname"
+        />
+
+    <TextView
+        android:id="@+id/presshowspec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/presshowdname"
+        android:text="Cardiologist , MBBS"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guwahati,Assam"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:id="@+id/presshowaddress"
+        android:layout_below="@id/presshowspec"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ph: 6001188123"
+        android:id="@+id/presshowphone"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:layout_below="@id/presshowaddress"
+        />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:id="@+id/presshowdate"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    android:text="Date : 16/04/2002"
+    android:layout_above="@id/presshowview"
+    />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/presshowphone"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="2dp"
+        android:id="@+id/presshowview"
+        android:layout_marginBottom="5dp"
+        android:background="#F65725" />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/presshowpnamell"
+    android:layout_below="@id/presshowview"
+    android:layout_margin="5dp"
+    android:weightSum="10"
+    >
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Patient's Name : "
+        android:layout_weight="4"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Ravi Kumar"
+        android:layout_weight="6"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/presshowpnamell"
+        android:layout_marginStart="5dp"
+        android:id="@+id/presshowpissue"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:weightSum="10"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Diagnosis :  "
+            android:layout_weight="4"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Heart Issue"
+            android:layout_weight="6"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/presshowpissue"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="2dp"
+        android:id="@+id/presshowview2"
+        android:layout_marginBottom="2dp"
+        android:background="#F65725" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prescription Note"
+        android:layout_below="@id/presshowview2"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:id="@+id/presshownotetitle"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp"
+/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I have viewd your report , you need one week rest, no fast or junk food."
+        android:layout_below="@id/presshownotetitle"
+        android:textColor="@color/black"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/presshownote"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Added Medicine"
+        android:layout_below="@id/presshownote"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:id="@+id/presshowmedtitle"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        />
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:id="@+id/presshowhorizon"
+            android:layout_below="@id/presshowmedtitle">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            <LinearLayout
+                android:id="@+id/headerRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Columns for Header Row -->
+                <!-- Medicine Name -->
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_box"
+                    android:padding="8dp"
+                    android:text="Medicine Name"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Dosage -->
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_box"
+                    android:padding="8dp"
+                    android:text="Dosage"
+
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Duration -->
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_box"
+                    android:padding="8dp"
+                    android:text="Duration"
+
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Quantity -->
+                <TextView
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_box"
+                    android:padding="8dp"
+                    android:text="Quantity"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tableContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/headerRow"
+                    android:orientation="vertical">
+                    <!-- Dynamic rows will be added here -->
+                </LinearLayout>
+            </RelativeLayout>
+        </HorizontalScrollView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medical Test"
+        android:layout_below="@id/presshowhorizon"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:id="@+id/presshowtesttitle"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        />
+
+
+            <LinearLayout
+                android:id="@+id/headerRow2"
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:weightSum="10"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/presshowtesttitle"
+                android:orientation="horizontal">
+
+                <!-- Columns for Header Row -->
+                <!-- Medicine Name -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_box"
+                    android:padding="8dp"
+                    android:text="Medicine Name"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Dosage -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="5"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_box"
+                    android:padding="8dp"
+                    android:text="Dosage"
+
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tableContent2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/headerRow2"
+                android:orientation="vertical">
+                <!-- Dynamic rows will be added here -->
+            </LinearLayout>
+
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_margin="10dp"
+    android:layout_below="@id/tableContent2"
+    android:id="@+id/presshowsign"
+    />
+</RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

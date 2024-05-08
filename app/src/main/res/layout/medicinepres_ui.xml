@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    android:layout_margin="10dp"
+    android:elevation="4dp"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medicine"
+        android:fontFamily="@font/gugi"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        android:id="@+id/mednametitle"
+        android:layout_alignParentTop="true"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Paracetamol Mg 250"
+        android:padding="5dp"
+        android:layout_below="@id/mednametitle"
+        android:id="@+id/meddesignmname"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dosage"
+        android:fontFamily="@font/gugi"
+        android:textColor="@color/black"
+        android:layout_below="@id/meddesignmname"
+        android:id="@+id/meddesigndosage_title"
+        android:textSize="19sp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meddesigndosage_title"
+        android:weightSum="15"
+        android:id="@+id/meddesgin_morning"
+        android:layout_marginTop="10dp"
+        android:padding="4dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:id="@+id/meddesign_mtitle_"
+            android:textColor="@color/black"
+            android:text="Morning"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:id="@+id/meddesign_morning_"
+            android:textColor="@color/black"
+            android:text="After Breakfast"
+            android:textSize="17sp"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meddesgin_morning"
+        android:weightSum="15"
+        android:id="@+id/meddesgin_after"
+        android:layout_marginTop="10dp"
+        android:padding="4dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:id="@+id/meddesign_atitle_"
+            android:textColor="@color/black"
+            android:text="Afternoon"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:id="@+id/meddesign_after_"
+            android:textColor="@color/black"
+            android:text="Before Lunch"
+            android:textSize="17sp"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meddesgin_after"
+        android:weightSum="15"
+        android:id="@+id/meddesgin_even"
+        android:layout_marginTop="10dp"
+        android:padding="4dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:id="@+id/meddesign_etitle_"
+            android:textColor="@color/black"
+            android:text="Evening"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:id="@+id/meddesign_snack_"
+            android:textColor="@color/black"
+            android:text="After Snack"
+            android:textSize="17sp"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meddesgin_even"
+        android:weightSum="15"
+        android:id="@+id/meddesgin_night"
+        android:layout_marginTop="10dp"
+        android:padding="4dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:id="@+id/meddesign_ntitle_"
+            android:textColor="@color/black"
+            android:text="Night"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:textColor="@color/black"
+            android:text="After Dinner"
+            android:id="@+id/meddesign_dinner_"
+            android:textSize="17sp"
+            />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="19sp"
+        android:text="Duration"
+        android:id="@+id/meddesgin_durationtitle"
+        android:textColor="@color/black"
+        android:fontFamily="@font/gugi"
+        android:layout_below="@id/meddesgin_night"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meddesgin_durationtitle"
+        android:weightSum="15"
+        android:id="@+id/meddesgin_durstart"
+        android:layout_marginTop="10dp"
+        android:padding="4dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:text="Start Date"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:gravity="center"
+            android:padding="5dp"
+            android:id="@+id/meddesign_start_"
+            android:background="@drawable/searchfun"
+            android:textColor="@color/black"
+            android:text="13 April 2024"
+            android:textSize="17sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meddesgin_durstart"
+        android:weightSum="15"
+        android:id="@+id/meddesgin_durend"
+        android:layout_marginTop="10dp"
+        android:padding="4dp"
+        android:gravity="start"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:text="End Date"
+            android:textSize="17sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:gravity="center"
+            android:padding="5dp"
+            android:background="@drawable/searchfun"
+            android:textColor="@color/black"
+            android:id="@+id/meddesign_end_"
+            android:text="15 May 2024"
+            android:textSize="17sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/meddesgin_durend"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Quantity"
+            android:fontFamily="@font/gugi"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="19sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text=""
+            android:id="@+id/meddesign_quan_"
+            android:padding="10dp"
+            android:textSize="17sp"
+            />
+
+
+    </LinearLayout>
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

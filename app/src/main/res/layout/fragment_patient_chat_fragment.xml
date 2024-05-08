@@ -8,29 +8,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-    <ScrollView
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_above="@id/chateditpatient_ll"
+            android:layout_alignParentTop="true"
+            android:padding="10dp"
+            android:scrollbarSize="20sp"
+            android:scrollbarStyle="outsideOverlay"
+            android:verticalScrollbarPosition="right"
+            android:overScrollMode="always"
+            android:id="@+id/chatscroll"
+            android:layout_height="wrap_content"
+            >
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:id="@+id/chatscroll"
-        android:layout_above="@id/chateditpatient_ll"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         >
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:layout_alignParentTop="true"
-    android:id="@+id/chatrecpat"
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatrecpat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
 
-    />
-
-</RelativeLayout>
-    </ScrollView>
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp" />
+    </RelativeLayout>
+        </ScrollView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

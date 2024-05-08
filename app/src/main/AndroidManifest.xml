@@ -38,6 +38,15 @@
         android:theme="@style/Theme.Trackhealth"
         tools:targetApi="31">
         <activity
+            android:name=".PrescriptionShow"
+            android:exported="false" />
+        <activity
+            android:name=".Prescription_page"
+            android:exported="false" />
+        <activity
+            android:name=".PrescriptionPage"
+            android:exported="false" />
+        <activity
             android:name=".LabAssistant"
             android:exported="false" />
         <activity

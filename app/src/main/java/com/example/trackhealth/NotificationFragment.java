@@ -36,8 +36,8 @@ public class NotificationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_notification, container, false);
 
-        createNotificationChannel();
-        displayNotification();
+      //  createNotificationChannel();
+       // displayNotification();
         return view;
     }
 

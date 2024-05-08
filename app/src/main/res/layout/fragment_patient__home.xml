@@ -1,314 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:background="#DAE5F3"
+    android:layout_marginTop="48dp"
     tools:context=".Patient_HomeFragment">
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/pappbar"
         android:layout_width="match_parent"
-        app:liftOnScroll="true"
-        android:layout_height="wrap_content">
-<com.google.android.material.appbar.MaterialToolbar
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_scrollFlags="scroll|enterAlwaysCollapsed|enterAlways"
-    app:title="TrackHealth"
-    android:gravity="center"
-    app:titleTextColor="@color/black"
-    android:background="@drawable/tiletoolbar"
-    android:layout_marginTop="40dp"/>
+        android:background="#DAE5F3"
+        android:layout_height="230dp">
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-    android:background="#DAE5F3"
-   android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp">
-        <HorizontalScrollView
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout2"
             android:layout_width="match_parent"
-            android:id="@+id/horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_height="230dp"
+            app:titleCollapseMode="scale"
+            app:title="TrackHealth"
             android:background="#DAE5F3"
-            android:layout_marginBottom="10dp"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:padding="10dp"
-                android:orientation="horizontal">
-                <androidx.cardview.widget.CardView
-                    android:layout_width="150dp"
-                    android:id="@+id/diet_card"
-                    android:layout_height="152dp"
-                    app:cardCornerRadius="20dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/effect"
-                    app:cardBackgroundColor="#A5DAD3"
-                    android:foreground="@drawable/effect"
-                    android:clickable="true"
-                    app:cardElevation="6dp">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                    <LinearLayout
-                        android:layout_width="130dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="12dp"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="112dp"
-                            android:layout_height="101dp"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="12dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/diet"
-                            app:shapeAppearanceOverlay="@style/createcircle"
-                            app:strokeColor="@color/black"
-                            app:strokeWidth="0.5dp" />
-
-                        <TextView
-                            android:layout_width="114dp"
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:id="@+id/horizontal"
+                        android:layout_marginTop="10dp"
+                        android:background="#DAE5F3"
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="9dp"
-                            android:fontFamily="@font/gugi"
-                            android:paddingStart="34dp"
-                            android:text="Diet"
-                            android:textColor="@color/red"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+                            android:layout_margin="3dp"
+                            android:padding="10dp"
+                            android:orientation="horizontal">
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="150dp"
+                                android:id="@+id/diet_card"
+                                android:layout_height="152dp"
+                                app:cardCornerRadius="20dp"
+                                android:layout_margin="4dp"
+                                android:background="@drawable/effect"
+                                app:cardBackgroundColor="#A5DAD3"
+                                android:foreground="@drawable/effect"
+                                android:clickable="true"
+                                app:cardElevation="6dp">
 
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="150dp"
-                    android:layout_height="152dp"
-                    app:cardCornerRadius="20dp"
-                    android:layout_margin="4dp"
-                    android:id="@+id/exercise_knowledge_card"
-                    android:foreground="@drawable/effect"
-                    android:clickable="true"
-                    app:cardBackgroundColor="#E6AA96"
-                    app:cardElevation="6dp">
+                                <LinearLayout
+                                    android:layout_width="130dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="12dp"
+                                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="129dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="12dp"
-                        android:orientation="vertical">
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:layout_width="112dp"
+                                        android:layout_height="101dp"
+                                        android:layout_marginStart="6dp"
+                                        android:layout_marginTop="12dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/diet"
+                                        app:shapeAppearanceOverlay="@style/createcircle"
+                                        app:strokeColor="@color/black"
+                                        app:strokeWidth="0.5dp" />
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="112dp"
-                            android:layout_height="101dp"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/exercise"
-                            app:shapeAppearanceOverlay="@style/createcircle"
-                            app:strokeColor="@color/black"
-                            app:strokeWidth="0.5dp" />
+                                    <TextView
+                                        android:layout_width="114dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginTop="9dp"
+                                        android:fontFamily="@font/gugi"
+                                        android:paddingStart="34dp"
+                                        android:text="Diet"
+                                        android:textColor="@color/red"
+                                        android:textSize="20sp" />
+                                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="114dp"
+                            </androidx.cardview.widget.CardView>
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="150dp"
+                                android:layout_height="152dp"
+                                app:cardCornerRadius="20dp"
+                                android:layout_margin="4dp"
+                                android:id="@+id/exercise_knowledge_card"
+                                android:foreground="@drawable/effect"
+                                android:clickable="true"
+                                app:cardBackgroundColor="#E6AA96"
+                                app:cardElevation="6dp">
+
+                                <LinearLayout
+                                    android:layout_width="129dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="12dp"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:layout_width="112dp"
+                                        android:layout_height="101dp"
+                                        android:layout_marginStart="6dp"
+                                        android:layout_marginTop="10dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/exercise"
+                                        app:shapeAppearanceOverlay="@style/createcircle"
+                                        app:strokeColor="@color/black"
+                                        app:strokeWidth="0.5dp" />
+
+                                    <TextView
+                                        android:layout_width="114dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="22dp"
+                                        android:layout_marginTop="9dp"
+                                        android:fontFamily="@font/gugi"
+                                        android:paddingStart="3dp"
+                                        android:text="Fit Gyan"
+                                        android:textColor="#191B1C"
+                                        android:textSize="20sp" />
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="150dp"
+                                android:layout_height="152dp"
+                                app:cardCornerRadius="20dp"
+                                android:layout_margin="5dp"
+                                android:foreground="@drawable/effect"
+                                android:clickable="true"
+                                app:cardBackgroundColor="#A5DAD3"
+                                app:cardElevation="6dp">
+
+                                <LinearLayout
+                                    android:layout_width="129dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="12dp"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:layout_width="112dp"
+                                        android:layout_height="101dp"
+                                        android:layout_marginStart="6dp"
+                                        android:layout_marginTop="10dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/reportr"
+                                        app:shapeAppearanceOverlay="@style/createcircle"
+                                        app:strokeColor="@color/black"
+                                        app:strokeWidth="0.5dp" />
+
+                                    <TextView
+                                        android:layout_width="114dp"
+                                        android:layout_height="wrap_content"
+
+                                        android:layout_marginTop="9dp"
+                                        android:fontFamily="@font/gugi"
+
+                                        android:text="Report"
+                                        android:gravity="center"
+                                        android:layout_gravity="center"
+                                        android:textColor="@color/red"
+                                        android:textSize="20sp" />
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="150dp"
+                                android:layout_height="152dp"
+                                app:cardCornerRadius="20dp"
+                                android:id="@+id/exercise_medicine_card"
+                                android:foreground="@drawable/effect"
+                                android:clickable="true"
+                                android:layout_margin="5dp"
+                                app:cardBackgroundColor="#BC7A65"
+                                app:cardElevation="6dp">
+
+                                <LinearLayout
+                                    android:layout_width="129dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="12dp"
+                                    android:orientation="vertical">
+
+                                    <com.google.android.material.imageview.ShapeableImageView
+                                        android:layout_width="112dp"
+                                        android:layout_height="101dp"
+                                        android:layout_marginStart="6dp"
+                                        android:layout_marginTop="10dp"
+                                        android:scaleType="centerCrop"
+                                        android:src="@drawable/medicine"
+                                        app:shapeAppearanceOverlay="@style/createcircle"
+                                        app:strokeColor="@color/black"
+                                        app:strokeWidth="0.5dp" />
+
+                                    <TextView
+                                        android:layout_width="114dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="10dp"
+                                        android:layout_marginTop="9dp"
+                                        android:fontFamily="@font/gugi"
+                                        android:paddingStart="3dp"
+                                        android:text="Medicine"
+                                        android:textColor="#0E1B75"
+                                        android:textSize="20sp" />
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+
+                    </HorizontalScrollView>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+                        <!--<TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="22dp"
-                            android:layout_marginTop="9dp"
-                            android:fontFamily="@font/gugi"
-                            android:paddingStart="3dp"
-                            android:text="Fit Gyan"
-                            android:textColor="#191B1C"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+                            android:layout_below="@id/horizontal"
+                            android:layout_marginStart="8dp"
+                            android:padding="4dp"
+                            android:id="@+id/patient_homefragment_title"
+                            android:text="Doctor List"
+                            android:textColor="@color/black"
+                            android:textSize="22sp" />
 
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="150dp"
-                    android:layout_height="152dp"
-                    app:cardCornerRadius="20dp"
-                    android:layout_margin="5dp"
-                    android:foreground="@drawable/effect"
-                    android:clickable="true"
-                    app:cardBackgroundColor="#A5DAD3"
-                    app:cardElevation="6dp">
-
-                    <LinearLayout
-                        android:layout_width="129dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="12dp"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="112dp"
-                            android:layout_height="101dp"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/reportr"
-                            app:shapeAppearanceOverlay="@style/createcircle"
-                            app:strokeColor="@color/black"
-                            app:strokeWidth="0.5dp" />
-
-                        <TextView
-                            android:layout_width="114dp"
-                            android:layout_height="wrap_content"
-
-                            android:layout_marginTop="9dp"
-                            android:fontFamily="@font/gugi"
-
-                            android:text="Report"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            android:textColor="@color/red"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                    android:layout_width="150dp"
-                    android:layout_height="152dp"
-                    app:cardCornerRadius="20dp"
-                    android:id="@+id/exercise_medicine_card"
-                    android:foreground="@drawable/effect"
-                    android:clickable="true"
-                    android:layout_margin="5dp"
-                    app:cardBackgroundColor="#BC7A65"
-                    app:cardElevation="6dp">
-
-                    <LinearLayout
-                        android:layout_width="129dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="12dp"
-                        android:orientation="vertical">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="112dp"
-                            android:layout_height="101dp"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/medicine"
-                            app:shapeAppearanceOverlay="@style/createcircle"
-                            app:strokeColor="@color/black"
-                            app:strokeWidth="0.5dp" />
-
-                        <TextView
-                            android:layout_width="114dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="9dp"
-                            android:fontFamily="@font/gugi"
-                            android:paddingStart="3dp"
-                            android:text="Medicine"
-                            android:textColor="#0E1B75"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/horizontal"
-                android:layout_marginStart="8dp"
-                android:padding="4dp"
-                android:id="@+id/patient_homefragment_title"
-                android:text="Doctor List"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
-
-
-
-        <FrameLayout
+            -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="#DAE5F3"
+        android:layout_marginTop="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:nestedScrollingEnabled="true"
+        android:layout_height="wrap_content">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/patient_homefragment_title"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
+            android:layout_height="wrap_content"
+            >
 
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/patient_home_searchlayout2"
-                    style="@style/CustomSearchViewStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/searchfun"
-                    app:closeIcon="@drawable/baseline_clear_24"
-                    app:iconifiedByDefault="false"
-                    app:queryHint="search...."
-                    app:searchHintIcon="@null"
-                    app:searchIcon="@drawable/baseline_search_24" />
+                            <androidx.appcompat.widget.SearchView
+                                android:id="@+id/patient_home_searchlayout2"
+                                style="@style/CustomSearchViewStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="10dp"
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/patient_recyclview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_below="@id/patient_home_searchlayout2"
-                    android:layout_marginBottom="10dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/searchfun"
+                                app:closeIcon="@drawable/baseline_clear_24"
+                                app:iconifiedByDefault="false"
+                                app:queryHint="search...."
+                                app:searchHintIcon="@null"
+                                app:searchIcon="@drawable/baseline_search_24" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/patient_recyclview"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_below="@id/patient_home_searchlayout2"
+                                android:layout_marginBottom="10dp"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
             <ProgressBar
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="38dp"
                 android:layout_below="@id/patient_home_searchlayout2"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="50dp"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/patientpage_home_progress"
+                            android:id="@+id/patientpage_home_progress"
+                            />
 
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"
+                            app:lottie_rawRes="@raw/empty1"
+                         android:visibility="gone"
+                            android:layout_below="@id/patient_home_searchlayout2"
+                            android:layout_marginTop="25dp"
+                            app:lottie_loop="true"
+            android:background="#DAE5F3"
 
-                />
+                            app:lottie_autoPlay="true"
+                            android:id="@+id/home_patientpage_lottie"/>
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:lottie_rawRes="@raw/empty1"
-             android:visibility="gone"
-                android:layout_below="@id/patient_home_searchlayout2"
-                android:layout_marginTop="25dp"
-                app:lottie_loop="true"
-android:background="#DAE5F3"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/home_patientpage_lottie"
+                            android:text="no data"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:visibility="gone"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="20dp"
+                            android:id="@+id/home_patientpage_nodata"
+                            />
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:id="@+id/refresh_home_patientpage"
+                                android:layout_centerVertical="true"
+                                android:visibility="gone"
+                                android:layout_below="@id/patient_home_searchlayout2"
+                                android:layout_marginTop="50dp"
+                                android:src="@drawable/baseline_refresh_24"
+                                android:layout_centerHorizontal="true"/>
 
-                app:lottie_autoPlay="true"
-                android:id="@+id/home_patientpage_lottie"/>
+        </RelativeLayout>
+                    </FrameLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/home_patientpage_lottie"
-                android:text="no data"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:visibility="gone"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:id="@+id/home_patientpage_nodata"
-                />
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:id="@+id/refresh_home_patientpage"
-                    android:visibility="gone"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/baseline_refresh_24"
-                    android:layout_centerHorizontal="true"/>
-            </RelativeLayout>
-        </FrameLayout>
-    </RelativeLayout>
-</RelativeLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>

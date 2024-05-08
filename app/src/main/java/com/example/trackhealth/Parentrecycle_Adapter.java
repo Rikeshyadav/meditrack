@@ -3,6 +3,7 @@ package com.example.trackhealth;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,9 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Adapter.Myholder> {
-    private final List<datamodelDoctorIssue> dataList;
+    private final List<List> dataList;
     Context context;
-    public Parentrecycle_Adapter(Context context, List<datamodelDoctorIssue> dataList) {
+    public Parentrecycle_Adapter(Context context, List<List> dataList) {
         this.context=context;
         this.dataList = dataList;
     }
@@ -31,19 +32,29 @@ public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Ad
     @NonNull
     @Override
     public Myholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.parent_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.prescription_ui_pateint,parent,false);
         return new Myholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Myholder holder, int position) {
-        datamodelDoctorIssue data=dataList.get(position);
-          holder.problem_name.setText(data.username);
-          holder.show_date.setText(data.number);
+          holder.problem_name.setText(dataList.get(position).get(0).toString());
+          holder.show_date1.setText(dataList.get(position).get(1).toString());
+          if(dataList.get(position).get(3).toString().equals("")){
+              holder.show_date2.setText(dataList.get(position).get(3).toString());
+              holder.lasttxt.setText("No visit yet");
+          }
+          else {
+              holder.show_date2.setText(dataList.get(position).get(3).toString());
+          }
           holder.itemView.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
                   Intent i=new Intent(v.getContext(), User_prescription_activity_page.class);
+                  i.putExtra("issueid",dataList.get(position).get(2).toString());
+                  SharedPreferences sp=v.getContext().getSharedPreferences("issue",Context.MODE_PRIVATE);
+                  sp.edit().putString("issueid",dataList.get(position).get(2).toString()).apply();
+                  sp.edit().putString("issuetitle",dataList.get(position).get(0).toString()).apply();
                   v.getContext().startActivity(i);
               }
           });
@@ -55,31 +66,22 @@ public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Ad
     }
 
     public class Myholder extends  RecyclerView.ViewHolder implements  View.OnClickListener{
-             TextView problem_name,show_date,goin_complete;
-             ImageView more_option;
-             SwitchCompat toggle;
+             TextView problem_name,show_date1,show_date2,lasttxt;
 
         public Myholder(@NonNull View itemView) {
             super(itemView);
-            problem_name=itemView.findViewById(R.id.name_problem);
-            show_date= itemView.findViewById(R.id.date_shower);
-            goin_complete= itemView.findViewById(R.id.go_complete);
-            more_option=itemView.findViewById(R.id.more_option);
-            toggle=itemView.findViewById(R.id.toggle);
-            more_option.setOnClickListener(this);
-            toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                        goin_complete.setText("completed");
-                    }
-                    else{
-                        goin_complete.setText("going on");
-                    }
-                }
-            });
+            problem_name = itemView.findViewById(R.id.problemvalue);
+            show_date1 = itemView.findViewById(R.id.year);
+            show_date2 = itemView.findViewById(R.id.year2);
+            lasttxt=itemView.findViewById(R.id.time2);
+        }
+
+        @Override
+        public void onClick(View view) {
 
         }
+/*
+
 
         @Override
         public void onClick(View v) {
@@ -102,8 +104,8 @@ public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Ad
                 }
             });
             popupMenu.show();
-        }
-
+        }*/
+/*
         private void showEditDialog(int position) {
             View editView = LayoutInflater.from(context).inflate(R.layout.doctor_input, null);
             EditText userName = editView.findViewById(R.id.editIssue);
@@ -112,9 +114,9 @@ public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Ad
             new AlertDialog.Builder(context)
                     .setView(editView)
                     .setPositiveButton("OK", (dialog, which) -> {
-                        datamodelDoctorIssue userData = dataList.get(position);
-                        userData.setUsername(userName.getText().toString());
-                        userData.setNumber(userNum.getText().toString());
+                       // datamodelDoctorIssue userData = dataList.get(position);
+                       // userData.setUsername(userName.getText().toString());
+                        //userData.setNumber(userNum.getText().toString());
                         notifyItemChanged(position);
                         Toast.makeText(context, "User Information is Edited", Toast.LENGTH_SHORT).show();
                     })
@@ -136,7 +138,7 @@ public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Ad
                     .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
                     .create()
                     .show();
-        }
+        }*/
     }
 
 }

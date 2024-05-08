@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.L;
+
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
@@ -60,5 +62,11 @@ else{
             me=itemView.findViewById(R.id.chatdesginme);
             opp=itemView.findViewById(R.id.chatdesginopp);
         }
+    }
+
+
+    public void addMessage(List<List> messageData) {
+        arr.add(messageData);
+        notifyItemInserted(arr.size() - 1);
     }
 }

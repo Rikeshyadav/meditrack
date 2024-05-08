@@ -29,15 +29,11 @@ public class Patient_Testfragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view= inflater.inflate(R.layout.fragment_patient__testfragment, container, false);
-      // textView=view.findViewById(R.id.mariz);
-       // textView1=view.findViewById(R.id.issu1);
+
         recyclerView=view.findViewById(R.id.prescr_recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         data=new ArrayList<>();//initialized
-        datamodel2 ob1=new datamodel2("fever","12.45pm","23-jun-2024","completed");
-        data.add(ob1);
-        datamodel2 ob2=new datamodel2("cholesterol problem","2.45pm","23-April-2024","on going");
-        data.add(ob2);
+
         recyclerView.setAdapter(new pateint_prescriptionAdapter(data));
 
         return view;

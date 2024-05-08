@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class ViewpagemessagePatientAdapter extends FragmentStateAdapter {
-    public ViewpagemessagePatientAdapter(@NonNull FragmentActivity fragmentActivity) {
+public class ViewPage_PatientAdapter extends FragmentStateAdapter {
+    public ViewPage_PatientAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
