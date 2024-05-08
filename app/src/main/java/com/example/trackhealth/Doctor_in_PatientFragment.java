@@ -1,5 +1,6 @@
 package com.example.trackhealth;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,6 +40,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.zegocloud.uikit.prebuilt.call.ZegoUIKitPrebuiltCallService;
+import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationConfig;
+import com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton;
+import com.zegocloud.uikit.service.defines.ZegoUIKitUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +52,7 @@ import org.json.JSONObject;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -62,7 +68,8 @@ float rate=0.0f;
 ReviewAdapter adapter;
 LinearLayoutManager l;
 List<List> arr=new ArrayList<>();
-
+ImageView vcall;
+    ZegoSendCallInvitationButton videoCall;
 RecyclerView review;
 ShapeableImageView dp;
     @Override
@@ -74,7 +81,14 @@ ShapeableImageView dp;
         progressBar=view.findViewById(R.id.reviewprogress);
         dspec=view.findViewById(R.id.skill);
         dhos=view.findViewById(R.id.pl);
+
+        SharedPreferences sp44=getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        videoCall=view.findViewById(R.id.dip_vcall);
+        startService(sp44.getString("phone",""));
+        setVideoCall(sp44.getString("curphone2",""));
+
         dp=view.findViewById(R.id.doctorpho);
+
        Button b1=view.findViewById(R.id.feed);//this is popup trigger id
         about=view.findViewById(R.id.dipabout);
         radio=view.findViewById(R.id.dipradio);
@@ -225,6 +239,15 @@ ShapeableImageView dp;
 
         return view;
     }
+
+
+    // Set up video call
+    void setVideoCall(String targetUserID){
+        videoCall.setIsVideoCall(true);
+        videoCall.setResourceID("zego_uikit_call"); // Please fill in the resource ID name that has been configured in the ZEGOCLOUD's console here.
+        videoCall.setInvitees(Collections.singletonList(new ZegoUIKitUser(targetUserID)));
+    }
+
     private void processFeedback(float rating, String feedbackText) {//to add to server
         String feedbackMessage = "Rating: " + rating + "Feedback: " + feedbackText;
         Toast.makeText(getActivity(), feedbackMessage, Toast.LENGTH_SHORT).show();
@@ -467,4 +490,17 @@ ShapeableImageView dp;
         }
 
     }
+    void startService(String userId){
+        Application application =getActivity().getApplication(); // Android's application context
+        long appID = 434413145;   // yourAppID
+        String appSign ="027ea8dc3c6a5baf570771f1bf803204242953e0929716ac097d30e68e426025";  // yourAppSign
+        //  String userID =; // yourUserID, userID should only contain numbers, English characters, and '_'.
+        String userName =userId;   // yourUserName
+
+        ZegoUIKitPrebuiltCallInvitationConfig callInvitationConfig = new ZegoUIKitPrebuiltCallInvitationConfig();
+
+        //  ZegoUIKitPrebuiltCallService.init(getApplication(), appID, appSign, userID, userName,callInvitationConfig);
+        ZegoUIKitPrebuiltCallService.init(getActivity().getApplication(), appID, appSign, userId, userName,callInvitationConfig);
+    }
+
 }

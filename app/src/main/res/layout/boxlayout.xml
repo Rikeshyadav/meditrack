@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+app:cardBackgroundColor="#B8B6B6"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="match_parent">
+<ImageView
+    android:layout_width="150dp"
+    android:layout_height="130dp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/tabletimg"
+    android:id="@+id/horfun"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/medicne_name1"
+        android:text="GAS tablet"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="130dp"
+        android:layout_marginStart="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/price1"
+        android:text="Rs 450"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="155dp"
+        android:layout_marginStart="5dp"
+        />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

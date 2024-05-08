@@ -72,19 +72,21 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_marginTop="50dp"
-                    android:layout_height="80dp"
+                    android:layout_height="40dp"
                     android:contentDescription="call"
                     android:layout_marginStart="30dp"
                     android:background="@drawable/fnd"
                     android:src="@drawable/baseline_call_24"/>
-                <ImageView
+                <com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton
                     android:layout_width="40dp"
-                    android:layout_height="80dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="50dp"
                     android:contentDescription="video"
+                    android:id="@+id/pid_vcall"
                     android:layout_marginStart="50dp"
-                    android:background="@drawable/fnd"
-                    android:src="@drawable/baseline_videocam_24" />
+                    android:background="@drawable/baseline_videocam_24"
+                    android:src="@drawable/baseline_videocam_24"
+                    />
             </LinearLayout>
 
         </LinearLayout>
