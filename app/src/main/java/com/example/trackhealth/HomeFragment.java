@@ -1,5 +1,6 @@
 package com.example.trackhealth;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +29,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.zegocloud.uikit.prebuilt.call.ZegoUIKitPrebuiltCallService;
+import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,8 +62,10 @@ SharedPreferences sp;
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_home, container, false);
   fab=view.findViewById(R.id.fab);
+
    sp=view.getContext().getSharedPreferences("user",Context.MODE_PRIVATE);
-refresh=view.findViewById(R.id.refresh_doctor_homepage);
+
+   refresh=view.findViewById(R.id.refresh_doctor_homepage);
 nodata=view.findViewById(R.id.nodata_doctorhome);
 empty=view.findViewById(R.id.doctor_home_lottie);
 progressBar=view.findViewById(R.id.doctor_home_progress);

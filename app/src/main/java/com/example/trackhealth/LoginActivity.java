@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,6 +34,8 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.zegocloud.uikit.prebuilt.call.ZegoUIKitPrebuiltCallService;
+import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -192,6 +195,7 @@ else{
                        sp.edit().putString("name",response.getString("username")).apply();
                        sp.edit().putBoolean("islogged",true).apply();
                         sp.edit().putString("email", response.getString("email")).apply();
+
                         sp.edit().putString("phone", phone).apply();
                         sp.edit().putString("pass", password).apply();
                         sp.edit().putString("identity",doctororpatient).apply();
@@ -292,4 +296,5 @@ else{
         super.onResume();
 
     }
+
 }
