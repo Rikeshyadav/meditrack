@@ -21,7 +21,7 @@
         android:id="@+id/Patinet_tablayout"/>
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
-        android:layout_marginTop="139dp"
+        android:layout_below="@id/Patinet_tablayout"
         android:layout_height="match_parent"
         android:id="@+id/Patient_pager"/>
 </RelativeLayout>

@@ -18,6 +18,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ SharedPreferences sp;
 AppCompatButton save;
 TextView user,name2;
     String photo;
+    ProgressBar progressBar;
 FloatingActionButton addimg;
 ImageView profilepic;
 String identity="";
@@ -55,6 +57,7 @@ String identity="";
         gender=findViewById(R.id.doctor_profileedit_genderValue);
         dob=findViewById(R.id.doctor_profileedit_dobValue);
         addimg=findViewById(R.id.uplodimage_doctor_profile);
+        progressBar=findViewById(R.id.doctor_profile_editprogress);
         profilepic=findViewById(R.id.doctor_editprofile_image);
         email=findViewById(R.id.doctor_profileedit_emailValue);
         state=findViewById(R.id.doctor_profileedit_stateValue);
@@ -122,6 +125,7 @@ jsonObject.put("state",hstate.getText().toString());
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
+                progressBar.setVisibility(View.VISIBLE);
                 updateprofile(nm,em,statee,cityy,sp.getString("phone",""),gender.getText().toString(),dob.getText().toString(),spec.getText().toString(),yoe.getText().toString(),quali.getText().toString(),about.getText().toString(),jsonObject);
 
 
@@ -229,19 +233,19 @@ jsonObject.put("state",hstate.getText().toString());
 
 
 
-
+progressBar.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), "saved", Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();
                         //  pb.setVisibility(View.GONE);
-                        throw new RuntimeException(e);
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    //  pb.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -257,6 +261,7 @@ jsonObject.put("state",hstate.getText().toString());
 
         } catch (
                 Exception e) {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
             //       pb.setVisibility(View.GONE);
 

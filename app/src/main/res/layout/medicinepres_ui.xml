@@ -21,6 +21,17 @@
         android:id="@+id/mednametitle"
         android:layout_alignParentTop="true"
         />
+
+    <ImageView
+        android:id="@+id/meddesigndel"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/delete" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

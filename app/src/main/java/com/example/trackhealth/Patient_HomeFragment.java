@@ -275,6 +275,16 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
                 inner.add(j.getString("about"));
                 inner.add(j.getString("phone"));
 
+
+                inner.add(j.getString("state"));
+                inner.add(j.getString("city"));
+                if(!sp.getString("identity","").equals("Doctor")) {
+                    inner.add(j.getString("qualification"));
+                    inner.add(j.getString("speciality"));
+                    inner.add(j.getString("clinic_name"));
+                }
+
+
                 outer.add(inner);
 
             }

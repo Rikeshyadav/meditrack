@@ -33,7 +33,6 @@ public class Patient_Testfragment extends Fragment {
         recyclerView=view.findViewById(R.id.prescr_recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         data=new ArrayList<>();//initialized
-
         recyclerView.setAdapter(new pateint_prescriptionAdapter(data));
 
         return view;

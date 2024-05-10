@@ -19,6 +19,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Adapter.Myholder> {
@@ -47,6 +60,17 @@ public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Ad
           else {
               holder.show_date2.setText(dataList.get(position).get(3).toString());
           }
+
+        SharedPreferences user=holder.itemView.getContext().getSharedPreferences("user",Context.MODE_PRIVATE);
+          if(user.getString("identity","").equals("Patient")){
+              holder.del.setVisibility(View.GONE);
+          }
+          holder.del.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  delissue(dataList.get(position).get(2).toString(),position);
+              }
+          });
           holder.itemView.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View v) {
@@ -67,12 +91,14 @@ public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Ad
 
     public class Myholder extends  RecyclerView.ViewHolder implements  View.OnClickListener{
              TextView problem_name,show_date1,show_date2,lasttxt;
+             ImageView del;
 
         public Myholder(@NonNull View itemView) {
             super(itemView);
             problem_name = itemView.findViewById(R.id.problemvalue);
             show_date1 = itemView.findViewById(R.id.year);
             show_date2 = itemView.findViewById(R.id.year2);
+            del=itemView.findViewById(R.id.problemdel);
             lasttxt=itemView.findViewById(R.id.time2);
         }
 
@@ -139,6 +165,64 @@ public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Ad
                     .create()
                     .show();
         }*/
+    }
+    public void delissue(String id,int position){
+SharedPreferences sp=context.getSharedPreferences("issue",Context.MODE_PRIVATE);
+        String temp="https://demo-uw46.onrender.com/api/issue/deleteIssue/"+id;
+        Toast.makeText(context,sp.getString("issueid",""),Toast.LENGTH_SHORT).show();
+        try{
+
+            JsonObjectRequest j = new JsonObjectRequest(Request.Method.DELETE, temp,null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    //pb.setVisibility(View.GONE);
+                    try {
+
+                        if (Boolean.parseBoolean(response.getString("success"))) {
+notifyDataSetChanged();
+dataList.remove(position);
+                    } }catch (JSONException e) {
+                        //progressBar.setVisibility(View.GONE);
+                        //retry.setVisibility(View.VISIBLE);
+                        Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+        /*        progressBar.setVisibility(View.GONE);
+                empty.setVisibility(View.GONE);
+                nodata.setVisibility(View.GONE);
+                refresh.setVisibility(View.VISIBLE);*/
+                    //progressBar.setVisibility(View.GONE);
+                    //retry.setVisibility(View.VISIBLE);
+                    Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            RequestQueue q = Volley.newRequestQueue(context);
+            RetryPolicy retryPolicy = new DefaultRetryPolicy(
+                    30000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            );
+            j.setRetryPolicy(retryPolicy);
+            q.add(j);
+
+
+        } catch (
+                Exception e) {
+ /*       progressBar.setVisibility(View.GONE);
+        empty.setVisibility(View.GONE);
+        nodata.setVisibility(View.GONE);
+        refresh.setVisibility(View.VISIBLE);*/
+            //   progressBar.setVisibility(View.GONE);
+            // retry.setVisibility(View.VISIBLE);
+            Toast.makeText(context, "fail to load - "+e.toString(), Toast.LENGTH_SHORT).show();
+
+        }
+
     }
 
 }

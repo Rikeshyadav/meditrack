@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".Patient_profile_editpage">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+                >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:background="@drawable/backgroundpatient"
@@ -95,6 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
+            android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:layout_below="@id/edit_profile_patient_backicon"
             android:textSize="16sp"
@@ -109,6 +114,8 @@
             android:textSize="16sp"
             android:layout_marginTop="5dp"
             android:layout_below="@id/edit_profile_patient_backicon"
+            android:layout_toRightOf="@id/patient_profileedit_gendertitle"
+            android:layout_marginStart="10dp"
             android:padding="6dp"
             android:minWidth="290dp"
             android:background="@drawable/rectangle_box"
@@ -135,6 +142,7 @@
             android:layout_height="wrap_content"
             android:text="State"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:layout_below="@id/hr0"
             android:padding="6dp"
             android:textColor="@color/black"
@@ -146,6 +154,8 @@
             android:layout_below="@id/hr0"
             android:textColorHint="@color/hint2"
             android:textSize="16sp"
+            android:layout_toRightOf="@id/patient_profileedit_gendertitle"
+            android:layout_marginStart="10dp"
             android:padding="6dp"
             android:minWidth="290dp"
             android:background="@drawable/rectangle_box"
@@ -172,6 +182,7 @@
             android:layout_height="wrap_content"
             android:text="City"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:padding="6dp"
             android:layout_below="@id/hr"
             android:textColor="@color/black"
@@ -185,6 +196,8 @@
             android:background="@drawable/rectangle_box"
             android:layout_below="@id/hr"
             android:minWidth="290dp"
+            android:layout_toRightOf="@id/patient_profileedit_gendertitle"
+            android:layout_marginStart="10dp"
             android:textColorHint="@color/hint2"
             android:layout_alignParentEnd="true"
             android:textColor="@color/black"
@@ -209,6 +222,7 @@
             android:text="Phone"
             android:textSize="16sp"
             android:padding="6dp"
+            android:textStyle="bold"
             android:layout_below="@id/hr2"
             android:textColor="@color/black"
             android:id="@+id/patient_profileedit_phonetitle"/>
@@ -222,6 +236,8 @@
             android:hint="+91XXXXXXXXXX"
             android:textSize="16sp"
             android:minWidth="290dp"
+            android:layout_toRightOf="@id/patient_profileedit_gendertitle"
+            android:layout_marginStart="10dp"
             android:background="@drawable/rectangle_box"
             android:padding="6dp"
             android:layout_below="@id/hr2"
@@ -247,6 +263,7 @@
             android:text="Gender"
             android:textSize="16sp"
             android:padding="6dp"
+            android:textStyle="bold"
             android:layout_below="@id/hr3"
             android:textColor="@color/black"
             android:id="@+id/patient_profileedit_gendertitle"/>
@@ -260,6 +277,8 @@
             android:background="@drawable/rectangle_box"
             android:textColorHint="@color/hint2"
             android:layout_below="@id/hr3"
+            android:layout_toRightOf="@id/patient_profileedit_gendertitle"
+            android:layout_marginStart="10dp"
             android:layout_alignParentEnd="true"
             android:textColor="@color/black"
             android:id="@+id/patient_profileedit_genderValue"/>
@@ -282,6 +301,7 @@
             android:layout_height="wrap_content"
             android:text="DOB"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:padding="6dp"
             android:layout_below="@id/hr4"
             android:textColor="@color/black"
@@ -297,6 +317,8 @@
             android:padding="6dp"
             android:background="@drawable/rectangle_box"
             android:minWidth="290dp"
+            android:layout_toRightOf="@id/patient_profileedit_gendertitle"
+            android:layout_marginStart="10dp"
             android:textColor="@color/black"
             android:id="@+id/patient_profileedit_dobValue"/>
 
@@ -340,3 +362,4 @@
     </RelativeLayout>
 
 
+</ScrollView>

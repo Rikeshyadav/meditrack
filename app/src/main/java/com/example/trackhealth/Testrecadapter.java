@@ -1,9 +1,11 @@
 package com.example.trackhealth;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,13 @@ public class Testrecadapter extends RecyclerView.Adapter<Testrecadapter.MyViewHo
     public void onBindViewHolder(@NonNull Testrecadapter.MyViewHolder holder, int position) {
         holder.tname.setText(arr.get(position).get(0).toString());
         holder.tstatus.setText(arr.get(position).get(1).toString());
+        holder.del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                arr.remove(position);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -41,11 +50,13 @@ public class Testrecadapter extends RecyclerView.Adapter<Testrecadapter.MyViewHo
 
     public class MyViewHolder  extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tname,tstatus;
+        ImageView del;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tname=itemView.findViewById(R.id.testdesgin_title);
             tstatus=itemView.findViewById(R.id.testdesgin_status);
+            del= itemView.findViewById(R.id.testdesigndel);
         }
 
         @Override
