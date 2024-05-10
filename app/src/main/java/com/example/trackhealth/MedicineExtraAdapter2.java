@@ -1,9 +1,11 @@
 package com.example.trackhealth;
 
+import android.Manifest;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -11,15 +13,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicineExtraAdapter2 extends RecyclerView.Adapter<MedicineExtraAdapter2.medicienholder> {
    List<List> MediList;
-   List<List>listfun;
+    List<List> originalList;
    public MedicineExtraAdapter2(List<List> modellist){
        this.MediList=modellist;
+       this.originalList = new ArrayList<>(modellist);
+       this.MediList=new ArrayList<>(modellist);
    }
-
+    public void resetData() {
+        MediList.clear();
+        MediList.addAll(originalList);
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public medicienholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -72,5 +81,35 @@ public class MedicineExtraAdapter2 extends RecyclerView.Adapter<MedicineExtraAda
             offerText=itemView.findViewById(R.id.rpice);
             ratingBar=itemView.findViewById(R.id.rating_one);
         }
+    }
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                List<List> filteredList = new ArrayList<>();
+                if (filterPattern.isEmpty()) {
+                    // If the search query is empty, use the original dataset
+                    filteredList.addAll(originalList);
+                } else {
+                    // Filter the original dataset based on the search query
+                    for (List item : originalList) {
+                        if (item.get(0).toString().toLowerCase().contains(filterPattern)) {
+                            filteredList.add(item);
+                        }
+                    }
+                }
+
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
+                return results;
+            }
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                MediList = (ArrayList<List>) results.values;
+                notifyDataSetChanged(); // Notify RecyclerView to update with filtered data
+            }
+        };
     }
 }

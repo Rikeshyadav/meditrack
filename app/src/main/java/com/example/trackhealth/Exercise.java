@@ -70,7 +70,7 @@ public class Exercise extends Fragment {
         recyclerView1.setLayoutManager(gridLayoutManager);
         String description0 = getString(R.string.date);
         String description1 = getString(R.string.information1);
-        String description2 = getString(R.string.information2);
+        String description2 =  getString(R.string.information4);
         String description3 = getString(R.string.information3);
         String description4 = getString(R.string.information4);
         String description5 = getString(R.string.information5);
