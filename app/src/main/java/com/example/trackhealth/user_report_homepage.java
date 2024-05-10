@@ -3,6 +3,7 @@ package com.example.trackhealth;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -47,5 +48,9 @@ public class user_report_homepage extends AppCompatActivity {
              }
          });
     }
-
+    public void onBackPressed() {
+        super.onBackPressed();
+    /*    Intent i=new Intent(user_report_homepage.this,HomePage_Patient.class);
+        startActivity(i);*/
+    }
 }

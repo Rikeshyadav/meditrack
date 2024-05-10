@@ -81,7 +81,13 @@ String issueid;
         rec.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
 
         add=view.findViewById(R.id.presparentadd);
+
         sp=getActivity().getSharedPreferences("issue", Context.MODE_PRIVATE);
+        sp2=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        if(sp2.getString("identity","").equals("Patient")){
+            add.setVisibility(View.GONE);
+        }
+
         issue.setText(sp.getString("issuetitle",""));
         getdata();
         add.setOnClickListener(new View.OnClickListener() {
@@ -212,5 +218,8 @@ if(jsonArray.length()>0){
         }
 
     }
+
+
+
 
 }

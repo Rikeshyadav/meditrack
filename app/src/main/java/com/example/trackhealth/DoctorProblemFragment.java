@@ -45,7 +45,7 @@ import java.util.List;
 
 public class DoctorProblemFragment extends Fragment {
     Parentrecycle_Adapter parentrecycle_adapter;
-    SharedPreferences sp;
+    SharedPreferences sp,user;
     RecyclerView parentRecycle;
     List<List> outer=new ArrayList<>();
     LottieAnimationView lottie;
@@ -65,6 +65,8 @@ public class DoctorProblemFragment extends Fragment {
         floatButton=view.findViewById(R.id.Parentfloatbutton);
         parentRecycle=view.findViewById(R.id.parentrecycleview);
         datalist=new ArrayList<>();
+
+
         progressBar=view.findViewById(R.id.progress_dproblem);
         retry=view.findViewById(R.id.retry_dproblem);
         lottie=view.findViewById(R.id.dproblem_lottie);
@@ -78,6 +80,13 @@ public class DoctorProblemFragment extends Fragment {
             }
         });
         sp=getActivity().getSharedPreferences("issue", Context.MODE_PRIVATE);
+        user=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        if(!user.getString("identity","").equals("Doctor")){
+        floatButton.setVisibility(View.GONE);
+
+        }
+
+
         linearLayoutManager=new LinearLayoutManager(getActivity());
         parentRecycle.setLayoutManager(linearLayoutManager);
         parentrecycle_adapter=new Parentrecycle_Adapter(getActivity(),datalist);
@@ -570,6 +579,7 @@ public class DoctorProblemFragment extends Fragment {
                         if (Boolean.parseBoolean(response.getString("success"))) {
                             lottie.setVisibility(View.GONE);
                             nodata.setVisibility(View.GONE);
+
                         }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);

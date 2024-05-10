@@ -86,7 +86,17 @@ Context context;
                 sp2.edit().putString("curphone2",data.get(position).get(6).toString()).apply();
                 sp2.edit().putString("curname",data.get(position).get(1).toString()).apply();
                 SharedPreferences sp3=v.getContext().getSharedPreferences("issue", Context.MODE_PRIVATE);
-                sp3.edit().putString("idno",data.get(position).get(6).toString()+sp.getString("phone","")).apply();
+                sp3.edit().putString("idno",data.get(position).get(6).toString()+sp2.getString("phone","")).apply();
+                sp2.edit().putString("curstate", data.get(position).get(7).toString()).apply();
+                sp2.edit().putString("curcity", data.get(position).get(8).toString()).apply();
+
+                if(!sp2.getString("identity","").equals("Doctor")){
+                    sp2.edit().putString("curspec", data.get(position).get(10).toString()).apply();
+                    sp2.edit().putString("curqua", data.get(position).get(9).toString()).apply();
+
+                    sp2.edit().putString("curclinic", data.get(position).get(11).toString()).apply();
+                }
+
                 v.getContext().startActivity(intent);
             }
         }

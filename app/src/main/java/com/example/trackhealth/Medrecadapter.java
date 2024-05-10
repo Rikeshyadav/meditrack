@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -29,6 +30,13 @@ public class Medrecadapter extends RecyclerView.Adapter<Medrecadapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull Medrecadapter.MyViewHolder holder, int position) {
 holder.medname.setText(arr.get(position).get(0).toString());
+        holder.del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                arr.remove(position);
+                notifyDataSetChanged();
+            }
+        });
 if(!arr.get(position).get(1).toString().trim().equals("")) {
     holder.medmorn.setText(arr.get(position).get(1).toString());
 }
@@ -79,12 +87,15 @@ else{
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 TextView medname,medmorn,medafter,medsnack,meddinner,medstart,medend,medquan;
 LinearLayout mtitle,atitle,etitle,ntitle;
+ImageView del;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             medname=itemView.findViewById(R.id.meddesignmname);
             medmorn=itemView.findViewById(R.id.meddesign_morning_);
             medafter=itemView.findViewById(R.id.meddesign_after_);
+
+            del=itemView.findViewById(R.id.meddesigndel);
 
             mtitle=itemView.findViewById(R.id.meddesgin_morning);
             atitle=itemView.findViewById(R.id.meddesgin_after);

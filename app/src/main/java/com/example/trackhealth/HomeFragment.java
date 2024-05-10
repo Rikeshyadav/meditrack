@@ -267,6 +267,15 @@ System.out.println("hello"+dataSearchList);
                 catch(Exception e){
                     inner.add("");
                 }
+                inner.add(j.getString("state"));
+                inner.add(j.getString("city"));
+                if(!sp.getString("identity","").equals("Doctor")) {
+                    inner.add(j.getString("qualification"));
+                    inner.add(j.getString("speciality"));
+                    JSONObject kk = j.getJSONObject("clinic_hospital");
+                    inner.add(kk.getString("name"));
+                }
+
                 outer.add(inner);
 
             }

@@ -203,7 +203,6 @@ public class Knowledge_medicine_fragment extends Fragment {
   thirdrecycleview.setHasFixedSize(true);
   thirdrecycleview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-
   simpleone = new ArrayList<>();
 
 
@@ -378,7 +377,7 @@ public class Knowledge_medicine_fragment extends Fragment {
   simpleone.add(new ArrayList<>(Arrays.asList("Lorazepam", "Lorazepam is a benzodiazepine medication that works in the brain to treat anxiety disorders, alcohol withdrawal symptoms, and seizures. It works by enhancing the activity of gamma-aminobutyric acid (GABA), a neurotransmitter that inhibits brain activity and promotes relaxation.", getRandomDiscount(), getRandomRating())));
   fourrecycleview = view.findViewById(R.id.four_recycleview);
   fourrecycleview.setHasFixedSize(true);
-  fourrecycleview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+  fourrecycleview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
   bestSellerAdapter = new MedicineExtraAdapter2(simpleone);
   fourrecycleview.setAdapter(bestSellerAdapter);
   setupSearch();

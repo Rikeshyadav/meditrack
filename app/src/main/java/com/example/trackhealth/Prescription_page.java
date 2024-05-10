@@ -70,50 +70,64 @@ import java.util.Locale;
 public class Prescription_page extends AppCompatActivity {
     String issueid;
 
-    RecyclerView medrec,testrec;
-    String date_="";
+    RecyclerView medrec, testrec;
+    String date_ = "";
     RelativeLayout layout;
-    AppCompatButton addmed,addtest,upload;
+    AppCompatButton addmed, addtest, upload;
     ProgressBar progressBar;
     EditText editpres;
-    String mspin_="",aspin_="",espin_="",nspin_="",tstatus="";
-    TextView startdate,enddate;
-    List<List> medfinal=new ArrayList<>();
+    String mspin_ = "", aspin_ = "", espin_ = "", nspin_ = "", tstatus = "";
+    TextView startdate, enddate;
+    List<List> medfinal = new ArrayList<>();
     SharedPreferences sp;
     LinearLayoutManager l;
     Medrecadapter medrecadapter;
     Testrecadapter testrecadapter;
-    List<List> testfinal=new ArrayList<>();
+    List<List> testfinal = new ArrayList<>();
 
 
     ViewGroup root;
+    String key="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prescription_page);
-issueid=getIntent().getStringExtra("issueid");
-        medrec=findViewById(R.id.presmedrec);
-        testrec=findViewById(R.id.prestestrec);
-        testrecadapter=new Testrecadapter(Prescription_page.this,testfinal);
-        addmed=findViewById(R.id.presmedadd);
-        addtest=findViewById(R.id.prestestadd);
-        layout=findViewById(R.id.preslayout);
-        progressBar=findViewById(R.id.presprogress);
-        sp=getSharedPreferences("issue",MODE_PRIVATE);
-        root = (ViewGroup)getWindow().getDecorView().getRootView();
-        upload=findViewById(R.id.uploadpres);
-        l=new LinearLayoutManager(Prescription_page.this,LinearLayoutManager.VERTICAL,false);
+        issueid = getIntent().getStringExtra("issueid");
+        medrec = findViewById(R.id.presmedrec);
+        testrec = findViewById(R.id.prestestrec);
+        testrecadapter = new Testrecadapter(Prescription_page.this, testfinal);
+        addmed = findViewById(R.id.presmedadd);
+        addtest = findViewById(R.id.prestestadd);
+        layout = findViewById(R.id.preslayout);
+        progressBar = findViewById(R.id.presprogress);
+        sp = getSharedPreferences("issue", MODE_PRIVATE);
+        root = (ViewGroup) getWindow().getDecorView().getRootView();
+        upload = findViewById(R.id.uploadpres);
+        l = new LinearLayoutManager(Prescription_page.this, LinearLayoutManager.VERTICAL, false);
 
         medrec.setLayoutManager(l);
 
-        editpres=findViewById(R.id.presedit);
+        editpres = findViewById(R.id.presedit);
 
-        medrecadapter=new Medrecadapter(Prescription_page.this,medfinal);
+        medrecadapter = new Medrecadapter(Prescription_page.this, medfinal);
         medrec.setAdapter(medrecadapter);
 
-        l=new LinearLayoutManager(Prescription_page.this,LinearLayoutManager.VERTICAL,false);
+        l = new LinearLayoutManager(Prescription_page.this, LinearLayoutManager.VERTICAL, false);
         testrec.setLayoutManager(l);
         testrec.setAdapter(testrecadapter);
+
+key=getIntent().getStringExtra("key");
+if(key==null || key.equals("")){
+    key="";
+}
+else {
+    if (getIntent().getStringExtra("key").equals("edit")) {
+        upload.setText("Update Prescription");
+        updatedata();
+    }
+
+}
         addmed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,56 +148,61 @@ issueid=getIntent().getStringExtra("issueid");
             @Override
             public void onClick(View view) {
                 progressBar.setVisibility(View.VISIBLE);
-String idno=sp.getString("idno","");
-String note=editpres.getText().toString();
-                System.out.println("medfinal"+medfinal);
-addmedfun(idno,issueid,note,convertToJsonArray(medfinal,"medicine"),convertToJsonArray(testfinal,"test"));
+                String idno = sp.getString("idno", "");
+                String note = editpres.getText().toString();
+                System.out.println("medfinal" + medfinal);
+                addmedfun(idno, issueid, note, convertToJsonArray(medfinal, "medicine"), convertToJsonArray(testfinal, "test"));
 
             }
         });
+
     }
 
-    private void addmedfun(String idno,String issueid,String note,JSONArray medfinal,JSONArray testfinal){
 
+    public void updatedata() {
 
-        String temp = "https://demo-uw46.onrender.com/api/issue/addPrescription";
-
+        String temp = "https://demo-uw46.onrender.com/api/issue/getPrescriptions/" + sp.getString("idno", "") + "/" + sp.getString("issueid", "") + "/" + sp.getString("pid", "");
         try {
-            JSONObject jsonobj=new JSONObject();
-            jsonobj.put("idno", idno);
-            jsonobj.put("issueid",issueid);
-            jsonobj.put("note",note);
-            jsonobj.put("medicine",medfinal);
-            jsonobj.put("test",testfinal);
-            System.out.println("hman"+medfinal+"/n"+testfinal);
 
-            JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, jsonobj, new Response.Listener<JSONObject>() {
+            JsonObjectRequest j = new JsonObjectRequest(Request.Method.GET, temp, null, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
                     //pb.setVisibility(View.GONE);
                     try {
+
                         if (Boolean.parseBoolean(response.getString("success"))) {
 
-Toast.makeText(Prescription_page.this,"Prescription uploaded",Toast.LENGTH_SHORT).show();
-Intent i=new Intent(Prescription_page.this,User_prescription_activity_page.class);
-i.putExtra("activity","prescription_page");
-sp.edit().putString("isuploaded","yes").apply();
-startActivity(i);
-                        }
-                        else{
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(Prescription_page.this, "fail to load", Toast.LENGTH_SHORT).show();
+                            JSONObject jsonobj = response.getJSONObject("prescription");
+                            editpres.setText(jsonobj.getString("note"));
+                            JSONArray jsonArraymed = jsonobj.getJSONArray("medicine");
+                           medfinal=convertToListArray(jsonArraymed,"medicine");
+                            medrecadapter=new Medrecadapter(Prescription_page.this,medfinal);
+                            medrec.setAdapter(medrecadapter);
+                            JSONArray jsonArraytest = jsonobj.getJSONArray("test");
+                            testfinal=convertToListArray(jsonArraytest,"test");
+                            testrecadapter=new Testrecadapter(Prescription_page.this,testfinal);
+                            testrec.setAdapter(testrecadapter);
+                            System.out.println("testarr"+testfinal);
+                            //testrecadapter.notifyDataSetChanged();
+
                         }
                     } catch (JSONException e) {
-                  progressBar.setVisibility(View.GONE);
+                        //progressBar.setVisibility(View.GONE);
+                        //retry.setVisibility(View.VISIBLE);
                         Toast.makeText(Prescription_page.this, e.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-progressBar.setVisibility(View.GONE);
+
+        /*        progressBar.setVisibility(View.GONE);
+                empty.setVisibility(View.GONE);
+                nodata.setVisibility(View.GONE);
+                refresh.setVisibility(View.VISIBLE);*/
+                    //progressBar.setVisibility(View.GONE);
+                    //retry.setVisibility(View.VISIBLE);
                     Toast.makeText(Prescription_page.this, error.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -199,7 +218,86 @@ progressBar.setVisibility(View.GONE);
 
         } catch (
                 Exception e) {
-progressBar.setVisibility(View.GONE);
+ /*       progressBar.setVisibility(View.GONE);
+        empty.setVisibility(View.GONE);
+        nodata.setVisibility(View.GONE);
+        refresh.setVisibility(View.VISIBLE);*/
+            //   progressBar.setVisibility(View.GONE);
+            // retry.setVisibility(View.VISIBLE);
+            Toast.makeText(Prescription_page.this, "fail to load - " + e.toString(), Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
+
+    private void addmedfun(String idno, String issueid, String note, JSONArray medfinal, JSONArray testfinal) {
+
+
+        String temp = "";
+if(key.equals("edit")){
+    temp="https://demo-uw46.onrender.com/api/issue/updatePrescription";
+}
+else{
+    temp="https://demo-uw46.onrender.com/api/issue/addPrescription";
+}
+        try {
+            JSONObject jsonobj = new JSONObject();
+            jsonobj.put("idno", idno);
+            jsonobj.put("issueid", issueid);
+            jsonobj.put("note", note);
+            jsonobj.put("medicine", medfinal);
+            jsonobj.put("test", testfinal);
+            jsonobj.put("pid",sp.getString("pid",""));
+            System.out.println("hman" + medfinal + "/n" + testfinal);
+
+            JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, jsonobj, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    //pb.setVisibility(View.GONE);
+                    try {
+                        if (Boolean.parseBoolean(response.getString("success"))) {
+if(!key.equals("edit")) {
+    Toast.makeText(Prescription_page.this, "Prescription uploaded", Toast.LENGTH_SHORT).show();
+}
+else{
+    Toast.makeText(Prescription_page.this, "Prescription updated", Toast.LENGTH_SHORT).show();
+}
+                            Intent i = new Intent(Prescription_page.this, User_prescription_activity_page.class);
+                            i.putExtra("activity", "prescription_page");
+                            sp.edit().putString("isuploaded", "yes").apply();
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                          finish();
+                        } else {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(Prescription_page.this, "fail to load", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(Prescription_page.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(Prescription_page.this, error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            RequestQueue q = Volley.newRequestQueue(Prescription_page.this);
+            RetryPolicy retryPolicy = new DefaultRetryPolicy(
+                    30000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            );
+            j.setRetryPolicy(retryPolicy);
+            q.add(j);
+
+
+        } catch (
+                Exception e) {
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(Prescription_page.this, "fail to load", Toast.LENGTH_SHORT).show();
 
         }
@@ -225,7 +323,7 @@ progressBar.setVisibility(View.GONE);
                         String formattedDate = dateFormat.format(selectedDate.getTime());
 
 
-   date.setText(formattedDate);
+                        date.setText(formattedDate);
 
                     }
                 },
@@ -238,8 +336,8 @@ progressBar.setVisibility(View.GONE);
     }
 
 
-    public void createWindow(){
-        LayoutInflater inflater=(LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public void createWindow() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View popup = inflater.inflate(R.layout.medicine_popupwindow, null);
 
        /* int width=ViewGroup.LayoutParams.MATCH_PARENT;
@@ -250,69 +348,68 @@ progressBar.setVisibility(View.GONE);
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x-55;
+        int width = size.x - 55;
         int height = ViewGroup.LayoutParams.WRAP_CONTENT;
 
-        PopupWindow popupWindow=new PopupWindow(popup);
+        PopupWindow popupWindow = new PopupWindow(popup);
         popupWindow.setWidth(width);
         popupWindow.setHeight(height);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
 
 
-        AppCompatButton addmed2=popup.findViewById(R.id.mpopupdesing_add);
-        AppCompatButton delete=popup.findViewById(R.id.mpopupdesing_delete);
-        Spinner morningspin,afterspin,evenspin,nightspin;
+        AppCompatButton addmed2 = popup.findViewById(R.id.mpopupdesing_add);
+        AppCompatButton delete = popup.findViewById(R.id.mpopupdesing_delete);
+        Spinner morningspin, afterspin, evenspin, nightspin;
         AppCompatAutoCompleteTextView quan;
-        CheckBox morningcheck,aftercheck,evencheck,nightcheck;
-        TextView startdate,enddate;
+        CheckBox morningcheck, aftercheck, evencheck, nightcheck;
+        TextView startdate, enddate;
 
         //textview
-        AppCompatAutoCompleteTextView mname=popup.findViewById(R.id.mpopdesgin_mname);
-        startdate=popup.findViewById(R.id.mpopdesginStartdate);
-        enddate=popup.findViewById(R.id.mpopdesginEnddate);
-        morningspin=popup.findViewById(R.id.mpopdesgin_morningspin);
-
+        AppCompatAutoCompleteTextView mname = popup.findViewById(R.id.mpopdesgin_mname);
+        startdate = popup.findViewById(R.id.mpopdesginStartdate);
+        enddate = popup.findViewById(R.id.mpopdesginEnddate);
+        morningspin = popup.findViewById(R.id.mpopdesgin_morningspin);
 
 
         //spinner
-        afterspin=popup.findViewById(R.id.mpopdesgin_afterspin);
-        evenspin=popup.findViewById(R.id.mpopdesgin_eveningspin);
-        nightspin=popup.findViewById(R.id.mpopdesgin_nightspin);
+        afterspin = popup.findViewById(R.id.mpopdesgin_afterspin);
+        evenspin = popup.findViewById(R.id.mpopdesgin_eveningspin);
+        nightspin = popup.findViewById(R.id.mpopdesgin_nightspin);
 
         //checkboxes
-        morningcheck=popup.findViewById(R.id.mpopdesgin_morning);
-        aftercheck=popup.findViewById(R.id.mpopdesgin_after);
-        evencheck=popup.findViewById(R.id.mpopdesgin_evening);
-        nightcheck=popup.findViewById(R.id.mpopdesgin_night);
+        morningcheck = popup.findViewById(R.id.mpopdesgin_morning);
+        aftercheck = popup.findViewById(R.id.mpopdesgin_after);
+        evencheck = popup.findViewById(R.id.mpopdesgin_evening);
+        nightcheck = popup.findViewById(R.id.mpopdesgin_night);
 
         //quantity
-      quan=popup.findViewById(R.id.mpopdesgin_quan);
+        quan = popup.findViewById(R.id.mpopdesgin_quan);
 
-        RegisterSpinnerApdater madapter,aadapter,eadapter,nadapter;
-        String[] mornspin_ = {"Select","After Breakfast","Before Breakfast"};
+        RegisterSpinnerApdater madapter, aadapter, eadapter, nadapter;
+        String[] mornspin_ = {"Select", "After Breakfast", "Before Breakfast"};
         madapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner1, mornspin_);
         morningspin.setAdapter(madapter);
 
-        String[] afterspin_ = {"Select","After Lunch","Before Lunch"};
+        String[] afterspin_ = {"Select", "After Lunch", "Before Lunch"};
         aadapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner1, afterspin_);
         afterspin.setAdapter(aadapter);
 
 
-        String[] evenspin_ = {"Select","After Snack","Before Snack"};
+        String[] evenspin_ = {"Select", "After Snack", "Before Snack"};
         eadapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner1, evenspin_);
         evenspin.setAdapter(eadapter);
 
 
-        String[] night_ = {"Select","After Dinner","Before Dinner"};
+        String[] night_ = {"Select", "After Dinner", "Before Dinner"};
         nadapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner1, night_);
         nightspin.setAdapter(nadapter);
 
-        String[] quan_ = {"1 Tablet/dosage","1 Tablet/day","Tablet/dosage","Tablet/day","1 Tablespoon/dosage","Tablespoon/dosage","ml/dosage","2 Tablet/dosage","2 Tablet/day","3 Tablet/dosage","3 Tablet/day","2 Tablespoon/dosage"};
+        String[] quan_ = {"1 Tablet/dosage", "1 Tablet/day", "Tablet/dosage", "Tablet/day", "1 Tablespoon/dosage", "Tablespoon/dosage", "ml/dosage", "2 Tablet/dosage", "2 Tablet/day", "3 Tablet/dosage", "3 Tablet/day", "2 Tablespoon/dosage"};
         nadapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner_login, quan_);
         quan.setAdapter(nadapter);
 
-        ImageView cross=popup.findViewById(R.id.popmedcross);
+        ImageView cross = popup.findViewById(R.id.popmedcross);
 
 
         String[] medicines = {"Paracetamol", "Ibuprofen", "Aspirin", "Loratadine", "Cetirizine", "Diphenhydramine", "Ranitidine", "Omeprazole",
@@ -435,12 +532,12 @@ progressBar.setVisibility(View.GONE);
                 "Epoetin alfa",
                 "Darbepoetin alfa",
                 "Filgrastim",
-                "Lenograstim","LIVOZEST SYRUP 200 ML","Gatiquin Eye Drop","Latanoprost Ophthalmic Eye Drop","Cipla Brimodin Eye Drops","Latanoprost Ophthalmic Eye Drop","Acetaminophen","Aspirin"," naproxen",
+                "Lenograstim", "LIVOZEST SYRUP 200 ML", "Gatiquin Eye Drop", "Latanoprost Ophthalmic Eye Drop", "Cipla Brimodin Eye Drops", "Latanoprost Ophthalmic Eye Drop", "Acetaminophen", "Aspirin", " naproxen",
                 "Sargramostim",
                 "Hydroxocobalamin",
                 "Iron polymaltose",
-                "Multivitamin 200ml", "Zincovit Multivitamin & Multimineral Syrup", "Sunlife Multivitamin Syrup", "Optumevit Multivitamin Syrup", "Vitamin B complex","Lyodiet Allopathic Lycopene Multiviatmin Multiminerals",
-                "Cyanocobalamin (Vitamin B12)","Liv 52 Syrup",
+                "Multivitamin 200ml", "Zincovit Multivitamin & Multimineral Syrup", "Sunlife Multivitamin Syrup", "Optumevit Multivitamin Syrup", "Vitamin B complex", "Lyodiet Allopathic Lycopene Multiviatmin Multiminerals",
+                "Cyanocobalamin (Vitamin B12)", "Liv 52 Syrup",
                 "Epoetin alfa",
                 "Ferrous sulfate",
                 "Vitamin K",
@@ -615,7 +712,7 @@ progressBar.setVisibility(View.GONE);
         };
 
 
-                nadapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner_login, medicines);
+        nadapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner_login, medicines);
         mname.setAdapter(nadapter);
 
         startdate.setOnClickListener(new View.OnClickListener() {
@@ -633,78 +730,75 @@ progressBar.setVisibility(View.GONE);
         });
 
 
-morningcheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if(morningcheck.isChecked()){
-            morningspin.setVisibility(View.VISIBLE);
+        morningcheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (morningcheck.isChecked()) {
+                    morningspin.setVisibility(View.VISIBLE);
 
-        }
-        if(!morningcheck.isChecked()){
-            morningspin.setVisibility(View.GONE);
-        }
+                }
+                if (!morningcheck.isChecked()) {
+                    morningspin.setVisibility(View.GONE);
+                }
 
-    }
-});
+            }
+        });
 
 
         aftercheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(aftercheck.isChecked()){
+                if (aftercheck.isChecked()) {
                     afterspin.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     afterspin.setVisibility(View.GONE);
                 }
 
             }
         });
 
-     evencheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        evencheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(evencheck.isChecked()){
+                if (evencheck.isChecked()) {
                     evenspin.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     evenspin.setVisibility(View.GONE);
                 }
 
             }
         });
-       nightcheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        nightcheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(nightcheck.isChecked()){
+                if (nightcheck.isChecked()) {
                     nightspin.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     nightspin.setVisibility(View.GONE);
                 }
 
             }
         });
 
-       morningspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-           public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        morningspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-               String selection = (String) adapterView.getItemAtPosition(i);
-               if (selection.equals("Select")) {
-                       mspin_="Select";
-               } else if (selection.equals("After Breakfast")) {
-mspin_="After Breakfast";
-               } else {
-                   mspin_="Before Breakfast";
-               }
-           }
+                String selection = (String) adapterView.getItemAtPosition(i);
+                if (selection.equals("Select")) {
+                    mspin_ = "Select";
+                } else if (selection.equals("After Breakfast")) {
+                    mspin_ = "After Breakfast";
+                } else {
+                    mspin_ = "Before Breakfast";
+                }
+            }
 
-           @Override
-           public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-           }
-       });
+            }
+        });
 
         afterspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -712,11 +806,11 @@ mspin_="After Breakfast";
 
                 String selection = (String) adapterView.getItemAtPosition(i);
                 if (selection.equals("Select")) {
-                    aspin_="Select";
+                    aspin_ = "Select";
                 } else if (selection.equals("After Lunch")) {
-                    aspin_="After Lunch";
+                    aspin_ = "After Lunch";
                 } else {
-                    aspin_="Before Lunch";
+                    aspin_ = "Before Lunch";
                 }
             }
 
@@ -732,11 +826,11 @@ mspin_="After Breakfast";
 
                 String selection = (String) adapterView.getItemAtPosition(i);
                 if (selection.equals("Select")) {
-                    espin_="Select";
+                    espin_ = "Select";
                 } else if (selection.equals("After Snack")) {
-                    espin_="After Snack";
+                    espin_ = "After Snack";
                 } else {
-                    espin_="Before Snack";
+                    espin_ = "Before Snack";
                 }
             }
 
@@ -753,11 +847,11 @@ mspin_="After Breakfast";
 
                 String selection = (String) adapterView.getItemAtPosition(i);
                 if (selection.equals("Select")) {
-                    nspin_="Select";
+                    nspin_ = "Select";
                 } else if (selection.equals("After Dinner")) {
-                    nspin_="After Dinner";
+                    nspin_ = "After Dinner";
                 } else {
-                    nspin_="Before Dinner";
+                    nspin_ = "Before Dinner";
                 }
             }
 
@@ -769,55 +863,45 @@ mspin_="After Breakfast";
         addmed2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-if(mname.getText().toString().equals("")) {
-    Toast.makeText(Prescription_page.this,"empty medicine name",Toast.LENGTH_SHORT).show();
-}
+                if (mname.getText().toString().equals("")) {
+                    Toast.makeText(Prescription_page.this, "empty medicine name", Toast.LENGTH_SHORT).show();
+                } else if (morningcheck.isChecked() && mspin_.equals("Select")) {
 
-                else if(morningcheck.isChecked() && mspin_.equals("Select")) {
+                    Toast.makeText(Prescription_page.this, "Please select morning dosage", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(Prescription_page.this, "Please select morning dosage", Toast.LENGTH_SHORT).show();
+                } else if (aftercheck.isChecked() && aspin_.equals("Select")) {
+                    Toast.makeText(Prescription_page.this, "Please select afternoon dosage", Toast.LENGTH_SHORT).show();
 
+                } else if (evencheck.isChecked() && espin_.equals("Select")) {
+
+                    Toast.makeText(Prescription_page.this, "Please select evening dosage", Toast.LENGTH_SHORT).show();
+
+                } else if (nightcheck.isChecked() && nspin_.equals("Select")) {
+                    Toast.makeText(Prescription_page.this, "Please select night dosage", Toast.LENGTH_SHORT).show();
+                } else if (startdate.getText().toString().equals("")) {
+                    Toast.makeText(Prescription_page.this, "empty start date", Toast.LENGTH_SHORT).show();
+                } else if (enddate.getText().toString().equals("")) {
+                    Toast.makeText(Prescription_page.this, "empty end date", Toast.LENGTH_SHORT).show();
+                } else if (quan.getText().toString().equals("")) {
+                    Toast.makeText(Prescription_page.this, "empty quantity", Toast.LENGTH_SHORT).show();
+                } else {
+                    List<String> innerm = new ArrayList<>();
+                    innerm.add(mname.getText().toString());
+                    innerm.add(mspin_);
+                    innerm.add(aspin_);
+                    innerm.add(espin_);
+                    innerm.add(nspin_);
+                    innerm.add(startdate.getText().toString());
+                    innerm.add(enddate.getText().toString());
+                    innerm.add(quan.getText().toString());
+                    medfinal.add(innerm);
+                    medrecadapter.notifyDataSetChanged();
+                    Toast.makeText(Prescription_page.this, "medicine added", Toast.LENGTH_SHORT).show();
+                    System.out.println("jkd" + medfinal);
+                    popupWindow.dismiss();
                 }
-                else if(aftercheck.isChecked() && aspin_.equals("Select")) {
-                        Toast.makeText(Prescription_page.this, "Please select afternoon dosage", Toast.LENGTH_SHORT).show();
-
-                }
-                else if(evencheck.isChecked() && espin_.equals("Select")) {
-
-                        Toast.makeText(Prescription_page.this, "Please select evening dosage", Toast.LENGTH_SHORT).show();
-
-                }
-                else if(nightcheck.isChecked() && nspin_.equals("Select")) {
-                        Toast.makeText(Prescription_page.this, "Please select night dosage", Toast.LENGTH_SHORT).show();
-                }
-
-                else if(startdate.getText().toString().equals("")) {
-    Toast.makeText(Prescription_page.this, "empty start date", Toast.LENGTH_SHORT).show();
-}
-                else if(enddate.getText().toString().equals("")) {
-    Toast.makeText(Prescription_page.this, "empty end date", Toast.LENGTH_SHORT).show();
-}
-                else if(quan.getText().toString().equals("")) {
-    Toast.makeText(Prescription_page.this, "empty quantity", Toast.LENGTH_SHORT).show();
-}
-else{
-    List<String> innerm=new ArrayList<>();
-    innerm.add(mname.getText().toString());
-    innerm.add(mspin_);
-    innerm.add(aspin_);
-    innerm.add(espin_);
-    innerm.add(nspin_);
-    innerm.add(startdate.getText().toString());
-    innerm.add(enddate.getText().toString());
-    innerm.add(quan.getText().toString());
-    medfinal.add(innerm);
-    medrecadapter.notifyDataSetChanged();
-    Toast.makeText(Prescription_page.this,"medicine added",Toast.LENGTH_SHORT).show();
-    System.out.println("jkd"+medfinal);
-    popupWindow.dismiss();
-}
-                }
-            });
+            }
+        });
 
 
         delete.setOnClickListener(new View.OnClickListener() {
@@ -844,15 +928,15 @@ else{
             @Override
             public void run() {
 
-                applyDim(root,0.5f);
-                popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
+                applyDim(root, 0.5f);
+                popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
             }
         });
     }
 
 
-    public void createWindowtest(){
-        LayoutInflater inflater=(LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public void createWindowtest() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View popup = inflater.inflate(R.layout.testprespopup, null);
 
        /* int width=ViewGroup.LayoutParams.MATCH_PARENT;
@@ -863,19 +947,19 @@ else{
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int width = size.x-55;
+        int width = size.x - 55;
         int height = ViewGroup.LayoutParams.WRAP_CONTENT;
 
-        PopupWindow popupWindow=new PopupWindow(popup);
+        PopupWindow popupWindow = new PopupWindow(popup);
         popupWindow.setWidth(width);
         popupWindow.setHeight(height);
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
-        AppCompatAutoCompleteTextView test=popup.findViewById(R.id.testdesgin_testname);
-        AppCompatButton addtest2=popup.findViewById(R.id.testdesgin_addtest);
-        AppCompatButton deletetest2=popup.findViewById(R.id.testdesgin_deletetest);
-        Spinner status=popup.findViewById(R.id.testdesgin_pendingspin);
-String[] statusstring={"Select","Pending","Done"};
+        AppCompatAutoCompleteTextView test = popup.findViewById(R.id.testdesgin_testname);
+        AppCompatButton addtest2 = popup.findViewById(R.id.testdesgin_addtest);
+        AppCompatButton deletetest2 = popup.findViewById(R.id.testdesgin_deletetest);
+        Spinner status = popup.findViewById(R.id.testdesgin_pendingspin);
+        String[] statusstring = {"Select", "Pending", "Done"};
         RegisterSpinnerApdater statusadapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner1, statusstring);
         status.setAdapter(statusadapter);
 
@@ -885,11 +969,11 @@ String[] statusstring={"Select","Pending","Done"};
 
                 String selection = (String) adapterView.getItemAtPosition(i);
                 if (selection.equals("Select")) {
-                    tstatus="Select";
+                    tstatus = "Select";
                 } else if (selection.equals("Pending")) {
-                    tstatus="Pending";
+                    tstatus = "Pending";
                 } else {
-                    tstatus="Done";
+                    tstatus = "Done";
                 }
             }
 
@@ -903,28 +987,26 @@ String[] statusstring={"Select","Pending","Done"};
         addtest2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(test.getText().toString().equals("")){
-                    Toast.makeText(Prescription_page.this,"empty test name",Toast.LENGTH_SHORT).show();
-                }
-                else if(tstatus.equals("Select")){
-                    Toast.makeText(Prescription_page.this,"select test status",Toast.LENGTH_SHORT).show();
-                }
-                else{
+                if (test.getText().toString().equals("")) {
+                    Toast.makeText(Prescription_page.this, "empty test name", Toast.LENGTH_SHORT).show();
+                } else if (tstatus.equals("Select")) {
+                    Toast.makeText(Prescription_page.this, "select test status", Toast.LENGTH_SHORT).show();
+                } else {
 
-                  List<String> innertest=new ArrayList<>();
-                  innertest.add(test.getText().toString());
-                  innertest.add(tstatus);
-                  testfinal.add(innertest);
-                  testrecadapter.notifyDataSetChanged();
-                  popupWindow.dismiss();
-                    Toast.makeText(Prescription_page.this,"Test added",Toast.LENGTH_SHORT).show();
+                    List<String> innertest = new ArrayList<>();
+                    innertest.add(test.getText().toString());
+                    innertest.add(tstatus);
+                    testfinal.add(innertest);
+                    testrecadapter.notifyDataSetChanged();
+                    popupWindow.dismiss();
+                    Toast.makeText(Prescription_page.this, "Test added", Toast.LENGTH_SHORT).show();
 
 
                 }
             }
         });
 
-        ImageView cross=popup.findViewById(R.id.poptestcross);
+        ImageView cross = popup.findViewById(R.id.poptestcross);
         cross.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1096,9 +1178,6 @@ String[] statusstring={"Select","Pending","Done"};
         test.setAdapter(nadapter);
 
 
-
-
-
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -1110,12 +1189,13 @@ String[] statusstring={"Select","Pending","Done"};
             @Override
             public void run() {
 
-                applyDim(root,0.5f);
-                popupWindow.showAtLocation(layout, Gravity.CENTER,0,0);
+                applyDim(root, 0.5f);
+                popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
             }
         });
     }
-    public  void applyDim(@NonNull ViewGroup parent, float dimAmount){
+
+    public void applyDim(@NonNull ViewGroup parent, float dimAmount) {
         Drawable dim = new ColorDrawable(Color.BLACK);
         dim.setBounds(0, 0, parent.getWidth(), parent.getHeight());
         dim.setAlpha((int) (255 * dimAmount));
@@ -1134,7 +1214,7 @@ String[] statusstring={"Select","Pending","Done"};
             JSONObject jsonObject = new JSONObject();
             try {
                 if (key.equals("medicine")) {
-                    System.out.println("medinside"+listList.get(i));
+                    System.out.println("medinside" + listList.get(i));
                     jsonObject.put("name", listList.get(i).get(0).toString());
 
                     JSONObject dobj = new JSONObject();
@@ -1165,8 +1245,40 @@ String[] statusstring={"Select","Pending","Done"};
             }
         }
 
-      //  System.out.println("finaljson" + jsonArray);
+        //  System.out.println("finaljson" + jsonArray);
         return jsonArray;
     }
 
+
+    public static List<List> convertToListArray(JSONArray jsonArray, String key) {
+        List<List> listList = new ArrayList<>();
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                List<Object> innerList = new ArrayList<>();
+                if (key.equals("medicine")) {
+                    innerList.add(jsonObject.getString("name"));
+
+                    JSONObject dosageObj = jsonObject.getJSONObject("dosage");
+                    innerList.add(dosageObj.get("morning"));
+                    innerList.add(dosageObj.get("afternoon"));
+                    innerList.add(dosageObj.get("evening"));
+                    innerList.add(dosageObj.get("night"));
+
+                    JSONObject durationObj = jsonObject.getJSONObject("duration");
+                    innerList.add(durationObj.get("start"));
+                    innerList.add(durationObj.get("end"));
+
+                    innerList.add(jsonObject.get("quantity"));
+                } else if (key.equals("test")) {
+                    innerList.add(jsonObject.get("name"));
+                    innerList.add(jsonObject.get("status"));
+                }
+                listList.add(innerList);
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        return listList;
     }
+}

@@ -3,6 +3,7 @@ package com.example.trackhealth;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -21,7 +22,7 @@ public class User_prescription_activity_page extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("PRESCRIPTION"));
         tabLayout.addTab(tabLayout.newTab().setText("MEDICINE"));
         tabLayout.addTab(tabLayout.newTab().setText("ANALYSIS"));
-        tabLayout.addTab(tabLayout.newTab().setText("REPORT"));
+       // tabLayout.addTab(tabLayout.newTab().setText("REPORT"));
         adapter=new DoctorPrescription_viewpager(this,getIntent().getStringExtra("issueid"));
         viewPager2.setAdapter(adapter);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -48,5 +49,12 @@ public class User_prescription_activity_page extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+     /*   Intent i=new Intent(User_prescription_activity_page.this,user_report_homepage.class);
+        startActivity(i);*/
     }
 }
