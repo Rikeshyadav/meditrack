@@ -9,6 +9,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+
+import java.util.ArrayList;
+
 public class DescMedicine extends AppCompatActivity {
     TextView name,desc,price;
     RatingBar ratingBar;
@@ -33,5 +39,12 @@ public class DescMedicine extends AppCompatActivity {
                 Toast.makeText(DescMedicine.this,"Your Order is placed",Toast.LENGTH_SHORT).show();
             }
         });
+        ArrayList<SlideModel> imageList = new ArrayList<>();
+        imageList.add(new SlideModel(R.drawable.warfrin, ".", ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.tabletimg, "Dietary Principles For Heart Patients.", ScaleTypes.CENTER_INSIDE));
+        //   imageList.add(new SlideModel(, "And people do that.",ScaleTypes.CENTER_CROP));
+        ImageSlider imageSlider = findViewById(R.id.image_slider);
+        imageSlider.setImageList(imageList);
+
     }
 }

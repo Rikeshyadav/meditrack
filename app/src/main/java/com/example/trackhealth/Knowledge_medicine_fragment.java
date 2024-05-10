@@ -32,7 +32,9 @@ public class Knowledge_medicine_fragment extends Fragment {
  List<List> simpleone = new ArrayList<>();
  List<String> arr = new ArrayList<>();
  MedicineExtraAdapter2 bestSellerAdapter;
+ MedicineExtraAdapter2 bestSeller;
  MedicineExtraAdapter1 newAdapter1;
+ MedicineExtraAdapter1 newAdapter2;
 
 
  @Override
@@ -59,6 +61,8 @@ public class Knowledge_medicine_fragment extends Fragment {
   firsrecyv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
   simpleone.add(new ArrayList<>(Arrays.asList("Amoxicillin", "Amoxicillin is a penicillin antibiotic that fights bacteria. Amoxicillin is used to treat many different types of infection caused by bacteria, such as tonsillitis, bronchitis, pneumonia, and infections of the ear, nose, throat, skin, or urinary tract.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Ciprofloxacin", "Ciprofloxacin is a fluoroquinolone antibiotic that fights bacteria in the body. It is used to treat different types of bacterial infections, including urinary tract infections, respiratory infections, skin infections, joint and bone infections, and certain types of infectious diarrhea.", getRandomDiscount(), getRandomRating())));
+  simpleone.add(new ArrayList<>(Arrays.asList("Sodium Nitroprusside", "Sodium nitroprusside is a vasodilator medication that improves blood flow by relaxing blood vessels. It is used to treat high blood pressure and heart failure.", getRandomDiscount(), getRandomRating())));
+  simpleone.add(new ArrayList<>(Arrays.asList("Hydrochlorothiazide", "Hydrochlorothiazide is a thiazide diuretic medication that increases urine production and reduces fluid retention. It is used to treat high blood pressure and edema (fluid retention)", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Doxycycline", "Doxycycline is a tetracycline antibiotic that fights bacteria in the body. It is used to treat many different types of bacterial infections, including acne, urinary tract infections, intestinal infections, eye infections, gonorrhea, chlamydia, periodontitis (gum disease), and others.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Metronidazole", "Metronidazole is an antibiotic that fights bacteria and parasites in the body. It is used to treat bacterial infections of the vagina, stomach, skin, joints, and respiratory tract. It is also used to treat certain sexually transmitted infections.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Azithromycin", "Azithromycin is a macrolide antibiotic that fights bacteria. It is used to treat many different types of infections caused by bacteria, including respiratory infections, skin infections, ear infections, and sexually transmitted diseases.", getRandomDiscount(), getRandomRating())));
@@ -143,8 +147,6 @@ public class Knowledge_medicine_fragment extends Fragment {
   simpleone.add(new ArrayList<>(Arrays.asList("Nicardipine", "Nicardipine is a calcium channel blocker medication that improves blood flow to the heart by relaxing blood vessels. It is used to treat high blood pressure and angina (chest pain).", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Hydralazine", "Hydralazine is a vasodilator medication that improves blood flow by relaxing blood vessels. It is used to treat high blood pressure and heart failure.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Minoxidil", "Minoxidil is a vasodilator medication that improves blood flow by relaxing blood vessels. It is used to treat high blood pressure and hair loss.", getRandomDiscount(), getRandomRating())));
-  simpleone.add(new ArrayList<>(Arrays.asList("Sodium Nitroprusside", "Sodium nitroprusside is a vasodilator medication that improves blood flow by relaxing blood vessels. It is used to treat high blood pressure and heart failure.", getRandomDiscount(), getRandomRating())));
-  simpleone.add(new ArrayList<>(Arrays.asList("Hydrochlorothiazide", "Hydrochlorothiazide is a thiazide diuretic medication that increases urine production and reduces fluid retention. It is used to treat high blood pressure and edema (fluid retention)", getRandomDiscount(), getRandomRating())));
   newAdapter1 = new MedicineExtraAdapter1(simpleone);
   firsrecyv.setAdapter(newAdapter1);
 
@@ -153,16 +155,11 @@ public class Knowledge_medicine_fragment extends Fragment {
   secondrecycleview.setHasFixedSize(true);
   GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, LinearLayoutManager.HORIZONTAL, false);
   secondrecycleview.setLayoutManager(gridLayoutManager);
-
- /*     arr=new ArrayList<>();
-        arr.add("Pantropzole");
-        arr.add("It is a medicine");
-        arr.add("6% Off $34");
-        arr.add("3.2");*/
   simpleone = new ArrayList<>();
   simpleone.add(new ArrayList(Arrays.asList("Pantoprazole", "It is a medicine", "6% Off $34", "3.2")));
   simpleone.add(new ArrayList<>(Arrays.asList("Metoclopramide", "Metoclopramide is a medication used to treat certain conditions of the stomach and intestines. It works by increasing the movements or contractions of the stomach and intestines.", "1% off Rs 350", "4.5")));
   simpleone.add(new ArrayList<>(Arrays.asList("Ondansetron", "Ondansetron is a medication used to prevent nausea and vomiting caused by cancer chemotherapy, radiation therapy, and surgery. It works by blocking the action of serotonin, a natural substance that may cause nausea and vomiting.", "7% off Rs 160", "3.5")));
+  simpleone.add(new ArrayList<>(Arrays.asList("Amoxicillin", "Amoxicillin is a penicillin antibiotic that fights bacteria. Amoxicillin is used to treat many different types of infection caused by bacteria, such as tonsillitis, bronchitis, pneumonia, and infections of the ear, nose, throat, skin, or urinary tract.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Domperidone", "Domperidone is a medication used to relieve symptoms of nausea and vomiting. It works by blocking the action of a chemical messenger in the brain that may cause nausea and vomiting, and by increasing the movements or contractions of the stomach and intestines.", "8% off Rs 750", "3.9")));
   simpleone.add(new ArrayList<>(Arrays.asList("Simethicone", "Simethicone is an anti-foaming agent that works by breaking up gas bubbles in the stomach and intestines. It is used to relieve symptoms of gas such as belching, bloating, and feelings of pressure/discomfort in the stomach/gut.", "1% off Rs 350", "4.5")));
   simpleone.add(new ArrayList<>(Arrays.asList("Lansoprazole", "Lansoprazole is a proton pump inhibitor (PPI) used to treat certain stomach and esophagus problems (such as acid reflux, ulcers). It works by decreasing the amount of acid your stomach makes.", "8% off Rs 650", "4.5")));
@@ -194,17 +191,16 @@ public class Knowledge_medicine_fragment extends Fragment {
   simpleone.add(new ArrayList<>(Arrays.asList("Fluticasone", "Fluticasone is a steroid. It prevents the release of substances in the body that cause inflammation. Fluticasone inhalation is used to prevent asthma attacks. It will not treat an asthma attack that has already begun.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Montelukast", "Montelukast is a leukotriene receptor antagonist. It works by blocking the action of certain natural substances that cause swelling, tightening of the airways, and other symptoms of asthma and allergies.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Salbutamol", "Salbutamol is a bronchodilator. It works by relaxing the muscles in the airways and making breathing easier. Salbutamol inhalation is used to treat or prevent bronchospasm in people with reversible obstructive airway disease.", getRandomDiscount(), getRandomRating())));
-  simpleone.add(new ArrayList<>(Arrays.asList("Ceftriaxone", "Ceftriaxone is a cephalosporin (SEF a low spor in) antibiotic. It works by fighting bacteria in your body. Ceftriaxone is used to treat many kinds of bacterial infections, including severe or life-threatening forms such as meningitis.", getRandomDiscount(), getRandomRating())));
-  simpleone.add(new ArrayList<>(Arrays.asList("Amoxicillin", "Amoxicillin is a penicillin antibiotic that fights bacteria. Amoxicillin is used to treat many different types of infection caused by bacteria, such as tonsillitis, bronchitis, pneumonia, and infections of the ear, nose, throat, skin, or urinary tract.", getRandomDiscount(), getRandomRating())));
+
   bestSellerAdapter = new MedicineExtraAdapter2(simpleone);
   secondrecycleview.setAdapter(bestSellerAdapter);
 
   thirdrecycleview = view.findViewById(R.id.third_recycleview);
   thirdrecycleview.setHasFixedSize(true);
-  thirdrecycleview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+  thirdrecycleview.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.HORIZONTAL, false));
+
 
   simpleone = new ArrayList<>();
-
 
   simpleone.add(new ArrayList<>(Arrays.asList("Chlorthalidone", "Chlorthalidone is a thiazide diuretic medication that increases urine production and reduces fluid retention. It is used to treat high blood pressure and edema (fluid retention) caused by certain medical conditions.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Indapamide", "Indapamide is a thiazide diuretic medication that increases urine production and reduces fluid retention. It is used to treat high blood pressure and edema (fluid retention) caused by certain medical conditions.", getRandomDiscount(), getRandomRating())));
@@ -306,11 +302,10 @@ public class Knowledge_medicine_fragment extends Fragment {
   simpleone.add(new ArrayList<>(Arrays.asList("Cephalexin", "Cephalexin is a cephalosporin antibiotic that fights bacteria. It is used to treat bacterial infections, including respiratory infections, skin infections, ear infections, and urinary tract infections.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Ciprofloxacin", "Ciprofloxacin is a fluoroquinolone antibiotic that fights bacteria. It is used to treat bacterial infections, including urinary tract infections, respiratory infections, skin infections, and gastrointestinal infections.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Levofloxacin", "Levofloxacin is a fluoroquinolone antibiotic that fights bacteria. It is used to treat bacterial infections, including respiratory infections, skin infections, urinary tract", getRandomDiscount(), getRandomRating())));
-  newAdapter1 = new MedicineExtraAdapter1(simpleone);
-  thirdrecycleview.setAdapter(newAdapter1);
+  newAdapter2 = new MedicineExtraAdapter1(simpleone);
+  thirdrecycleview.setAdapter(newAdapter2);
 
   simpleone = new ArrayList<>();
-
   simpleone.add(new ArrayList<>(Arrays.asList("Warfarin", "Warfarin is an anticoagulant medication that works by inhibiting the synthesis of vitamin K-dependent clotting factors in the liver. It is used to prevent blood clots, stroke, and heart attacks.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Clopidogrel", "Clopidogrel is an antiplatelet medication that works by inhibiting the binding of adenosine diphosphate (ADP) to platelet receptors. It is used to prevent blood clots, stroke, and heart attacks.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Heparin", "Heparin is an anticoagulant medication that works by enhancing the activity of antithrombin III, an enzyme that inhibits the formation of blood clots. It is used to prevent and treat blood clots.", getRandomDiscount(), getRandomRating())));
@@ -371,6 +366,7 @@ public class Knowledge_medicine_fragment extends Fragment {
   simpleone.add(new ArrayList<>(Arrays.asList("Melatonin", "Melatonin is a hormone supplement that is used to regulate sleep-wake cycles and treat insomnia. It works by signaling the brain to prepare for sleep and promoting relaxation.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Buspirone", "Buspirone is an anxiolytic medication that works in the brain to treat anxiety disorders and symptoms of anxiety. It works by binding to serotonin and dopamine receptors, neurotransmitters that regulate mood and anxiety.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Pregabalin", "Pregabalin is an anticonvulsant and anxiolytic medication that works in the brain to treat epilepsy, neuropathic pain, and generalized anxiety disorder (GAD). It works by binding to calcium channels in the brain, which reduces the release of neurotransmitters involved in pain and anxiety.", getRandomDiscount(), getRandomRating())));
+
   simpleone.add(new ArrayList<>(Arrays.asList("Gabapentin", "Gabapentin is an anticonvulsant and analgesic medication that works in the brain to treat epilepsy, neuropathic pain, and restless legs syndrome (RLS). It works by binding to calcium channels in the brain, which reduces the release of neurotransmitters involved in pain and seizure activity.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Diazepam", "Diazepam is a benzodiazepine medication that works in the brain to treat anxiety disorders, alcohol withdrawal symptoms, muscle spasms, and seizures. It works by enhancing the activity of gamma-aminobutyric acid (GABA), a neurotransmitter that inhibits brain activity and promotes relaxation.", getRandomDiscount(), getRandomRating())));
   simpleone.add(new ArrayList<>(Arrays.asList("Alprazolam", "Alprazolam is a benzodiazepine medication that works in the brain to treat anxiety disorders and panic disorder. It works by enhancing the activity of gamma-aminobutyric acid (GABA), a neurotransmitter that inhibits brain activity and promotes relaxation.", getRandomDiscount(), getRandomRating())));
@@ -378,8 +374,8 @@ public class Knowledge_medicine_fragment extends Fragment {
   fourrecycleview = view.findViewById(R.id.four_recycleview);
   fourrecycleview.setHasFixedSize(true);
   fourrecycleview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-  bestSellerAdapter = new MedicineExtraAdapter2(simpleone);
-  fourrecycleview.setAdapter(bestSellerAdapter);
+  bestSeller = new MedicineExtraAdapter2(simpleone);
+  fourrecycleview.setAdapter(bestSeller);
   setupSearch();
 
   return view;
@@ -395,40 +391,44 @@ public class Knowledge_medicine_fragment extends Fragment {
 
    @Override
    public boolean onQueryTextChange(String newText) {
-    // Filter the data based on the search query
-    if (newText.isEmpty()) {
-     // If the query is empty, hide the ListView and clear the search results
-
-    } else {
-     // If the query is not empty, show the ListView and filter the results
-
-     // filterData(newText);
-    }
+    filterData(newText);
 
     return true;
    }
   });
  }
-
-
-/* private void searchList(String text) {
-  List<List> dataSearchList = new ArrayList<>();
-  for (int i = 0; i < outer.size(); i++) {
-
-   if (outer.get(i).get(0).toString().toLowerCase().contains(text.toLowerCase())) {
-    dataSearchList.add(outer.get(i));
+ private void filterData(String query) {
+  String lowercaseQuery = query.toLowerCase();
+  if (newAdapter1 != null) {
+   newAdapter1.getFilter().filter(lowercaseQuery);
+  }
+  if (newAdapter2 != null) {
+   newAdapter2.getFilter().filter(lowercaseQuery);
+  }
+  if (bestSeller != null) {
+   bestSeller.getFilter().filter(lowercaseQuery);
+  }
+  if (bestSellerAdapter != null) {
+   bestSellerAdapter.getFilter().filter(lowercaseQuery);
+  }
+  if (lowercaseQuery.isEmpty()) {
+   if (newAdapter1 != null) {
+    newAdapter1.resetData();
+   }
+   if (newAdapter2 != null) {
+    newAdapter2.resetData();
+   }
+   if (bestSeller != null) {
+    bestSeller.resetData();
+   }
+   if (bestSellerAdapter != null) {
+    bestSellerAdapter.resetData();
    }
   }
-  if (dataSearchList.isEmpty()) {
-   Toast.makeText(getActivity(), "Not Found", Toast.LENGTH_SHORT).show();
-  }
-  System.out.println("hello" + dataSearchList);
-  adapter = new HomeDoctorAdapter(dataSearchList, getActivity());
-  recyclerView.setAdapter(adapter);
-  recyclerView.setHasFixedSize(true);
- }*/
+ }
+
+
  private static String getRandomDiscount() {
-        // Generate a random discount between 5% and 20%
         Random random = new Random();
         int r= random.nextInt(99) + 1;
         int price=  random.nextInt(1901) + 100;
@@ -436,7 +436,6 @@ public class Knowledge_medicine_fragment extends Fragment {
     }
 
     private static String getRandomRating() {
-        // Generate a random rating between 0 and 5
         Random random=new Random();
         float f= random.nextFloat() * 5;
         return String.valueOf(f);

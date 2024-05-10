@@ -4,19 +4,30 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicineExtraAdapter1 extends RecyclerView.Adapter<MedicineExtraAdapter1.newViewHolder> {
     List<List> listmodel;
-    List<List>listfun;
+    //List<List> filteredList;
+    List<List> originalList;
     public MedicineExtraAdapter1(List<List> modellist){
-        this.listmodel=modellist;
+        this.originalList = new ArrayList<>(modellist);
+        this.listmodel=new ArrayList<>(modellist);
+      //  this.filteredList = new ArrayList<>(modellist);
+    }
+
+    public void resetData() {
+        listmodel.clear();
+        listmodel.addAll(originalList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -60,6 +71,37 @@ public class MedicineExtraAdapter1 extends RecyclerView.Adapter<MedicineExtraAda
             name=itemView.findViewById(R.id.medicne_name1);
             price=itemView.findViewById(R.id.price1);
         }
+    }
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                List<List> filteredList = new ArrayList<>();
+                if (filterPattern.isEmpty()) {
+                    // If the search query is empty, use the original dataset
+                    filteredList.addAll(originalList);
+                } else {
+                    // Filter the original dataset based on the search query
+                    for (List item : originalList) {
+                        if (item.get(0).toString().toLowerCase().contains(filterPattern)) {
+                            filteredList.add(item);
+                        }
+                    }
+                }
+
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                listmodel = (ArrayList<List>) results.values;
+                notifyDataSetChanged(); // Notify RecyclerView to update with filtered data
+            }
+        };
     }
 
 }

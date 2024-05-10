@@ -115,6 +115,17 @@
                 android:text="10% $450"/>
         </LinearLayout>
 
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearl"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:text="nearest location"
+            android:textSize="20sp" />
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_below="@id/linearl"
@@ -124,6 +135,18 @@
             android:layout_alignParentEnd="true"
             android:layout_margin="30dp"
             android:text="order"/>
+        <com.denzcoskun.imageslider.ImageSlider
+            android:id="@+id/image_slider"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/medextrasecmorder"
+            android:layout_height="200dp"
+            app:iss_auto_cycle="true"
+            app:iss_period="1000"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/black"
+            android:layout_marginBottom="20dp"
+            app:iss_delay="1000"
+            app:iss_text_align="CENTER"/>
 
     </RelativeLayout>
 </ScrollView>

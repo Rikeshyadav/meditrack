@@ -7,8 +7,17 @@
     android:background="#DAE5F3"
     android:layout_marginTop="48dp"
     tools:context=".Patient_HomeFragment">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:id="@+id/track"
+        android:background="#509DF4"
+       android:text="  TrackHealth"
+        android:textSize="30sp"
+        />
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/pappbar"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:background="#DAE5F3"
         android:layout_height="230dp">
@@ -17,6 +26,7 @@
             android:id="@+id/collapsing_toolbar_layout2"
             android:layout_width="match_parent"
             android:layout_height="230dp"
+
             app:titleCollapseMode="scale"
             app:title="TrackHealth"
             android:background="#DAE5F3"
