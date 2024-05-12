@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -53,6 +54,22 @@ public class Knowledge_diet_fragment extends Fragment {
         closeButton.setColorFilter(textColor);
         ImageView searchIcon = searchView_diet.findViewById(androidx.appcompat.R.id.search_button);
         searchIcon.setColorFilter(textColor);
+        searchView_diet.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
+            }
+        });
+
+
+
+
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),3, LinearLayoutManager.HORIZONTAL,false);
         recycler_Diet.setLayoutManager(gridLayoutManager);
         String description0 = getString(R.string.date);
@@ -77,5 +94,22 @@ public class Knowledge_diet_fragment extends Fragment {
         adapter_diet=new myadapterfor_list(getActivity(),dataModels_diet);
         recycler_Diet.setAdapter(adapter_diet);
         return view;
+    }
+
+
+
+    private void searchList(String text){
+        List<dataModel_exerciseGyan> dataSearchList=new ArrayList<>();
+        for(dataModel_exerciseGyan data: dataModels_diet){
+            if(data.getTitle().toLowerCase().contains(text.toLowerCase())){
+                dataSearchList.add(data);
+            }
+        }
+        if(dataSearchList.isEmpty()){
+            Toast.makeText(getActivity(),"Not Found",Toast.LENGTH_SHORT).show();
+        }
+        adapter_diet.setSearchList(dataSearchList);
+
+
     }
 }

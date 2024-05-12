@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class Exercise extends Fragment {
 
     Postadapter_exercisegyan postadapter;
     dataModel_exerciseGyan datafun;
+    SearchView searchView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +54,16 @@ public class Exercise extends Fragment {
 
         recyclerView1=view.findViewById(R.id.search_recy);
 
-        SearchView searchView=view.findViewById(R.id.search_view);
+        searchView=view.findViewById(R.id.search_view);
+        searchView.setBackgroundColor(getResources().getColor(R.color.white));
+        int textColor = getResources().getColor(R.color.black);
+        EditText editText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        editText.setTextColor(textColor);
+        editText.setHintTextColor(textColor);
+        ImageView closeButton = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+        closeButton.setColorFilter(textColor);
+        ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_button);
+        searchIcon.setColorFilter(textColor);
 
         searchView.clearFocus();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

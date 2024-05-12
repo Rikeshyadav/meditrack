@@ -9,9 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,8 +27,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
-
-import org.checkerframework.checker.units.qual.Length;
 
 import java.util.Objects;
 
@@ -146,12 +142,12 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
             Toast.makeText(getApplicationContext(), "Notification", Toast.LENGTH_SHORT).show();
 
         } else if (itemId == R.id.nav_trash) {
-            openFragment(new TrashFragment(), "trash");
+            openFragment(new Panding_Fragment(), "trash");
             //toolbar.setTitle("Pending");
         } else if (itemId == R.id.patient_nav_setting) {
             openFragment(new SettingFragment(), "setting");
         } else if (itemId == R.id.patient_nav_about) {
-            //toolbar.setTitle("about us");
+            openFragment(new aboutUsFragment(),"about");
         } else if (itemId == R.id.patient_nav_logout) {
             setAlert("Do you want to logout?", "yes", "no", "logout");
             unchecknav();
