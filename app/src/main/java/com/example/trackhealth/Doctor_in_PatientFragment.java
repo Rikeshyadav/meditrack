@@ -1,15 +1,22 @@
 package com.example.trackhealth;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,16 +66,16 @@ import java.util.List;
 
 public class Doctor_in_PatientFragment extends Fragment {
 
-SharedPreferences sp,sp2;
+SharedPreferences sp,sp2,sp44;
 TextView dname,dspec,dhos,about;
 RadioGroup radio;
+ImageView call;
 RadioButton all,five,four,three,two,one;
 ProgressBar progressBar;
 float rate=0.0f;
 ReviewAdapter adapter;
 LinearLayoutManager l;
 List<List> arr=new ArrayList<>();
-ImageView vcall;
     ZegoSendCallInvitationButton videoCall;
 RecyclerView review;
 ShapeableImageView dp;
@@ -78,18 +85,16 @@ ShapeableImageView dp;
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_doctor_in__patient, container, false);
         dname=view.findViewById(R.id.Dn);
+        call=view.findViewById(R.id.doctorinpat_call);
         progressBar=view.findViewById(R.id.reviewprogress);
         dspec=view.findViewById(R.id.skill);
         dhos=view.findViewById(R.id.pl);
-
-        SharedPreferences sp44=getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        sp44=getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         videoCall=view.findViewById(R.id.dip_vcall);
         startService(sp44.getString("phone",""));
         setVideoCall(sp44.getString("curphone2",""));
-
         dp=view.findViewById(R.id.doctorpho);
-
-       Button b1=view.findViewById(R.id.feed);//this is popup trigger id
+        Button b1=view.findViewById(R.id.feed);//this is popup trigger id
         about=view.findViewById(R.id.dipabout);
         radio=view.findViewById(R.id.dipradio);
         all=view.findViewById(R.id.dipall);
@@ -98,9 +103,15 @@ ShapeableImageView dp;
         three=view.findViewById(R.id.dip3);
         two=view.findViewById(R.id.dip2);
         one=view.findViewById(R.id.dip1);
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+setAlert();
+            }
 
+
+        });
         all.setSelected(true);
-
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -252,6 +263,50 @@ ShapeableImageView dp;
         String feedbackMessage = "Rating: " + rating + "Feedback: " + feedbackText;
         Toast.makeText(getActivity(), feedbackMessage, Toast.LENGTH_SHORT).show();
     }
+
+    public void setAlert(){
+        String pos="Yes";
+        String neg="No";
+        String msg="Do you want to do "+call+" call?";
+        androidx.appcompat.app.AlertDialog.Builder b=new androidx.appcompat.app.AlertDialog.Builder(getActivity());
+        b.setMessage(msg);
+        b.setPositiveButton(pos,(DialogInterface.OnClickListener) (dialog, which)->{
+
+
+                String phoneNumber = sp44.getString("curphone2","");
+                if (!phoneNumber.isEmpty()) {
+                    if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                        // You have permission, so proceed with making the call
+                        Intent myIntent = new Intent(Intent.ACTION_CALL);
+                        myIntent.setData(Uri.parse("tel:" + phoneNumber));
+                       getActivity().startActivity(myIntent);
+                    } else {
+                        // Request the CALL_PHONE permission
+                        ActivityCompat.requestPermissions((Activity) getActivity(), new String[]{Manifest.permission.CALL_PHONE}, 1);
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Phone number not available", Toast.LENGTH_SHORT).show();
+                }
+
+
+        });
+        b.setNegativeButton(neg,(DialogInterface.OnClickListener) (dialog,which)->{
+
+            dialog.cancel();
+        });
+        AlertDialog ad=b.create();
+        ad.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+
+                ad.getWindow().getDecorView().setBackgroundColor(getActivity().getResources().getColor(R.color.black));
+            }
+        });
+
+        ad.show();
+
+    }
+
     public Bitmap getbitmap(String s){
         byte[] bytes= Base64.decode(s,Base64.DEFAULT);
         Bitmap bitmap2= BitmapFactory.decodeByteArray(bytes,0,bytes.length);

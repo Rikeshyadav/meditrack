@@ -77,7 +77,6 @@ public class Patient_chat_fragment extends Fragment {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rec.setLayoutManager(layoutManager);
-
         scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {

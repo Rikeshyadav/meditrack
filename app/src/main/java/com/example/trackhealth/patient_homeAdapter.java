@@ -39,7 +39,9 @@ Context context;
         //holder.dp.setImageResource(data.get(position));
         holder.dname.setText("Dr. "+data.get(position).get(1).toString());
         holder.dspec.setText(data.get(position).get(2).toString());
+        SharedPreferences sp=context.getSharedPreferences("user",Context.MODE_PRIVATE);
         holder.dhospital.setText(data.get(position).get(3).toString());
+        sp.edit().putString("curclinic_name",data.get(position).get(3).toString()).apply();
         holder.dqua.setText(data.get(position).get(4).toString());
         if(!data.get(position).get(0).toString().equals("")) {
             holder.dp.setImageBitmap(getbitmap(data.get(position).get(0).toString()));

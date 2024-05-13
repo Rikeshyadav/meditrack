@@ -6,138 +6,119 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F1F4F8"
     tools:context=".Patient_in_Doctor_fragemt">
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F1F4F8">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_marginTop="40dp"
+        android:weightSum="10"
+        android:id="@+id/pid_topll"
+        android:layout_marginTop="15dp"
         android:layout_height="wrap_content">
         <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="200dp"
+            android:layout_width="0dp"
+            android:layout_weight="5"
             android:padding="4dp"
-            android:id="@+id/PAteint_photo"
-            android:layout_height="330dp"
+            android:id="@+id/pid_photo"
+            android:layout_height="220dp"
             android:layout_marginStart="14dp"
-            android:contentDescription="image_access"
-            app:shapeAppearanceOverlay="@style/specificcorner"
-            android:src="@drawable/ladies"
+            android:src="@drawable/user"
+            app:shapeAppearanceOverlay="@style/specificcorner1"
             android:scaleType="centerCrop"
             />
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_margin="10dp"
+            android:padding="5dp"
             android:orientation="vertical"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mr.Ashok Agrawal"
-                android:textSize="20sp"
-                android:id="@+id/PAteint_name1"
+                android:textSize="22sp"
+                android:layout_marginBottom="6dp"
+                android:id="@+id/pid_name"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="6dp"
+                android:layout_margin="4dp"
                 android:text="Male"
-                android:textSize="15sp"
-                android:id="@+id/PAtient_gender"
+                android:textSize="16sp"
+                android:id="@+id/pid_gender"
                 android:textColor="#00695C"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:text="AGE: 40"
-                android:id="@+id/PAteint_age"
-                android:textSize="15sp"
+                android:layout_margin="4dp"
+                android:text="AGE: "
+                android:id="@+id/pid_age"
+                android:textSize="16sp"
                 android:textColor="#00695C"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="6dp"
+                android:layout_margin="4dp"
                 android:text="Blood Group: AB+"
-                android:id="@+id/PAteint_blood"
-                android:textSize="15sp"
+                android:id="@+id/pid_loc"
+                android:textSize="16sp"
                 android:textColor="#00695C"/>
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <ImageView
                     android:layout_width="40dp"
-                    android:layout_marginTop="50dp"
                     android:layout_height="40dp"
-                    android:contentDescription="call"
-                    android:layout_marginStart="30dp"
+                    android:layout_margin="15dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/patientindoc_call"
                     android:background="@drawable/fnd"
                     android:src="@drawable/baseline_call_24"/>
                 <com.zegocloud.uikit.prebuilt.call.invite.widget.ZegoSendCallInvitationButton
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="50dp"
-                    android:contentDescription="video"
                     android:id="@+id/pid_vcall"
-                    android:layout_marginStart="50dp"
+                    android:layout_margin="15dp"
+                    android:gravity="end"
                     android:background="@drawable/baseline_videocam_24"
                     android:src="@drawable/baseline_videocam_24"
                     />
+
             </LinearLayout>
+
+
 
         </LinearLayout>
     </LinearLayout>
     <TextView
-        android:layout_marginTop="400dp"
         android:layout_marginStart="20dp"
         android:layout_width="wrap_content"
         android:text="Email"
         android:textColor="#1565C0"
-        android:textSize="25sp"
+        android:id="@+id/pid_emailtitle"
+        android:layout_below="@id/pid_topll"
+        android:layout_marginTop="25dp"
+        android:textSize="20sp"
         android:layout_height="wrap_content"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="445dp"
-        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="10dp"
-        android:textSize="20sp"
+        android:textSize="17sp"
+        android:layout_below="@id/pid_emailtitle"
         android:id="@+id/emaildetails"
         android:text="agarwal123@gmail.com"
         android:textColor="@color/black"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location:"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="510dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nerist,Arunachal Pradesh"
-        android:id="@+id/patient_location"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="510dp"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="google map"
-        android:id="@+id/PAtient_loc1"
-        android:clickable="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="540dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"/>
-
-
-    </FrameLayout>
+    </RelativeLayout>
 
 </ScrollView>

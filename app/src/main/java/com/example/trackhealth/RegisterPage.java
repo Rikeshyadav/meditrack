@@ -1,3 +1,4 @@
+
 package com.example.trackhealth;
 
 import androidx.annotation.NonNull;
@@ -12,13 +13,19 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.telephony.SmsManager;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -50,6 +57,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -63,12 +71,14 @@ public class RegisterPage extends AppCompatActivity {
     Spinner dopcat;
     int select = 1;
     FirebaseAuth auth;
-    ImageView img;
+    ImageView img,sign;
     String phh="",verificationId="";
+    SharedPreferences sp;
     ProgressBar progress,progress2;
+    String photoid_="",photosign_="";
     String verified_phone="";
     String otp="";
-    boolean verified=false ,existUser=false;
+    boolean verified=true ,existUser=false;
 
 
     ScrollView scroll;
@@ -79,7 +89,7 @@ public class RegisterPage extends AppCompatActivity {
 
     TextView spec_text, yoe_text, about_text, qualification_text, text_clinicphone, text_clinic_header, text_clinic_name, text_clinic_type, text_clinic_state,text_clinic_city, country_code2;
 
-    TextView additional_det, verification_text, phone_text, doc_reg, pass_warn, docpat_warn, upload_warn;
+    TextView additional_det, verification_text, phone_text, doc_reg, pass_warn, docpat_warn, upload_warn,upload_warn2;
 
     EditText speciality, yoe, aboutDoc, qualification, organisation, clinic_type, clinic_phone, dob, phone_no, pass;
     EditText password, firstname, lastname, emailid, otpedit;
@@ -88,7 +98,7 @@ public class RegisterPage extends AppCompatActivity {
 
     AppCompatButton signup, otp_but, verify_but;
 
-    CardView card2, card3, card4, card5;
+    CardView card2, card3, card4, card5,card6;
     String doctorOrPatient = "null", gender = "";
 
     @Override
@@ -96,7 +106,7 @@ public class RegisterPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-progress=findViewById(R.id.progressregister);
+        progress=findViewById(R.id.progressregister);
         progress2=findViewById(R.id.progressregister2);
 
         //id of text view
@@ -105,6 +115,7 @@ progress=findViewById(R.id.progressregister);
         text_clinic_header = findViewById(R.id.clinic_info);
         text_clinic_name = findViewById(R.id.text_clinicname);
         text_clinic_state = findViewById(R.id.text_clinicstate);
+        sp=getSharedPreferences("user",MODE_PRIVATE);
         text_clinic_city=findViewById(R.id.text_cliniccity);
         text_clinic_type = findViewById(R.id.text_clinictype);
         radiogroup_gender=findViewById(R.id.gender);
@@ -155,6 +166,7 @@ progress=findViewById(R.id.progressregister);
         otp_but = findViewById(R.id.get_otp_but);
         verify_but = findViewById(R.id.verify_but_reg);
         upload_warn = findViewById(R.id.upload_doc);
+        upload_warn2 = findViewById(R.id.upload_signdoc);
 
 
         //radio button and group
@@ -193,6 +205,7 @@ progress=findViewById(R.id.progressregister);
         card3 = findViewById(R.id.card3);
         card4 = findViewById(R.id.card4);
         card5 = findViewById(R.id.card5);
+        card6 = findViewById(R.id.card6);
 
 
         //gender
@@ -235,6 +248,7 @@ progress=findViewById(R.id.progressregister);
                 String selectedOption = (String) adapterView.getItemAtPosition(i);
                 if (selectedOption.equals("Select")) {
                     card5.setVisibility(View.GONE);
+                    card6.setVisibility(View.GONE);
                     select = 0;
                     doctorOrPatient = "null";
                     card2.setVisibility(View.GONE);
@@ -252,94 +266,96 @@ progress=findViewById(R.id.progressregister);
                     hospital_radio.setVisibility(View.GONE);
                     clinic_radio.setVisibility(View.GONE);
                 }else{
-                if ((firstname.getText().toString().trim() + lastname.getText().toString().trim()).equals("")) {
-                    scroll.fullScroll(scroll.FOCUS_UP);
-                    dopcat.setSelection(0);
-                    Toast.makeText(getApplicationContext(), "empty username", Toast.LENGTH_SHORT).show();
-                } else if (emailid.getText().toString().trim().equals("")) {
-                    scroll.fullScroll(scroll.FOCUS_UP);
-                    dopcat.setSelection(0);
-                    Toast.makeText(getApplicationContext(), "empty email", Toast.LENGTH_SHORT).show();
-                } else if (dob.getText().toString().trim().equals("")) {
-                    scroll.fullScroll(scroll.FOCUS_UP);
-                    dopcat.setSelection(0);
-                    Toast.makeText(getApplicationContext(), "empty dob", Toast.LENGTH_SHORT).show();
-                } else if (gender.equals("")) {
-                    scroll.fullScroll(scroll.FOCUS_UP);
-                    dopcat.setSelection(0);
-                    Toast.makeText(getApplicationContext(), "empty gender", Toast.LENGTH_SHORT).show();
-                } else if (state.getText().toString().trim().equals("")) {
-                    scroll.fullScroll(scroll.FOCUS_UP);
-                    dopcat.setSelection(0);
-                    Toast.makeText(getApplicationContext(), "empty state", Toast.LENGTH_SHORT).show();
-                }
-                else if (city.getText().toString().trim().equals("")) {
-                    scroll.fullScroll(scroll.FOCUS_UP);
-                    dopcat.setSelection(0);
-                    Toast.makeText(getApplicationContext(), "empty city", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    if (selectedOption.equals("Doctor")) {
+                    if ((firstname.getText().toString().trim() + lastname.getText().toString().trim()).equals("")) {
+                        scroll.fullScroll(scroll.FOCUS_UP);
+                        dopcat.setSelection(0);
+                        Toast.makeText(getApplicationContext(), "empty username", Toast.LENGTH_SHORT).show();
+                    } else if (emailid.getText().toString().trim().equals("")) {
+                        scroll.fullScroll(scroll.FOCUS_UP);
+                        dopcat.setSelection(0);
+                        Toast.makeText(getApplicationContext(), "empty email", Toast.LENGTH_SHORT).show();
+                    } else if (dob.getText().toString().trim().equals("")) {
+                        scroll.fullScroll(scroll.FOCUS_UP);
+                        dopcat.setSelection(0);
+                        Toast.makeText(getApplicationContext(), "empty dob", Toast.LENGTH_SHORT).show();
+                    } else if (gender.equals("")) {
+                        scroll.fullScroll(scroll.FOCUS_UP);
+                        dopcat.setSelection(0);
+                        Toast.makeText(getApplicationContext(), "empty gender", Toast.LENGTH_SHORT).show();
+                    } else if (state.getText().toString().trim().equals("")) {
+                        scroll.fullScroll(scroll.FOCUS_UP);
+                        dopcat.setSelection(0);
+                        Toast.makeText(getApplicationContext(), "empty state", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (city.getText().toString().trim().equals("")) {
+                        scroll.fullScroll(scroll.FOCUS_UP);
+                        dopcat.setSelection(0);
+                        Toast.makeText(getApplicationContext(), "empty city", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        if (selectedOption.equals("Doctor")) {
 
-                        select = 1;
-                        doctorOrPatient = "Doctor";
-                        docpat_warn.setVisibility(View.GONE);
-                        card5.setVisibility(View.VISIBLE);
-                        card2.setVisibility(View.VISIBLE);
-                        card3.setVisibility(View.GONE);
-                        if (!verified) {
-                            otp_but.setText("Get OTP");
-                            otp_but.setFocusable(true);
-                        } else {
-                            otp_but.setText("verified");
-                            otp_but.setFocusable(false);
+                            select = 1;
+                            doctorOrPatient = "Doctor";
+                            docpat_warn.setVisibility(View.GONE);
+                            card5.setVisibility(View.VISIBLE);
+                            card6.setVisibility(View.VISIBLE);
+                            card2.setVisibility(View.VISIBLE);
+                            card3.setVisibility(View.GONE);
+                            if (!verified) {
+                                otp_but.setText("Get OTP");
+                                otp_but.setFocusable(true);
+                            } else {
+                                otp_but.setText("verified");
+                                otp_but.setFocusable(false);
+                            }
+                            card4.setVisibility(View.VISIBLE);
+                            upload_warn.setVisibility(View.GONE);
+                            additional_det.setVisibility(View.VISIBLE);
+                            verification_text.setVisibility(View.VISIBLE);
+                            qualification_text.setVisibility(View.VISIBLE);
+                            text_clinic_header.setVisibility(View.VISIBLE);
+
+                            hospital_radio.setVisibility(View.VISIBLE);
+                            clinic_radio.setVisibility(View.VISIBLE);
+                            otp_but.setVisibility(View.VISIBLE);
+                            verify_but.setVisibility(View.GONE);
+                            doc_reg.setVisibility(View.VISIBLE);
+
+
                         }
-                        card4.setVisibility(View.VISIBLE);
-                        upload_warn.setVisibility(View.GONE);
-                        additional_det.setVisibility(View.VISIBLE);
-                        verification_text.setVisibility(View.VISIBLE);
-                        qualification_text.setVisibility(View.VISIBLE);
-                        text_clinic_header.setVisibility(View.VISIBLE);
+                        if (selectedOption.equals("patient")) {
+                            select = 1;
 
-                        hospital_radio.setVisibility(View.VISIBLE);
-                        clinic_radio.setVisibility(View.VISIBLE);
-                        otp_but.setVisibility(View.VISIBLE);
-                        verify_but.setVisibility(View.GONE);
-                        doc_reg.setVisibility(View.VISIBLE);
+                            doctorOrPatient = "Patient";
+                            card5.setVisibility(View.GONE);
+                            card6.setVisibility(View.GONE);
+                            docpat_warn.setVisibility(View.GONE);
+                            otp_but.setText("GET OTP");
+                            card2.setVisibility(View.GONE);
+                            card3.setVisibility(View.GONE);
+                            card4.setVisibility(View.VISIBLE);
+                            additional_det.setVisibility(View.GONE);
+                            verification_text.setVisibility(View.GONE);
+                            upload_warn.setVisibility(View.GONE);
+                            text_clinic_header.setVisibility(View.GONE);
+                            otp_but.setVisibility(View.VISIBLE);
+                            verify_but.setVisibility(View.GONE);
+                            if (!verified) {
+                                otp_but.setText("Get OTP");
+                                otp_but.setFocusable(true);
+                            } else {
+                                otp_but.setText("verified");
+                                otp_but.setFocusable(false);
+                            }
+                            doc_reg.setVisibility(View.GONE);
+                            hospital_radio.setVisibility(View.GONE);
+                            clinic_radio.setVisibility(View.GONE);
 
+
+                        }
 
                     }
-                    if (selectedOption.equals("patient")) {
-                        select = 1;
-
-                        doctorOrPatient = "Patient";
-                        card5.setVisibility(View.GONE);
-                        docpat_warn.setVisibility(View.GONE);
-                        otp_but.setText("GET OTP");
-                        card2.setVisibility(View.GONE);
-                        card3.setVisibility(View.GONE);
-                        card4.setVisibility(View.VISIBLE);
-                        additional_det.setVisibility(View.GONE);
-                        verification_text.setVisibility(View.GONE);
-                        upload_warn.setVisibility(View.GONE);
-                        text_clinic_header.setVisibility(View.GONE);
-                        otp_but.setVisibility(View.VISIBLE);
-                        verify_but.setVisibility(View.GONE);
-                        if (!verified) {
-                            otp_but.setText("Get OTP");
-                            otp_but.setFocusable(true);
-                        } else {
-                            otp_but.setText("verified");
-                            otp_but.setFocusable(false);
-                        }
-                        doc_reg.setVisibility(View.GONE);
-                        hospital_radio.setVisibility(View.GONE);
-                        clinic_radio.setVisibility(View.GONE);
-
-
-                    }
-
-                }
                 }
             }
             @Override
@@ -422,7 +438,7 @@ progress=findViewById(R.id.progressregister);
                 String verotp=otpedit.getText().toString().trim();
                 if(!verotp.equals("")){
 
-               signin(verotp);
+                    signin(verotp);
                 }
                 else{
                     Toast.makeText(RegisterPage.this, "empty otp", Toast.LENGTH_SHORT).show();
@@ -438,11 +454,11 @@ progress=findViewById(R.id.progressregister);
                 if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() == 10) {
                     phone_text.setText("+91" + phone_no.getText().toString());
 
-                   // verify_but.setVisibility(View.VISIBLE);
+                    // verify_but.setVisibility(View.VISIBLE);
                     if(!verified) {
                         progress.setVisibility(View.VISIBLE);
-                       // sendmsg(phone_no.getText().toString().trim());
-                     getotpFirebase(phone_no.getText().toString().trim());
+                        // sendmsg(phone_no.getText().toString().trim());
+                        getotpFirebase(phone_no.getText().toString().trim());
 
 
                     }
@@ -459,23 +475,33 @@ progress=findViewById(R.id.progressregister);
                 //
             }
         });
-        img.setOnClickListener(new View.OnClickListener() {
+
+        sign=findViewById(R.id.imagesign);
+
+
+        sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 2);
+            }
+        });
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+               startImageCapture(1);
             }
         });
 
 
 // document image
-        img.setOnClickListener(new View.OnClickListener() {
+        sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 1);
+                startImageCapture(2);
             }
         });
 
@@ -517,108 +543,108 @@ progress=findViewById(R.id.progressregister);
                             String cityy=city.getText().toString().trim();
 
 
-                             if(!existUser) {
-                                 if (verified) {
-                                     progress2.setVisibility(View.VISIBLE);
-                                     verified_phone=phone;
-                                     if (verified_phone.equals(phone)) {
-                                         progress2.setVisibility(View.VISIBLE);
+                            if(!existUser) {
+                                if (verified) {
+                                    progress2.setVisibility(View.VISIBLE);
+                                    verified_phone=phone;
+                                    if (verified_phone.equals(phone)) {
+                                        progress2.setVisibility(View.VISIBLE);
 
 
-                                         if (doctorOrPatient.equals("Patient")) {
+                                        if (doctorOrPatient.equals("Patient")) {
 
-                                                 progress2.setVisibility(View.VISIBLE);
-signup.setVisibility(View.GONE);
-                                                 sendPatient(username, email, pass, phone, dateofbirth, gen, statee,cityy);
-
-
-                                         } else {
+                                            progress2.setVisibility(View.VISIBLE);
+                                            signup.setVisibility(View.GONE);
+                                            sendPatient(username, email, pass, phone, dateofbirth, gen, statee,cityy);
 
 
-                                             if (speciality.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty speciality", Toast.LENGTH_SHORT).show();
-                                             } else if (yoe.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty year of experience", Toast.LENGTH_SHORT).show();
-                                             } else if (qualification.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty qualification", Toast.LENGTH_SHORT).show();
+                                        } else {
 
-                                             } else if (about_text.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty about", Toast.LENGTH_SHORT).show();
 
-                                             } else if (organisation.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic name", Toast.LENGTH_SHORT).show();
+                                            if (speciality.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty speciality", Toast.LENGTH_SHORT).show();
+                                            } else if (yoe.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty year of experience", Toast.LENGTH_SHORT).show();
+                                            } else if (qualification.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty qualification", Toast.LENGTH_SHORT).show();
 
-                                             } else if (clinic_state.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic state", Toast.LENGTH_SHORT).show();
+                                            } else if (about_text.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty about", Toast.LENGTH_SHORT).show();
 
-                                             }
-                                             else if (clinic_city.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic city", Toast.LENGTH_SHORT).show();
+                                            } else if (organisation.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty hospital/clinic name", Toast.LENGTH_SHORT).show();
 
-                                             }
+                                            } else if (clinic_state.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty hospital/clinic state", Toast.LENGTH_SHORT).show();
 
-                                             else if (clinic_type.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic type", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else if (clinic_city.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty hospital/clinic city", Toast.LENGTH_SHORT).show();
 
-                                             } else if (clinic_phone.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty hospital/clinic phone", Toast.LENGTH_SHORT).show();
+                                            }
 
-                                             }
-                                             else if(aboutDoc.getText().toString().trim().equals("")) {
-                                                 scroll.fullScroll(scroll.FOCUS_UP);
-                                                 Toast.makeText(getApplicationContext(), "empty about", Toast.LENGTH_SHORT).show();
+                                            else if (clinic_type.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty hospital/clinic type", Toast.LENGTH_SHORT).show();
 
-                                             }
-else {
+                                            } else if (clinic_phone.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty hospital/clinic phone", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                            else if(aboutDoc.getText().toString().trim().equals("")) {
+                                                scroll.fullScroll(scroll.FOCUS_UP);
+                                                Toast.makeText(getApplicationContext(), "empty about", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                            else {
                                                 progress2.setVisibility(View.VISIBLE);
-                signup.setVisibility(View.GONE);
-                                                 sendDoctor(username, email, pass, phone, dateofbirth, gen, statee,cityy, speciality.getText().toString().trim(), yoe.getText().toString().trim(), qualification.getText().toString().trim(), aboutDoc.getText().toString().trim(), organisation.getText().toString().trim(), clinic_type.getText().toString().trim(), clinic_state.getText().toString().trim(),clinic_city.getText().toString().trim(), clinic_phone.getText().toString().trim());
-                                             }
-                                         }
+                                                signup.setVisibility(View.GONE);
+                                                sendDoctor(username, email, pass, phone, dateofbirth, gen, statee,cityy, speciality.getText().toString().trim(), yoe.getText().toString().trim(), qualification.getText().toString().trim(), aboutDoc.getText().toString().trim(), organisation.getText().toString().trim(), clinic_type.getText().toString().trim(), clinic_state.getText().toString().trim(),clinic_city.getText().toString().trim(), clinic_phone.getText().toString().trim());
+                                            }
+                                        }
 
-                                     }
-
-
-else{
-                                             verified = false;
-                                             verified_phone = "";
-                                             verify_but.setText("Verify");
-                                             otp_but.setVisibility(View.VISIBLE);
-                                             verify_but.setVisibility(View.GONE);
-
-                                             if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() == 10) {
-                                                 Toast.makeText(getApplicationContext(), "verify changed phone no.", Toast.LENGTH_SHORT).show();
-                                                 phone_text.setText("+91" + phone_no.getText().toString());
-
-                                             } else if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() != 10) {
-                                                 Toast.makeText(getApplicationContext(), "invalid phone no.", Toast.LENGTH_SHORT).show();
-                                                 scroll.fullScroll(ScrollView.FOCUS_UP);
-                                             } else {
-                                                 Toast.makeText(getApplicationContext(), "empty phone no.", Toast.LENGTH_SHORT).show();
-                                                 scroll.fullScroll(ScrollView.FOCUS_UP);
-                                             }
-
-                                         }
-                                     }else{
-                                     Toast.makeText(getApplicationContext(),"verify phone no.", Toast.LENGTH_SHORT).show();
-                                 }
-                                      //
-
-                             }
+                                    }
 
 
-                             else{
-                                 Toast.makeText(getApplicationContext(),"user already exist", Toast.LENGTH_SHORT).show();
-                             }
+                                    else{
+                                        verified = false;
+                                        verified_phone = "";
+                                        verify_but.setText("Verify");
+                                        otp_but.setVisibility(View.VISIBLE);
+                                        verify_but.setVisibility(View.GONE);
+
+                                        if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() == 10) {
+                                            Toast.makeText(getApplicationContext(), "verify changed phone no.", Toast.LENGTH_SHORT).show();
+                                            phone_text.setText("+91" + phone_no.getText().toString());
+
+                                        } else if (!phone_no.getText().toString().equals("") && phone_no.getText().toString().length() != 10) {
+                                            Toast.makeText(getApplicationContext(), "invalid phone no.", Toast.LENGTH_SHORT).show();
+                                            scroll.fullScroll(ScrollView.FOCUS_UP);
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "empty phone no.", Toast.LENGTH_SHORT).show();
+                                            scroll.fullScroll(ScrollView.FOCUS_UP);
+                                        }
+
+                                    }
+                                }else{
+                                    Toast.makeText(getApplicationContext(),"verify phone no.", Toast.LENGTH_SHORT).show();
+                                }
+                                //
+
+                            }
+
+
+                            else{
+                                Toast.makeText(getApplicationContext(),"user already exist", Toast.LENGTH_SHORT).show();
+                            }
 
                         } else {
                             docpat_warn.setText("** kindly select one option");
@@ -635,7 +661,6 @@ else{
 
 
     }
-
     public void sendPatient(String username, String email, String password, String phone, String dob, String gender, String state,String city) {
         progress2.setVisibility(View.VISIBLE);
                 String temp = "https://demo-uw46.onrender.com/api/patient/register";
@@ -730,7 +755,8 @@ progress2.setVisibility(View.VISIBLE);
             jsonobj.put("qualification", qualification);
             jsonobj.put("about", about);
             jsonobj.put("clinic_hospital", clinic_hospital);
-
+/*jsonobj.put("sign",photosign_);
+jsonobj.put("photoid",photoid_);*/
             jsonobj.put("patient",inner2);
         } catch (JSONException e) {
 
@@ -758,7 +784,7 @@ progress2.setVisibility(View.VISIBLE);
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
                             progress.setVisibility(View.GONE);
                             progress2.setVisibility(View.GONE);
                             signup.setVisibility(View.VISIBLE);
@@ -799,27 +825,6 @@ progress2.setVisibility(View.VISIBLE);
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
-            // The result is for picking a PDF file
-
-            ContentResolver contentResolver = getApplicationContext().getContentResolver();
-            String type = contentResolver.getType(data.getData());
-            if (type != null) {
-                if (type.startsWith("image")) {
-                    upload_warn.setVisibility(View.GONE);
-                    img.setImageURI(data.getData());
-                } else if (type.startsWith("video")) {
-                    img.setImageResource(R.drawable.add_photo);
-                    upload_warn.setText("** kindly select image file");
-                    upload_warn.setVisibility(View.VISIBLE);
-
-                }
-        }
-    }}
 
 
     public boolean isValid(String str){
@@ -911,6 +916,100 @@ otpedit.setVisibility(View.VISIBLE);
                 Toast.makeText(getApplicationContext(), "otp sent to +91"+phone_no.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+
+
+    public void setPhoto(ImageView profilepic){
+        String photo= sp.getString("photo","");
+        if(!photo.equals("")) {
+            Bitmap b = getbitmap(photo);
+            profilepic.setImageBitmap(b);
+        }
+        else{
+            profilepic.setImageResource(R.drawable.baseline_person_24);
+        }
+    }
+
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            try {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                img.setImageBitmap(imageBitmap);
+                photoid_= String.valueOf(getImageUri(RegisterPage.this, imageBitmap));
+                sp.edit().putString("photo",photoid_).apply();
+                //updateprofile(photo,imageBitmap);
+            }
+            catch (Exception e){
+                img.setImageResource(R.drawable.baseline_person_24);
+            }
+
+        }
+else if (requestCode == 2 && resultCode == RESULT_OK) {
+            try {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+sign.setImageBitmap(imageBitmap);
+                photosign_= String.valueOf(getImageUri(RegisterPage.this, imageBitmap));
+                sp.edit().putString("photosign",photosign_).apply();
+                //updateprofile(photo,imageBitmap);
+            }
+            catch (Exception e){
+                sign.setImageResource(R.drawable.baseline_person_24);
+            }
+
+        }
+
+    }
+    public String getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        byte[] byteImage_photo = bytes.toByteArray();
+        return Base64.encodeToString(byteImage_photo,Base64.DEFAULT);
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode >= 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startImageCapture(requestCode);
+            } else {
+
+            }
+        }
+    }
+
+    private void startImageCapture(int i) {
+        if (ContextCompat.checkSelfPermission(RegisterPage.this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (intent.resolveActivity(getPackageManager()) != null ) {
+
+                startActivityForResult(intent,i);
+
+            } else {
+
+                Toast.makeText(RegisterPage.this, "No camera app available", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+
+            ActivityCompat.requestPermissions(RegisterPage.this, new String[]{android.Manifest.permission.CAMERA}, 1);
+        }
+    }
+
+
+    public Bitmap getbitmap(String s){
+        byte[] bytes= Base64.decode(s,Base64.DEFAULT);
+        Bitmap bitmap2= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        return bitmap2;
     }
 
 

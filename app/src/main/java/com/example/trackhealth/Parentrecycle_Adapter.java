@@ -1,7 +1,7 @@
 package com.example.trackhealth;
 
-import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,7 +69,8 @@ public class Parentrecycle_Adapter extends RecyclerView.Adapter<Parentrecycle_Ad
           holder.del.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                  delissue(dataList.get(position).get(2).toString(),position);
+
+                  setAlert(dataList.get(position).get(2).toString(),position);
               }
           });
           holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +184,12 @@ SharedPreferences sp=context.getSharedPreferences("issue",Context.MODE_PRIVATE);
                         if (Boolean.parseBoolean(response.getString("success"))) {
 notifyDataSetChanged();
 dataList.remove(position);
+                            Intent i = new Intent(context, User_prescription_activity_page.class);
+                            i.putExtra("activity", "prescription_page");
+                            sp.edit().putString("isuploaded", "yes").apply();
+                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            context.startActivity(i);
+
                     } }catch (JSONException e) {
                         //progressBar.setVisibility(View.GONE);
                         //retry.setVisibility(View.VISIBLE);
@@ -222,6 +230,35 @@ dataList.remove(position);
             Toast.makeText(context, "fail to load - "+e.toString(), Toast.LENGTH_SHORT).show();
 
         }
+
+    }
+
+
+    public void setAlert(String id,int posi){
+        String pos="Yes";
+        String neg="No";
+        String msg="Do you want to delete Patient's issue?";
+        androidx.appcompat.app.AlertDialog.Builder b=new androidx.appcompat.app.AlertDialog.Builder(context);
+        b.setMessage(msg);
+        b.setPositiveButton(pos,(DialogInterface.OnClickListener) (dialog, which)->{
+            delissue(id,posi);
+
+
+        });
+        b.setNegativeButton(neg,(DialogInterface.OnClickListener) (dialog,which)->{
+
+            dialog.cancel();
+        });
+        AlertDialog ad=b.create();
+        ad.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+
+                ad.getWindow().getDecorView().setBackgroundColor(context.getResources().getColor(R.color.black));
+            }
+        });
+
+        ad.show();
 
     }
 

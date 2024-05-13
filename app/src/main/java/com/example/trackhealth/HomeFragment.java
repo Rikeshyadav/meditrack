@@ -269,6 +269,8 @@ System.out.println("hello"+dataSearchList);
                 }
                 inner.add(j.getString("state"));
                 inner.add(j.getString("city"));
+                inner.add(j.getString("gender"));
+                inner.add(j.getString("email"));
                 if(!sp.getString("identity","").equals("Doctor")) {
                     inner.add(j.getString("qualification"));
                     inner.add(j.getString("speciality"));

@@ -4,25 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
 public class user_report_homepage extends AppCompatActivity {
   TabLayout tabLayout;
   ViewPager2 viewPager2;
+  TextView title;
   ViewPage_PatientAdapter adapter1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_report_homepage);
          tabLayout=findViewById(R.id.Patinet_tablayout);
+         title=findViewById(R.id.patient_tabtoptxt);
          viewPager2=findViewById(R.id.Patient_pager);
         tabLayout.addTab(tabLayout.newTab().setText("DOCTOR"));
         tabLayout.addTab(tabLayout.newTab().setText("Problem"));
         tabLayout.addTab(tabLayout.newTab().setText("CHAT"));
          adapter1=new ViewPage_PatientAdapter(this);
          viewPager2.setAdapter(adapter1);
+        SharedPreferences sp=getSharedPreferences("user",MODE_PRIVATE);
+        if(sp.getString("identity","").equals("Patient")){
+
+            title.setText(sp.getString("curclinic_name",""));
+        }
+        else{
+            title.setText(sp.getString("clinic_name",""));
+        }
          tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
              @Override
              public void onTabSelected(TabLayout.Tab tab) {
