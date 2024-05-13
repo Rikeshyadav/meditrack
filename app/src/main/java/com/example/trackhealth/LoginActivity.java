@@ -219,6 +219,7 @@ else{
                             sp.edit().putString("yoe",response.getString("yoe")).apply();
                             sp.edit().putString("qualification",response.getString("qualification")).apply();
                             sp.edit().putString("about",response.getString("about")).apply();
+                            sp.edit().putString("photosign",response.getString("sign")).apply();
                             JSONObject jo=new JSONObject();
                             jo=response.getJSONObject("clinic_hospital");
                             String clinic_name=jo.getString("name");
