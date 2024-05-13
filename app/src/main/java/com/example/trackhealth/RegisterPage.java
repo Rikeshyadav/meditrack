@@ -755,8 +755,8 @@ progress2.setVisibility(View.VISIBLE);
             jsonobj.put("qualification", qualification);
             jsonobj.put("about", about);
             jsonobj.put("clinic_hospital", clinic_hospital);
-/*jsonobj.put("sign",photosign_);
-jsonobj.put("photoid",photoid_);*/
+jsonobj.put("sign",photosign_+"");
+jsonobj.put("photoid",photoid_+"");
             jsonobj.put("patient",inner2);
         } catch (JSONException e) {
 

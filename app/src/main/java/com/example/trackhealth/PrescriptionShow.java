@@ -7,8 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,8 +39,8 @@ import java.util.List;
 public class PrescriptionShow extends AppCompatActivity {
     LinearLayout tableContent,tableContent2;
     SharedPreferences sp,sp2;
-ImageView edit,del;
-TextView note,date,pname,pissue,page,dname,dspec,daddress,dphone,hospital;
+ImageView edit,del,signimg;
+TextView note,date,pname,pissue,page,dname,dspec,daddress,dphone,hospital,dnamelast;
 
 
 
@@ -52,9 +55,24 @@ page=findViewById(R.id.presshowpagevalue);
 dname=findViewById(R.id.presshowdname);
 hospital=findViewById(R.id.presshowtitle);
 edit=findViewById(R.id.presshowedit);
-del=findViewById(R.id.presshowdel);
+signimg=findViewById(R.id.presshowsign);
+dnamelast=findViewById(R.id.presshowname4);
+
 
         sp2=getSharedPreferences("user",MODE_PRIVATE);
+try{
+    if(sp2.getString("identity","").equals("Patient")) {
+        //signimg.setImageBitmap(getbitmap(sp2.getString("")));
+    }else{
+        signimg.setImageBitmap(getbitmap(sp2.getString("photosign","")));
+    }
+}catch (Exception e)
+{
+
+}
+del=findViewById(R.id.presshowdel);
+
+
         if(sp2.getString("identity","").equals("Patient")){
             edit.setVisibility(View.GONE);
             del.setVisibility(View.GONE);
@@ -79,6 +97,7 @@ if(sp2.getString("identity","").equals("Doctor")) {
     pname.setText(sp2.getString("curname", ""));
     page.setText(getAge(sp2.getString("curdob", "")));
     dname.setText("Dr. "+sp2.getString("name",""));
+    dnamelast.setText("Dr. "+sp2.getString("name","")+"\n"+sp2.getString("speciality","")+","+sp2.getString("qualification",""));
     dspec.setText(sp2.getString("speciality","")+","+sp2.getString("qualification",""));
     daddress.setText(sp2.getString("city","")+","+sp2.getString("state",""));
     dphone.setText("Ph : "+sp2.getString("phone",""));
@@ -451,6 +470,12 @@ String msg="Do you want to delete the prescription?";
     private int dpToPx(int dp) {
         float density = getResources().getDisplayMetrics().density;
         return Math.round(dp * density);
+    }
+
+    public Bitmap getbitmap(String s){
+        byte[] bytes= Base64.decode(s,Base64.DEFAULT);
+        Bitmap bitmap2= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        return bitmap2;
     }
 
 

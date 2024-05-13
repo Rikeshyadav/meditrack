@@ -252,6 +252,7 @@ if(!phone.equals("")) {
             jj.put("state",sp.getString("state",""));
             jj.put("city",sp.getString("city",""));
             jj.put("photo",sp.getString("photo",""));
+            jj.put("sign",sp.getString("photosign",""));
 
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.PUT, temp,jj, new Response.Listener<JSONObject>() {
                 @Override
