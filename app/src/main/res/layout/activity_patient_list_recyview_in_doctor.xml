@@ -8,12 +8,14 @@
     tools:context=".Patient_ListRecyview_inDoctor">
 
     <TextView
-        android:layout_width="388dp"
-        android:layout_height="74dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:padding="8dp"
+        android:layout_margin="10dp"
         android:text="Check health"
         android:textAlignment="center"
+        android:id="@+id/doctor_tabtoptxt"
         android:textColor="@color/black"
         android:textSize="25sp" />
     <com.google.android.material.tabs.TabLayout
@@ -22,8 +24,8 @@
         app:tabBackground="@color/tabBackgroundColor1"
         app:tabIndicatorColor="#0C0C0C"
         app:tabTextColor="#EA3E09"
-        android:layout_marginTop="80dp"
         app:tabTextAppearance="@style/TabTextStyle"
+        android:layout_below="@id/doctor_tabtoptxt"
         android:layout_height="60dp"
         app:tabMode="fixed"
         app:tabGravity="fill"

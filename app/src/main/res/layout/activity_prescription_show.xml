@@ -417,11 +417,12 @@
         </HorizontalScrollView>
 
 <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="220dp"
+    android:layout_height="150dp"
+    android:layout_below="@id/presshowhorizon2"
     android:layout_alignParentEnd="true"
     android:layout_margin="10dp"
-    android:layout_below="@id/tableContent2"
+    android:src="@drawable/doctor_female"
     android:id="@+id/presshowsign"
     />
 </RelativeLayout>

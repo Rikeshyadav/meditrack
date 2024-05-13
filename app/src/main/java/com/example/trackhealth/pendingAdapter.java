@@ -174,8 +174,11 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.MyViewHo
             jj.put("username",sp.getString("name",""));
             jj.put("dob",sp.getString("dob",""));
             jj.put("gender",sp.getString("gender",""));
+            jj.put("email",sp.getString("email",""));
             jj.put("address",sp.getString("address",""));
             jj.put("photo",sp.getString("photo",""));
+            jj.put("state",sp.getString("state",""));
+            jj.put("city",sp.getString("city",""));
             jj.put("phone",patient);
             jj.put("pending",pending);
             jj.put("issue",issue);

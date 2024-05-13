@@ -88,14 +88,17 @@ Context context;
 
                sp.edit().putString("curphone2", data.get(position).get(5).toString()).apply();
                 sp.edit().putString("curname", data.get(position).get(0).toString()).apply();
+                sp.edit().putString("curphoto", data.get(position).get(6).toString()).apply();
                 sp.edit().putString("curdob", data.get(position).get(1).toString()).apply();
                 sp.edit().putString("curstate", data.get(position).get(7).toString()).apply();
                 sp.edit().putString("curcity", data.get(position).get(8).toString()).apply();
+                sp.edit().putString("curgender", data.get(position).get(9).toString()).apply();
+                sp.edit().putString("curemail", data.get(position).get(10).toString()).apply();
                 if(!sp.getString("identity","").equals("Doctor")){
-                sp.edit().putString("curspec", data.get(position).get(10).toString()).apply();
-                sp.edit().putString("curqua", data.get(position).get(9).toString()).apply();
+                sp.edit().putString("curspec", data.get(position).get(12).toString()).apply();
+                sp.edit().putString("curqua", data.get(position).get(11).toString()).apply();
 
-                sp.edit().putString("curclinic", data.get(position).get(11).toString()).apply();
+                sp.edit().putString("curclinic", data.get(position).get(13).toString()).apply();
 }
 
 

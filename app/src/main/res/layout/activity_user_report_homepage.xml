@@ -7,11 +7,23 @@
     android:layout_height="match_parent"
     android:background="@drawable/fnd"
     tools:context=".user_report_homepage">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="8dp"
+        android:layout_margin="10dp"
+        android:text="Check health"
+        android:textAlignment="center"
+        android:id="@+id/patient_tabtoptxt"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:contentDescription="roller"
         app:tabBackground="@color/tabBackgroundColor1"
         app:tabIndicatorColor="#0C0C0C"
+        android:layout_below="@id/patient_tabtoptxt"
         app:tabTextColor="#EA3E09"
         android:layout_marginTop="2dp"
         app:tabTextAppearance="@style/TabTextStyle"

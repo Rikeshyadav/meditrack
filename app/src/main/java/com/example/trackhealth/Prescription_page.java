@@ -14,8 +14,11 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
+import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -24,6 +27,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.telephony.TelephonyCallback;
+import android.util.Base64;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -71,6 +75,7 @@ public class Prescription_page extends AppCompatActivity {
     String issueid;
 
     RecyclerView medrec, testrec;
+
     String date_ = "";
     RelativeLayout layout;
     AppCompatButton addmed, addtest, upload;
@@ -79,7 +84,8 @@ public class Prescription_page extends AppCompatActivity {
     String mspin_ = "", aspin_ = "", espin_ = "", nspin_ = "", tstatus = "";
     TextView startdate, enddate;
     List<List> medfinal = new ArrayList<>();
-    SharedPreferences sp;
+    SharedPreferences sp,sp2;
+    ImageView sign;
     LinearLayoutManager l;
     Medrecadapter medrecadapter;
     Testrecadapter testrecadapter;
@@ -98,10 +104,21 @@ public class Prescription_page extends AppCompatActivity {
         testrec = findViewById(R.id.prestestrec);
         testrecadapter = new Testrecadapter(Prescription_page.this, testfinal);
         addmed = findViewById(R.id.presmedadd);
+        sign=findViewById(R.id.presshowsign);
         addtest = findViewById(R.id.prestestadd);
         layout = findViewById(R.id.preslayout);
         progressBar = findViewById(R.id.presprogress);
         sp = getSharedPreferences("issue", MODE_PRIVATE);
+        sp2 = getSharedPreferences("user", MODE_PRIVATE);
+        try {
+            if (sp2.getString("identity", "").equals("Patient")) {
+                sign.setImageBitmap(getbitmap(sp2.getString("cursign", "")));
+            } else {
+                sign.setImageBitmap(getbitmap(sp2.getString("photosign", "")));
+            }
+        }catch (Exception e){
+
+        }
         root = (ViewGroup) getWindow().getDecorView().getRootView();
         upload = findViewById(R.id.uploadpres);
         l = new LinearLayoutManager(Prescription_page.this, LinearLayoutManager.VERTICAL, false);
@@ -158,7 +175,11 @@ else {
 
     }
 
-
+    public Bitmap getbitmap(String s){
+        byte[] bytes= Base64.decode(s,Base64.DEFAULT);
+        Bitmap bitmap2= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        return bitmap2;
+    }
     public void updatedata() {
 
         String temp = "https://demo-uw46.onrender.com/api/issue/getPrescriptions/" + sp.getString("idno", "") + "/" + sp.getString("issueid", "") + "/" + sp.getString("pid", "");

@@ -257,7 +257,6 @@ if(!phone.equals("")) {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-
                         if (Boolean.parseBoolean(response.getString("success"))) {
                             pb.setVisibility(View.GONE);
                             add.setText("added");
@@ -265,7 +264,7 @@ if(!phone.equals("")) {
                             Toast.makeText(getApplicationContext(),"added successfully",Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(getApplicationContext(),"unable to update patient side",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),response.getString("msg"),Toast.LENGTH_SHORT).show();
                             pb.setVisibility(View.GONE);
 
                         }
