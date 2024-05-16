@@ -69,8 +69,9 @@ public class Doctor_in_PatientFragment extends Fragment {
 SharedPreferences sp,sp2,sp44;
 TextView dname,dspec,dhos,about;
 RadioGroup radio;
+    RadioButton all,five,four,three,two,one;
 ImageView call;
-RadioButton all,five,four,three,two,one;
+
 ProgressBar progressBar;
 float rate=0.0f;
 ReviewAdapter adapter;
@@ -267,7 +268,7 @@ setAlert();
     public void setAlert(){
         String pos="Yes";
         String neg="No";
-        String msg="Do you want to do "+call+" call?";
+        String msg="Do you want to do voice call?";
         androidx.appcompat.app.AlertDialog.Builder b=new androidx.appcompat.app.AlertDialog.Builder(getActivity());
         b.setMessage(msg);
         b.setPositiveButton(pos,(DialogInterface.OnClickListener) (dialog, which)->{
@@ -436,10 +437,10 @@ setAlert();
             review.setVisibility(View.VISIBLE);
             l = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
             review.setLayoutManager(l);
-            adapter.notifyDataSetChanged();
+           // adapter.notifyDataSetChanged();
             adapter= new ReviewAdapter(outer,getActivity());
           review.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+            //adapter.notifyDataSetChanged();
         }
         else{
             review.setVisibility(View.GONE);

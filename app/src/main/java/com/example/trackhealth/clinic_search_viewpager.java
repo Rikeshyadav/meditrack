@@ -114,7 +114,13 @@ public class clinic_search_viewpager extends Fragment {
         parameter_filter=view.findViewById(R.id.para_spinner_hosclinic_search_filter);
         RegisterSpinnerApdater filteradapter = new RegisterSpinnerApdater(getContext(), R.layout.spinner1, parameterpop);
         parameter_filter.setAdapter(filteradapter);
-
+        JSONObject j = new JSONObject();
+        try {
+            j.put("hospital_clinic","clinic");
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        searchhospital(j);
         parameter_filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

@@ -20,6 +20,9 @@ public class ViewPage_PatientAdapter extends FragmentStateAdapter {
             }else if(position==2){
                 return new Patient_chat_fragment();
             }
+            else if(position==3){
+                return new Patient_Testfragment();
+            }
             else {
                 return new Doctor_in_PatientFragment();
             }

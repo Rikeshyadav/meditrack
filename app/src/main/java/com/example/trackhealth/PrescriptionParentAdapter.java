@@ -15,7 +15,10 @@ import java.util.List;
 
 public class PrescriptionParentAdapter extends RecyclerView.Adapter<PrescriptionParentAdapter.MyViewHolder> {
 List<List> arr;
-    public PrescriptionParentAdapter(List<List> arr){
+Context context;
+    public PrescriptionParentAdapter(Context context,List<List> arr){
+
+        this.context=context;
         this.arr=arr;
     }
     @NonNull
@@ -28,6 +31,8 @@ List<List> arr;
     @Override
     public void onBindViewHolder(@NonNull PrescriptionParentAdapter.MyViewHolder holder, int position) {
 holder.pid.setText(arr.get(position).get(2).toString());
+SharedPreferences sp=context.getSharedPreferences("issue",Context.MODE_PRIVATE);
+sp.edit().putString("pid",arr.get(position).get(2).toString()).apply();
         String data=arr.get(position).get(0).toString();
         if (data.length() >= 15) {
             data = data.substring(0, 15) + "...";

@@ -15,6 +15,7 @@ SharedPreferences sp;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 sp=getSharedPreferences("user",MODE_PRIVATE);
+
 boolean islogged=sp.getBoolean("islogged",false);
 String user=sp.getString("identity","").trim();
 

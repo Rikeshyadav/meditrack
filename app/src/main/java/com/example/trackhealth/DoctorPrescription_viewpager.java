@@ -21,10 +21,10 @@ public class DoctorPrescription_viewpager extends FragmentStateAdapter {
             return new prescriptionParent(issueid);
         } else if (position==1) {
             return new patient_medicinefragment();
-        }else {
-            return new Patient_Analysisfragment();
+        }else
+            return new Patient_Testfragment();
         }
-    }
+
 
     @Override
     public int getItemCount() {

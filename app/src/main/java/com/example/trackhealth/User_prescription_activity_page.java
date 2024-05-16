@@ -21,8 +21,8 @@ public class User_prescription_activity_page extends AppCompatActivity {
         viewPager2=findViewById(R.id.Patient_pager2);
         tabLayout.addTab(tabLayout.newTab().setText("PRESCRIPTION"));
         tabLayout.addTab(tabLayout.newTab().setText("MEDICINE"));
-        tabLayout.addTab(tabLayout.newTab().setText("ANALYSIS"));
-       // tabLayout.addTab(tabLayout.newTab().setText("REPORT"));
+        tabLayout.addTab(tabLayout.newTab().setText("TEST"));
+      // tabLayout.addTab(tabLayout.newTab().setText("REPORT"));
         adapter=new DoctorPrescription_viewpager(this,getIntent().getStringExtra("issueid"));
         viewPager2.setAdapter(adapter);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

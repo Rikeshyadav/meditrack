@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+
+    android:layout_height="match_parent"
+    tools:context=".SearchProfile">
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:id="@+id/sprofile_progress"
+        />
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/searchprofile_retry"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/baseline_refresh_24"
+        android:layout_centerHorizontal="true"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_marginTop="10dp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/searchprofile_ll"
+            android:layout_margin="4dp"
+            android:layout_height="match_parent"
+            >
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white"
+                android:id="@+id/sdoctor_profile_image_cardview"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:padding="10dp"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/sdoctor_profile_image"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:background="#3985DC"
+                        android:padding="8dp"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/baseline_person_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.498"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.306"
+                        app:shapeAppearanceOverlay="@style/roundedImageview"
+                        app:strokeColor="@color/black"
+                        app:strokeWidth="2dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dr. Asok Seth"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:padding="9dp"
+                        android:background="@drawable/orange_button2"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/spdoctor_profile_dnamecard1"
+                        android:layout_below="@id/sdoctor_profile_image"
+                        android:layout_centerHorizontal="true"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MBBS - Cardiology"
+                        android:textColor="@color/black"
+                        android:id="@+id/spdoctor_profile_qualicard1"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@id/spdoctor_profile_dnamecard1"
+                        android:layout_centerHorizontal="true"
+                        />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="15 Yrs Practice"
+                        android:textColor="@color/black"
+                        android:id="@+id/spdoctor_profile_yearcard1"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_below="@id/spdoctor_profile_qualicard1"
+                        android:layout_centerHorizontal="true"
+                        />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/sedit_profile_doctor_icon"
+                        android:src="@drawable/editicon"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="11dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="5dp"
+                        />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:elevation="5dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="5dp"
+                android:layout_below="@id/sdoctor_profile_aboutCardview"
+                android:id="@+id/sdcardprofile_info1"
+                android:layout_height="wrap_content"
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:id="@+id/spatient_scroll1_profile"
+                        android:layout_height="wrap_content">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="State"
+                                android:textSize="18sp"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_statetitle"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="18sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_stateValue"/>
+
+                            <View
+                                android:layout_below="@id/sdoctor_profile_statetitle"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/shr"
+                                android:layout_marginTop="8dp"
+                                android:background="#CAC7C7"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="8dp"
+                                />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="City"
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_citytitle"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_cityValue"/>
+                            <View
+                                android:layout_below="@id/sdoctor_profile_citytitle"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/shr2"
+                                android:layout_marginTop="8dp"
+                                android:background="#CAC7C7"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="8dp"
+                                />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Phone"
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr2"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_phonetitle"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+91"
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr2"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_phoneValue"/>
+
+                            <View
+                                android:layout_below="@id/sdoctor_profile_phonetitle"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/shr3"
+                                android:layout_marginTop="8dp"
+                                android:background="#CAC7C7"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="8dp"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Email"
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr3"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_emailtitle"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr3"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_emailValue"/>
+
+                            <View
+                                android:layout_below="@id/sdoctor_profile_emailtitle"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/shr4"
+                                android:layout_marginTop="8dp"
+                                android:background="#CAC7C7"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="8dp"
+                                />
+
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Gender"
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr4"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_gendertitle"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr4"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_genderValue"/>
+                            <View
+                                android:layout_below="@id/sdoctor_profile_gendertitle"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/shr5"
+                                android:layout_marginTop="8dp"
+                                android:background="#CAC7C7"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="8dp"
+                                />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DOB"
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr5"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_dobtitle"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr5"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_dobValue"/>
+
+                            <View
+                                android:layout_below="@id/sdoctor_profile_dobtitle"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/shr6"
+                                android:layout_marginTop="8dp"
+                                android:background="#CAC7C7"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="8dp"
+                                />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Age"
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr6"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_agetitle"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textSize="18sp"
+                                android:layout_below="@id/shr6"
+
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"
+                                android:id="@+id/sdoctor_profile_ageValue"/>
+
+                            <View
+                                android:layout_below="@id/sdoctor_profile_agetitle"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/shr7"
+                                android:layout_marginTop="8dp"
+                                android:background="#CAC7C7"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_height="1dp"
+                                android:layout_marginBottom="8dp"
+                                />
+
+
+
+
+                        </RelativeLayout>
+                    </ScrollView>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sdoctor_profile_image_cardview"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:elevation="5dp"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="5dp"
+                android:id="@+id/sdoctor_profile_aboutCardview"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="About"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="19sp"
+                        android:id="@+id/sdoctor_profile_abouttitle"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sdoctor_profile_abouttitle"
+                        android:text="hello"
+                        android:id="@+id/sdoctor_profile_aboutvalue"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#3E3E3E"
+                        />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:id="@+id/sdoctor_profile_qualicardView"
+                android:layout_below="@id/sdcardprofile_info1"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Qualification"
+                        android:textSize="20sp"
+                        android:id="@+id/sdoctor_profile_qualititle"
+                        android:minHeight="40dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/add_plus"
+                        android:id="@+id/sdoctor_profile_qualicardadd"
+                        android:layout_alignParentEnd="true"
+                        />
+
+                    <TextView
+                        android:id="@+id/sdoctor_profile_qualivalue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sdoctor_profile_qualititle"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:textColor="@color/black"
+                        android:visibility="gone"
+                        android:layout_marginBottom="5dp"
+                        android:text="MBBS"
+                        android:textSize="19sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:id="@+id/sdoctor_profile_speccardView"
+                android:layout_below="@id/sdoctor_profile_qualicardView"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Specification"
+                        android:textSize="20sp"
+                        android:id="@+id/sdoctor_profile_spectitle"
+                        android:minHeight="40dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/add_plus"
+                        android:id="@+id/sdoctor_profile_speccardadd"
+                        android:layout_alignParentEnd="true"
+                        />
+
+                    <TextView
+                        android:id="@+id/sdoctor_profile_specvalue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sdoctor_profile_spectitle"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:visibility="gone"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="5dp"
+                        android:text="Cardiologist"
+                        android:textSize="19sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:id="@+id/sdoctor_profile_yoecardView"
+                android:layout_below="@id/sdoctor_profile_speccardView"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginTop="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Year Of Experience"
+                        android:textSize="20sp"
+                        android:id="@+id/sdoctor_profile_yoetitle"
+                        android:minHeight="40dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/add_plus"
+                        android:id="@+id/sdoctor_profile_yoecardadd"
+                        android:layout_alignParentEnd="true"
+                        />
+
+                    <TextView
+                        android:id="@+id/sdoctor_profile_yoevalue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/sdoctor_profile_yoetitle"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:visibility="gone"
+                        android:layout_marginBottom="5dp"
+                        android:text="10 years"
+                        android:textColor="@color/black"
+                        android:textSize="19sp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sdoctor_profile_hoscardView"
+                android:layout_below="@id/sdoctor_profile_yoecardView"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginTop="0dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="25dp"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hospital/Clinic Details"
+                        android:textSize="20sp"
+                        android:id="@+id/sdoctor_profile_hostitle"
+                        android:minHeight="40dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        />
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/add_plus"
+                        android:id="@+id/sdoctor_profile_hoscardadd"
+                        android:layout_alignParentEnd="true"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/shosll_deditprofile"
+                        android:layout_below="@id/sdoctor_profile_hostitle"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:textSize="18sp"
+                            android:layout_marginTop="15dp"
+                            android:layout_alignParentTop="true"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hosnametitle"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Apollo Hospital"
+                            android:textSize="18sp"
+                            android:layout_alignEnd="@id/sdoctor_profile_hosnametitle"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hosnameValue"/>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Type"
+                            android:textSize="18sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/sdoctor_profile_hosnametitle"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hostypetitle"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Govt"
+                            android:layout_alignEnd="@id/sdoctor_profile_hostypetitle"
+                            android:layout_marginStart="5dp"
+                            android:textSize="18sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/sdoctor_profile_hosnametitle"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hostypeValue"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="State"
+                            android:textSize="18sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/sdoctor_profile_hostypetitle"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hosstateTitle"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Assam"
+                            android:textSize="18sp"
+                            android:layout_alignEnd="@id/sdoctor_profile_hosstateTitle"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/sdoctor_profile_hostypetitle"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hosstateValue"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="City"
+                            android:textSize="18sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/sdoctor_profile_hosstateTitle"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hoscitytitle"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Guwahati"
+                            android:textSize="18sp"
+                            android:layout_alignEnd="@id/sdoctor_profile_hoscitytitle"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/sdoctor_profile_hosstateTitle"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hoscityValue"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Contact No."
+                            android:textSize="18sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/sdoctor_profile_hoscitytitle"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hosphonetitle"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+916001188122"
+                            android:layout_alignEnd="@id/sdoctor_profile_hosphonetitle"
+                            android:layout_marginStart="5dp"
+                            android:textSize="18sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/sdoctor_profile_hoscitytitle"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"
+                            android:id="@+id/sdoctor_profile_hosphoneValue"/>
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginTop="0dp"
+    app:cardCornerRadius="5dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="25dp"
+    android:layout_below="@id/sdoctor_profile_hoscardView"
+    android:layout_height="wrap_content"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+            <TextView
+                android:id="@+id/sdipsort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="2dp"
+                android:text="Review"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+<HorizontalScrollView
+    android:layout_width="match_parent"
+android:layout_margin="5dp"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/sdipsort"
+    android:id="@+id/profilesearch_hs"
+    >
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/sdipradio"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+
+                >
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:background="@drawable/register_selector_radiobutton"
+                    android:textColor="@drawable/register_text_color"
+                    android:elevation="4dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="All"
+                    android:padding="10dp"
+                    android:id="@+id/sdipall"
+                    android:button="@color/black"
+                    android:textSize="15sp"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5 star"
+                    android:layout_marginEnd="2.5dp"
+                    android:layout_marginStart="2.5dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:padding="10dp"
+                    android:elevation="4dp"
+                    android:button="@color/black"
+                    android:id="@+id/sdip5"
+                    android:background="@drawable/register_selector_radiobutton"
+                    android:textColor="@drawable/register_text_color"
+                    android:textSize="@dimen/register_font_size"
+                    />
+
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4 star"
+                    android:layout_marginEnd="2.5dp"
+                    android:layout_marginStart="2.5dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:padding="10dp"
+                    android:elevation="4dp"
+                    android:button="@color/black"
+                    android:id="@+id/sdip4"
+                    android:background="@drawable/register_selector_radiobutton"
+                    android:textColor="@drawable/register_text_color"
+                    android:textSize="@dimen/register_font_size"
+                    />
+
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3 star"
+                    android:layout_marginEnd="2.5dp"
+                    android:layout_marginStart="2.5dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:padding="10dp"
+                    android:elevation="4dp"
+                    android:button="@color/black"
+                    android:id="@+id/sdip3"
+                    android:background="@drawable/register_selector_radiobutton"
+                    android:textColor="@drawable/register_text_color"
+                    android:textSize="@dimen/register_font_size"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2 star"
+                    android:layout_marginEnd="2.5dp"
+                    android:layout_marginStart="2.5dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:padding="10dp"
+                    android:elevation="4dp"
+                    android:button="@color/black"
+                    android:id="@+id/sdip2"
+                    android:background="@drawable/register_selector_radiobutton"
+                    android:textColor="@drawable/register_text_color"
+                    android:textSize="@dimen/register_font_size"
+                    />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 star"
+                    android:layout_marginEnd="2.5dp"
+                    android:layout_marginStart="2.5dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:padding="10dp"
+                    android:elevation="4dp"
+                    android:button="@color/black"
+                    android:id="@+id/sdip1"
+                    android:background="@drawable/register_selector_radiobutton"
+                    android:textColor="@drawable/register_text_color"
+                    android:textSize="@dimen/register_font_size"
+                    />
+            </RadioGroup>
+</HorizontalScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_below="@id/profilesearch_hs"
+                android:id="@+id/sdiprecreview"
+                />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

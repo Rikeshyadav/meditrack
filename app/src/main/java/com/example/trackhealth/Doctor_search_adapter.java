@@ -4,8 +4,12 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,21 +69,23 @@ public class Doctor_search_adapter extends RecyclerView.Adapter<Doctor_search_ad
         });
         //holder.contact.setText(item.get(4).toString());
 
-        holder.l.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(view.getContext(),HomePage_Patient.class  );
+                Intent i=new Intent(view.getContext(),SearchProfile.class);
+                i.putExtra("nonuserprofile", item.get(4).toString());
                 view.getContext().startActivity(i);
             }
         });
-
-        if(item.get(5).toString().equals("male") || item.get(5).toString().equals("Male")){
-            holder.imageView.setImageResource(R.drawable.doctor_male);
-        }
-        else{
-            holder.imageView.setImageResource(R.drawable.doctor_female);
-        }
-
+if(item.get(6).toString().equals("") ) {
+    if (item.get(5).toString().equals("male") || item.get(5).toString().equals("Male")) {
+        holder.imageView.setImageResource(R.drawable.doctor_male);
+    } else {
+        holder.imageView.setImageResource(R.drawable.doctor_female);
+    }
+}else{
+    holder.imageView.setImageBitmap(getbitmap(item.get(6).toString()));
+}
 
     }
 
@@ -105,4 +111,11 @@ public class Doctor_search_adapter extends RecyclerView.Adapter<Doctor_search_ad
             address=itemView.findViewById(R.id.address_doctor_searchdesign);
         }
     }
+
+    public Bitmap getbitmap(String s){
+        byte[] bytes= Base64.decode(s,Base64.DEFAULT);
+        Bitmap bitmap2= BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+        return bitmap2;
+    }
+
 }

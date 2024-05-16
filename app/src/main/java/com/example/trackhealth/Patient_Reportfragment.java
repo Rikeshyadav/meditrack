@@ -10,22 +10,17 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Patient_Analysisfragment extends Fragment {
+public class Patient_Reportfragment extends Fragment {
 
 LineChart graph;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_patient__analysisfragment, container, false);
-graph=view.findViewById(R.id.graph);
-graph.setTouchEnabled(true);
-graph.setPinchZoom(true);
-setGraph();
+        View view=inflater.inflate(R.layout.fragment_patient__reportfragment, container, false);
+
         return view;
     }
 
