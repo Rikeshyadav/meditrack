@@ -53,7 +53,11 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         setContentView(R.layout.activity_homepage_doctor);
         sp=getSharedPreferences("user",MODE_PRIVATE);
         boot=getSharedPreferences("boot",MODE_PRIVATE);
+        fragmentManager =getSupportFragmentManager();
         username = sp.getString("name","user");
+
+
+
 
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -116,10 +120,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
             }
         });
 
-    fragmentManager =getSupportFragmentManager();
-    openFragment(new HomeFragment(),"home");
-
-
+        openFragment(new HomeFragment(),"home");
     }
 
     public void setPhoto(){
@@ -145,7 +146,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         bottomNavigationView.getMenu().getItem(1).setChecked(false);
         bottomNavigationView.getMenu().getItem(2).setChecked(false);
         bottomNavigationView.getMenu().getItem(3).setChecked(false);
-
+        sp.edit().putString("isuserprofile","yes").apply();
         int itemId=item.getItemId();
         if (itemId==R.id.nav_editprofile){
             openFragment(new EditprofileFragment(),"profile");
@@ -203,6 +204,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
 
     // Assuming you have a method to replace a fragment
     public void openFragment(Fragment fragment,String tag) {
+
         back=false;
         FragmentManager fragmentManager = getSupportFragmentManager();
         boolean fragmentInStack = isFragmentInBackStack(fragment,tag);
@@ -219,10 +221,12 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
                         .replace(R.id.fragment_container, fragment)
                         .addToBackStack(tag) // Add to back stack to allow popping
                         .commit();
+
+                sp.edit().putString("start","no").apply();
             }
         }
         catch(NullPointerException e){
-
+            Toast.makeText(HomePage_Doctor.this,e.toString(),Toast.LENGTH_SHORT).show();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, new HomeFragment())
                         .addToBackStack(tag) // Add to back stack to allow popping

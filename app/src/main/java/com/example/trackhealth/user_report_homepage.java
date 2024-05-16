@@ -25,6 +25,7 @@ public class user_report_homepage extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("DOCTOR"));
         tabLayout.addTab(tabLayout.newTab().setText("Problem"));
         tabLayout.addTab(tabLayout.newTab().setText("CHAT"));
+        tabLayout.addTab(tabLayout.newTab().setText("Report"));
          adapter1=new ViewPage_PatientAdapter(this);
          viewPager2.setAdapter(adapter1);
         SharedPreferences sp=getSharedPreferences("user",MODE_PRIVATE);

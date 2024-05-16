@@ -18,13 +18,27 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class EditprofileFragment extends Fragment {
     TextView name, email, phone, state, city, hospital, hosparent, about, gender, dob, age, quali, spec, yoe, hname, htype, hstate, hcity, hphone;
     boolean adhosactive=false,adyoeactive=false,adspecactive=false,adqualiactive=false;
-
+    String pp="";
     TextView quadesc,yeardesc;
     ProgressBar pb;
     RelativeLayout ll;
@@ -135,7 +149,7 @@ addhos.setOnClickListener(new View.OnClickListener() {
                 }
             }
         });
-
+getvalues2();
         editbut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,7 +158,8 @@ addhos.setOnClickListener(new View.OnClickListener() {
             }
         });
 
-        getvalues2();
+
+
         return view;
     }
 
@@ -154,6 +169,80 @@ int year=Calendar.getInstance().get(Calendar.YEAR);
 
         return year2+" years";
     }
+
+    public void getvalues(String ph) {
+        String temp ="https://demo-uw46.onrender.com/api/doctor/getDetails";
+        try {
+
+            HashMap<String, String> jsonobj = new HashMap<>();
+
+            jsonobj.put("phone",ph);
+            JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, new JSONObject(jsonobj), new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+
+                    try {
+
+                        if (Boolean.parseBoolean(response.getString("success"))) {
+
+try {
+    setPhoto(response.getString("photo"));
+}catch (Exception e){
+
+}
+
+                            yeardesc.setText(response.getString("yoe")+" Yrs Practice");
+                            quadesc.setText(response.getString("qualification")+" - "+response.getString("speciality"));
+                            name.setText(response.getString("username"));
+                            email.setText(response.getString("email"));
+                            state.setText(response.getString("state"));
+                            city.setText(response.getString("city"));
+                            gender.setText(response.getString("gender"));
+                            age.setText(getAge(response.getString("dob")));
+                            dob.setText(response.getString("dob"));
+                            phone.setText(response.getString("phone"));
+                            spec.setText(response.getString("speciality"));
+                            quali.setText(response.getString("qualification"));
+                            yoe.setText(response.getString("yoe")+" years");
+                            about.setText(response.getString("about"));
+                            JSONObject jobj=response.getJSONObject("clinic_hospital");
+                            hname.setText(jobj.getString("name"));
+                            htype.setText(jobj.getString("type"));
+                            hstate.setText(jobj.getString("state"));
+                            hcity.setText(jobj.getString("city"));
+                            hphone.setText(jobj.getString("phone"));
+
+                        }
+                    } catch (JSONException e) {
+Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_SHORT).show();
+                }
+            });
+            RequestQueue q = Volley.newRequestQueue(requireActivity());
+            RetryPolicy retryPolicy = new DefaultRetryPolicy(
+                    20000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            );
+            j.setRetryPolicy(retryPolicy);
+            q.add(j);
+            q.add(j);
+
+
+        } catch (
+                Exception e) {
+
+            Toast.makeText(getActivity(),e.toString(),Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
     public void getvalues2() {
         setPhoto();
 yeardesc.setText(sp.getString("yoe","")+" Yrs Practice");
@@ -191,6 +280,16 @@ phone.setText(sp.getString("phone",""));
         }
     }
 
+    public void setPhoto(String photo){
+        if(!photo.equals("")) {
+            Bitmap b = getbitmap(photo);
+            profilepic.setImageBitmap(b);
+        }
+        else{
+            profilepic.setImageResource(R.drawable.baseline_person_24);
+        }
+    }
+
 
 
 
@@ -204,7 +303,5 @@ phone.setText(sp.getString("phone",""));
     @Override
     public void onResume() {
         super.onResume();
-        getvalues2();
-    }
-
-}
+   getvalues2();
+    }}

@@ -121,7 +121,7 @@ if(jsonArray.length()>0){
     arr=filterArray(jsonArray);
     System.out.println("hbhai"+arr.toString());
     if(arr.size()>0){
-        adapter=new PrescriptionParentAdapter(arr);
+        adapter=new PrescriptionParentAdapter(getActivity(),arr);
         progressBar.setVisibility(View.GONE);
         rec.scrollToPosition(arr.size()-1);
         rec.setVisibility(View.VISIBLE);

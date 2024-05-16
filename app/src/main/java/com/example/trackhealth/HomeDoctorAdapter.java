@@ -2,6 +2,7 @@ package com.example.trackhealth;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -12,12 +13,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.zegocloud.uikit.prebuilt.call.ZegoUIKitPrebuiltCallService;
 import com.zegocloud.uikit.prebuilt.call.invite.ZegoUIKitPrebuiltCallInvitationConfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -53,10 +67,97 @@ Context context;
         catch (Exception e){
             holder.img.setImageResource(R.drawable.user);
         }
+SharedPreferences sp=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+holder.del.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
 
-
+           setAlert(item.get(5).toString(),sp.getString("phone",""));
 
     }
+});
+
+    }
+
+
+    public void setAlert(String patient,String doctor){
+        String pos="Yes";
+        String neg="No";
+        String msg="Do you want to delete the patient?";
+        AlertDialog.Builder b=new AlertDialog.Builder(context);
+        b.setMessage(msg);
+        b.setPositiveButton(pos,(DialogInterface.OnClickListener) (dialog, which)->{
+            deldata(patient,doctor);
+           // deldata(doctor,patient);
+
+
+        });
+        b.setNegativeButton(neg,(DialogInterface.OnClickListener) (dialog,which)->{
+
+            dialog.cancel();
+        });
+        AlertDialog ad=b.create();
+        ad.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+
+                ad.getWindow().getDecorView().setBackgroundColor(context.getResources().getColor(R.color.black));
+            }
+        });
+
+        ad.show();
+
+    }
+
+    public void deldata(String patient,String doctor){
+        String temp = "https://demo-uw46.onrender.com/api/doctor/updatepending/"+doctor;
+
+        try {
+            JSONObject jj=new JSONObject();
+            jj.put("phone",patient);
+            jj.put("pending","delete");
+
+            JsonObjectRequest j = new JsonObjectRequest(Request.Method.PUT, temp,jj, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+
+                        if (Boolean.parseBoolean(response.getString("success"))) {
+                            Toast.makeText(context.getApplicationContext(), "updated doctor",Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        //Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();
+
+                        throw new RuntimeException(e);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    //Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            RequestQueue q = Volley.newRequestQueue(context);
+            RetryPolicy retryPolicy = new DefaultRetryPolicy(
+                    30000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            );
+            j.setRetryPolicy(retryPolicy);
+            q.add(j);
+
+
+        } catch (
+                Exception e) {
+
+
+
+        }
+
+    }
+
 
     @Override
     public int getItemCount() {
@@ -65,13 +166,14 @@ Context context;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView pname, pdob, pgender;
-        public ImageView img;
+        public ImageView img,del;
         private List<List> data; // Add a reference to data variable
 
         public MyViewHolder(@NonNull View itemView, List<List> data) { // Pass data as a parameter
             super(itemView);
             this.data = data; // Assign passed data to local variable
 
+            del=itemView.findViewById(R.id.docrecdel);
             pname = itemView.findViewById(R.id.homerecpat);
             pdob = itemView.findViewById(R.id.homerecdob);
             pgender = itemView.findViewById(R.id.homerecgen);

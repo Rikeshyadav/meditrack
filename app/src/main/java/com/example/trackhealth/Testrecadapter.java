@@ -18,9 +18,11 @@ import java.util.List;
 public class Testrecadapter extends RecyclerView.Adapter<Testrecadapter.MyViewHolder> {
     Context context;
     List<List> arr;
-    public Testrecadapter(Context context, List<List>arr){
+    String key;
+    public Testrecadapter(Context context, List<List>arr,String key){
         this.arr=arr;
         this.context=context;
+        this.key=key;
     }
     @NonNull
     @Override
@@ -32,8 +34,14 @@ public class Testrecadapter extends RecyclerView.Adapter<Testrecadapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull Testrecadapter.MyViewHolder holder, int position) {
+        if(key.toLowerCase().equals("general")){
+            holder.del.setVisibility(View.GONE);
+        }
         holder.tname.setText(arr.get(position).get(0).toString());
         holder.tstatus.setText(arr.get(position).get(1).toString());
+        if(arr.get(position).get(1).toString().toLowerCase().equals("done")){
+            holder.tstatus.setTextColor(context.getColor(R.color.green_button));
+        }
         holder.del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

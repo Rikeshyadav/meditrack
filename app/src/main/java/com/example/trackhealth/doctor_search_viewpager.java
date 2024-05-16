@@ -110,7 +110,8 @@ public class doctor_search_viewpager extends Fragment {
         RegisterSpinnerApdater filteradapter=new RegisterSpinnerApdater(getContext(),R.layout.spinner1,parameterpop);
         parameter_filter.setAdapter(filteradapter);
 
-
+        JSONObject j = new JSONObject();
+        searchDoctor2(j);
         parameter_filter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -732,6 +733,12 @@ public class doctor_search_viewpager extends Fragment {
             inner.add(j.getString("qualification"));
             inner.add(j.getString("phone"));
             inner.add(j.getString("gender"));
+            try {
+                inner.add(j.getString("photo"));
+            }
+            catch (Exception e){
+                inner.add("");
+            }
             outer.add(inner);
         }
 

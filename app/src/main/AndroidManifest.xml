@@ -38,6 +38,9 @@
         android:theme="@style/Theme.Trackhealth"
         tools:targetApi="31">
         <activity
+            android:name=".SearchProfile"
+            android:exported="false" />
+        <activity
             android:name=".VcallActivity"
             android:exported="false" />
         <activity

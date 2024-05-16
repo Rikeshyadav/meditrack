@@ -3,6 +3,7 @@ package com.example.trackhealth;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -38,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -55,7 +57,7 @@ public class DoctorProblemFragment extends Fragment {
     FloatingActionButton floatButton;
     List<List> arr=new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
-    List<List> datalist;
+    List<List> datalist=new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,12 +89,7 @@ public class DoctorProblemFragment extends Fragment {
         }
 
 
-        linearLayoutManager=new LinearLayoutManager(getActivity());
-        parentRecycle.setLayoutManager(linearLayoutManager);
-        parentrecycle_adapter=new Parentrecycle_Adapter(getActivity(),datalist);
-        parentRecycle.setAdapter(parentrecycle_adapter);
-        parentRecycle.scrollToPosition(arr.size()-1);
-        parentRecycle.setHasFixedSize(true);
+
         getdata();
 
         floatButton.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +97,7 @@ public class DoctorProblemFragment extends Fragment {
             public void onClick(View v) {
                 LayoutInflater inflater=LayoutInflater.from(getActivity());
                 AlertDialog.Builder addDialog=new AlertDialog.Builder(getActivity());
-                final android.view.View dview = inflater.inflate(R.layout.doctor_input, null);
+                final View dview = inflater.inflate(R.layout.doctor_input, null);
                 AutoCompleteTextView userNAme=dview.findViewById(R.id.editIssue);
 
                     String[] quan_ = {
@@ -537,11 +534,12 @@ public class DoctorProblemFragment extends Fragment {
                 addDialog.setView(dview);
                 addDialog.setPositiveButton("OK",(dialog, which) ->{
                     String issue=userNAme.getText().toString();
-                    List<String> demo=new ArrayList<>();
-                    demo.add(issue);
-                    datalist.add(demo);
+
+
                     adddata(issue);
-                    getdata();
+                  //  getdata();
+
+                    //getdata();
                     Toast.makeText(getActivity(),"Issue Added",Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 });
@@ -580,6 +578,9 @@ public class DoctorProblemFragment extends Fragment {
                             lottie.setVisibility(View.GONE);
                             nodata.setVisibility(View.GONE);
 
+getdata();
+
+
                         }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
@@ -614,7 +615,7 @@ public class DoctorProblemFragment extends Fragment {
 
 
     public void getdata(){
-
+progressBar.setVisibility(View.VISIBLE);
         String temp="https://demo-uw46.onrender.com/api/issue/getissue/"+sp.getString("idno","");
 
         try{
@@ -633,9 +634,13 @@ public class DoctorProblemFragment extends Fragment {
                                 arr = filterArray(ja);
                                 if (arr.size() > 0) {
                                     progressBar.setVisibility(View.GONE);
+                                    linearLayoutManager=new LinearLayoutManager(getActivity());
+                                    parentRecycle.setLayoutManager(linearLayoutManager);
                                     parentrecycle_adapter=new Parentrecycle_Adapter(getActivity(),arr);
                                     parentRecycle.scrollToPosition(arr.size()-1);
                                     parentRecycle.setAdapter(parentrecycle_adapter);
+
+
                         /*        progressBar.setVisibility(View.GONE);
                                 empty.setVisibility(View.GONE);
                                 refresh.setVisibility(View.GONE);

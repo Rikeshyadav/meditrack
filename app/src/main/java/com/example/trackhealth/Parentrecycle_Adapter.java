@@ -184,11 +184,7 @@ SharedPreferences sp=context.getSharedPreferences("issue",Context.MODE_PRIVATE);
                         if (Boolean.parseBoolean(response.getString("success"))) {
 notifyDataSetChanged();
 dataList.remove(position);
-                            Intent i = new Intent(context, User_prescription_activity_page.class);
-                            i.putExtra("activity", "prescription_page");
-                            sp.edit().putString("isuploaded", "yes").apply();
-                            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            context.startActivity(i);
+
 
                     } }catch (JSONException e) {
                         //progressBar.setVisibility(View.GONE);

@@ -64,12 +64,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class Prescription_page extends AppCompatActivity {
     String issueid;
@@ -102,7 +105,7 @@ public class Prescription_page extends AppCompatActivity {
         issueid = getIntent().getStringExtra("issueid");
         medrec = findViewById(R.id.presmedrec);
         testrec = findViewById(R.id.prestestrec);
-        testrecadapter = new Testrecadapter(Prescription_page.this, testfinal);
+        testrecadapter = new Testrecadapter(Prescription_page.this, testfinal,"real");
         addmed = findViewById(R.id.presmedadd);
         sign=findViewById(R.id.presshowsign);
         addtest = findViewById(R.id.prestestadd);
@@ -196,16 +199,16 @@ else {
 
                             JSONObject jsonobj = response.getJSONObject("prescription");
                             editpres.setText(jsonobj.getString("note"));
-                            JSONArray jsonArraymed = jsonobj.getJSONArray("medicine");
+                           JSONArray jsonArraymed = jsonobj.getJSONArray("medicine");
                            medfinal=convertToListArray(jsonArraymed,"medicine");
-                            medrecadapter=new Medrecadapter(Prescription_page.this,medfinal);
+                           medrecadapter=new Medrecadapter(Prescription_page.this,medfinal);
                             medrec.setAdapter(medrecadapter);
-                            JSONArray jsonArraytest = jsonobj.getJSONArray("test");
+                           JSONArray jsonArraytest = jsonobj.getJSONArray("test");
                             testfinal=convertToListArray(jsonArraytest,"test");
-                            testrecadapter=new Testrecadapter(Prescription_page.this,testfinal);
+                            testrecadapter=new Testrecadapter(Prescription_page.this,testfinal,"real");
                             testrec.setAdapter(testrecadapter);
                             System.out.println("testarr"+testfinal);
-                            //testrecadapter.notifyDataSetChanged();
+                            testrecadapter.notifyDataSetChanged();
 
                         }
                     } catch (JSONException e) {
@@ -261,15 +264,17 @@ if(key.equals("edit")){
 else{
     temp="https://demo-uw46.onrender.com/api/issue/addPrescription";
 }
+
         try {
             JSONObject jsonobj = new JSONObject();
+
             jsonobj.put("idno", idno);
             jsonobj.put("issueid", issueid);
             jsonobj.put("note", note);
             jsonobj.put("medicine", medfinal);
             jsonobj.put("test", testfinal);
             jsonobj.put("pid",sp.getString("pid",""));
-            System.out.println("hman" + medfinal + "/n" + testfinal);
+
 
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.POST, temp, jsonobj, new Response.Listener<JSONObject>() {
 
@@ -292,7 +297,7 @@ else{
                           finish();
                         } else {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(Prescription_page.this, "fail to load", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Prescription_page.this, "fail to load : "+response.getString("msg"), Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         progressBar.setVisibility(View.GONE);
@@ -915,6 +920,10 @@ else{
                     innerm.add(startdate.getText().toString());
                     innerm.add(enddate.getText().toString());
                     innerm.add(quan.getText().toString());
+                    innerm.add(getmid());
+                    innerm.add("0");
+                    innerm.add("0");
+                    innerm.add("0");
                     medfinal.add(innerm);
                     medrecadapter.notifyDataSetChanged();
                     Toast.makeText(Prescription_page.this, "medicine added", Toast.LENGTH_SHORT).show();
@@ -955,6 +964,25 @@ else{
         });
     }
 
+    public String getmid() {
+
+        LocalDateTime currentDateTime = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentDateTime = LocalDateTime.now();
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("hhmmss");
+            return currentDateTime.format(formatter1)+"#"+currentDateTime.format(formatter2);
+        }
+
+        return String.valueOf(generateRandomNumber())+String.valueOf(generateRandomNumber());
+
+    }
+
+
+    public int generateRandomNumber() {
+        Random random = new Random();
+        return random.nextInt(991) + 10; // Generates a random number between 0 (inclusive) and 991 (exclusive), then adds 10
+    }
 
     public void createWindowtest() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -1237,7 +1265,6 @@ else{
                 if (key.equals("medicine")) {
                     System.out.println("medinside" + listList.get(i));
                     jsonObject.put("name", listList.get(i).get(0).toString());
-
                     JSONObject dobj = new JSONObject();
                     dobj.put("morning", listList.get(i).get(1));
                     dobj.put("afternoon", listList.get(i).get(2));
@@ -1252,6 +1279,9 @@ else{
 
                     jsonObject.put("duration", durobj);
                     jsonObject.put("quantity", listList.get(i).get(7));
+                    jsonObject.put("medid",listList.get(i).get(8));
+                    jsonObject.put("taken",listList.get(i).get(9));
+                    jsonObject.put("date","55");
                     jsonArray.put(jsonObject);
                 } else if (key.equals("test")) {
                     JSONObject tobj = new JSONObject();
@@ -1281,19 +1311,24 @@ else{
                     innerList.add(jsonObject.getString("name"));
 
                     JSONObject dosageObj = jsonObject.getJSONObject("dosage");
-                    innerList.add(dosageObj.get("morning"));
-                    innerList.add(dosageObj.get("afternoon"));
-                    innerList.add(dosageObj.get("evening"));
-                    innerList.add(dosageObj.get("night"));
+                    innerList.add(dosageObj.getString("morning"));
+                    innerList.add(dosageObj.getString("afternoon"));
+                    innerList.add(dosageObj.getString("evening"));
+                    innerList.add(dosageObj.getString("night"));
 
                     JSONObject durationObj = jsonObject.getJSONObject("duration");
-                    innerList.add(durationObj.get("start"));
-                    innerList.add(durationObj.get("end"));
+                    innerList.add(durationObj.getString("start"));
+                    innerList.add(durationObj.getString("end"));
 
-                    innerList.add(jsonObject.get("quantity"));
+                    innerList.add(jsonObject.getString("quantity"));
+
+                    innerList.add(jsonObject.getString("medid"));
+                    innerList.add(jsonObject.getString("taken"));
+//                    innerList.add(jsonObject.getString("tdate"));
+
                 } else if (key.equals("test")) {
-                    innerList.add(jsonObject.get("name"));
-                    innerList.add(jsonObject.get("status"));
+                    innerList.add(jsonObject.getString("name"));
+                    innerList.add(jsonObject.getString("status"));
                 }
                 listList.add(innerList);
             }

@@ -53,7 +53,6 @@ ProgressBar pb;
         gender=findViewById(R.id.spatient_gender2);
         sp=getSharedPreferences("user", Context.MODE_PRIVATE);
         search=findViewById(R.id.search_but_add);
-
         doctorph=sp.getString("phone","");
         dname=sp.getString("name","");
         specification=sp.getString("speciality","");
@@ -238,6 +237,7 @@ if(!phone.equals("")) {
 
     public void updatePatient(String ph){  //ph is patient contact
         pb.setVisibility(View.VISIBLE);
+        String photosign_=sp.getString("photosign","");
         String temp = "https://demo-uw46.onrender.com/api/patient/addDoctor/"+ph;
         try {
             JSONObject jj=new JSONObject();
@@ -246,13 +246,14 @@ if(!phone.equals("")) {
             jj.put("speciality",specification);
             jj.put("qualification",qualification);
             jj.put("issue",issue);
+            jj.put("sign","");
             jj.put("phone",sp.getString("phone",""));
             jj.put("pending","true");
             jj.put("about",sp.getString("about",""));
             jj.put("state",sp.getString("state",""));
             jj.put("city",sp.getString("city",""));
             jj.put("photo",sp.getString("photo",""));
-            jj.put("sign",sp.getString("photosign",""));
+
 
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.PUT, temp,jj, new Response.Listener<JSONObject>() {
                 @Override
@@ -267,9 +268,10 @@ if(!phone.equals("")) {
                         else{
                             Toast.makeText(getApplicationContext(),response.getString("msg"),Toast.LENGTH_SHORT).show();
                             pb.setVisibility(View.GONE);
-
+                            deleteDoctor(sp.getString("phone",""),ph,"delete","");
                         }
                     } catch (JSONException e) {
+                        deleteDoctor(sp.getString("phone",""),ph,"delete","");
                         Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();
                         pb.setVisibility(View.GONE);
                     }
@@ -278,6 +280,7 @@ if(!phone.equals("")) {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     pb.setVisibility(View.GONE);
+                    deleteDoctor(sp.getString("phone",""),ph,"delete","");
                     Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -294,7 +297,7 @@ if(!phone.equals("")) {
         } catch (
                 Exception e) {
             pb.setVisibility(View.GONE);
-
+            deleteDoctor(sp.getString("phone",""),ph,"delete","");
             Toast.makeText(this, "error", Toast.LENGTH_SHORT).show();
 
 
@@ -302,4 +305,64 @@ if(!phone.equals("")) {
 
     }
 
+    public void deleteDoctor(String doctor,String patient,String pending,String issue){
+        String temp = "https://demo-uw46.onrender.com/api/doctor/updatepending/"+doctor;
+
+        try {
+            JSONObject jj=new JSONObject();
+            jj.put("username",sp.getString("name",""));
+            jj.put("dob",sp.getString("dob",""));
+            jj.put("gender",sp.getString("gender",""));
+            jj.put("email",sp.getString("email",""));
+            jj.put("address",sp.getString("address",""));
+            jj.put("photo",sp.getString("photo",""));
+            jj.put("state",sp.getString("state",""));
+            jj.put("city",sp.getString("city",""));
+            jj.put("phone",patient);
+            jj.put("pending",pending);
+            jj.put("issue",issue);
+
+            JsonObjectRequest j = new JsonObjectRequest(Request.Method.PUT, temp,jj, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+
+                        if (Boolean.parseBoolean(response.getString("success"))) {
+                            Toast.makeText(AddPatientPage.this, "try again",Toast.LENGTH_SHORT).show();
+                            add.setText("add");
+                        }
+                    } catch (JSONException e) {
+                        //Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();
+
+                        throw new RuntimeException(e);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    //Toast.makeText(getApplicationContext(),error.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            RequestQueue q = Volley.newRequestQueue(AddPatientPage.this);
+            RetryPolicy retryPolicy = new DefaultRetryPolicy(
+                    30000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            );
+            j.setRetryPolicy(retryPolicy);
+            q.add(j);
+
+
+        } catch (
+                Exception e) {
+
+
+
+        }
+
+    }
+
 }
+
