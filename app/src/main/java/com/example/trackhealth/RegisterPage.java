@@ -235,7 +235,7 @@ public class RegisterPage extends AppCompatActivity {
 
         //select
         otpedit.setVisibility(View.GONE);
-        String[] st = {"Select", "Doctor", "patient"};
+        String[] st = {"Select", "Doctor", "patient","lab assistant"};
         RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner_login, st);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dopcat.setAdapter(adapter);
@@ -328,6 +328,35 @@ public class RegisterPage extends AppCompatActivity {
                             select = 1;
 
                             doctorOrPatient = "Patient";
+                            card5.setVisibility(View.GONE);
+                            card6.setVisibility(View.GONE);
+                            docpat_warn.setVisibility(View.GONE);
+                            otp_but.setText("GET OTP");
+                            card2.setVisibility(View.GONE);
+                            card3.setVisibility(View.GONE);
+                            card4.setVisibility(View.VISIBLE);
+                            additional_det.setVisibility(View.GONE);
+                            verification_text.setVisibility(View.GONE);
+                            upload_warn.setVisibility(View.GONE);
+                            text_clinic_header.setVisibility(View.GONE);
+                            otp_but.setVisibility(View.VISIBLE);
+                            verify_but.setVisibility(View.GONE);
+                            if (!verified) {
+                                otp_but.setText("Get OTP");
+                                otp_but.setFocusable(true);
+                            } else {
+                                otp_but.setText("verified");
+                                otp_but.setFocusable(false);
+                            }
+                            doc_reg.setVisibility(View.GONE);
+                            hospital_radio.setVisibility(View.GONE);
+                            clinic_radio.setVisibility(View.GONE);
+
+
+                        }if (selectedOption.equals("lab assistant")) {
+                            select = 1;
+
+                            doctorOrPatient = "Lab Assistant";
                             card5.setVisibility(View.GONE);
                             card6.setVisibility(View.GONE);
                             docpat_warn.setVisibility(View.GONE);
@@ -555,10 +584,18 @@ public class RegisterPage extends AppCompatActivity {
 
                                             progress2.setVisibility(View.VISIBLE);
                                             signup.setVisibility(View.GONE);
-                                            sendPatient(username, email, pass, phone, dateofbirth, gen, statee,cityy);
+                                            sendPatient(username, email, pass, phone, dateofbirth, gen, statee,cityy,"patient");
 
 
-                                        } else {
+                                        } else if(doctorOrPatient.equals("Lab Assistant")) {
+
+                                            progress2.setVisibility(View.VISIBLE);
+                                            signup.setVisibility(View.GONE);
+                                            sendPatient(username, email, pass, phone, dateofbirth, gen, statee,cityy,"assistant");
+
+
+
+                                        }else {
 
 
                                             if (speciality.getText().toString().trim().equals("")) {
@@ -661,13 +698,22 @@ public class RegisterPage extends AppCompatActivity {
 
 
     }
-    public void sendPatient(String username, String email, String password, String phone, String dob, String gender, String state,String city) {
+    public void sendPatient(String username, String email, String password, String phone, String dob, String gender, String state,String city,String key) {
         progress2.setVisibility(View.VISIBLE);
-                String temp = "https://demo-uw46.onrender.com/api/patient/register";
+        String temp="";
+        if(key.equals("Patient")) {
+             temp= "https://demo-uw46.onrender.com/api/patient/register";
+        }else{
+            temp= "https://demo-uw46.onrender.com/api/assistant/register";
+        }
               JSONObject inner2=new JSONObject();
                 JSONObject jsonobj=new JSONObject();
         try {
+            if(key.equals("Patient")) {
                 jsonobj.put("doctor_patient", "patient");
+            }else{
+                jsonobj.put("doctor_patient", "assistant");
+            }
                   jsonobj.put("username", username);
                 jsonobj.put("email", email);
                 jsonobj.put("password", password);

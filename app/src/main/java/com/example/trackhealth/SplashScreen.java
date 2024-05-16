@@ -64,7 +64,7 @@ String user=sp.getString("identity","").trim();
                     @Override
                     public void run() {
 
-                        Intent i = new Intent(SplashScreen.this, DescriptionPage.class);
+                        Intent i = new Intent(SplashScreen.this, LabAssistant.class);
                         startActivity(i);
                         finish();
 

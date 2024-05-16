@@ -166,7 +166,7 @@ startActivity(i);
             temp = "https://demo-uw46.onrender.com/api/patient/auth";
         }
         else{
-            temp = "https://demo-uw46.onrender.com/api/doctor/auth";
+            temp = "https://demo-uw46.onrender.com/api/assistant/auth";
         }
         HashMap<String,String> jsonobj=new HashMap<>();
         jsonobj.put("phone", phone);
@@ -238,11 +238,13 @@ else{
                         startActivity(b1);
                     }
                     else{
+                        progressBar.setVisibility(View.GONE);
 
                         Toast.makeText(getApplicationContext(),response.getString("msg"), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
+                    progressBar.setVisibility(View.GONE);
                     throw new RuntimeException(e);
                 }
             }
