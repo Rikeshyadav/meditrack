@@ -97,9 +97,10 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
                     openFragment(new HomeFragment(),"home");
                
                 }
-                else if (itemId==R.id.bottom_schedule){
-                    toolbar.setTitle("Schedule");
-                    openFragment(new ScheduledFragment(),"schedule");
+              else if (itemId==R.id.bottom_schedule){
+                    toolbar.setTitle("Setting");
+                    //openFragment(new ScheduledFragment(),"schedule");
+                    openFragment(new Pending_Fragment(), "pending");
                 }
                else if(itemId==R.id.bottom_search){
                     toolbar.setTitle("Search");
@@ -145,7 +146,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         bottomNavigationView.getMenu().getItem(0).setChecked(false);
         bottomNavigationView.getMenu().getItem(1).setChecked(false);
         bottomNavigationView.getMenu().getItem(2).setChecked(false);
-        bottomNavigationView.getMenu().getItem(3).setChecked(false);
+       // bottomNavigationView.getMenu().getItem(3).setChecked(false);
         sp.edit().putString("isuserprofile","yes").apply();
         int itemId=item.getItemId();
         if (itemId==R.id.nav_editprofile){
@@ -172,8 +173,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         navigationView.getMenu().getItem(1).setChecked(false);
         navigationView.getMenu().getItem(2).setChecked(false);
         navigationView.getMenu().getItem(3).setChecked(false);
-        navigationView.getMenu().getItem(4).setChecked(false);
-        navigationView.getMenu().getItem(5).setChecked(false);
+
     }
     @Override
     public void onBackPressed() {
@@ -220,7 +220,6 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
             }
         }
         catch(NullPointerException e){
-            Toast.makeText(HomePage_Doctor.this,e.toString(),Toast.LENGTH_SHORT).show();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, new HomeFragment())
                         .addToBackStack(tag) // Add to back stack to allow popping

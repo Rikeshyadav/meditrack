@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Panding_Fragment extends Fragment {
+public class Pending_Fragment extends Fragment {
     RecyclerView recyclerView;
     ProgressBar progressBar;
     LottieAnimationView empty;

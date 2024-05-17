@@ -51,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences sp,boot;
 
-     String patientMsg ="";
-     boolean bol=false;
+    String patientMsg ="";
+    boolean bol=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         t2=findViewById(R.id.regclick);
         e1=findViewById(R.id.email);
         e2=findViewById(R.id.pass);
-       Spinner docpat2=findViewById(R.id.loginSpinner);
+        Spinner docpat2=findViewById(R.id.loginSpinner);
         progressBar=findViewById(R.id.progress);
         login=findViewById(R.id.login);
         forgot=findViewById(R.id.forgotpass);
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 String selectedOption = (String) adapterView.getItemAtPosition(i);
 
                 if (selectedOption.equals("Doctor")) {
-                             doctororpatient="Doctor";
+                    doctororpatient="Doctor";
                 }
                 else if (selectedOption.equals("Patient")) {
                     doctororpatient="Patient";
@@ -99,27 +99,27 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
             }
-              @Override
-           public void onNothingSelected(AdapterView<?> adapterView) {
-doctororpatient="null";
-                                             }
-                                         });
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                doctororpatient="null";
+            }
+        });
 
 
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            // setAlert("Do you want to recover your password?","yes","no");
-Intent i=new Intent(LoginActivity.this,ForgotPassword.class);
-startActivity(i);
+                // setAlert("Do you want to recover your password?","yes","no");
+                Intent i=new Intent(LoginActivity.this,ForgotPassword.class);
+                startActivity(i);
             }
         });
 
-                    t2.setOnClickListener(new View.OnClickListener() {
+        t2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent t2 =new Intent(LoginActivity.this, RegisterPage.class);
-              startActivity(t2);
+                Intent t2 =new Intent(LoginActivity.this, RegisterPage.class);
+                startActivity(t2);
             }
 
 
@@ -162,7 +162,10 @@ startActivity(i);
 
     public void authPatient(String phone, String password, String identity){
         String temp="";
-        if(identity.equals("Patient")) {
+        if(identity.equals("Doctor")) {
+            temp = "https://demo-uw46.onrender.com/api/doctor/auth";
+        }
+        else if(identity.equals("Patient")){
             temp = "https://demo-uw46.onrender.com/api/patient/auth";
         }
         else{
@@ -176,24 +179,24 @@ startActivity(i);
 
             @Override
             public void onResponse(JSONObject response) {
-progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
                 try {
 
                     if(Boolean.parseBoolean(response.getString("success"))){
                         Intent b1;
-if(doctororpatient.equals("Patient")) {
-    b1 = new Intent(LoginActivity.this, HomePage_Patient.class);
-}
+                        if(doctororpatient.equals("Patient")) {
+                            b1 = new Intent(LoginActivity.this, HomePage_Patient.class);
+                        }
                         else if(doctororpatient.equals("Lab Assistant")) {
                             b1 = new Intent(LoginActivity.this,LabAssistant.class);
                         }
-else{
-    b1 = new Intent(LoginActivity.this, HomePage_Doctor.class);
-}
+                        else{
+                            b1 = new Intent(LoginActivity.this, HomePage_Doctor.class);
+                        }
                         Toast.makeText(getApplicationContext(),response.getString("msg"), Toast.LENGTH_SHORT).show();
 
-                       sp.edit().putString("name",response.getString("username")).apply();
-                       sp.edit().putBoolean("islogged",true).apply();
+                        sp.edit().putString("name",response.getString("username")).apply();
+                        sp.edit().putBoolean("islogged",true).apply();
                         sp.edit().putString("email", response.getString("email")).apply();
 
                         sp.edit().putString("phone", phone).apply();
@@ -215,10 +218,11 @@ else{
                         sp.edit().putString("city", response.getString("city")).apply();
                         sp.edit().putString("state", response.getString("state")).apply();
                         if(identity.equals("Doctor")) {
-                         sp.edit().putString("speciality",response.getString("speciality")).apply();
+                            sp.edit().putString("speciality",response.getString("speciality")).apply();
                             sp.edit().putString("yoe",response.getString("yoe")).apply();
                             sp.edit().putString("qualification",response.getString("qualification")).apply();
                             sp.edit().putString("about",response.getString("about")).apply();
+                            sp.edit().putString("photoid",response.getString("photoid")).apply();
                             sp.edit().putString("photosign",response.getString("sign")).apply();
                             JSONObject jo=new JSONObject();
                             jo=response.getJSONObject("clinic_hospital");
@@ -238,13 +242,11 @@ else{
                         startActivity(b1);
                     }
                     else{
-                        progressBar.setVisibility(View.GONE);
 
                         Toast.makeText(getApplicationContext(),response.getString("msg"), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
-                    progressBar.setVisibility(View.GONE);
                     throw new RuntimeException(e);
                 }
             }
@@ -273,7 +275,7 @@ else{
 
             if(ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.SEND_SMS)== PackageManager.PERMISSION_GRANTED){
                 progressBar.setVisibility(View.VISIBLE);
-               // sendmsg(e1.getText().toString());
+                // sendmsg(e1.getText().toString());
                 progressBar.setVisibility(View.GONE);
             }else{
 
@@ -281,7 +283,7 @@ else{
             }
         });
         b.setNegativeButton(neg,(DialogInterface.OnClickListener) (dialog,which)->{
-                  dialog.cancel();
+            dialog.cancel();
         });
         AlertDialog ad=b.create();
         ad.show();

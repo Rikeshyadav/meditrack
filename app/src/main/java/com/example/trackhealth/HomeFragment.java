@@ -200,7 +200,7 @@ System.out.println("hello"+dataSearchList);
                             empty.setVisibility(View.GONE);
                             nodata.setVisibility(View.GONE);
                             refresh.setVisibility(View.VISIBLE);
-                            Toast.makeText(getActivity(), "fail to load", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), response.getString("msg"), Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         //Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();

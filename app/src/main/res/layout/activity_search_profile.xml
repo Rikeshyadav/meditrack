@@ -771,19 +771,70 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="2dp"
                 android:text="Review"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
-<HorizontalScrollView
+                android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="0"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/sdipratestar"
+            android:gravity="center"
+
+            android:layout_below="@id/sdipsort"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:fontFamily="@font/gugi"
+            />
+
+        <RatingBar
+            android:id="@+id/ratingBar_sdip"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="2"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@id/sdipratestar"
+            android:layout_below="@id/sdipsort"
+            android:scaleY="2"
+            android:transformPivotX="0dp"
+            android:transformPivotY="0dp"
+            android:isIndicator="true"
+            android:layout_marginTop="18dp"
+            android:numStars="5"
+            android:rating="0.0"
+            android:theme="@style/RatingBar"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 reviews"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/sdipratestar"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginBottom="15dp"
+            android:id="@+id/sdipvote"
+            />
+
+
+        <HorizontalScrollView
     android:layout_width="match_parent"
 android:layout_margin="5dp"
     android:layout_height="wrap_content"
-    android:layout_below="@id/sdipsort"
+    android:layout_below="@id/sdipvote"
     android:id="@+id/profilesearch_hs"
     >
             <RadioGroup

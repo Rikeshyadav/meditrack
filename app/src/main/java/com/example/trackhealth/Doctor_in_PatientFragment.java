@@ -67,7 +67,7 @@ import java.util.List;
 public class Doctor_in_PatientFragment extends Fragment {
 
 SharedPreferences sp,sp2,sp44;
-TextView dname,dspec,dhos,about;
+TextView dname,dspec,dhos,about,vote;
 RadioGroup radio;
     RadioButton all,five,four,three,two,one;
 ImageView call;
@@ -81,6 +81,7 @@ List<List> arr=new ArrayList<>();
     ZegoSendCallInvitationButton videoCall;
 RecyclerView review;
 ShapeableImageView dp;
+RatingBar ratingBar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -88,6 +89,7 @@ ShapeableImageView dp;
         View view= inflater.inflate(R.layout.fragment_doctor_in__patient, container, false);
         dname=view.findViewById(R.id.Dn);
         pimg=view.findViewById(R.id.doctorpho);
+        ratingBar=view.findViewById(R.id.rating_doctor_patientpage);
         pimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,11 +101,13 @@ ShapeableImageView dp;
         call=view.findViewById(R.id.doctorinpat_call);
         progressBar=view.findViewById(R.id.reviewprogress);
         dspec=view.findViewById(R.id.skill);
+        vote=view.findViewById(R.id.vote_dppage);
         dhos=view.findViewById(R.id.pl);
         sp44=getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         videoCall=view.findViewById(R.id.dip_vcall);
         startService(sp44.getString("phone",""));
         setVideoCall(sp44.getString("curphone2",""));
+
         dp=view.findViewById(R.id.doctorpho);
         Button b1=view.findViewById(R.id.feed);//this is popup trigger id
         about=view.findViewById(R.id.dipabout);
@@ -463,6 +467,7 @@ setAlert();
     public List filterArray(JSONArray jsonArray) throws JSONException {
         List<List> outer=new ArrayList<>();
 
+  float startot=0.0f;
         for(int i=0;i<jsonArray.length();i++){
 
             JSONObject j=jsonArray.getJSONObject(i);
@@ -478,15 +483,20 @@ setAlert();
                     inner.add(j.getString("star"));
                     inner.add(j.getString("date"));
                     inner.add(j.getString("time"));
-
+                    startot+=Float.parseFloat(j.getString("star"));
 
             outer.add(inner);
 
             }
+startot=startot/(jsonArray.length());
+        ratingBar.setRating(startot);
+        vote.setText(truncateToOneDecimalPlace(startot)+" ( "+jsonArray.length()+" votes )");
 
         return outer;
     }
-
+    public static float truncateToOneDecimalPlace(float value) {
+        return (float) ((int) (value * 10)) / 10;
+    }
 
     public void addReview(float rate,String txt){
         String temp = "https://demo-uw46.onrender.com/api/doctor/review/"+sp.getString("dphone","");

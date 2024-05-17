@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="2dp"
-    android:padding="10dp"
+    android:padding="9dp"
     android:background="@color/white"
     android:layout_marginBottom="2dp"
     android:minHeight="120dp"
-    android:elevation="1dp"
+    android:elevation="4dp"
     android:layout_height="wrap_content">
 
    <!-- <ImageView
@@ -27,8 +27,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/dp_doctor_searchdesign"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
@@ -47,7 +47,7 @@
         android:id="@+id/maincontent_doctor_search_design"
         android:layout_toRightOf="@id/dp_doctor_searchdesign"
         android:layout_marginStart="1dp"
-        android:layout_toLeftOf="@id/contactlldes"
+        android:layout_toLeftOf="@id/contact_doctor_searchdesign"
         android:layout_marginEnd="5dp"
         android:layout_height="wrap_content"
         >
@@ -101,64 +101,9 @@
 
             />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="6dp"
-        android:id="@+id/review_doctor_searchdesign"
-        android:layout_marginBottom="6dp"
-        android:layout_toRightOf="@+id/dp_doctor_searchdesign"
-        android:layout_below="@id/maincontent_doctor_search_design">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:text="4.3"
-    android:gravity="center"
-    android:textColor="@color/black"
-    android:textSize="25sp"
-    android:fontFamily="@font/gugi"
-    />
-
-        <RatingBar
-            android:id="@+id/ratingBar"
-            style="?android:attr/ratingBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="1"
-            android:scaleY="1"
-            android:transformPivotX="0dp"
-            android:transformPivotY="0dp"
-            android:isIndicator="true"
-            android:layout_marginTop="8dp"
-            android:numStars="5"
-            android:rating="3.4"
-            android:theme="@style/RatingBar"
-             />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="(145 votes)"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/contactlldes"
-        android:orientation="horizontal"
-        >
-
     <ImageView
-        android:layout_width="0dp"
-        android:layout_weight="2"
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_height="wrap_content"
         android:text="Call Doctor"
         android:src="@drawable/baseline_call_24"
@@ -170,9 +115,7 @@
         android:textSize="14sp"
         android:layout_marginTop="30dp"
         android:padding="10dp"
-
-        />
-    </LinearLayout>
+   />
 
 
 

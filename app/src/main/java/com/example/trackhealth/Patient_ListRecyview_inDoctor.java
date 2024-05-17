@@ -33,6 +33,7 @@ public class Patient_ListRecyview_inDoctor extends AppCompatActivity {
             title.setText(sp.getString("clinic_name",""));
         }
         doctor_tablayout.addTab(doctor_tablayout.newTab().setText("CHAT"));
+        doctor_tablayout.addTab(doctor_tablayout.newTab().setText("REPORT"));
         adapterdoctor=new ViewPage_DoctorAdapter(this);
         doctor_view.setAdapter(adapterdoctor);
         doctor_tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

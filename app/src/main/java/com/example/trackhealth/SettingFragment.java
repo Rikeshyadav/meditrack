@@ -1,6 +1,7 @@
 package com.example.trackhealth;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -28,7 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SettingFragment extends Fragment {
-TextView delete;
+TextView delete,setting;
 String user;
 SharedPreferences sp;
 String phone;
@@ -39,7 +40,8 @@ String phone;
         View view= inflater.inflate(R.layout.fragment_setting, container, false);
 
         delete=view.findViewById(R.id.delete_acc);
-        sp=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);String
+        sp=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+                setting=view.findViewById(R.id.setting_changeph);
         user=sp.getString("identity","");
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +49,14 @@ String phone;
               openFragment(new delete_page(),user);
             }
         });
+
+setting.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent i=new Intent(getActivity(),ChangePhone.class);
+        startActivity(i);
+    }
+});
         return view;
 
     }

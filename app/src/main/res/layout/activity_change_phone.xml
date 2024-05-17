@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    tools:context=".ChangePhone">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:titleTextColor="@color/white"
+        android:id="@+id/toolbar_cphone"
+        android:fitsSystemWindows="true"
+        android:elevation="5dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"
+        android:background="#5F8CBD"
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
+        >
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:foregroundTint="@color/white"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:id="@+id/changephone_back"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Phone Number"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            android:layout_marginStart="30dp"
+            />
+    </androidx.appcompat.widget.Toolbar>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      android:hint="Enter New Phone"
+        android:layout_marginTop="75dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/change_phoneedit"
+        android:background="@drawable/search_box"
+        android:padding="14dp"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter OTP"
+        android:layout_marginTop="25dp"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@id/change_phoneedit"
+        android:id="@+id/change_phoneedit2"
+        android:background="@drawable/search_box"
+        android:padding="14dp"
+        />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/changephone_verify"
+        android:layout_below="@id/change_progress"
+        android:text="Verify"
+        android:background="@drawable/orange_button"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="** Not Recommended, may loss data"
+        android:fontFamily="@font/gugi"
+        android:textSize="19sp"
+        android:id="@+id/changeremark"
+        android:layout_margin="10dp"
+        android:layout_centerVertical="true"
+        android:textStyle="bold"
+        android:textColor="#FB4343"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/changeremark"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="In case if you loss your data, re change your phone number to old one"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+<ProgressBar
+    android:id="@+id/change_progress"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="17dp"
+    android:visibility="gone"
+    android:layout_below="@id/change_phoneedit2"
+    android:layout_centerHorizontal="true"
+    />
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/changephone_change"
+        android:layout_below="@id/change_progress"
+        android:text="Enter OTP"
+        android:visibility="gone"
+        android:background="@drawable/orange_button"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+</RelativeLayout>
