@@ -21,9 +21,11 @@ public class patient_homeAdapter extends RecyclerView.Adapter<patient_homeAdapte
 
     private static List<List>data;
 Context context;
-    public patient_homeAdapter(List<List> data,Context context) {
+String key;
+    public patient_homeAdapter(List<List> data,Context context,String key) {
         this.data = data;
         this.context=context;
+        this.key=key;
     }
 
     @NonNull
@@ -47,7 +49,46 @@ Context context;
             holder.dp.setImageBitmap(getbitmap(data.get(position).get(0).toString()));
 
         }
+holder.itemView.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
 
+        if (!key.equals("lab")) {
+            Intent intent = new Intent(v.getContext(), user_report_homepage.class);
+            SharedPreferences sp = v.getContext().getSharedPreferences("docpat", Context.MODE_PRIVATE);
+            sp.edit().putString("dname", data.get(position).get(1).toString()).apply();
+            sp.edit().putString("dspec", data.get(position).get(2).toString()).apply();
+            sp.edit().putString("dhos", data.get(position).get(3).toString()).apply();
+            sp.edit().putString("dqua", data.get(position).get(4).toString()).apply();
+            sp.edit().putString("dphoto", data.get(position).get(0).toString()).apply();
+            sp.edit().putString("dabout", data.get(position).get(5).toString()).apply();
+            sp.edit().putString("dphone", data.get(position).get(6).toString()).apply();
+            SharedPreferences sp2 = v.getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+            sp2.edit().putString("curphone2", data.get(position).get(6).toString()).apply();
+            sp2.edit().putString("curname", data.get(position).get(1).toString()).apply();
+            SharedPreferences sp3 = v.getContext().getSharedPreferences("issue", Context.MODE_PRIVATE);
+            sp3.edit().putString("idno", data.get(position).get(6).toString() + sp2.getString("phone", "")).apply();
+            sp2.edit().putString("curstate", data.get(position).get(7).toString()).apply();
+            sp2.edit().putString("curcity", data.get(position).get(8).toString()).apply();
+
+            if (!sp2.getString("identity", "").equals("Doctor")) {
+                sp2.edit().putString("curspec", data.get(position).get(10).toString()).apply();
+                sp2.edit().putString("curqua", data.get(position).get(9).toString()).apply();
+
+                sp2.edit().putString("curclinic", data.get(position).get(11).toString()).apply();
+            }
+
+            v.getContext().startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(v.getContext(), uploadReport.class);
+            intent.putExtra("patient",data.get(position).get(12).toString());
+            intent.putExtra("doctor",data.get(position).get(6).toString());
+            context.startActivity(intent);
+        }
+        //
+    }
+});
 
 
     }
@@ -58,7 +99,7 @@ Context context;
         return data.size();
     }
 
-    public static class myholder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class myholder extends RecyclerView.ViewHolder{
         ImageView dp;
         TextView dname, dspec, dhospital,dqua;
         public myholder(@NonNull View itemView) {
@@ -68,40 +109,11 @@ Context context;
             dspec =itemView.findViewById(R.id.dspec_patient_homepage);
             dhospital =itemView.findViewById(R.id.dhospital_patient_homepage);
             dqua=itemView.findViewById(R.id.dqua_patient_homepage);
-            itemView.setOnClickListener(this);
+
         }
 
-        @Override
-        public void onClick(View v) {
-            int position=getAdapterPosition();
-            if(position !=RecyclerView.NO_POSITION){
-                Intent intent=new Intent(v.getContext(), user_report_homepage.class);
-                SharedPreferences sp=v.getContext().getSharedPreferences("docpat", Context.MODE_PRIVATE);
-                sp.edit().putString("dname",data.get(position).get(1).toString()).apply();
-                sp.edit().putString("dspec",data.get(position).get(2).toString()).apply();
-                sp.edit().putString("dhos",data.get(position).get(3).toString()).apply();
-                sp.edit().putString("dqua",data.get(position).get(4).toString()).apply();
-                sp.edit().putString("dphoto",data.get(position).get(0).toString()).apply();
-                sp.edit().putString("dabout",data.get(position).get(5).toString()).apply();
-                sp.edit().putString("dphone",data.get(position).get(6).toString()).apply();
-                SharedPreferences sp2=v.getContext().getSharedPreferences("user",Context.MODE_PRIVATE);
-                sp2.edit().putString("curphone2",data.get(position).get(6).toString()).apply();
-                sp2.edit().putString("curname",data.get(position).get(1).toString()).apply();
-                SharedPreferences sp3=v.getContext().getSharedPreferences("issue", Context.MODE_PRIVATE);
-                sp3.edit().putString("idno",data.get(position).get(6).toString()+sp2.getString("phone","")).apply();
-                sp2.edit().putString("curstate", data.get(position).get(7).toString()).apply();
-                sp2.edit().putString("curcity", data.get(position).get(8).toString()).apply();
 
-                if(!sp2.getString("identity","").equals("Doctor")){
-                    sp2.edit().putString("curspec", data.get(position).get(10).toString()).apply();
-                    sp2.edit().putString("curqua", data.get(position).get(9).toString()).apply();
 
-                    sp2.edit().putString("curclinic", data.get(position).get(11).toString()).apply();
-                }
-
-                v.getContext().startActivity(intent);
-            }
-        }
     }
 
     public Bitmap getbitmap(String s){

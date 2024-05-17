@@ -89,9 +89,9 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
                 } else if (itemId == R.id.bottom_search) {
                     openFragment(new SearchFragment(), "search");
 
-                } else if (itemId == R.id.bottom_call) {
+                } else if (itemId == R.id.bottom_profile) {
 
-                    // toolbar.setTitle("call");
+                    openFragment(new patient_edit_profile(),"profile");
                     Toast.makeText(getApplicationContext(), "call", Toast.LENGTH_SHORT).show();
                 }
                 return true;
@@ -136,12 +136,12 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
         if (itemId == R.id.patient_nav_editprofile) {
             //toolbar.setTitle("Profile");
             openFragment(new patient_edit_profile(), "profile");
-        } else if (itemId == R.id.patient_nav_notify) {
+        }/* else if (itemId == R.id.patient_nav_notify) {
             // toolbar.setTitle("Notification");
             openFragment(new patient_nav_notification(), "notification");
             Toast.makeText(getApplicationContext(), "Notification", Toast.LENGTH_SHORT).show();
 
-        } else if (itemId == R.id.nav_trash) {
+        }*/ else if (itemId == R.id.nav_trash) {
             openFragment(new Panding_Fragment(), "trash");
             //toolbar.setTitle("Pending");
         } else if (itemId == R.id.patient_nav_setting) {

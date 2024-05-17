@@ -134,48 +134,7 @@
                                         </LinearLayout>
 
                                 </androidx.cardview.widget.CardView>
-                                <androidx.cardview.widget.CardView
-                                    android:layout_width="150dp"
-                                    android:layout_height="152dp"
-                                    app:cardCornerRadius="20dp"
-                                    android:layout_margin="5dp"
-                                    android:foreground="@drawable/effect"
-                                    android:clickable="true"
-                                    app:cardBackgroundColor="#A5DAD3"
-                                    app:cardElevation="6dp">
 
-                                        <LinearLayout
-                                            android:layout_width="129dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_marginStart="12dp"
-                                            android:orientation="vertical">
-
-                                                <com.google.android.material.imageview.ShapeableImageView
-                                                    android:layout_width="112dp"
-                                                    android:layout_height="101dp"
-                                                    android:layout_marginStart="6dp"
-                                                    android:layout_marginTop="10dp"
-                                                    android:scaleType="centerCrop"
-                                                    android:src="@drawable/reportr"
-                                                    app:shapeAppearanceOverlay="@style/createcircle"
-                                                    app:strokeColor="@color/black"
-                                                    app:strokeWidth="0.5dp" />
-
-                                                <TextView
-                                                    android:layout_width="114dp"
-                                                    android:layout_height="wrap_content"
-
-                                                    android:layout_marginTop="9dp"
-                                                    android:fontFamily="@font/gugi"
-
-                                                    android:text="Report"
-                                                    android:gravity="center"
-                                                    android:layout_gravity="center"
-                                                    android:textColor="@color/red"
-                                                    android:textSize="20sp" />
-                                        </LinearLayout>
-
-                                </androidx.cardview.widget.CardView>
                                 <androidx.cardview.widget.CardView
                                     android:layout_width="150dp"
                                     android:layout_height="152dp"

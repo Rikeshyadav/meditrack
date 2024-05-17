@@ -23,7 +23,7 @@ public class ViewPage_DoctorAdapter extends FragmentStateAdapter {
             return new Patient_chat_fragment();
         }
         else if(position==3){
-            return new Patient_Testfragment();
+            return new Patient_Reportfragment();
         }
         else {
             return new Patient_in_Doctor_fragemt();
@@ -32,6 +32,6 @@ public class ViewPage_DoctorAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }

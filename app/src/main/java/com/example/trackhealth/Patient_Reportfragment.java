@@ -1,51 +1,94 @@
 package com.example.trackhealth;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Patient_Reportfragment extends Fragment {
-
-LineChart graph;
+DatabaseReference databaseReference;
+    List<List> uploderpdf=new ArrayList<>();
+    LottieAnimationView pb;
+    PdfReportAdapter adapter;
+RecyclerView recyclerView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_patient__reportfragment, container, false);
+recyclerView=view.findViewById(R.id.pdfreportrec);
+pb=view.findViewById(R.id.report_searchlottie);
+String key="";
+        SharedPreferences sp=getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+        if(sp.getString("identity","").equals("Patient")) {
+            key=sp.getString("curphone2","")+sp.getString("phone","");
+        }
+else{
+    key=sp.getString("phone","")+sp.getString("curphone2","");
+        }
+        retrievePDFiles(key);
 
         return view;
     }
 
-void setGraph(){
-    ArrayList<String> arr=new ArrayList<>();
-    arr.add("11 Am");
-    arr.add("12 AM");
-    arr.add("1 PM");
-    ArrayList<Entry> line=new ArrayList<>();
-    line.add(new Entry(20f,10));
-    line.add(new Entry(60f,40));
-    line.add(new Entry(90f,20));
+    private void retrievePDFiles(String key){
+        databaseReference= FirebaseDatabase.getInstance().getReference("Report").child(key);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    List<String> inner=new ArrayList<>();
+                    inner.add(ds.child("filename").getValue().toString());
+                    inner.add(ds.child("fileurl").getValue(String.class).toString());
+                    try {
+                        inner.add(ds.child("datee").getValue(String.class).toString());
+                    }
+                    catch (Exception e){
+                        inner.add("");
+                    }
+                    uploderpdf.add(inner);
 
-    ArrayList<Entry> line2=new ArrayList<>();
-    line2.add(new Entry(20f,30));
-    line2.add(new Entry(10f,70));
-    line2.add(new Entry(40f,80));
-
-    LineDataSet ls=new LineDataSet(line,"Sugar");
-    LineData ld=new LineData(ls);
-    LineDataSet ls2=new LineDataSet(line2,"Haemoglobin");
-    ls2.setColor(getResources().getColor(R.color.red));
-    ld.addDataSet(ls2);
-    graph.setData(ld);
-    graph.animateXY(3000,3000);
-
+                }
+                adapter=new PdfReportAdapter(getContext(),uploderpdf);
+                LinearLayoutManager  l = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                recyclerView.setLayoutManager(l);
+                pb.setVisibility(View.GONE);
+                recyclerView.setAdapter(adapter);
+if(uploderpdf.size()==0){
+    Toast.makeText(getContext(),"no report available",Toast.LENGTH_SHORT).show();
 }
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 }
