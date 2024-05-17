@@ -37,9 +37,9 @@ public class Knowledge_diet_fragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_knowledge_diet_fragment, container, false);
         ArrayList<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.heartdiat, "", ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.plan_cancer, "Diet Plan for cancer", ScaleTypes.CENTER_CROP));
         imageList.add(new SlideModel(R.drawable.dietpictures, "Dietary Principles For Heart Patients.", ScaleTypes.CENTER_INSIDE));
-        //   imageList.add(new SlideModel(, "And people do that.",ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.diet_thouht, "",ScaleTypes.CENTER_CROP));
         ImageSlider imageSlider = view.findViewById(R.id.image_slider);
         imageSlider.setImageList(imageList);
 
@@ -67,27 +67,23 @@ public class Knowledge_diet_fragment extends Fragment {
             }
         });
 
-
-
-
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),3, LinearLayoutManager.HORIZONTAL,false);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1, LinearLayoutManager.VERTICAL,false);
         recycler_Diet.setLayoutManager(gridLayoutManager);
-        String description0 = getString(R.string.date);
-        String description1 = getString(R.string.information1);
-        String description2 = getString(R.string.information2);
-        String description3 = getString(R.string.information3);
-        String description4 = getString(R.string.information4);
-        String description5 = getString(R.string.information5);
+        String diet0 = getString(R.string.diet);
+        String diet1 = getString(R.string.diet1_a);
+        String diet2_notif = getString(R.string.information2);
+        String diet3 = getString(R.string.diet2_b);
+        String diet4 = getString(R.string.diet3_c);
+        String diet5 = getString(R.string.diet4_d);
 
         dataModels_diet=new ArrayList<>();
-        data_diet=new dataModel_exerciseGyan("7 Best Exercises for Diabetes","hjkjdek","fact",R.drawable.yoga);
+        data_diet=new dataModel_exerciseGyan("Foods to Eat to Gain Muscle",diet0,"fact",R.drawable.muscle_gain);
         dataModels_diet.add( data_diet);
-        data_diet=new dataModel_exerciseGyan(" Heart-healthy diet: 4 steps to prevent heart disease",description2,"fact",R.drawable.yoga);
-        dataModels_diet.add( data_diet); data_diet=new dataModel_exerciseGyan(" Best Exercises for Diabetes","hjkjdek","fact",R.drawable.yoga);
+        data_diet=new dataModel_exerciseGyan(" Heart-healthy diet: 4 steps to prevent heart disease",diet2_notif,"fact",R.drawable.heart_im);
         dataModels_diet.add( data_diet);
-        data_diet=new dataModel_exerciseGyan(" Best Exercises for Diabetes","hjkjdek","fact",R.drawable.yoga);
+        data_diet=new dataModel_exerciseGyan(" Diet for Cancer Patients During Chemotherapy",diet1,"fact",R.drawable.cancer);
         dataModels_diet.add( data_diet);
-        data_diet=new dataModel_exerciseGyan(" Best Exercises for Diabetes","hjkjdek","fact",R.drawable.yoga);
+        data_diet=new dataModel_exerciseGyan(" Diet plan for Diabetic patient",diet3,"fact",R.drawable.diabites);
         dataModels_diet.add( data_diet);
 
 

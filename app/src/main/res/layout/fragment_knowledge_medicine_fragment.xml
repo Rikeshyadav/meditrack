@@ -29,7 +29,7 @@
             android:background="#DAE5F3"
             android:paddingTop="2dp"
             app:iconifiedByDefault="false"
-            app:queryHint="search" />
+            app:queryHint="search.." />
     </Toolbar>
         <ScrollView
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="8dp"
                     android:id="@+id/First_recycleview"/>
 
@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_below="@+id/First_recycleview"
                     android:id="@+id/Second_recycleview"/>
@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_below="@+id/Second_recycleview"
                     android:id="@+id/third_recycleview"/>
@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="8dp"
                     android:layout_below="@+id/third_recycleview"
                     android:id="@+id/four_recycleview"/>

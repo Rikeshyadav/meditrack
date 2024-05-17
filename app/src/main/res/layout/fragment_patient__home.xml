@@ -7,18 +7,22 @@
     android:background="#DAE5F3"
     android:layout_marginTop="48dp"
     tools:context=".Patient_HomeFragment">
-
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#5F8CBD"
+        android:title="TrackHealth"
+        />
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/pappbar"
         android:layout_width="match_parent"
         android:background="#DAE5F3"
+        android:layout_marginTop="50dp"
         android:layout_height="230dp">
-
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout2"
             android:layout_width="match_parent"
             android:layout_height="230dp"
-
             app:titleCollapseMode="scale"
             app:title="TrackHealth"
             android:background="#DAE5F3"
@@ -191,6 +195,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             >
 
                             <androidx.appcompat.widget.SearchView
