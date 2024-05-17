@@ -8,12 +8,13 @@
         android:elevation="5dp"
         android:id="@+id/Rec_card"
         android:backgroundTint="#F5F7FA"
-        app:cardCornerRadius="10dp"
-        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="6dp"
+        android:layout_margin="5dp"
         android:padding="10dp"
         android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
+        android:padding="10dp"
         android:orientation="vertical"
         android:layout_height="match_parent">
         <ImageView
@@ -29,8 +30,9 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:maxLines="2"
+            android:layout_margin="4dp"
             android:id="@+id/recytitle"
-            android:layout_marginStart="10dp"
+            android:textStyle="bold"
             android:text="textdkssfd"
             android:textColor="@color/black"
             />
@@ -42,26 +44,11 @@
                 android:id="@+id/recyDESc"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_margin="4dp"
                 android:maxLines="1"
                 android:text="Description"
                 android:textColor="#474545"
-                android:textSize="18sp" />
-         <ImageView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="35dp"
-             android:src="@drawable/baseline_star_24"/>
-            <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-                android:maxLines="1"
-                android:id="@+id/show_language"
-            android:layout_marginStart="0dp"
-            android:text="Description"
-            android:textColor="@color/black"
-            />
+                android:textSize="17sp" />
         </LinearLayout>
     </LinearLayout>
     </androidx.cardview.widget.CardView>

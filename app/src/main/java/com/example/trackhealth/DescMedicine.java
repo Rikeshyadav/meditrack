@@ -24,7 +24,7 @@ import java.util.List;
 
 public class DescMedicine extends AppCompatActivity {
     TextView name,desc,price,address;
-    ImageView image;
+    ImageView image,back;
     RatingBar ratingBar;
     AppCompatButton order,location;
     @Override
@@ -36,6 +36,13 @@ public class DescMedicine extends AppCompatActivity {
         desc=findViewById(R.id.medextrasecmdesc);
         price=findViewById(R.id.medextrasecmprice);
         ratingBar=findViewById(R.id.medextrasecmrating);
+        back=findViewById(R.id.medescback);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         order=findViewById(R.id.medextrasecmorder);
         image.setImageResource(getIntent().getIntExtra("image",0));
         name.setText(getIntent().getStringExtra("mname"));
