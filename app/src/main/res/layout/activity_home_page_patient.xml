@@ -57,7 +57,7 @@
         android:layout_gravity="start"
         android:id="@+id/navigation_drawer2"
         app:itemTextColor="@drawable/icon_tint_color_bar"
-        app:itemIconTint="#121111"
+        app:itemIconTint="#EDEDED"
         android:background="#4A4949"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/patient_nav_header"

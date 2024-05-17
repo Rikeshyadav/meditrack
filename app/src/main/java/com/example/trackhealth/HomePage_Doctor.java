@@ -106,9 +106,9 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
                 openFragment(new SearchFragment(),"search");
 
                 }
-                  else if(itemId==R.id.bottom_call){
-                    toolbar.setTitle("Call");
-                    openFragment(new CallFragment(),"call");
+                  else if(itemId==R.id.bottom_profile){
+                    toolbar.setTitle("Profile");
+                    openFragment(new EditprofileFragment(),"profile");
 
                 }
               /*  else if(itemId==R.id.bottom_setting){
@@ -151,12 +151,6 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         if (itemId==R.id.nav_editprofile){
             openFragment(new EditprofileFragment(),"profile");
             toolbar.setTitle("Profile");
-        }
-       else if (itemId==R.id.nav_notification) {
-            toolbar.setTitle("Notification");
-            openFragment(new NotificationFragment(),"notification");}
-        else if(itemId==R.id.nav_privacy){
-            openFragment(new privacyFragment(),"privacy");
         }
         else if (itemId==R.id.nav_setting) {
             openFragment(new SettingFragment(),"setting");

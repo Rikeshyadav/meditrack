@@ -13,8 +13,8 @@
         android:icon="@drawable/baseline_search_24"
 
           />
-    <item android:id="@+id/bottom_call"
-        android:title="call"
-        android:icon="@drawable/baseline_call_24"/>
+    <item android:id="@+id/bottom_profile"
+        android:title="profile"
+        android:icon="@drawable/baseline_person_24"/>
     </group>
 </menu>

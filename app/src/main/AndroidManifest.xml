@@ -38,6 +38,12 @@
         android:theme="@style/Theme.Trackhealth"
         tools:targetApi="31">
         <activity
+            android:name=".uploadReport"
+            android:exported="false" />
+        <activity
+            android:name=".ViewPdf"
+            android:exported="false" />
+        <activity
             android:name=".SearchProfile"
             android:exported="false" />
         <activity

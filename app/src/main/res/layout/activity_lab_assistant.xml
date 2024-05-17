@@ -16,6 +16,167 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/toolbar_assistant"
+        android:weightSum="10"
+        android:id="@+id/ll_assistant"
+        >
+        <EditText
+            android:id="@+id/addPatient_searchBar_assistant"
+            android:layout_width="0dp"
+            android:background="@drawable/white_box"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:inputType="number"
+            android:maxLength="10"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Phone No. "
+            android:padding="10dp"
+            android:layout_weight="8"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:padding="9dp"
+            android:background="@drawable/white_box"
+            android:id="@+id/search_but_add_assistant"
+            android:layout_weight="2"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="1dp"
+            android:src="@drawable/baseline_search_24"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/spb_assistant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+    <RelativeLayout
+        android:id="@+id/slayout_parent_assistant"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_assistant"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp">
 
 
+
+        <RelativeLayout
+            android:id="@+id/slayout_assistant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/spatient_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patient's Name : "
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/spatient_name2_assitant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="0dp"
+                android:layout_toRightOf="@id/spatient_name"
+                android:text=""
+                android:textColor="#434242"
+                android:textSize="17sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/spatient_dob_assistant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spatient_name"
+                android:text="Date Of Birth : "
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/spatient_dob2_assistant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spatient_name2_assitant"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="0dp"
+                android:layout_toRightOf="@id/spatient_dob_assistant"
+                android:text=""
+                android:textColor="#434242"
+                android:textSize="17sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/spatient_gender_assistant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spatient_dob_assistant"
+                android:text="Gender : "
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/spatient_gender2_assistant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/spatient_dob2_assistant"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="0dp"
+                android:layout_toRightOf="@id/spatient_gender_assistant"
+                android:text=""
+                android:textColor="#434242"
+                android:textSize="17sp"
+                android:textStyle="bold"
+
+                />
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Select Patient's Doctor"
+    android:textSize="20sp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    android:id="@+id/pdfdesign_dtitle"
+    android:layout_below="@id/spatient_gender2_assistant"
+    />
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/pdfdesign_dtitle"
+    android:id="@+id/labassistantrec"
+    />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

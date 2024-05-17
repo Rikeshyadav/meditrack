@@ -12,28 +12,20 @@
             android:id="@+id/nav_editprofile"
            android:icon="@drawable/baseline_edit_24"
            android:title="Profile"/>
-        <item
-            android:id="@+id/nav_notification"
-            android:title="Notification"
-            android:icon="@drawable/baseline_notifications_24"/>
-        <item android:id="@+id/nav_privacy"
-            android:title="Team"
-            android:icon="@drawable/baseline_privacy_tip_24"
-            />
-
 
         <item
             android:id="@+id/nav_setting"
             android:title="Setting"
             android:icon="@drawable/baseline_settings_24"/>
+
+        <item android:id="@+id/nav_aboutus"
+            android:icon="@drawable/about"
+            android:title="About"
+           />
         <item android:id="@+id/nav_logout"
             android:title="Logout"
             android:icon="@drawable/baseline_logout_24"
             />
-        <item android:id="@+id/nav_aboutus"
-            android:icon="@drawable/about"
-            android:title="About Us"
-           />
 
 
     </group>

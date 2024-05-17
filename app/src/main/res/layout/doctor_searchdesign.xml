@@ -47,6 +47,8 @@
         android:id="@+id/maincontent_doctor_search_design"
         android:layout_toRightOf="@id/dp_doctor_searchdesign"
         android:layout_marginStart="1dp"
+        android:layout_toLeftOf="@id/contactlldes"
+        android:layout_marginEnd="5dp"
         android:layout_height="wrap_content"
         >
         <TextView
@@ -150,6 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:id="@+id/contactlldes"
         android:orientation="horizontal"
         >
 

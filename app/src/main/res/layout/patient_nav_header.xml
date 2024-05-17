@@ -6,7 +6,7 @@
     android:layout_marginTop="2dp"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:background="#5588BF"
+    android:background="#5F8CBD"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <com.google.android.material.imageview.ShapeableImageView
     android:layout_width="115sp"

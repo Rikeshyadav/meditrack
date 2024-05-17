@@ -174,34 +174,14 @@
         android:text="“While the journey seems long and hard at the beginning with perseverance and  dedication the rewards at the end last a lifetime.”"
         android:textColor="@color/black"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Available Period"
-        android:layout_marginTop="20dp"
-        android:id="@+id/dip_timetitle"
-    android:layout_marginStart="20dp"
-        android:layout_below="@id/dipabout"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Monday to Friday from 9:30 to 2 :00 pm"
-        android:layout_marginStart="20dp"
-        android:layout_below="@id/dip_timetitle"
-        android:id="@+id/dip_time"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/feed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dip_time"
+            android:layout_below="@id/dipabout"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:text="Write a review"
@@ -231,18 +211,26 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="2dp"
-            android:text="Sort by"
+            android:text="Filter"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18sp" />
-
+<HorizontalScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/diphs"
+    android:layout_margin="5dp"
+    android:layout_below="@id/dipsort"
+    >
         <RadioGroup
             android:layout_width="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:id="@+id/dipradio"
             android:orientation="horizontal"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/dipsort"
+
             >
 
             <RadioButton
@@ -350,12 +338,13 @@
                 android:textSize="@dimen/register_font_size"
                 />
         </RadioGroup>
+</HorizontalScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:layout_below="@id/dipradio"
+            android:layout_below="@id/diphs"
             android:id="@+id/diprecreview"
             />
 
@@ -366,7 +355,7 @@
             android:layout_marginTop="20dp"
             android:visibility="gone"
             android:id="@+id/reviewprogress"
-            android:layout_below="@id/dipradio"
+            android:layout_below="@id/diphs"
             />
     </RelativeLayout>
 </FrameLayout>

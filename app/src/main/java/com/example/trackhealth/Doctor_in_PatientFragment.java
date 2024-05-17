@@ -73,6 +73,7 @@ RadioGroup radio;
 ImageView call;
 
 ProgressBar progressBar;
+ShapeableImageView pimg;
 float rate=0.0f;
 ReviewAdapter adapter;
 LinearLayoutManager l;
@@ -86,6 +87,15 @@ ShapeableImageView dp;
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_doctor_in__patient, container, false);
         dname=view.findViewById(R.id.Dn);
+        pimg=view.findViewById(R.id.doctorpho);
+        pimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getContext(),SearchProfile.class);
+                i.putExtra("nonuserprofile",sp44.getString("curphone2",""));
+            startActivity(i);
+            }
+        });
         call=view.findViewById(R.id.doctorinpat_call);
         progressBar=view.findViewById(R.id.reviewprogress);
         dspec=view.findViewById(R.id.skill);
