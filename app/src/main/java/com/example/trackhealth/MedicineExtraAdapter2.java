@@ -38,26 +38,28 @@ public class MedicineExtraAdapter2 extends RecyclerView.Adapter<MedicineExtraAda
 
     @Override
     public void onBindViewHolder(@NonNull medicienholder holder, int position) {
-       holder.imageView.setImageResource(R.drawable.tabletimg);
-       holder.nametxt.setText(MediList.get(position).get(0).toString());
-       if(MediList.get(position).get(1).toString().length()>35){
-           holder.detailText.setText(MediList.get(position).get(1).toString().substring(0,35)+"...");
-       }
-       else{
-           holder.detailText.setText(MediList.get(position).get(1).toString());
-       }
+       holder.imageView.setImageResource((Integer) MediList.get(position).get(0));
+      // holder.imageView.setImageResource(R.drawable.tabletimg);
+        holder.nametxt.setText(MediList.get(position).get(1).toString());
+        if(MediList.get(position).get(2).toString().length()>35){
+            holder.detailText.setText(MediList.get(position).get(2).toString().substring(0,35)+"...");
+        }
+        else{
+            holder.detailText.setText(MediList.get(position).get(2).toString());
+        }
 
-       holder.offerText.setText(MediList.get(position).get(2).toString());
-       holder.ratingBar.setRating(Float.parseFloat(MediList.get(position).get(3).toString()));
-       int p=position;
+        holder.offerText.setText(MediList.get(position).get(3).toString());
+        holder.ratingBar.setRating(Float.parseFloat(MediList.get(position).get(4).toString()));
+        int p=position;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(v.getContext(),DescMedicine.class);
-                i.putExtra("mname",MediList.get(p).get(0).toString());
-                i.putExtra("mdesc",MediList.get(p).get(1).toString());
-                i.putExtra("mrate",MediList.get(p).get(3).toString());
-                i.putExtra("mprice",MediList.get(p).get(2).toString());
+                i.putExtra("image", (Integer) MediList.get(p).get(0));
+                i.putExtra("mname",MediList.get(p).get(1).toString());
+                i.putExtra("mdesc",MediList.get(p).get(2).toString());
+                i.putExtra("mrate",MediList.get(p).get(4).toString());
+                i.putExtra("mprice",MediList.get(p).get(3).toString());
                 v.getContext().startActivity(i);
             }
         });
@@ -95,7 +97,7 @@ public class MedicineExtraAdapter2 extends RecyclerView.Adapter<MedicineExtraAda
                 } else {
                     // Filter the original dataset based on the search query
                     for (List item : originalList) {
-                        if (item.get(0).toString().toLowerCase().contains(filterPattern)) {
+                        if (item.get(1).toString().toLowerCase().contains(filterPattern)) {
                             filteredList.add(item);
                         }
                     }
@@ -107,8 +109,9 @@ public class MedicineExtraAdapter2 extends RecyclerView.Adapter<MedicineExtraAda
             }
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                MediList = (ArrayList<List>) results.values;
-                notifyDataSetChanged(); // Notify RecyclerView to update with filtered data
+                MediList.clear();
+                MediList.addAll((List<List>) results.values);
+                notifyDataSetChanged();
             }
         };
     }

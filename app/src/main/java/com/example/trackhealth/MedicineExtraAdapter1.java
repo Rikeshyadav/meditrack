@@ -39,18 +39,20 @@ public class MedicineExtraAdapter1 extends RecyclerView.Adapter<MedicineExtraAda
 
     @Override
     public void onBindViewHolder(@NonNull newViewHolder holder, int position) {
-        holder.image1.setImageResource(R.drawable.tabletimg);
-        holder.name.setText(listmodel.get(position).get(0).toString());
-        holder.price.setText(listmodel.get(position).get(2).toString());
+        holder.image1.setImageResource((Integer) listmodel.get(position).get(0));
+       // holder.image1.setImageResource(R.drawable.tabletimg);
+        holder.name.setText(listmodel.get(position).get(1).toString());
+        holder.price.setText(listmodel.get(position).get(3).toString());
         int p=position;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(v.getContext(), DescMedicine.class);
-                i.putExtra("mname",listmodel.get(p).get(0).toString());
-                i.putExtra("mdesc",listmodel.get(p).get(1).toString());
-                i.putExtra("mrate",listmodel.get(p).get(3).toString());
-                i.putExtra("mprice",listmodel.get(p).get(2).toString());
+                i.putExtra("image", (Integer) listmodel.get(p).get(0));
+                i.putExtra("mname",listmodel.get(p).get(1).toString());
+                i.putExtra("mdesc",listmodel.get(p).get(2).toString());
+                i.putExtra("mrate",listmodel.get(p).get(4).toString());
+                i.putExtra("mprice",listmodel.get(p).get(3).toString());
                 v.getContext().startActivity(i);
             }
         });
@@ -85,7 +87,7 @@ public class MedicineExtraAdapter1 extends RecyclerView.Adapter<MedicineExtraAda
                 } else {
                     // Filter the original dataset based on the search query
                     for (List item : originalList) {
-                        if (item.get(0).toString().toLowerCase().contains(filterPattern)) {
+                        if (item.get(1).toString().toLowerCase().contains(filterPattern)) {
                             filteredList.add(item);
                         }
                     }
@@ -98,7 +100,8 @@ public class MedicineExtraAdapter1 extends RecyclerView.Adapter<MedicineExtraAda
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                listmodel = (ArrayList<List>) results.values;
+                listmodel.clear();
+                listmodel.addAll((List<List>) results.values);
                 notifyDataSetChanged(); // Notify RecyclerView to update with filtered data
             }
         };

@@ -25,9 +25,9 @@ public class Exercise extends Fragment {
     List<dataModel_exerciseGyan> dataModels1;
     myadapterfor_list adapter;
     RecyclerView recyclerView1;
-    List<postitem_exercisegyan> postitemList;
+   // List<postitem_exercisegyan> postitemList;
 
-    Postadapter_exercisegyan postadapter;
+    //Postadapter_exercisegyan postadapter;
     dataModel_exerciseGyan datafun;
     SearchView searchView;
     @Override
@@ -82,9 +82,9 @@ public class Exercise extends Fragment {
         recyclerView1.setLayoutManager(gridLayoutManager);
         String description0 = getString(R.string.date);
         String description1 = getString(R.string.information1);
-        String description2 =  getString(R.string.information4);
-        String description3 = getString(R.string.information3);
-        String description4 = getString(R.string.information4);
+        String description2 = getString(R.string.information3);
+        String description3 = getString(R.string.information4);
+        String description4 = getString(R.string.information5);
         String description5 = getString(R.string.information5);
 
         dataModels1=new ArrayList<>();
@@ -92,11 +92,11 @@ public class Exercise extends Fragment {
         dataModels1.add(datafun);
         datafun=new dataModel_exerciseGyan("Yoga and it's Types",description1,"fact",R.drawable.ladies);
         dataModels1.add(datafun);
-        datafun=new dataModel_exerciseGyan("Benefits of medication:fact and its steps...",description2,"31-03",R.drawable.meditation);
+        datafun=new dataModel_exerciseGyan("The Top 10 Benefits of Regular Physical Activity",description2,"date",R.drawable.regual);
         dataModels1.add(datafun);
-        datafun=new dataModel_exerciseGyan("The Top 10 Benefits of Regular Physical Activity",description3,"date",R.drawable.regual);
+        datafun=new dataModel_exerciseGyan("Fitness and Exercise Guidelines for Heart Disease Patients: Improving Cardiovascular Health through Regular Physical Activity",description3,"date",R.drawable.heart_disease);
         dataModels1.add(datafun);
-        datafun=new dataModel_exerciseGyan("The Top 10 Benefits of Regular Physical Activity",description4,"date",R.drawable.regual);
+        datafun=new dataModel_exerciseGyan("How to Overcome Depression and Anxiety..",description5,"**",R.drawable.depression);
         dataModels1.add(datafun);
 
         adapter=new myadapterfor_list(getActivity(),dataModels1);
