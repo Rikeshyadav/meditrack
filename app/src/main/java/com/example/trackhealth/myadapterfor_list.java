@@ -42,7 +42,7 @@ public class myadapterfor_list extends RecyclerView.Adapter<MyHolder> {
         holder.image.setImageResource(dataModels.get(position).getImage());
         holder.title.setText(dataModels.get(position).getTitle());
         holder.desc.setText(dataModels.get(position).getDatadesc());
-        holder.language.setText(dataModels.get(position).getDataLanguage());
+       // holder.language.setText(dataModels.get(position).getDataLanguage());
         holder.card_fun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,14 +63,14 @@ public class myadapterfor_list extends RecyclerView.Adapter<MyHolder> {
 }
 class MyHolder extends RecyclerView.ViewHolder{
     ImageView image;
-    TextView title,desc,language;
+    TextView title,desc;
     CardView card_fun;
     public MyHolder(@NonNull View itemView) {
         super(itemView);
         image=itemView.findViewById(R.id.image_recy);
         title=itemView.findViewById(R.id.recytitle);
         desc=itemView.findViewById(R.id.recyDESc);
-        language=itemView.findViewById(R.id.show_language);
+     //   language=itemView.findViewById(R.id.show_language);
         card_fun=itemView.findViewById(R.id.Rec_card);
 
     }

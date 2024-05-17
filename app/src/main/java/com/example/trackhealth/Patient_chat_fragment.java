@@ -101,13 +101,16 @@ public class Patient_chat_fragment extends Fragment {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference myRef = database.getReference(child);
-                Map<String, Object> messageData = new HashMap<>();
-                messageData.put("user", sp.getString("phone", ""));
-                messageData.put("message", txt.getText().toString());
-                myRef.push().setValue(messageData);
-                scrollView.fullScroll(ScrollView.FOCUS_DOWN);scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-                txt.setText("");
+                if(!txt.getText().toString().trim().equals("")) {
+                    DatabaseReference myRef = database.getReference(child);
+                    Map<String, Object> messageData = new HashMap<>();
+                    messageData.put("user", sp.getString("phone", ""));
+                    messageData.put("message", txt.getText().toString());
+                    myRef.push().setValue(messageData);
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                    scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                    txt.setText("");
+                }
             }
         });
 

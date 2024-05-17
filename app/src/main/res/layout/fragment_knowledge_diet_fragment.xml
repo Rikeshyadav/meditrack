@@ -41,17 +41,13 @@
         app:iss_delay="1000"
         app:iss_period="1000"
         app:iss_text_align="" />
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_marginTop="1dp"
-        android:layout_below="@id/image_slider"
-        android:layout_height="wrap_content">
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_margin="4dp"
+        android:layout_below="@id/image_slider"
         android:padding="5dp"
         android:layout_height="wrap_content"
         android:id="@+id/recycview_diet"/>
 
-</ScrollView>
 </RelativeLayout>
