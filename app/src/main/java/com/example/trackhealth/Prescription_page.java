@@ -64,6 +64,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -1007,30 +1008,8 @@ else{
         AppCompatAutoCompleteTextView test = popup.findViewById(R.id.testdesgin_testname);
         AppCompatButton addtest2 = popup.findViewById(R.id.testdesgin_addtest);
         AppCompatButton deletetest2 = popup.findViewById(R.id.testdesgin_deletetest);
-        Spinner status = popup.findViewById(R.id.testdesgin_pendingspin);
         String[] statusstring = {"Select", "Pending", "Done"};
         RegisterSpinnerApdater statusadapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner1, statusstring);
-        status.setAdapter(statusadapter);
-
-        status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String selection = (String) adapterView.getItemAtPosition(i);
-                if (selection.equals("Select")) {
-                    tstatus = "Select";
-                } else if (selection.equals("Pending")) {
-                    tstatus = "Pending";
-                } else {
-                    tstatus = "Done";
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
 
         addtest2.setOnClickListener(new View.OnClickListener() {
@@ -1038,8 +1017,6 @@ else{
             public void onClick(View view) {
                 if (test.getText().toString().equals("")) {
                     Toast.makeText(Prescription_page.this, "empty test name", Toast.LENGTH_SHORT).show();
-                } else if (tstatus.equals("Select")) {
-                    Toast.makeText(Prescription_page.this, "select test status", Toast.LENGTH_SHORT).show();
                 } else {
 
                     List<String> innertest = new ArrayList<>();
@@ -1225,6 +1202,13 @@ else{
         };
         RegisterSpinnerApdater nadapter = new RegisterSpinnerApdater(Prescription_page.this, R.layout.spinner1, test_);
         test.setAdapter(nadapter);
+        LocalDate currentDate = null;
+        String date_="";
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            date_ = currentDate.format(formatter);
+        }
 
 
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -1262,6 +1246,14 @@ else{
         for (int i = 0; i < listList.size(); i++) {
             JSONObject jsonObject = new JSONObject();
             try {
+                LocalDate currentDate = null;
+                String date="";
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    currentDate = LocalDate.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    date = currentDate.format(formatter);
+                }
+
                 if (key.equals("medicine")) {
                     System.out.println("medinside" + listList.get(i));
                     jsonObject.put("name", listList.get(i).get(0).toString());
@@ -1281,12 +1273,16 @@ else{
                     jsonObject.put("quantity", listList.get(i).get(7));
                     jsonObject.put("medid",listList.get(i).get(8));
                     jsonObject.put("taken",listList.get(i).get(9));
-                    jsonObject.put("date","55");
+
+                    jsonObject.put("date",date);
                     jsonArray.put(jsonObject);
                 } else if (key.equals("test")) {
                     JSONObject tobj = new JSONObject();
                     tobj.put("name", listList.get(i).get(0));
-                    tobj.put("status", listList.get(i).get(1));
+
+
+
+                    tobj.put("status", date);
                     jsonArray.put(tobj);
                 }
 

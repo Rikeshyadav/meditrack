@@ -6,6 +6,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
@@ -13,6 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 public class user_report_homepage extends AppCompatActivity {
   TabLayout tabLayout;
   ViewPager2 viewPager2;
+  ImageView back;
   TextView title;
   ViewPage_PatientAdapter adapter1;
     @Override
@@ -21,8 +24,15 @@ public class user_report_homepage extends AppCompatActivity {
         setContentView(R.layout.activity_user_report_homepage);
          tabLayout=findViewById(R.id.Patinet_tablayout);
          title=findViewById(R.id.patient_tabtoptxt);
+         back=findViewById(R.id.innerpres1_back);
          viewPager2=findViewById(R.id.Patient_pager);
         tabLayout.addTab(tabLayout.newTab().setText("DOCTOR"));
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         tabLayout.addTab(tabLayout.newTab().setText("Problem"));
         tabLayout.addTab(tabLayout.newTab().setText("CHAT"));
         tabLayout.addTab(tabLayout.newTab().setText("Report"));

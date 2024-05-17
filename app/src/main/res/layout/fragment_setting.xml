@@ -58,10 +58,11 @@
               android:layout_width="0dp"
               android:textSize="18sp"
               android:layout_weight="9"
+              android:id="@+id/setting_changeph"
               android:textColor="@color/black"
               android:layout_height="wrap_content"
               android:padding="8dp"
-              android:text="Contact us"/>
+              android:text="Change Phone Number"/>
 
       </LinearLayout>
   </RelativeLayout>

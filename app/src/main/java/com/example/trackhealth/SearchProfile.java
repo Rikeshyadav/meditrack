@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +44,8 @@ public class SearchProfile extends AppCompatActivity {
     boolean adhosactive=false,adyoeactive=false,adspecactive=false,adqualiactive=false;
     String pp="";
     LinearLayoutManager l;
-    TextView quadesc,yeardesc;
+    TextView quadesc,yeardesc,star,vote;
+    RatingBar rate;
     ReviewAdapter adapter;
     RadioGroup radio;
     RadioButton all,five,four,three,two,one;
@@ -64,6 +66,9 @@ public class SearchProfile extends AppCompatActivity {
         editbut =findViewById(R.id.sedit_profile_doctor_icon);
         sp =getSharedPreferences("user", Context.MODE_PRIVATE);
         editbut.setVisibility(View.GONE);
+        rate=findViewById(R.id.ratingBar_sdip);
+        vote=findViewById(R.id.sdipvote);
+        star=findViewById(R.id.sdipratestar);
         addqua=findViewById(R.id.sdoctor_profile_qualicardadd);
         retry=findViewById(R.id.searchprofile_retry);
 review=findViewById(R.id.sdiprecreview);
@@ -414,6 +419,7 @@ retry.setOnClickListener(new View.OnClickListener() {
     public List filterArray(JSONArray jsonArray) throws JSONException {
         List<List> outer=new ArrayList<>();
 
+        float startot=0.0f;
         for(int i=0;i<jsonArray.length();i++){
 
             JSONObject j=jsonArray.getJSONObject(i);
@@ -429,16 +435,21 @@ retry.setOnClickListener(new View.OnClickListener() {
             inner.add(j.getString("star"));
             inner.add(j.getString("date"));
             inner.add(j.getString("time"));
-
+            startot+=Float.parseFloat(j.getString("star"));
 
             outer.add(inner);
 
         }
-
+        startot=startot/(jsonArray.length());
+        rate.setRating(startot);
+        star.setText(truncateToOneDecimalPlace(startot)+"");
+        vote.setText(" ( "+jsonArray.length()+" votes )");
         return outer;
     }
 
-
+    public static float truncateToOneDecimalPlace(float value) {
+        return (float) ((int) (value * 10)) / 10;
+    }
     public void getvalues2() {
         setPhoto();
         yeardesc.setText(sp.getString("yoe","")+" Yrs Practice");

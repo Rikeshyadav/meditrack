@@ -37,11 +37,12 @@ public class Testrecadapter extends RecyclerView.Adapter<Testrecadapter.MyViewHo
         if(key.toLowerCase().equals("general")){
             holder.del.setVisibility(View.GONE);
         }
+
+
+
         holder.tname.setText(arr.get(position).get(0).toString());
         holder.tstatus.setText(arr.get(position).get(1).toString());
-        if(arr.get(position).get(1).toString().toLowerCase().equals("done")){
-            holder.tstatus.setTextColor(context.getColor(R.color.green_button));
-        }
+
         holder.del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

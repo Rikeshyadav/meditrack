@@ -38,6 +38,9 @@
         android:theme="@style/Theme.Trackhealth"
         tools:targetApi="31">
         <activity
+            android:name=".ChangePhone"
+            android:exported="false" />
+        <activity
             android:name=".uploadReport"
             android:exported="false" />
         <activity

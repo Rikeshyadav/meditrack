@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#98A9BD"
+    android:background="#E8EDF3"
+    android:layout_marginTop="48dp"
     tools:context=".aboutUsFragment">
 
  <TextView
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     android:text="About Us"
+     android:text="TrackHealth"
+     android:id="@+id/about_title"
      android:textSize="30sp"
+     android:fontFamily="@font/gugi"
      android:textAlignment="center"
      android:textColor="@color/black"
-     android:layout_marginTop="45dp"
+     android:layout_marginTop="25dp"
      />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
-        android:text="Our platform facilitates online consultations between patients and doctors, enabling advice and prescriptions remotely.
-         \n Users can also search for medications and locate nearby pharmacies. Additionally, we offer fitness, exercise, and diet related information within the app.Developed using Android Studio and Java, with MongoDB backend."
+        android:text="TrackHealth facilitates online consultations between patients and doctors, enabling advice and prescriptions remotely. It contains medication tracking feature which will track the daily status of medicine intaking of patient. Doctors can upload prescriptions anytime online . Voice and video calling features have been implemented for the ease of consultations . Additionally chat feature is also added that allows convenient communication. Lab reports are uploaded by the lab assistant for easy access by both patients and doctors. The app further provides health resources covering fitness, exercise, and diet for comprehensive health management."
         android:gravity="center"
+        android:layout_below="@id/about_title"
         android:textStyle="normal"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:textSize="25sp"
-        android:textColor="@color/purple"/>
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textSize="19sp"
+        android:textColor="#232225"/>
 
-</FrameLayout>
+</RelativeLayout>

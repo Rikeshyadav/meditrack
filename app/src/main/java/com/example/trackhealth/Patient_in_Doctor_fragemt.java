@@ -85,8 +85,9 @@ public class Patient_in_Doctor_fragemt extends Fragment {
 
 
         });
+       
 
-     name.setText(sp.getString("curname",""));
+        name.setText(sp.getString("curname",""));
         gender.setText(sp.getString("curgender",""));
           emaild.setText(sp.getString("curemail",""));
        age.setText(getAge(sp.getString("curdob","")));

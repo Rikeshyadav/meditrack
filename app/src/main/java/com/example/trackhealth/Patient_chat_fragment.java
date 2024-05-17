@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class Patient_chat_fragment extends Fragment {
 
     EditText txt;
     String child = "";
+    ProgressBar progressBar;
     private static Bundle mBundleRecyclerViewState;
     private static final int PAGE_SIZE = 20; // Number of items to load per page
     ScrollView scrollView;
@@ -66,6 +68,8 @@ public class Patient_chat_fragment extends Fragment {
         txt = view.findViewById(R.id.chateditpatient);
         send = view.findViewById(R.id.chatsendpat);
         scrollView=view.findViewById(R.id.chatscroll);
+        progressBar=view.findViewById(R.id.chat_progress);
+        progressBar.setVisibility(View.VISIBLE);
         scrollView.fullScroll(View.FOCUS_DOWN);
         rec = view.findViewById(R.id.chatrecpat);
         rec.setHasFixedSize(true);
@@ -138,6 +142,8 @@ public class Patient_chat_fragment extends Fragment {
                     scrollView.fullScroll(ScrollView.FOCUS_DOWN);
 
                 }
+
+                progressBar.setVisibility(View.GONE);
                 if (messageList.size() > dsize) {
                     //chatAdapter.notifyDataSetChanged();
                     chatAdapter=new ChatAdapter(messageList,getActivity());
@@ -154,6 +160,7 @@ public class Patient_chat_fragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle errors
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
