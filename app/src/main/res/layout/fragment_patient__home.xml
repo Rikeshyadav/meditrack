@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,52 +8,45 @@
     android:layout_marginTop="48dp"
     tools:context=".Patient_HomeFragment">
 
-    <TextView
-        android:id="@+id/pattracktitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/transparentColor"
-        android:fontFamily="@font/gugi"
-        android:padding="10dp"
-        android:text="TrackHealth"
-        android:textColor="@color/black"
-        android:textSize="29sp" />
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-
-        android:layout_below="@id/pattracktitle"
-        android:layout_height="wrap_content"
-        >
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/pappbar"
         android:layout_width="match_parent"
         android:background="#DAE5F3"
-        android:layout_height="210dp">
+        android:layout_height="265dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout2"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="match_parent"
+
             app:titleCollapseMode="scale"
             app:title="TrackHealth"
             android:background="#DAE5F3"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TrackHealth"
+        android:gravity="center"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="32sp"
 
+        android:id="@+id/phometitle"
+        />
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:id="@+id/horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_below="@id/phometitle"
+                android:layout_marginTop="10dp"
                 android:background="#DAE5F3"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -191,8 +184,7 @@
                 </LinearLayout>
 
             </HorizontalScrollView>
-
-            </RelativeLayout>
+</RelativeLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <!--<TextView
@@ -226,6 +218,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="10dp"
+
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/searchfun"
@@ -297,4 +290,3 @@
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</RelativeLayout>
