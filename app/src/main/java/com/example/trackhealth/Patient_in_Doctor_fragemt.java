@@ -118,8 +118,8 @@ public class Patient_in_Doctor_fragemt extends Fragment {
     }
     void startService(String userId){
         Application application =getActivity().getApplication(); // Android's application context
-        long appID = 434413145;   // yourAppID
-        String appSign ="027ea8dc3c6a5baf570771f1bf803204242953e0929716ac097d30e68e426025";  // yourAppSign
+        long appID = 2035003173;   // yourAppID
+        String appSign ="47a24a7211aca24715f2e101ddbed51b5d4a6f01c1dfec1800ab4af2ad7eac25";  // yourAppSign
         //  String userID =; // yourUserID, userID should only contain numbers, English characters, and '_'.
         String userName =userId;   // yourUserName
 
