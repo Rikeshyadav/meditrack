@@ -27,8 +27,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/dp_doctor_searchdesign"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
@@ -65,9 +65,10 @@
             android:layout_width="wrap_content"
             android:layout_marginTop="1dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
             android:orientation="horizontal">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Guwahati,Assam"
             android:id="@+id/address_doctor_searchdesign"
@@ -76,6 +77,7 @@
             />
             <ImageView
                 android:layout_width="wrap_content"
+                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_location_on_24"
                 />
@@ -100,6 +102,34 @@
             android:textSize="15.6sp"
 
             />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="3dp"
+                android:background="@color/white"
+                android:foregroundTint="@color/red"
+                android:src="@drawable/hospital2"
+                />
+            <TextView
+                android:id="@+id/dhospital_searchdoctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/black"
+                android:padding="1dp"
+                android:text="Trims"
+                android:layout_marginTop="4dp"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
     </LinearLayout>
     <ImageView
         android:layout_width="wrap_content"

@@ -33,6 +33,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +60,7 @@ public class Patient_chat_fragment extends Fragment {
     ChatAdapter chatAdapter;
     SharedPreferences sp;
     RecyclerView rec;
+    String date="",time="";
     Parcelable recyclerViewState;
 
     @Override
@@ -101,11 +104,22 @@ public class Patient_chat_fragment extends Fragment {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                LocalDateTime currentDateTime = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    currentDateTime = LocalDateTime.now();
+                    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("hh:mm");
+                    date=currentDateTime.format(formatter1);
+                    time=currentDateTime.format(formatter2);
+                }
                 if(!txt.getText().toString().trim().equals("")) {
                     DatabaseReference myRef = database.getReference(child);
                     Map<String, Object> messageData = new HashMap<>();
                     messageData.put("user", sp.getString("phone", ""));
                     messageData.put("message", txt.getText().toString());
+                    messageData.put("date",date);
+                    messageData.put("time",time);
+
                     myRef.push().setValue(messageData);
                     scrollView.fullScroll(ScrollView.FOCUS_DOWN);
                     scrollView.fullScroll(ScrollView.FOCUS_DOWN);
@@ -119,15 +133,30 @@ public class Patient_chat_fragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 messageList.clear(); // Clear the existing list
-
+                String dkey="";
                 for (DataSnapshot messageSnapshot : dataSnapshot.getChildren()) {
+                    List<String> messageData = new ArrayList<>();
+                    try{
                     String message = messageSnapshot.child("message").getValue(String.class);
                     String user = messageSnapshot.child("user").getValue(String.class);
-
-                    List<String> messageData = new ArrayList<>();
+                        String date_ = messageSnapshot.child("date").getValue(String.class);
+                        String time_ = messageSnapshot.child("time").getValue(String.class);
                     messageData.add(message);
                     messageData.add(user);
+                    messageData.add(date_);
+                    messageData.add(time_);
+                    if(dkey.equals(date_)){
+                        messageData.add("same");
+                    }
+                    else{
+                        messageData.add("different");
+                    }
+                    dkey=date_;
                     messageList.add(messageData);
+
+                    }catch (Exception e){
+
+                    }
 
                 }
                 /*if (mBundleRecyclerViewState != null) {

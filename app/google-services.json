@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "998843107824",
-    "firebase_url": "https://trackhealth-8d326-default-rtdb.firebaseio.com",
-    "project_id": "trackhealth-8d326",
-    "storage_bucket": "trackhealth-8d326.appspot.com"
+    "project_number": "318600772019",
+    "project_id": "trackhealth-f10b5",
+    "storage_bucket": "trackhealth-f10b5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:998843107824:android:5d1615db9e2c497d36b535",
+        "mobilesdk_app_id": "1:318600772019:android:79561956fe62c78a2c73c6",
         "android_client_info": {
           "package_name": "com.example.trackhealth"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCi3JlFJUjn95xf3zRkxJ_qXQaxDTHOVIo"
+          "current_key": "AIzaSyDhKmCtR2zpGDbo5kY1uvDLoysw5Mb2Gyo"
         }
       ],
       "services": {

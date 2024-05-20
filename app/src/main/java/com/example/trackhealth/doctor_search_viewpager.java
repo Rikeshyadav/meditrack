@@ -739,6 +739,9 @@ public class doctor_search_viewpager extends Fragment {
             catch (Exception e){
                 inner.add("");
             }
+
+            JSONObject kk = j.getJSONObject("clinic_hospital");
+            inner.add(kk.getString("name"));
             outer.add(inner);
         }
 

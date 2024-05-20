@@ -17,13 +17,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-<ImageView
-    android:layout_width="20dp"
-    android:layout_height="20dp"
-    android:layout_margin="10dp"
-    android:src="@drawable/delete"
-    android:layout_alignParentEnd="true"
-    android:id="@+id/docrecdel"/>
+
+            <ImageView
+                android:id="@+id/docrecdel"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/delete" />
 
             <com.google.android.material.imageview.ShapeableImageView
 android:layout_below="@id/docrecdel"
@@ -43,6 +47,7 @@ android:layout_below="@id/docrecdel"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginBottom="10dp"
+                android:id="@+id/doctorrecll"
                 android:layout_below="@id/docrecdel"
                 android:layout_toRightOf="@id/dp_patient_page_doctor"
                 android:layout_marginStart="10dp"
@@ -58,7 +63,7 @@ android:layout_below="@id/docrecdel"
                     android:padding="2dp"
                     android:fontFamily="@font/gugi"
                     android:text="Dr.Rikesh Yadav"
-                    android:textSize="22dp" />
+                    android:textSize="20dp" />
 
 
                 <TextView
@@ -104,10 +109,25 @@ android:layout_below="@id/docrecdel"
                         android:padding="1dp"
                         android:text="Trims"
                         android:layout_marginTop="4dp"
-                        android:textSize="18dp" />
+                        android:textSize="17.6dp" />
 
                 </LinearLayout>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/doctorrecll"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/deletedremark"
+                android:visibility="gone"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Account deleted"
+                android:textColor="@color/red"
+                android:textSize="17sp" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

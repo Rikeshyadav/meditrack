@@ -11,6 +11,7 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +59,10 @@ Context context;
         holder.pname.setText(item.get(0).toString());
         holder.pdob.setText(item.get(1).toString());
         holder.pgender.setText(item.get(2).toString());
-
+        if(data.get(position).get(5).toString().trim().length()>10){
+            holder.remark.setVisibility(View.VISIBLE);
+            holder.del.setVisibility(View.VISIBLE);
+        }
         try {
             if(!item.get(6).toString().equals("")) {
                 holder.img.setImageBitmap(getbitmap(item.get(6).toString()));
@@ -72,7 +76,8 @@ holder.del.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
 
-           setAlert(item.get(5).toString(),sp.getString("phone",""));
+            setAlert(item.get(5).toString(), sp.getString("phone", ""));
+
 
     }
 });
@@ -87,7 +92,13 @@ holder.del.setOnClickListener(new View.OnClickListener() {
         AlertDialog.Builder b=new AlertDialog.Builder(context);
         b.setMessage(msg);
         b.setPositiveButton(pos,(DialogInterface.OnClickListener) (dialog, which)->{
-            deldata(patient,doctor);
+            if(patient.trim().length()>10){
+deldoc(patient,doctor);
+            }
+            else {
+
+                deldata(patient, doctor);
+            }
            // deldata(doctor,patient);
 
 
@@ -157,7 +168,50 @@ holder.del.setOnClickListener(new View.OnClickListener() {
         }
 
     }
+    public void deldoc(String patient,String doctor){
+        String temp = "https://demo-uw46.onrender.com/api/doctor/deletePatient/"+doctor+"/"+patient;
 
+        try {
+
+            JsonObjectRequest j = new JsonObjectRequest(Request.Method.DELETE, temp,null, new Response.Listener<JSONObject>() {
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+
+                        if (Boolean.parseBoolean(response.getString("success"))) {
+                            Toast.makeText(context.getApplicationContext(), "Doctor Deleted",Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        Toast.makeText(context.getApplicationContext(), e.toString(),Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Toast.makeText(context.getApplicationContext(), error.toString(),Toast.LENGTH_SHORT).show();
+                }
+            });
+            RequestQueue q = Volley.newRequestQueue(context);
+            RetryPolicy retryPolicy = new DefaultRetryPolicy(
+                    30000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            );
+            j.setRetryPolicy(retryPolicy);
+            q.add(j);
+
+
+        } catch (
+                Exception e) {
+            Toast.makeText(context.getApplicationContext(), e.toString(),Toast.LENGTH_SHORT).show();
+
+
+        }
+
+    }
 
     @Override
     public int getItemCount() {
@@ -165,7 +219,7 @@ holder.del.setOnClickListener(new View.OnClickListener() {
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView pname, pdob, pgender;
+        public TextView pname, pdob, pgender,remark;
         public ImageView img,del;
         private List<List> data; // Add a reference to data variable
 
@@ -176,6 +230,7 @@ holder.del.setOnClickListener(new View.OnClickListener() {
             del=itemView.findViewById(R.id.docrecdel);
             pname = itemView.findViewById(R.id.homerecpat);
             pdob = itemView.findViewById(R.id.homerecdob);
+            remark=itemView.findViewById(R.id.deletedremark);
             pgender = itemView.findViewById(R.id.homerecgen);
             img = itemView.findViewById(R.id.dp_patient_page_doctor);
             itemView.setOnClickListener(this);
