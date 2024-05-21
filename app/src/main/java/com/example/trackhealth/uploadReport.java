@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class uploadReport extends AppCompatActivity {
     StorageReference storageReference;
     DatabaseReference databaseReference;
     String key="";
+    ImageView back;
     TextView tx1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,13 @@ public class uploadReport extends AppCompatActivity {
         setContentView(R.layout.activity_upload_report);
         addreport=findViewById(R.id.addreport_assistant);
         tx1= findViewById(R.id.file_assistant);
+        back=findViewById(R.id.labuploadback);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         button_upload = findViewById(R.id.upload_reportassistant);
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("Report");
