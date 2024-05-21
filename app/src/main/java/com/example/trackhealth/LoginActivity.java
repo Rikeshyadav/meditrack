@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         sp = getSharedPreferences("user", MODE_PRIVATE);
         boot = getSharedPreferences("boot", MODE_PRIVATE);
         t1 = findViewById(R.id.appname);
-        FirebaseMessaging.getInstance().subscribeToTopic("notify");
+        FirebaseMessaging.getInstance().subscribeToTopic("notify1");
         t2 = findViewById(R.id.regclick);
         createNotificationChannel(LoginActivity.this);
         scheduleAlarm();
@@ -89,7 +89,21 @@ public class LoginActivity extends AppCompatActivity {
         forgot = findViewById(R.id.forgotpass);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
 
+                        // Get new FCM registration token
+                        String token = task.getResult();
+
+                       System.out.println("abcf - "+token);
+                    }
+                });
         String[] st = {"Select", "Doctor", "Patient", "Lab Assistant"};
         RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner_login, st);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -162,9 +176,23 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         // Schedule the lunch reminder
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            checkAndRequestNotificationPermission();
+        }
 
     }
 
+    private void checkAndRequestNotificationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted, request it
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                    1);
+        } else {
+            // Permission has already been granted
+        }
+    }
 
 
  private void permission(){
