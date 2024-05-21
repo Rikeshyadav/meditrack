@@ -1,6 +1,7 @@
 package com.example.trackhealth;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,7 @@ public class SearchProfile extends AppCompatActivity {
     TextView name, email, phone, state, city, hospital, hosparent, about, gender, dob, age, quali, spec, yoe, hname, htype, hstate, hcity, hphone;
     boolean adhosactive=false,adyoeactive=false,adspecactive=false,adqualiactive=false;
     String pp="";
+    AppCompatButton consult;
     LinearLayoutManager l;
     TextView quadesc,yeardesc,star,vote;
     RatingBar rate;
@@ -67,6 +69,22 @@ public class SearchProfile extends AppCompatActivity {
         sp =getSharedPreferences("user", Context.MODE_PRIVATE);
         editbut.setVisibility(View.GONE);
         rate=findViewById(R.id.ratingBar_sdip);
+        consult=findViewById(R.id.dconsult_searchdoctor2);
+
+
+        SharedPreferences spk=getSharedPreferences("user",MODE_PRIVATE);
+          if(spk.getString("identity","").equals("Doctor")){
+              consult.setVisibility(View.GONE);
+          }
+        consult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(SearchProfile.this,AddPatientPage.class);
+                i.putExtra("phone",getIntent().getStringExtra("nonuserprofile"));
+                i.putExtra("from","search");
+                startActivity(i);
+            }
+        });
         vote=findViewById(R.id.sdipvote);
         star=findViewById(R.id.sdipratestar);
         addqua=findViewById(R.id.sdoctor_profile_qualicardadd);
@@ -253,6 +271,8 @@ retry.setOnClickListener(new View.OnClickListener() {
         });
 
     }
+
+
 
     String getAge(String birthDate) {
         int year= Calendar.getInstance().get(Calendar.YEAR);

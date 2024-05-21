@@ -90,7 +90,12 @@ public class Patient_in_Doctor_fragemt extends Fragment {
         name.setText(sp.getString("curname",""));
         gender.setText(sp.getString("curgender",""));
           emaild.setText(sp.getString("curemail",""));
-       age.setText(getAge(sp.getString("curdob","")));
+        try {
+            age.setText(getAge(sp.getString("curdob", "")));
+        }
+        catch (Exception e){
+
+        }
 
         locaton.setText(sp.getString("curcity","")+","+sp.getString("curstate",""));
    vcall=view.findViewById(R.id.pid_vcall);

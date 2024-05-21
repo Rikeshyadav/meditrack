@@ -54,6 +54,7 @@ public class Patient_HomeFragment extends Fragment {
     RecyclerView recyclerView;
     Toolbar toolbar;
     ImageView refresh;
+
     List<List> outer=new ArrayList<>();
     ProgressBar progressBar;
     TextView nodata;
@@ -62,6 +63,7 @@ public class Patient_HomeFragment extends Fragment {
     NavigationView navigationView;
     patient_homeAdapter adapter;
     List arr=new ArrayList<>();
+    FloatingActionButton fab;
     DrawerLayout drawerLayout;
     SharedPreferences sp;
 
@@ -83,7 +85,14 @@ medicine=view.findViewById(R.id.exercise_medicine_card);
         empty=view.findViewById(R.id.home_patientpage_lottie);
         nodata=view.findViewById(R.id.home_patientpage_nodata);
         refresh=view.findViewById(R.id.refresh_home_patientpage);
-
+        fab=view.findViewById(R.id.fab_pat);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent fab=new Intent(getActivity(), AddPatientPage.class);
+                startActivity(fab);
+            }
+        });
         exercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
