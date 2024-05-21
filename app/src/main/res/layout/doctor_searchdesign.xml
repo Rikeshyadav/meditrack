@@ -129,7 +129,20 @@
                 android:textSize="16dp" />
 
         </LinearLayout>
+<androidx.appcompat.widget.AppCompatButton
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Consult online"
+    android:layout_gravity="end"
+    android:gravity="center"
+    android:id="@+id/dconsult_searchdoctor"
+    android:background="@drawable/button_login"
+    android:layout_margin="3dp"
+    android:padding="9dp"
 
+    android:textColor="@color/white"
+    android:textSize="12sp"
+    />
     </LinearLayout>
     <ImageView
         android:layout_width="wrap_content"

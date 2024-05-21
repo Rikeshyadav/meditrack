@@ -67,7 +67,7 @@ public class Pending_Fragment extends Fragment {
     }
 
     public void searchDoctor(String ph){
-        String temp = "https://demo-uw46.onrender.com/api/patient/getDetails";
+        String temp = "https://demo-uw46.onrender.com/api/doctor/getDetails";
 
         try {
             progressBar.setVisibility(View.VISIBLE);
@@ -85,8 +85,8 @@ public class Pending_Fragment extends Fragment {
                             empty.setVisibility(View.GONE);
                             nodata.setVisibility(View.GONE);
                             progressBar.setVisibility(View.GONE);
-                          patientn=response.getString("username");
-                          arr=filterArray(response.getJSONArray("doctoradd"));
+                         // patientn=response.getString("username");
+                          arr=filterArray(response.getJSONArray("patientadd"));
                           if(arr.size()>0) {
                               recyclerView = (RecyclerView) view.findViewById(R.id.doctor_home_rec);
                               pendingAdapter adapter = new pendingAdapter(arr, getActivity(), sp);
@@ -148,16 +148,18 @@ public class Pending_Fragment extends Fragment {
 
     public List filterArray(JSONArray jsonArray) throws JSONException {
     List<List> outer=new ArrayList<>();
+    System.out.println("kky"+jsonArray.toString());
         for(int i=0;i<jsonArray.length();i++){
 
             JSONObject j=jsonArray.getJSONObject(i);
             List<String> inner=new ArrayList<>();
             if(j.getString("pending").equals("true")){
-                inner.add(j.getString("clinic_name"));
+                inner.add("");
                 inner.add(j.getString("username"));
-                inner.add(j.getString("speciality"));
-                inner.add(j.getString("qualification"));
+                inner.add(j.getString("dob"));
+                inner.add(j.getString("city"));
                 inner.add(j.getString("issue"));
+                inner.add("");
                 inner.add(j.getString("phone"));
                 outer.add(inner);
 

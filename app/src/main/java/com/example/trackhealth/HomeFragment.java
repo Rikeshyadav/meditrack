@@ -258,7 +258,7 @@ System.out.println("hello"+dataSearchList);
                 inner.add(j.getString("username"));
                 inner.add(j.getString("dob"));
                 inner.add(j.getString("gender"));
-                inner.add(j.getString("address"));
+                inner.add("");
                 inner.add(j.getString("issue"));
                 inner.add(j.getString("phone"));
                 try {

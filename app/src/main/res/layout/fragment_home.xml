@@ -293,6 +293,7 @@
                     android:backgroundTint="#1E4065"
                     android:layout_gravity="bottom|end"
                     android:contentDescription="add"
+                    android:visibility="gone"
                     android:src="@drawable/add_circle"
                     app:itemIconTint="@drawable/icon_tint_color_bar"
                     android:id="@+id/fab"

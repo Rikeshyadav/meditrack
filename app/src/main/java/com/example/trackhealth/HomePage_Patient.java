@@ -86,6 +86,7 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
 
                     // toolbar.setBackgroundColor(getColor(R.color.red));
                     //openFragment((new patient_scheduledFragment()), "schedule");
+
                     openFragment(new Pending_Fragment(), "pending");
                 } else if (itemId == R.id.bottom_search) {
                     openFragment(new SearchFragment(), "search");

@@ -67,8 +67,8 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.MyViewHo
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-           updatePatient(patient,item.get(5).toString(),"false",item.get(4).toString());
-           updateDoctor(item.get(5).toString(),patient,"false",item.get(4).toString());
+           updatePatient(patient,item.get(6).toString(),"false",item.get(4).toString());
+          updateDoctor(item.get(6).toString(),patient,"false",item.get(4).toString());
            holder.accept.setText("accepted");
            holder.reject.setVisibility(View.GONE);
            holder.accept.setClickable(false);
@@ -112,12 +112,12 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.MyViewHo
         }
     }
 
-    public void updatePatient(String patient,String doctor,String pending,String issue){
-        String temp = "https://demo-uw46.onrender.com/api/patient/updatepending/"+patient;
+    public void updatePatient(String doctor,String patient,String pending,String issue){
+        String temp = "https://demo-uw46.onrender.com/api/patient/updatepending/"+doctor;
         try {
             JSONObject jj=new JSONObject();
 
-            jj.put("phone",doctor);
+            jj.put("phone",patient);
             jj.put("pending",pending);
             jj.put("issue",issue);
 
@@ -182,6 +182,13 @@ public class pendingAdapter extends RecyclerView.Adapter<pendingAdapter.MyViewHo
             jj.put("phone",patient);
             jj.put("pending",pending);
             jj.put("issue",issue);
+            jj.put("clinic_name",dclinic);
+            jj.put("speciality",specification);
+            jj.put("qualification",qualification);
+            jj.put("sign",sp.getString("sign",""));
+            jj.put("about",sp.getString("about",""));
+
+
 
             JsonObjectRequest j = new JsonObjectRequest(Request.Method.PUT, temp,jj, new Response.Listener<JSONObject>() {
 

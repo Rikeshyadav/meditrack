@@ -286,7 +286,24 @@
                 android:src="@drawable/baseline_refresh_24"
                 android:layout_centerHorizontal="true"/>
 
+
+
         </RelativeLayout>
     </FrameLayout>
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#1E4065"
+        android:layout_gravity="bottom|end"
+        android:contentDescription="add"
+        android:visibility="gone"
+        android:src="@drawable/add_circle"
+        app:itemIconTint="@drawable/icon_tint_color_bar"
+        android:id="@+id/fab_pat"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:maxImageSize="30dp"
+        />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

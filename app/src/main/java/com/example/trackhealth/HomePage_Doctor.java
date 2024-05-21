@@ -98,7 +98,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
                
                 }
               else if (itemId==R.id.bottom_schedule){
-                    toolbar.setTitle("Setting");
+                    toolbar.setTitle("");
                     //openFragment(new ScheduledFragment(),"schedule");
                     openFragment(new Pending_Fragment(), "pending");
                 }

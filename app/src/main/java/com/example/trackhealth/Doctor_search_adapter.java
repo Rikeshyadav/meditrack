@@ -48,6 +48,15 @@ public class Doctor_search_adapter extends RecyclerView.Adapter<Doctor_search_ad
         holder.specification.setText(item.get(2).toString());
         holder.qualification.setText(item.get(3).toString());
         holder.hos.setText(item.get(7).toString());
+        holder.consult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(context,AddPatientPage.class);
+                i.putExtra("phone",item.get(4).toString());
+                i.putExtra("from","search");
+                context.startActivity(i);
+            }
+        });
         holder.contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,6 +97,10 @@ if(item.get(6).toString().equals("") ) {
     holder.imageView.setImageBitmap(getbitmap(item.get(6).toString()));
 }
 
+SharedPreferences sp=context.getSharedPreferences("user",Context.MODE_PRIVATE);
+if(sp.getString("identity","").equals("Doctor")){
+    holder.consult.setVisibility(View.GONE);
+}
     }
 
     @Override
@@ -100,6 +113,7 @@ if(item.get(6).toString().equals("") ) {
         ImageView contact;
         LinearLayout l;
         TextView name,qualification,specification,address,hos;
+        AppCompatButton consult;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -111,6 +125,7 @@ if(item.get(6).toString().equals("") ) {
             l=itemView.findViewById(R.id.maincontent_doctor_search_design);
             address=itemView.findViewById(R.id.address_doctor_searchdesign);
             hos=itemView.findViewById(R.id.dhospital_searchdoctor);
+            consult=itemView.findViewById(R.id.dconsult_searchdoctor);
         }
     }
 
