@@ -233,8 +233,8 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Medicine Taken"
-                android:layout_weight="4"
+                android:text="Total Medicine Intake"
+                android:layout_weight="6"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -249,7 +249,38 @@
                 android:gravity="end"
                 android:id="@+id/patmedtaknevalue"
                 android:textColor="@color/black"
+                android:layout_weight="4"
+                android:padding="10dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:layout_below="@id/patmeddesignll4"
+            android:id="@+id/patmedtakendatell"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Date of Last Medicine"
                 android:layout_weight="6"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="16sp"
+                android:gravity="end"
+                android:id="@+id/patmedtaknedatevalue"
+                android:textColor="@color/black"
+                android:layout_weight="4"
                 android:padding="10dp"
                 />
         </LinearLayout>

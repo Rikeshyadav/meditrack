@@ -55,8 +55,13 @@ holder.mname.setText(arr.get(position).get(0).toString());
         holder.leftdays.setText(arr.get(position).get(3).toString()+" days left");
         holder.dos.setText(arr.get(position).get(4).toString());
         holder.tdays.setText(arr.get(position).get(5).toString()+" days");
-        holder.misdays.setText(arr.get(position).get(6).toString()+" days");;
-        holder.tval.setText(arr.get(position).get(8).toString());
+        if(Integer.parseInt(arr.get(position).get(6).toString().trim())<0){
+            holder.misdays.setText("0 days");
+        }else {
+            holder.misdays.setText(arr.get(position).get(6).toString() + " days");
+
+        }
+
 String currdate=arr.get(position).get(10).toString();
         String startdate=arr.get(position).get(11).toString();
 
@@ -84,9 +89,14 @@ if(sp.getString("identity","").equals("Doctor")){
                 holder.consume.setBackgroundDrawable(context.getDrawable(R.drawable.gray_but));
             }
         }
-
-
-
+if(arr.get(position).get(12).toString().trim().length()>1) {
+    String[] taken = arr.get(position).get(12).toString().split("@");
+    holder.tval.setText(taken[0]);
+    holder.tdate.setText(taken[1]);
+}
+else {
+    holder.tval.setText(arr.get(position).get(12).toString());
+}
                 //
 if(!arr.get(position).get(9).toString().equals("allow")){
     holder.consume.setText("Already Consumed");
@@ -95,6 +105,7 @@ if(!arr.get(position).get(9).toString().equals("allow")){
 }
         LocalDate finalDate = date1;
         LocalDate finalDate1 = date2;
+
         holder.consume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,15 +113,25 @@ if(!arr.get(position).get(9).toString().equals("allow")){
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     if (finalDate.isBefore(finalDate1)) {
 
-                        Toast.makeText(context, "Medicine is to consume from " + startdate, Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Medicine will start from " + startdate, Toast.LENGTH_LONG).show();
                     } else {
                         if (arr.get(position).get(9).toString().equals("allow")) {
-                            if(Integer.parseInt(arr.get(position).get(5).toString())>=Integer.parseInt(arr.get(position).get(12).toString())) {
-                                holder.status.setText("Ongoing");
-                                updatetab(arr.get(position).get(7).toString(), holder.consume, arr.get(position).get(8).toString(),holder.status);
+                            if(arr.get(position).get(12).toString().trim().length()>1) {
+                                if (Integer.parseInt(arr.get(position).get(5).toString().trim()) >= Integer.parseInt(arr.get(position).get(12).toString().split("@")[0])) {
+                                    holder.status.setText("Ongoing");
+                                    updatetab(arr.get(position).get(7).toString(), holder.consume, arr.get(position).get(8).toString(), holder.status,holder.tval,Integer.parseInt(arr.get(position).get(12).toString().split("@")[0]),holder.tdate,arr.get(position).get(12).toString().split("@")[1]);
+                                } else {
+                                    holder.consume.setText("Completed");
+                                    holder.status.setText("Completed");
+                                }
                             }else{
-                                holder.consume.setText("Completed");
-                                holder.status.setText("Completed");
+                                if (Integer.parseInt(arr.get(position).get(5).toString().trim()) >= Integer.parseInt(arr.get(position).get(12).toString())) {
+                                    holder.status.setText("Ongoing");
+                                    updatetab(arr.get(position).get(7).toString(), holder.consume, arr.get(position).get(8).toString(), holder.status,holder.tval,Integer.parseInt(arr.get(position).get(12).toString()),holder.tdate, currdate);
+                                } else {
+                                    holder.consume.setText("Completed");
+                                    holder.status.setText("Completed");
+                                }
                             }
                         }
                         else{
@@ -131,7 +152,7 @@ if(!arr.get(position).get(9).toString().equals("allow")){
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mname,quan,dur,dos,leftdays,tdays,misdays,status,tval;
+        TextView mname,quan,dur,dos,leftdays,tdays,misdays,status,tval,tdate;
         AppCompatButton consume;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -143,6 +164,7 @@ if(!arr.get(position).get(9).toString().equals("allow")){
             dos=itemView.findViewById(R.id.patmeddesigndos);
             leftdays=itemView.findViewById(R.id.patmeddesigndaysleft);
             tdays=itemView.findViewById(R.id.patmeddesigntdays);
+            tdate=itemView.findViewById(R.id.patmedtaknedatevalue);
             misdays=itemView.findViewById(R.id.patmeddesignmisdays);
             consume=itemView.findViewById(R.id.patmeddesignconsume);
             status=itemView.findViewById(R.id.patmedstatus);
@@ -150,7 +172,7 @@ if(!arr.get(position).get(9).toString().equals("allow")){
     }
 
 
-    public void updatetab(String mid, AppCompatButton button,String pid,TextView status) {
+    public void updatetab(String mid, AppCompatButton button,String pid,TextView status,TextView tval,int val,TextView date,String dt) {
         SharedPreferences sp=context.getSharedPreferences("issue",Context.MODE_PRIVATE);
         String temp = "https://demo-uw46.onrender.com/api/patient/updateTaken";
         try {
@@ -172,7 +194,10 @@ jsonObject.put("issueid",sp.getString("issueid",""));
 
                           //  JSONObject jsonobj = response.getJSONObject("prescription");
                             button.setText("Consumed");
+
                             button.setFocusable(false);
+                            date.setText(dt);
+                            tval.setText(String.valueOf(val+1));
                             button.setClickable(false);
                             status.setText("Consumed");
                             button.setBackgroundDrawable(context.getDrawable(R.drawable.orange_button2));
