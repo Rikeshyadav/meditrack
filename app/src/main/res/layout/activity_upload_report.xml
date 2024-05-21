@@ -5,12 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:padding="20dp"
     tools:context=".uploadReport">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_assistantupload"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#5F8CBD"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.DayNight">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:id="@+id/labuploadback"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload Lab Report"
+            android:textSize="19sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingStart="15dp"
+            />
+    </androidx.appcompat.widget.Toolbar>
     <TextView
         android:id="@+id/file_assistant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_assistantupload"
+        android:layout_margin="12dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="2dp"
         android:layout_marginTop="20dp"
@@ -31,7 +56,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/orange_button"
         android:padding="10dp"
@@ -51,6 +76,7 @@
         android:padding="10dp"
         android:visibility="gone"
         android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
         android:textSize="18sp" />
 

@@ -11,79 +11,79 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:padding="5dp"
+        android:orientation="vertical"
         android:layout_height="wrap_content"
         >
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Paracetamol"
-    android:textColor="@color/black"
-    android:id="@+id/patmeddesigntitle"
-    android:textSize="18sp"
-    android:padding="10dp"
-    />
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="horizontal"
-       android:layout_below="@id/patmeddesigntitle"
-       android:id="@+id/patmeddesignll1"
-       >
-       <TextView
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:text="Quantity"
-           android:layout_weight="4"
-           android:textSize="16sp"
-           android:textColor="@color/black"
-           android:textStyle="bold"
-           android:padding="10dp"
-           />
-
-       <TextView
-           android:layout_width="0dp"
-           android:layout_height="wrap_content"
-           android:text="Quantity"
-           android:textSize="16sp"
-           android:gravity="end"
-           android:id="@+id/patmeddesignquan"
-           android:textColor="@color/black"
-           android:layout_weight="6"
-           android:padding="10dp"
-           />
-   </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/patmeddesignll1"
-        android:id="@+id/patmeddesignll2"
-        >
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Duration"
-            android:layout_weight="4"
-            android:textSize="16sp"
+            android:text="Paracetamol"
             android:textColor="@color/black"
-            android:textStyle="bold"
+            android:id="@+id/patmeddesigntitle"
+            android:textSize="18sp"
             android:padding="10dp"
             />
-
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="06-03-2002 to 08-06-2002"
-            android:textSize="16sp"
-            android:gravity="end"
-            android:id="@+id/patmeddesigndur"
-            android:textColor="@color/black"
-            android:layout_weight="6"
-            android:padding="10dp"
-            />
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_below="@id/patmeddesigntitle"
+            android:id="@+id/patmeddesignll1"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:layout_weight="4"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Quantity"
+                android:textSize="16sp"
+                android:gravity="end"
+                android:id="@+id/patmeddesignquan"
+                android:textColor="@color/black"
+                android:layout_weight="6"
+                android:padding="10dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/patmeddesignll1"
+            android:id="@+id/patmeddesignll2"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                android:layout_weight="4"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="06-03-2002 to 08-06-2002"
+                android:textSize="16sp"
+                android:gravity="end"
+                android:id="@+id/patmeddesigndur"
+                android:textColor="@color/black"
+                android:layout_weight="6"
+                android:padding="10dp"
+                />
+        </LinearLayout>
 
 
 
@@ -124,36 +124,36 @@
 
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/patmeddesignll33"
-        android:id="@+id/patmeddesignll3"
-        >
-        <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Remaining Days"
-            android:layout_weight="4"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:padding="10dp"
-            />
+            android:orientation="horizontal"
+            android:layout_below="@id/patmeddesignll33"
+            android:id="@+id/patmeddesignll3"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Remaining Days"
+                android:layout_weight="4"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="5 days left"
-            android:textSize="16sp"
-            android:gravity="end"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="5 days left"
+                android:textSize="16sp"
+                android:gravity="end"
 
-            android:id="@+id/patmeddesigndaysleft"
-            android:textColor="@color/black"
-            android:layout_weight="6"
-            android:padding="10dp"
-            />
-    </LinearLayout>
+                android:id="@+id/patmeddesigndaysleft"
+                android:textColor="@color/black"
+                android:layout_weight="6"
+                android:padding="10dp"
+                />
+        </LinearLayout>
 
 
         <LinearLayout
@@ -193,41 +193,39 @@
 
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/patmeddesignll44"
-        android:id="@+id/patmeddesignll4"
-        >
-        <TextView
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dosage"
-            android:layout_weight="4"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:padding="10dp"
-            />
+            android:orientation="horizontal"
+            android:layout_below="@id/patmeddesignll44"
+            android:id="@+id/patmeddesignll4"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Dosage"
+                android:layout_weight="4"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:padding="10dp"
+                />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="After Breakfast"
-            android:textSize="16sp"
-            android:gravity="end"
-            android:id="@+id/patmeddesigndos"
-            android:textColor="@color/black"
-            android:layout_weight="6"
-            android:padding="10dp"
-            />
-    </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="After Breakfast"
+                android:textSize="16sp"
+                android:gravity="end"
+                android:id="@+id/patmeddesigndos"
+                android:textColor="@color/black"
+                android:layout_weight="6"
+                android:padding="10dp"
+                />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
-            android:layout_below="@id/patmeddesignll4"
             android:id="@+id/patmedtakenll"
             >
             <TextView
@@ -257,8 +255,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
-            android:layout_below="@id/patmeddesignll4"
             android:id="@+id/patmedtakendatell"
             >
             <TextView
@@ -289,8 +285,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-
-            android:layout_below="@id/patmeddesignll4"
             android:id="@+id/patmeddesignll5"
             >
             <TextView
@@ -321,7 +315,6 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/patmeddesignll5"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
