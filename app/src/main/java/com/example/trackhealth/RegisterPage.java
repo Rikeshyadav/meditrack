@@ -78,7 +78,7 @@ public class RegisterPage extends AppCompatActivity {
     String photoid_="",photosign_="";
     String verified_phone="";
     String otp="";
-    boolean verified=true ,existUser=false;
+    boolean verified=false ,existUser=false;
 
 
     ScrollView scroll;

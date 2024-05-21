@@ -56,6 +56,7 @@ holder.mname.setText(arr.get(position).get(0).toString());
         holder.dos.setText(arr.get(position).get(4).toString());
         holder.tdays.setText(arr.get(position).get(5).toString()+" days");
         holder.misdays.setText(arr.get(position).get(6).toString()+" days");;
+        holder.tval.setText(arr.get(position).get(8).toString());
 String currdate=arr.get(position).get(10).toString();
         String startdate=arr.get(position).get(11).toString();
 
@@ -130,7 +131,7 @@ if(!arr.get(position).get(9).toString().equals("allow")){
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView mname,quan,dur,dos,leftdays,tdays,misdays,status;
+        TextView mname,quan,dur,dos,leftdays,tdays,misdays,status,tval;
         AppCompatButton consume;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -138,6 +139,7 @@ if(!arr.get(position).get(9).toString().equals("allow")){
             mname=itemView.findViewById(R.id.patmeddesigntitle);
             quan=itemView.findViewById(R.id.patmeddesignquan);
             dur=itemView.findViewById(R.id.patmeddesigndur);
+            tval=itemView.findViewById(R.id.patmedtaknevalue);
             dos=itemView.findViewById(R.id.patmeddesigndos);
             leftdays=itemView.findViewById(R.id.patmeddesigndaysleft);
             tdays=itemView.findViewById(R.id.patmeddesigntdays);
