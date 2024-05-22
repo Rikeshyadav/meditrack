@@ -12,6 +12,10 @@
             android:id="@+id/nav_editprofile"
            android:icon="@drawable/baseline_edit_24"
            android:title="Profile"/>
+        <item
+            android:id="@+id/nav_pending"
+            android:icon="@drawable/baseline_schedule_24"
+            android:title="Pending"/>
 
         <item
             android:id="@+id/nav_setting"

@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8EDF3"
+    android:background="@color/white"
     android:layout_marginTop="48dp"
     tools:context=".aboutUsFragment">
-
- <TextView
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:text="TrackHealth"
-     android:id="@+id/about_title"
-     android:textSize="30sp"
-     android:fontFamily="@font/gugi"
-     android:textAlignment="center"
-     android:textColor="@color/black"
-     android:layout_marginTop="25dp"
-     />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/pending_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gugi"
+        android:text="TrackHealth"
+        android:textColor="#266291"
+        android:layout_gravity="center"
+        android:layout_margin="25dp"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:src="@drawable/appicon"
+    android:scaleType="centerCrop"
+    android:id="@+id/aboutimg"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:text="TrackHealth facilitates online consultations between patients and doctors, enabling advice and prescriptions remotely. It contains medication tracking feature which will track the daily status of medicine intaking of patient. Doctors can upload prescriptions anytime online . Voice and video calling features have been implemented for the ease of consultations . Additionally chat feature is also added that allows convenient communication. Lab reports are uploaded by the lab assistant for easy access by both patients and doctors. The app further provides health resources covering fitness, exercise, and diet for comprehensive health management."
-        android:gravity="center"
-        android:layout_below="@id/about_title"
+        android:justificationMode="inter_word"
+        android:layout_below="@id/aboutimg"
         android:textStyle="normal"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:textSize="19sp"
-        android:textColor="#232225"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="18sp"
+        android:fontFamily="times"
+        android:layout_marginBottom="20dp"
+        android:textColor="#303032"/>
 
-</RelativeLayout>
+</LinearLayout>
+</ScrollView>
