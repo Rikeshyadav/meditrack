@@ -12,13 +12,12 @@
         android:id="@+id/pappbar"
         android:layout_width="match_parent"
         android:background="#DAE5F3"
-        android:layout_height="265dp">
+        android:layout_height="270dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             app:titleCollapseMode="scale"
             app:title="TrackHealth"
             android:background="#DAE5F3"
@@ -27,26 +26,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/phometitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TrackHealth"
-        android:gravity="center"
-        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_centerHorizontal="true"
+        android:textColor="#325B88"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="10dp"
-        android:textColor="@color/black"
-        android:textSize="32sp"
-
-        android:id="@+id/phometitle"
-        />
+        android:layout_marginBottom="10dp"
+        android:textSize="36sp"
+        android:textStyle="bold" />
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:id="@+id/horizontal"
                 android:layout_below="@id/phometitle"
-                android:layout_marginTop="10dp"
                 android:background="#DAE5F3"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="3dp"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
