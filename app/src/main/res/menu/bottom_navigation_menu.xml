@@ -5,9 +5,7 @@
     android:title="Home"
     android:icon="@drawable/baseline_home_24"
     android:enabled="true"/>
-   <item android:id="@+id/bottom_schedule"
-        android:title="pending"
-        android:icon="@drawable/baseline_schedule_24"/>
+
     <item android:id="@+id/bottom_search"
         android:title="search"
         android:icon="@drawable/baseline_search_24"
@@ -16,5 +14,8 @@
     <item android:id="@+id/bottom_profile"
         android:title="profile"
         android:icon="@drawable/baseline_person_24"/>
+        <item android:id="@+id/bottom_schedule"
+            android:title="setting"
+            android:icon="@drawable/baseline_settings_24"/>
     </group>
 </menu>
