@@ -11,7 +11,7 @@
         android:id="@+id/toolbar_assistant"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        app:title="Lab Assistant"
+        app:title="Pathologist"
         android:background="#5F8CBD"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"

@@ -235,7 +235,7 @@ public class RegisterPage extends AppCompatActivity {
 
         //select
         otpedit.setVisibility(View.GONE);
-        String[] st = {"Select", "Doctor", "patient","lab assistant"};
+        String[] st = {"Select", "Doctor", "patient","pathologist"};
         RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner_login, st);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dopcat.setAdapter(adapter);
@@ -353,7 +353,7 @@ public class RegisterPage extends AppCompatActivity {
                             clinic_radio.setVisibility(View.GONE);
 
 
-                        }if (selectedOption.equals("lab assistant")) {
+                        }if (selectedOption.equals("pathologist")) {
                             select = 1;
 
                             doctorOrPatient = "Lab Assistant";

@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                        System.out.println("abcf - "+token);
                     }
                 });
-        String[] st = {"Select", "Doctor", "Patient", "Lab Assistant"};
+        String[] st = {"Select", "Doctor", "Patient", "Pathologist"};
         RegisterSpinnerApdater adapter = new RegisterSpinnerApdater(this, R.layout.spinner_login, st);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         docpat2.setAdapter(adapter);
@@ -118,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                     doctororpatient = "Patient";
                 } else if (selectedOption.equals("Select")) {
                     doctororpatient = "null";
-                } else if (selectedOption.equals("Lab Assistant")) {
+                } else if (selectedOption.equals("Pathologist")) {
                     doctororpatient = "Lab Assistant";
                 } else {
                     doctororpatient = "null";
