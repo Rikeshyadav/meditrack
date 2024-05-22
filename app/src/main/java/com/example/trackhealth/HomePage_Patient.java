@@ -87,7 +87,7 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
                     // toolbar.setBackgroundColor(getColor(R.color.red));
                     //openFragment((new patient_scheduledFragment()), "schedule");
 
-                    openFragment(new Pending_Fragment(), "pending");
+                    openFragment(new SettingFragment(), "setting");
                 } else if (itemId == R.id.bottom_search) {
                     openFragment(new SearchFragment(), "search");
 
@@ -143,10 +143,7 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
             openFragment(new patient_nav_notification(), "notification");
             Toast.makeText(getApplicationContext(), "Notification", Toast.LENGTH_SHORT).show();
 
-        }*/ else if (itemId == R.id.nav_trash) {
-            openFragment(new Pending_Fragment(), "trash");
-            //toolbar.setTitle("Pending");
-        } else if (itemId == R.id.patient_nav_setting) {
+        }*/ else if (itemId == R.id.patient_nav_setting) {
             openFragment(new SettingFragment(), "setting");
         } else if (itemId == R.id.patient_nav_about) {
             openFragment(new aboutUsFragment(),"about");
@@ -259,7 +256,6 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
         navigationView.getMenu().getItem(1).setChecked(false);
         navigationView.getMenu().getItem(2).setChecked(false);
         navigationView.getMenu().getItem(3).setChecked(false);
-        navigationView.getMenu().getItem(4).setChecked(false);
     }
 
     public void setAlert(String msg, String pos, String neg, String flag) {

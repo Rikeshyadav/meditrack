@@ -100,7 +100,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
               else if (itemId==R.id.bottom_schedule){
                     toolbar.setTitle("");
                     //openFragment(new ScheduledFragment(),"schedule");
-                    openFragment(new Pending_Fragment(), "pending");
+                    openFragment(new SettingFragment(), "pending");
                 }
                else if(itemId==R.id.bottom_search){
                     toolbar.setTitle("Search");
