@@ -94,7 +94,6 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
                 } else if (itemId == R.id.bottom_profile) {
 
                     openFragment(new patient_edit_profile(),"profile");
-                    Toast.makeText(getApplicationContext(), "call", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }

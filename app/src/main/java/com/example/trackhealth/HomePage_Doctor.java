@@ -146,12 +146,15 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         bottomNavigationView.getMenu().getItem(0).setChecked(false);
         bottomNavigationView.getMenu().getItem(1).setChecked(false);
         bottomNavigationView.getMenu().getItem(2).setChecked(false);
-       // bottomNavigationView.getMenu().getItem(3).setChecked(false);
+        bottomNavigationView.getMenu().getItem(3).setChecked(false);
         sp.edit().putString("isuserprofile","yes").apply();
         int itemId=item.getItemId();
         if (itemId==R.id.nav_editprofile){
             openFragment(new EditprofileFragment(),"profile");
             toolbar.setTitle("Profile");
+        }else if (itemId==R.id.nav_pending) {
+            openFragment(new Pending_Fragment(),"pending");
+            toolbar.setTitle("");
         }
         else if (itemId==R.id.nav_setting) {
             openFragment(new SettingFragment(),"setting");
@@ -173,6 +176,7 @@ public class HomePage_Doctor extends AppCompatActivity  implements NavigationVie
         navigationView.getMenu().getItem(1).setChecked(false);
         navigationView.getMenu().getItem(2).setChecked(false);
         navigationView.getMenu().getItem(3).setChecked(false);
+        navigationView.getMenu().getItem(4).setChecked(false);
 
     }
     @Override
