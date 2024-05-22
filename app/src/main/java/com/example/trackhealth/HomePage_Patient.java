@@ -159,13 +159,20 @@ public class HomePage_Patient extends AppCompatActivity implements NavigationVie
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer((GravityCompat.START));
+            drawerLayout.closeDrawer(GravityCompat.START);
         }
+        else if(this.getSupportFragmentManager().getBackStackEntryCount()==1 && !back){
+            back=true;
+            Toast.makeText(getApplicationContext(),"Press back again to exit",Toast.LENGTH_SHORT).show();
 
+        }
+        else if(this.getSupportFragmentManager().getBackStackEntryCount()==1 && back){
 
-        setPhoto(navHeaderImageView);
-        headerText.setText(sp.getString("name", "user"));
-        super.onBackPressed();
+            finishAffinity();
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 
     public void openFragment(Fragment fragment, String tag) {

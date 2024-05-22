@@ -161,6 +161,11 @@ layout=findViewById(R.id.slayout_parent_assistant);
                                 }
                             }
                         }
+                        else{
+                            pb.setVisibility(View.GONE);
+                         //   layout.setVisibility(View.VISIBLE);
+                            Toast.makeText(getApplicationContext(),"patient doesn't exist", Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         Toast.makeText(getApplicationContext(), "error"+e, Toast.LENGTH_SHORT).show();
                         pb.setVisibility(View.GONE);
