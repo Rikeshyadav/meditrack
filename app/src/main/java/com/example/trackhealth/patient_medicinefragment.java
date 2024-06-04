@@ -215,7 +215,7 @@ int rem=0;
                     if(j.getString("taken").length()>1) {
                         String[] taken = j.getString("taken").split("@");
                         miss=getDaysBetween(dur.getString("start"),date)-Integer.parseInt(taken[0]);
-                        rem=getDaysBetween(date,dur.getString("end"))+miss;
+                        rem=getDaysBetween(dur.getString("start"),dur.getString("end"))-Integer.parseInt(taken[0]);
                         System.out.println("taken"+taken[1]);
                        if (!taken[1].equals(String.valueOf(date))) {
                             desc = "allow";
@@ -225,7 +225,7 @@ int rem=0;
                     }
                     else{
                         miss=getDaysBetween(dur.getString("start"),date)-Integer.parseInt(j.getString("taken"))-1;
-                        rem=getDaysBetween(date,dur.getString("end"))+miss;
+                        rem=getDaysBetween(dur.getString("start"),dur.getString("end"))-Integer.parseInt(j.getString("taken"));
                     }
 
                     miss+=1;
